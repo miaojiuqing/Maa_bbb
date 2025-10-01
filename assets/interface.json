@@ -1,4 +1,6 @@
 {
+    "name": "MAA_bbb",
+    "url": "https://github.com/miaojiuqing/MAA_bbb",
     "controller": [
         {
             "name": "安卓端",
