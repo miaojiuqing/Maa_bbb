@@ -1,6 +1,0 @@
-{
-    "打开游戏": {
-        "action": "StartApp",
-        "package": "com.miHoYo.enterprise.NGHSoD"
-    }
-}

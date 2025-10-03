@@ -1,0 +1,18 @@
+{
+    "空任务": {},
+    "点击空白位置关闭": {
+        "recognition": "OCR",
+        "expected": [
+            "点击空白处关闭",
+            "点击空白区域关闭",
+            "点击空白位置关闭"
+        ],
+        "action": "Click"
+    },
+    "点击返回主菜单": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "ADB/进入游戏/点击返回主菜单.png"
+        ]
+    }
+}
