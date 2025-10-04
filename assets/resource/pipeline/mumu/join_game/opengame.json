@@ -14,12 +14,27 @@
             "点击任意位置进入游戏",
             "所有资源已下载完毕",
             "着色器编译中",
+            "家园处-点击返回",
             "空任务"
         ]
     },
     "打开游戏": {
         "action": "StartApp",
         "package": "com.miHoYo.enterprise.NGHSoD"
+    },
+    "家园处-点击返回": {
+        "roi": [
+            0,
+            9,
+            121,
+            60
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "返回"
+        ],
+        "action": "Click",
+        "post_delay": 2000
     },
     "点击任意位置进入游戏": {
         "roi": [
