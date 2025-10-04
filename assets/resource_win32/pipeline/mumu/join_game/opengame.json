@@ -1,0 +1,95 @@
+{
+    "启动并进入游戏": {
+        "action": "StartApp",
+        "package": "com.miHoYo.enterprise.NGHSoD",
+        "next": [
+            "成功进入游戏主菜单"
+        ],
+        "interrupt": [
+            "点击返回主菜单",
+            "点击空白位置关闭",
+            "点击叉叉",
+            "领取签到奖励",
+            "月份每日登录奖励",
+            "点击任意位置进入游戏",
+            "所有资源已下载完毕",
+            "着色器编译中",
+            "家园处-点击返回",
+            "空任务"
+        ]
+    },
+    "打开游戏": {
+        "action": "StartApp",
+        "package": "com.miHoYo.enterprise.NGHSoD"
+    },
+    "家园处-点击返回": {
+        "roi": [
+            0,
+            9,
+            121,
+            60
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "返回"
+        ],
+        "action": "Click",
+        "post_delay": 2000
+    },
+    "点击任意位置进入游戏": {
+        "roi": [
+            457,
+            445,
+            350,
+            166
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "点击任意处进入游戏"
+        ],
+        "action": "Click"
+    },
+    "成功进入游戏主菜单": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "ADB/主页UI/休伯利安主界面.png"
+        ]
+    },
+    "所有资源已下载完毕": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "ADB/进入游戏/所有资源下载完毕，点击确定.png"
+        ],
+        "next": [
+            "所有资源已下载完毕-点击确定",
+            "启动并进入游戏"
+        ]
+    },
+    "着色器编译中": {
+        "roi": [
+            998,
+            634,
+            275,
+            81
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "着色器"
+        ],
+        "post_delay": 1000,
+        "pre_delay": 1000
+    },
+    "所有资源已下载完毕-点击确定": {
+        "roi": [
+            474,
+            317,
+            330,
+            236
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "确定"
+        ],
+        "action": "Click"
+    }
+}

@@ -23,10 +23,10 @@
             ]
         },
         {
-            "name": "B 服",
+            "name": "桌面端",
             "path": [
                 "{PROJECT_DIR}/resource",
-                "{PROJECT_DIR}/resource_bilibili"
+                "{PROJECT_DIR}/resource_win32"
             ]
         }
     ],
@@ -43,7 +43,7 @@
             "option": [
                 "登录渠道"
             ],
-            "doc": "会自行确认/领取所有奖励"
+            "doc": "左上角可选模拟器或者桌面端，桌面端需自行选择游戏窗口\n\n会自行确认/领取所有奖励"
         },
         {
             "name": "材料远征",
