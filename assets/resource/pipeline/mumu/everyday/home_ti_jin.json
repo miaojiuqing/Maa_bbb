@@ -1,3 +1,109 @@
 {
-    "进入家园": {}
+    "进入家园领取金币/体力-开始任务层": {
+        "next": [
+            "进入家园领取金币/体力-总任务层"
+        ],
+        "interrupt": [
+            "启动并进入游戏"
+        ]
+    },
+    "进入家园领取金币/体力-总任务层": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "ADB/主页UI/休伯利安主界面.png"
+        ],
+        "next": [
+            "家园体力资源领取-成功进入家园"
+        ],
+        "interrupt": [
+            "点击进入家园",
+            "点击叉叉",
+            "点击空白位置关闭"
+        ]
+    },
+    "点击进入家园": {
+        "roi": [
+            971,
+            615,
+            207,
+            98
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "ADB/主页UI/家园.png"
+        ],
+        "action": "Click",
+        "target_offset": [
+            30,
+            0,
+            0,
+            0
+        ]
+    },
+    "家园体力资源领取-成功进入家园": {
+        "roi": [
+            24,
+            628,
+            167,
+            87
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "家园小队"
+        ],
+        "post_delay": 400,
+        "next": [
+            "家园资源领取-没有可领取资源了"
+        ],
+        "interrupt": [
+            "家园资源领取-金币",
+            "家园资源领取-体力"
+        ]
+    },
+    "家园资源领取-没有可领取资源了": {
+        "roi": [
+            129,
+            91,
+            285,
+            108
+        ],
+        "inverse": true,
+        "recognition": "TemplateMatch",
+        "template": [
+            "ADB/日常/家园/资源领取/家园-金币.png"
+        ],
+        "action": "Click",
+        "next": [
+            "成功进入游戏主菜单"
+        ],
+        "interrupt": [
+            "家园处-点击返回"
+        ]
+    },
+    "家园资源领取-金币": {
+        "roi": [
+            129,
+            91,
+            285,
+            108
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "ADB/日常/家园/资源领取/家园-金币.png"
+        ],
+        "action": "Click"
+    },
+    "家园资源领取-体力": {
+        "roi": [
+            129,
+            91,
+            285,
+            108
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "ADB/日常/家园/资源领取/家园-体力.png"
+        ],
+        "action": "Click"
+    }
 }
