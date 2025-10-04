@@ -54,9 +54,10 @@
             "entry": "任务奖励领取-任务开始层"
         },
         {
-            "name": "参数任务",
-            "entry": "MyTask3",
-            "pipeline_override": {}
+            "name": "家园资源领取",
+            "entry": "进入家园领取金币/体力-开始任务层",
+            "pipeline_override": {},
+            "doc": "只领金币"
         },
         {
             "name": "带Custom的任务",
