@@ -38,16 +38,19 @@
     },
     "task": [
         {
-            "name": "启动游戏",
-            "entry": "打开游戏"
+            "name": "崩坏三 启动！",
+            "entry": "启动并进入游戏",
+            "option": [
+                "登录渠道"
+            ]
         },
         {
-            "name": "普通任务",
-            "entry": "MyTask1"
+            "name": "材料远征",
+            "entry": "材料远征-开始任务层"
         },
         {
-            "name": "选项任务",
-            "entry": "MyTask2",
+            "name": "日常奖励领取",
+            "entry": "任务奖励领取-任务开始层",
             "option": [
                 "任务选项1"
             ]
@@ -55,9 +58,6 @@
         {
             "name": "参数任务",
             "entry": "MyTask3",
-            "option": [
-                "任务选项1"
-            ],
             "pipeline_override": {}
         },
         {
@@ -66,25 +66,28 @@
         }
     ],
     "option": {
-        "任务选项1": {
+        "登录渠道": {
             "cases": [
                 {
-                    "name": "文本1",
+                    "name": "官服",
                     "pipeline_override": {
-                        "OcrTask": {
-                            "text": "文本1"
+                        "启动并进入游戏": {
+                            "action": "StartApp",
+                            "package": "com.miHoYo.enterprise.NGHSoD"
                         }
                     }
                 },
                 {
-                    "name": "文本2",
+                    "name": "B服",
                     "pipeline_override": {
-                        "OcrTask": {
-                            "text": "文本2"
+                        "启动并进入游戏": {
+                            "action": "StartApp",
+                            "package": "com.miHoYo.bh3.bilibili"
                         }
                     }
                 }
-            ]
+            ],
+            "default_case": "官服"
         }
     }
 }
