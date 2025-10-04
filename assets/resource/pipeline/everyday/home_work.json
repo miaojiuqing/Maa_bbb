@@ -10,7 +10,7 @@
     "家园打工-总任务层": {
         "recognition": "TemplateMatch",
         "template": [
-            "ADB/主页UI/休伯利安主界面.png"
+            "主页UI/休伯利安主界面.png"
         ],
         "next": [
             "家园打工-已进入家园"

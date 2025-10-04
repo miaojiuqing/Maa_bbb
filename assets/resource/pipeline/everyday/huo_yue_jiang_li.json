@@ -47,7 +47,7 @@
         ],
         "recognition": "TemplateMatch",
         "template": [
-            "ADB/日常/任务奖励领取/活跃度奖励.png"
+            "日常/任务奖励领取/活跃度奖励.png"
         ],
         "action": "Click",
         "pre_delay": 450,
@@ -69,7 +69,7 @@
         ],
         "recognition": "TemplateMatch",
         "template": [
-            "ADB/日常/任务奖励领取/活跃度奖励.png"
+            "日常/任务奖励领取/活跃度奖励.png"
         ],
         "action": "Click"
     }

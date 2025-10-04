@@ -18,8 +18,8 @@
         ],
         "recognition": "TemplateMatch",
         "template": [
-            "ADB/通用/点击返回主菜单.png",
-            "ADB/通用/点击返回主菜单2.png"
+            "通用/点击返回主菜单.png",
+            "通用/点击返回主菜单2.png"
         ],
         "action": "Click",
         "post_delay": 2000
@@ -33,7 +33,7 @@
         ],
         "recognition": "TemplateMatch",
         "template": [
-            "ADB/通用/叉叉.png"
+            "通用/叉叉.png"
         ],
         "action": "Click"
     },
@@ -46,7 +46,7 @@
         ],
         "recognition": "TemplateMatch",
         "template": [
-            "ADB/通用/叉叉.png"
+            "通用/叉叉.png"
         ],
         "action": "Click"
     }

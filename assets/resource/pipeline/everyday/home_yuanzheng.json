@@ -10,7 +10,7 @@
     "家园远征-总任务层": {
         "recognition": "TemplateMatch",
         "template": [
-            "ADB/主页UI/休伯利安主界面.png"
+            "主页UI/休伯利安主界面.png"
         ],
         "next": [
             "家园远征-成功进入家园"
@@ -143,7 +143,7 @@
         ],
         "recognition": "TemplateMatch",
         "template": [
-            "ADB/通用/体力药.png"
+            "通用/体力药.png"
         ],
         "post_delay": 200,
         "action": "Click",
@@ -169,7 +169,7 @@
         ],
         "recognition": "TemplateMatch",
         "template": [
-            "ADB/日常/家园/远征/家园远征用-体力图标.png"
+            "日常/家园/远征/家园远征用-体力图标.png"
         ],
         "post_delay": 200,
         "action": "Click",

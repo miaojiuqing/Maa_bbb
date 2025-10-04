@@ -10,7 +10,7 @@
     "进入家园领取金币/体力-总任务层": {
         "recognition": "TemplateMatch",
         "template": [
-            "ADB/主页UI/休伯利安主界面.png"
+            "主页UI/休伯利安主界面.png"
         ],
         "next": [
             "家园体力资源领取-成功进入家园"
@@ -30,7 +30,7 @@
         ],
         "recognition": "TemplateMatch",
         "template": [
-            "ADB/主页UI/家园.png"
+            "主页UI/家园.png"
         ],
         "action": "Click",
         "target_offset": [
@@ -71,7 +71,7 @@
         "inverse": true,
         "recognition": "TemplateMatch",
         "template": [
-            "ADB/日常/家园/资源领取/家园-金币.png"
+            "日常/家园/资源领取/家园-金币.png"
         ],
         "action": "Click",
         "next": [
@@ -90,7 +90,7 @@
         ],
         "recognition": "TemplateMatch",
         "template": [
-            "ADB/日常/家园/资源领取/家园-金币.png"
+            "日常/家园/资源领取/家园-金币.png"
         ],
         "action": "Click"
     },
@@ -103,7 +103,7 @@
         ],
         "recognition": "TemplateMatch",
         "template": [
-            "ADB/日常/家园/资源领取/家园-体力.png"
+            "日常/家园/资源领取/家园-体力.png"
         ],
         "action": "Click"
     }
