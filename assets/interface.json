@@ -60,6 +60,13 @@
             "doc": "只领金币"
         },
         {
+            "name": "家园远征派遣",
+            "entry": "家园远征-开始任务层",
+            "option": [
+                "派遣时体力不足吃药吗"
+            ]
+        },
+        {
             "name": "带Custom的任务",
             "entry": "MyTask4"
         }
@@ -87,6 +94,31 @@
                 }
             ],
             "default_case": "官服"
+        },
+        "派遣时体力不足吃药吗": {
+            "cases": [
+                {
+                    "name": "YES",
+                    "pipeline_override": {
+                        "家园远征-体力不足提示": {
+                            "next": [
+                                "启动并进入游戏"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "NO",
+                    "pipeline_override": {
+                        "家园远征-体力不足提示": {
+                            "next": [
+                                "启动并进入游戏"
+                            ]
+                        }
+                    }
+                }
+            ],
+            "default_case": "NO"
         }
     }
 }

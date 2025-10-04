@@ -36,5 +36,18 @@
             "ADB/通用/叉叉.png"
         ],
         "action": "Click"
+    },
+    "点击叉叉-延迟一秒版": {
+        "roi": [
+            837,
+            0,
+            442,
+            264
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "ADB/通用/叉叉.png"
+        ],
+        "action": "Click"
     }
 }
