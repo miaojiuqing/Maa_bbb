@@ -1,1 +1,284 @@
-{}
+{
+    "万象虚境-任务开始层": {
+        "next": [
+            "万象虚境-总任务层"
+        ],
+        "interrupt": [
+            "启动并进入游戏"
+        ]
+    },
+    "万象虚境-总任务层": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "主页UI/休伯利安主界面.png"
+        ],
+        "next": [
+            "万象虚境-已进入万象虚境"
+        ],
+        "interrupt": [
+            "万象虚境-点击进入万象虚境界面",
+            "万象虚境-点击出击页面的挑战",
+            "万象虚境-点击主菜单处的出击"
+        ]
+    },
+    "万象虚境-点击主菜单处的出击": {
+        "roi": [
+            1085,
+            287,
+            131,
+            153
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "出击"
+        ],
+        "action": "Click",
+        "post_delay": 500
+    },
+    "万象虚境-点击出击页面的挑战": {
+        "roi": [
+            621,
+            79,
+            183,
+            76
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "挑战"
+        ],
+        "action": "Click"
+    },
+    "万象虚境-点击进入万象虚境界面": {
+        "roi": [
+            41,
+            140,
+            1188,
+            475
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "周常/万象虚境/万象虚境入口.png"
+        ],
+        "action": "Click",
+        "post_delay": 1000
+    },
+    "万象虚境-已进入万象虚境": {
+        "roi": [
+            40,
+            158,
+            1168,
+            433
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "周常/万象虚境/幽寒之槛.png",
+            "周常/万象虚境/煌然之地.png",
+            "周常/万象虚境/轰鸣之殿.png",
+            "周常/万象虚境/千刃之冢.png"
+        ],
+        "post_delay": 500,
+        "next": [
+            "万象虚境-选择关卡进行挑战",
+            "万象虚境-已进入万象虚境"
+        ],
+        "interrupt": [
+            "家园处-点击返回"
+        ]
+    },
+    "万象虚境-选择关卡进行挑战": {
+        "roi": [
+            40,
+            158,
+            1168,
+            433
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "周常/万象虚境/千刃之冢.png"
+        ],
+        "action": "Click",
+        "next": [
+            "万象虚境-是否消耗时序通行证"
+        ],
+        "interrupt": [
+            "万象虚境-是否消耗时序通行证-状态切换点击"
+        ]
+    },
+    "万象虚境-是否消耗时序通行证": {
+        "roi": [
+            632,
+            624,
+            113,
+            85
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "周常/万象虚境/不消耗时序通行证.png"
+        ],
+        "post_delay": 200,
+        "pre_delay": 500,
+        "next": [
+            "万象虚境-重置挑战次数"
+        ]
+    },
+    "万象虚境-是否消耗时序通行证-状态切换点击": {
+        "roi": [
+            632,
+            624,
+            113,
+            85
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "周常/万象虚境/消耗时序通行证.png",
+            "周常/万象虚境/不消耗时序通行证.png"
+        ],
+        "post_delay": 500,
+        "pre_delay": 200,
+        "action": "Click",
+        "target": [
+            676,
+            656,
+            26,
+            25
+        ]
+    },
+    "万象虚境-选择挑战次数": {
+        "roi": [
+            849,
+            567,
+            82,
+            62
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "1"
+        ],
+        "next": [
+            "万象虚境-减负流程"
+        ]
+    },
+    "万象虚境-重置挑战次数": {
+        "roi": [
+            975,
+            556,
+            224,
+            94
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "周常/万象虚境/次数滑动按钮.png"
+        ],
+        "action": "Swipe",
+        "end": [
+            985,
+            577,
+            31,
+            42
+        ],
+        "duration": 1000,
+        "next": [
+            "万象虚境-选择挑战次数"
+        ],
+        "interrupt": [
+            "万象虚境-挑战次数加一"
+        ]
+    },
+    "万象虚境-挑战次数加一": {
+        "roi": [
+            1160,
+            563,
+            89,
+            69
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "周常/万象虚境/增加挑战次数.png"
+        ],
+        "post_delay": 700,
+        "action": "Click"
+    },
+    "万象虚境-点击减负": {
+        "roi": [
+            875,
+            617,
+            194,
+            99
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "减负"
+        ],
+        "action": "Click",
+        "post_delay": 750
+    },
+    "万象虚境-减负流程": {
+        "roi": [
+            875,
+            617,
+            194,
+            99
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "减负"
+        ],
+        "next": [
+            "万象虚境-确认虚空秘藏奖励"
+        ],
+        "interrupt": [
+            "万象虚境-使用吼吼休假卷",
+            "万象虚境-点击减负"
+        ]
+    },
+    "万象虚境-使用吼吼休假卷": {
+        "roi": [
+            284,
+            154,
+            714,
+            297
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "通用/吼吼休假卷-大.png"
+        ],
+        "action": "Click",
+        "pre_delay": 400,
+        "post_delay": 2000,
+        "target": [
+            749,
+            516,
+            87,
+            40
+        ]
+    },
+    "万象虚境-确认虚空秘藏奖励": {
+        "roi": [
+            515,
+            349,
+            225,
+            89
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "虚空秘藏"
+        ],
+        "action": "Click",
+        "target": [
+            564,
+            538,
+            133,
+            23
+        ],
+        "post_delay": 500,
+        "pre_delay": 150,
+        "next": [
+            "成功进入游戏主菜单"
+        ],
+        "interrupt": [
+            "家园处-点击返回",
+            "点击返回主菜单",
+            "点击叉叉"
+        ]
+    }
+}
