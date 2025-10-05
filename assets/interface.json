@@ -12,7 +12,7 @@
             "type": "Win32",
             "win32": {
                 "class_regex": ".*",
-                "window_regex": "Visual Studio",
+                "window_regex": "崩坏3",
                 "input": 1,
                 "screencap": 1
             }
