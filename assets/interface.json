@@ -1,6 +1,7 @@
 {
     "name": "MAA_bbb",
     "url": "https://github.com/miaojiuqing/MAA_bbb",
+    "message": "欢迎舰长使用识宝小助手，我什么都做得到！",
     "controller": [
         {
             "name": "安卓端",
@@ -11,7 +12,9 @@
             "type": "Win32",
             "win32": {
                 "class_regex": ".*",
-                "window_regex": "Visual Studio"
+                "window_regex": "Visual Studio",
+                "input": 1,
+                "screencap": 1
             }
         }
     ],
