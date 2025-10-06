@@ -23,6 +23,7 @@
             519,
             245
         ],
+        "threshold": 0.8,
         "recognition": "TemplateMatch",
         "template": [
             "通用/点击返回主菜单.png",
