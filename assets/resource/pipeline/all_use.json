@@ -56,5 +56,18 @@
             "通用/叉叉.png"
         ],
         "action": "Click"
+    },
+    "家园等级提升": {
+        "recognition": "OCR",
+        "expected": [
+            "家园等级提升"
+        ],
+        "action": "Click",
+        "target": [
+            588,
+            577,
+            110,
+            18
+        ]
     }
 }
