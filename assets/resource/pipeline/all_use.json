@@ -1,5 +1,12 @@
 {
     "空任务": {},
+    "返回主页后强制结束任务": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "主页UI/休伯利安主界面.png"
+        ],
+        "action": "StopTask"
+    },
     "点击空白位置关闭": {
         "recognition": "OCR",
         "expected": [

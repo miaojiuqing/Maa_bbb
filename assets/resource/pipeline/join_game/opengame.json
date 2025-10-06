@@ -18,6 +18,12 @@
             "空任务"
         ]
     },
+    "成功进入游戏主菜单": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "主页UI/休伯利安主界面.png"
+        ]
+    },
     "打开游戏": {
         "action": "StartApp",
         "package": "com.miHoYo.enterprise.NGHSoD"
@@ -48,12 +54,6 @@
             "点击任意处进入游戏"
         ],
         "action": "Click"
-    },
-    "成功进入游戏主菜单": {
-        "recognition": "TemplateMatch",
-        "template": [
-            "主页UI/休伯利安主界面.png"
-        ]
     },
     "所有资源已下载完毕": {
         "recognition": "TemplateMatch",
