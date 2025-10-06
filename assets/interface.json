@@ -61,6 +61,9 @@
             "name": "家园资源领取",
             "entry": "进入家园领取金币/体力-开始任务层",
             "pipeline_override": {},
+            "option": [
+                "是否检查并领取所有溢出体力"
+            ],
             "doc": "只领金币"
         },
         {
@@ -156,6 +159,28 @@
                 }
             ],
             "default_case": "NO"
+        },
+        "是否检查并领取所有溢出体力": {
+            "cases": [
+                {
+                    "name": "YES",
+                    "pipeline_override": {}
+                },
+                {
+                    "name": "NO",
+                    "pipeline_override": {
+                        "家园资源领取-没有可领取金币了": {
+                            "next": [
+                                "成功进入游戏主菜单"
+                            ],
+                            "interrupt": [
+                                "家园处-点击返回"
+                            ]
+                        }
+                    }
+                }
+            ],
+            "default_case": "YES"
         },
         "万象虚境-副本选择": {
             "cases": [
