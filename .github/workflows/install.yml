@@ -14,7 +14,7 @@ on:
     branches:
       - "**"
     paths:
-      - ".github/workflows/installflows/install.yml"
+      - ".github/workflows/install.yml"
       - "assets/**"
       - "**.py"
   workflow_dispatch:
@@ -96,6 +96,14 @@ jobs:
         run: |
           python ./install.py ${{ needs.meta.outputs.tag }}
 
+          # 为 Windows 平台创建 resource_win32 文件夹
+          if [[ "${{ matrix.os }}" == "win" ]]; then
+            echo "Creating resource_win32 folder for Windows..."
+            mkdir -p install/resource_win32
+            cp -r assets/resource/* install/resource_win32/ 2>/dev/null || true
+            echo "resource_win32 folder created"
+          fi
+
           if [[ "${{ matrix.os }}" != "android" ]]; then
             if [ -d "MFA" ]; then
               echo "Copying MFA files to install directory..."
@@ -142,17 +150,6 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           path: assets
-
-      - name: Prepare resource_win32 folder
-        run: |
-          if [ -d "assets/resource" ]; then
-            echo "Creating resource_win32 folder..."
-            mkdir -p assets/resource_win32
-            cp -r assets/resource/* assets/resource_win32/
-            echo "resource_win32 folder created successfully"
-          else
-            echo "Warning: assets/resource directory not found"
-          fi
 
       - run: |
           cd assets
