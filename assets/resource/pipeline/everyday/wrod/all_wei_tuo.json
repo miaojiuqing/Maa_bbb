@@ -1,0 +1,48 @@
+{
+    "冒险委托通用-点击主菜单的出击": {
+        "roi": [
+            1089,
+            257,
+            174,
+            200
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "出击"
+        ],
+        "action": "Click",
+        "post_delay": 1500
+    },
+    "冒险委托通用-点击出击的出击": {
+        "roi": [
+            444,
+            53,
+            224,
+            97
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "出击"
+        ],
+        "action": "Click"
+    },
+    "冒险委托通用-点击进入委托界面": {
+        "roi": [
+            31,
+            351,
+            229,
+            120
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "开放世界"
+        ],
+        "action": "Click",
+        "target_offset": [
+            0,
+            30,
+            50,
+            0
+        ]
+    }
+}
