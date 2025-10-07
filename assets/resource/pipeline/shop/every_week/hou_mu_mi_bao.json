@@ -1,0 +1,161 @@
+{
+    "每周吼姆秘宝-开始任务层": {
+        "next": [
+            "每周吼姆秘宝-总任务层"
+        ],
+        "interrupt": [
+            "启动并进入游戏"
+        ]
+    },
+    "每周吼姆秘宝-总任务层": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "主页UI/休伯利安主界面.png"
+        ],
+        "next": [
+            "每周吼姆秘宝-已进入商店"
+        ],
+        "interrupt": [
+            "每周吼姆秘宝-点击进入商店",
+            "每周吼姆秘宝-点击礼包"
+        ]
+    },
+    "每周吼姆秘宝-点击进入商店": {
+        "roi": [
+            42,
+            403,
+            130,
+            115
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "主页UI/商城.png"
+        ],
+        "action": "Click"
+    },
+    "每周吼姆秘宝-点击礼包": {
+        "roi": [
+            0,
+            247,
+            231,
+            393
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "礼包"
+        ],
+        "action": "Click"
+    },
+    "每周吼姆秘宝-已进入商店": {
+        "roi": [
+            25,
+            89,
+            226,
+            517
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "限时",
+            "周期",
+            "普通"
+        ],
+        "next": [
+            "每周吼姆秘宝-已进入礼包"
+        ]
+    },
+    "每周吼姆秘宝-已进入礼包": {
+        "roi": [
+            25,
+            89,
+            226,
+            517
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "充值",
+            "热销"
+        ],
+        "action": "Click",
+        "pre_delay": 500,
+        "post_delay": 500,
+        "target": [
+            37,
+            421,
+            79,
+            32
+        ],
+        "next": [
+            "每周吼姆秘宝-有秘宝可领取",
+            "每周吼姆秘宝-无秘宝可领取"
+        ]
+    },
+    "每周吼姆秘宝-点击免费": {
+        "roi": [
+            230,
+            346,
+            272,
+            124
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "免费"
+        ],
+        "action": "Click"
+    },
+    "每周吼姆秘宝-有秘宝可领取": {
+        "roi": [
+            246,
+            88,
+            1010,
+            607
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "商店/每周/吼姆秘宝.png"
+        ],
+        "next": [
+            "每周吼姆秘宝-确认奖励"
+        ],
+        "interrupt": [
+            "每周吼姆秘宝-点击免费"
+        ]
+    },
+    "每周吼姆秘宝-确认奖励": {
+        "roi": [
+            416,
+            552,
+            453,
+            75
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "免费"
+        ],
+        "action": "Click",
+        "next": [
+            "成功进入游戏主菜单"
+        ],
+        "interrupt": [
+            "点击返回主菜单"
+        ]
+    },
+    "每周吼姆秘宝-无秘宝可领取": {
+        "roi": [
+            246,
+            88,
+            1010,
+            607
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "商店/每周/吼姆秘宝.png"
+        ],
+        "inverse": true,
+        "next": [
+            "成功进入游戏主菜单"
+        ],
+        "interrupt": [
+            "点击返回主菜单"
+        ]
+    }
+}
