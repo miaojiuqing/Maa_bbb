@@ -14,7 +14,7 @@ on:
     branches:
       - "**"
     paths:
-      - ".github/workflows/install.yml"
+      - ".github/workflows/installflows/install.yml"
       - "assets/**"
       - "**.py"
   workflow_dispatch:
@@ -145,8 +145,14 @@ jobs:
 
       - name: Prepare resource_win32 folder
         run: |
-          mkdir -p assets/resource_win32
-          cp -r assets/resource/* assets/resource_win32/
+          if [ -d "assets/resource" ]; then
+            echo "Creating resource_win32 folder..."
+            mkdir -p assets/resource_win32
+            cp -r assets/resource/* assets/resource_win32/
+            echo "resource_win32 folder created successfully"
+          else
+            echo "Warning: assets/resource directory not found"
+          fi
 
       - run: |
           cd assets
