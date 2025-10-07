@@ -20,7 +20,7 @@
     ],
     "resource": [
         {
-            "name": "官服",
+            "name": "模拟器",
             "path": [
                 "{PROJECT_DIR}/resource"
             ]
