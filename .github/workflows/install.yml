@@ -143,12 +143,19 @@ jobs:
         with:
           path: assets
 
+      - name: Prepare resource_win32 folder
+        run: |
+          mkdir -p assets/resource_win32
+          cp -r assets/resource/* assets/resource_win32/
+
       - run: |
           cd assets
           for f in *; do
-            (cd $f && zip -r ../$f-${{ needs.meta.outputs.tag }}.zip .)
+            if [ -d "$f" ]; then
+              (cd $f && zip -r ../$f-${{ needs.meta.outputs.tag }}.zip .)
+            fi
           done
-          
+        
       - uses: softprops/action-gh-release@v2
         with:
           files: assets/*
