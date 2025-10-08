@@ -55,9 +55,9 @@
     "舰团活跃奖励-奖励可领取": {
         "roi": [
             183,
-            166,
-            90,
-            526
+            171,
+            87,
+            78
         ],
         "recognition": "TemplateMatch",
         "template": [
@@ -74,10 +74,10 @@
     },
     "舰团活跃奖励-奖励不可领取": {
         "roi": [
-            12,
-            154,
-            137,
-            135
+            183,
+            171,
+            87,
+            78
         ],
         "recognition": "TemplateMatch",
         "template": [
