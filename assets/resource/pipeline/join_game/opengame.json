@@ -16,13 +16,37 @@
             "着色器编译中",
             "家园处-点击返回",
             "拓境战幕-返回",
+            "资源下载",
             "空任务"
         ]
+    },
+    "模拟器包名游戏启动": {
+        "action": "StartApp",
+        "package": "com.miHoYo.enterprise.NGHSoD"
     },
     "成功进入游戏主菜单": {
         "recognition": "TemplateMatch",
         "template": [
             "主页UI/休伯利安主界面.png"
+        ]
+    },
+    "资源下载": {
+        "roi": [
+            526,
+            137,
+            228,
+            112
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "下载资源"
+        ],
+        "action": "Click",
+        "target": [
+            559,
+            483,
+            168,
+            52
         ]
     },
     "打开游戏": {
