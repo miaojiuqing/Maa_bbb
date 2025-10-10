@@ -166,6 +166,14 @@
                             "package": "com.miHoYo.bh3.bilibili"
                         }
                     }
+                },
+                {
+                    "name": "电脑客户端",
+                    "pipeline_override": {
+                        "启动并进入游戏": {
+                            "action": "DoNothing"
+                        }
+                    }
                 }
             ],
             "default_case": "官服"
