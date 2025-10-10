@@ -479,10 +479,10 @@
             ],
             "default_case": "不变"
         },
-        "冒险委托地图选择": {
+        "委托地图选择": {
             "cases": [
                 {
-                    "name": "轮回之樱",
+                    "name": "樱色轮回",
                     "pipeline_override": {
                         "冒险委托任务-选择层": {
                             "next": [
@@ -522,7 +522,7 @@
                     }
                 }
             ],
-            "default_case": "轮回之樱"
+            "default_case": "樱色轮回"
         }
     }
 }
