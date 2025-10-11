@@ -135,9 +135,14 @@
         {
             "name": "冒险委托-减负",
             "entry": "冒险委托任务-选择层",
-            "doc": "[color:tomato]还没做完[/color]\n\n资源文件什么的，舰长要自己提前下好哦",
+            "doc": "[color:tomato]还没做完[/color]\n\n资源文件什么的，舰长要自己提前下好哦\n\n优先级最高是水晶，提供的选项是除了氵之外的优先级",
             "option": [
-                "委托地图选择"
+                "委托地图选择",
+                "接委托时体力不足处理",
+                "报酬接取优先级-1",
+                "报酬接取优先级-2",
+                "报酬接取优先级-3",
+                "报酬接取优先级-4"
             ]
         },
         {
@@ -523,6 +528,325 @@
                 }
             ],
             "default_case": "樱色轮回"
+        },
+        "接委托时体力不足处理": {
+            "cases": [
+                {
+                    "name": "吃药",
+                    "pipeline_override": {
+                        "后崩2委托-体力不足处理": {
+                            "next": [
+                                "后崩2委托-已进入接受委托界面"
+                            ],
+                            "interrupt": [
+                                "后崩2委托-接取冒险委托消耗体力确认",
+                                "后崩2委托-点击接取冒险委托",
+                                "家园远征-体力药已食用确认",
+                                "后崩2委托-一次一药动作"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "不吃药直接退",
+                    "pipeline_override": {
+                        "后崩2委托-体力不足处理": {
+                            "next": [
+                                "成功进入游戏主菜单"
+                            ],
+                            "interrupt": [
+                                "点击返回主菜单",
+                                "输入键码-ESC"
+                            ]
+                        }
+                    }
+                }
+            ],
+            "default_case": "不吃药直接退"
+        },
+        "报酬接取优先级-1": {
+            "cases": [
+                {
+                    "name": "逆熵",
+                    "pipeline_override": {
+                        "冒险委托报酬接取优先级-1": {
+                            "recognition": "TemplateMatch",
+                            "template": [
+                                "周常/冒险委托/后崩坏书2/报酬/逆熵.png"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "空间透镜",
+                    "pipeline_override": {
+                        "冒险委托报酬接取优先级-1": {
+                            "recognition": "TemplateMatch",
+                            "template": [
+                                "周常/冒险委托/后崩坏书2/报酬/空间透镜.png"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "逆熵",
+                    "pipeline_override": {
+                        "冒险委托报酬接取优先级-1": {
+                            "recognition": "TemplateMatch",
+                            "template": [
+                                "周常/冒险委托/后崩坏书2/报酬/相转移镜面.png"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "逆熵",
+                    "pipeline_override": {
+                        "冒险委托报酬接取优先级-1": {
+                            "recognition": "TemplateMatch",
+                            "template": [
+                                "周常/冒险委托/后崩坏书2/报酬/崩坏结晶.png"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "高级技能材料",
+                    "pipeline_override": {
+                        "冒险委托报酬接取优先级-1": {
+                            "recognition": "TemplateMatch",
+                            "template": [
+                                "周常/冒险委托/后崩坏书2/报酬/后崩2-高级技能材料.png"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "虚数核心",
+                    "pipeline_override": {
+                        "冒险委托报酬接取优先级-1": {
+                            "recognition": "TemplateMatch",
+                            "template": [
+                                "周常/冒险委托/后崩坏书2/报酬/虚数核心.png"
+                            ]
+                        }
+                    }
+                }
+            ],
+            "default_case": "逆熵"
+        },
+        "报酬接取优先级-2": {
+            "cases": [
+                {
+                    "name": "逆熵",
+                    "pipeline_override": {
+                        "冒险委托报酬接取优先级-2": {
+                            "recognition": "TemplateMatch",
+                            "template": [
+                                "周常/冒险委托/后崩坏书2/报酬/逆熵.png"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "空间透镜",
+                    "pipeline_override": {
+                        "冒险委托报酬接取优先级-2": {
+                            "recognition": "TemplateMatch",
+                            "template": [
+                                "周常/冒险委托/后崩坏书2/报酬/空间透镜.png"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "逆熵",
+                    "pipeline_override": {
+                        "冒险委托报酬接取优先级-2": {
+                            "recognition": "TemplateMatch",
+                            "template": [
+                                "周常/冒险委托/后崩坏书2/报酬/相转移镜面.png"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "逆熵",
+                    "pipeline_override": {
+                        "冒险委托报酬接取优先级-2": {
+                            "recognition": "TemplateMatch",
+                            "template": [
+                                "周常/冒险委托/后崩坏书2/报酬/崩坏结晶.png"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "高级技能材料",
+                    "pipeline_override": {
+                        "冒险委托报酬接取优先级-2": {
+                            "recognition": "TemplateMatch",
+                            "template": [
+                                "周常/冒险委托/后崩坏书2/报酬/后崩2-高级技能材料.png"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "虚数核心",
+                    "pipeline_override": {
+                        "冒险委托报酬接取优先级-2": {
+                            "recognition": "TemplateMatch",
+                            "template": [
+                                "周常/冒险委托/后崩坏书2/报酬/虚数核心.png"
+                            ]
+                        }
+                    }
+                }
+            ],
+            "default_case": "高级技能材料"
+        },
+        "报酬接取优先级-3": {
+            "cases": [
+                {
+                    "name": "逆熵",
+                    "pipeline_override": {
+                        "冒险委托报酬接取优先级-3": {
+                            "recognition": "TemplateMatch",
+                            "template": [
+                                "周常/冒险委托/后崩坏书2/报酬/逆熵.png"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "空间透镜",
+                    "pipeline_override": {
+                        "冒险委托报酬接取优先级-3": {
+                            "recognition": "TemplateMatch",
+                            "template": [
+                                "周常/冒险委托/后崩坏书2/报酬/空间透镜.png"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "逆熵",
+                    "pipeline_override": {
+                        "冒险委托报酬接取优先级-3": {
+                            "recognition": "TemplateMatch",
+                            "template": [
+                                "周常/冒险委托/后崩坏书2/报酬/相转移镜面.png"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "逆熵",
+                    "pipeline_override": {
+                        "冒险委托报酬接取优先级-3": {
+                            "recognition": "TemplateMatch",
+                            "template": [
+                                "周常/冒险委托/后崩坏书2/报酬/崩坏结晶.png"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "高级技能材料",
+                    "pipeline_override": {
+                        "冒险委托报酬接取优先级-3": {
+                            "recognition": "TemplateMatch",
+                            "template": [
+                                "周常/冒险委托/后崩坏书2/报酬/后崩2-高级技能材料.png"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "虚数核心",
+                    "pipeline_override": {
+                        "冒险委托报酬接取优先级-3": {
+                            "recognition": "TemplateMatch",
+                            "template": [
+                                "周常/冒险委托/后崩坏书2/报酬/虚数核心.png"
+                            ]
+                        }
+                    }
+                }
+            ],
+            "default_case": "空间透镜"
+        },
+        "报酬接取优先级-4": {
+            "cases": [
+                {
+                    "name": "逆熵",
+                    "pipeline_override": {
+                        "冒险委托报酬接取优先级-4": {
+                            "recognition": "TemplateMatch",
+                            "template": [
+                                "周常/冒险委托/后崩坏书2/报酬/逆熵.png"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "空间透镜",
+                    "pipeline_override": {
+                        "冒险委托报酬接取优先级-4": {
+                            "recognition": "TemplateMatch",
+                            "template": [
+                                "周常/冒险委托/后崩坏书2/报酬/空间透镜.png"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "逆熵",
+                    "pipeline_override": {
+                        "冒险委托报酬接取优先级-4": {
+                            "recognition": "TemplateMatch",
+                            "template": [
+                                "周常/冒险委托/后崩坏书2/报酬/相转移镜面.png"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "逆熵",
+                    "pipeline_override": {
+                        "冒险委托报酬接取优先级-4": {
+                            "recognition": "TemplateMatch",
+                            "template": [
+                                "周常/冒险委托/后崩坏书2/报酬/崩坏结晶.png"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "高级技能材料",
+                    "pipeline_override": {
+                        "冒险委托报酬接取优先级-4": {
+                            "recognition": "TemplateMatch",
+                            "template": [
+                                "周常/冒险委托/后崩坏书2/报酬/后崩2-高级技能材料.png"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "虚数核心",
+                    "pipeline_override": {
+                        "冒险委托报酬接取优先级-4": {
+                            "recognition": "TemplateMatch",
+                            "template": [
+                                "周常/冒险委托/后崩坏书2/报酬/虚数核心.png"
+                            ]
+                        }
+                    }
+                }
+            ],
+            "default_case": "相转移镜面"
         }
     }
 }
