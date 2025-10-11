@@ -72,19 +72,19 @@
         ]
     },
     "家园资源领取-点一下领取金币": {
+        "roi": [
+            296,
+            92,
+            127,
+            96
+        ],
         "recognition": "TemplateMatch",
         "template": [
             "日常/家园/资源领取/家园-金币.png",
             "日常/家园/资源领取/金币-满溢.png"
         ],
         "pre_delay": 200,
-        "action": "Click",
-        "target": [
-            335,
-            123,
-            41,
-            37
-        ]
+        "action": "Click"
     },
     "家园资源领取-没有可领取金币了": {
         "roi": [
