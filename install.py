@@ -45,6 +45,16 @@ def install_resource():
         install_path / "resource",
         dirs_exist_ok=True,
     )
+    shutil.copytree(
+        working_dir / "assets" / "resource_win32",
+        install_path / "resource_win32",
+        dirs_exist_ok=True,
+    )
+    shutil.copytree(
+        working_dir / "assets" / "resource_bilibili",
+        install_path / "resource_bilibili",
+        dirs_exist_ok=True,
+    )
     shutil.copy2(
         working_dir / "assets" / "interface.json",
         install_path,
