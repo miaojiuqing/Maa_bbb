@@ -20,9 +20,16 @@
     ],
     "resource": [
         {
-            "name": "模拟器",
+            "name": "模拟器-官服",
             "path": [
                 "{PROJECT_DIR}/resource"
+            ]
+        },
+        {
+            "name": "模拟器-B服",
+            "path": [
+                "{PROJECT_DIR}/resource",
+                "{PROJECT_DIR}/resource_bilibili"
             ]
         },
         {
