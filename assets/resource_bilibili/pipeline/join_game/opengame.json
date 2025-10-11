@@ -1,7 +1,7 @@
 {
     "启动并进入游戏": {
-        // "action": "StartApp",
-        // "package": "com.miHoYo.enterprise.NGHSoD",
+        "action": "StartApp",
+        "package": "com.miHoYo.enterprise.NGHSoD",
         "next": [
             "成功进入游戏主菜单"
         ],
