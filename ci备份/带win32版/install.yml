@@ -96,6 +96,14 @@ jobs:
         run: |
           python ./install.py ${{ needs.meta.outputs.tag }}
 
+          # 为 Windows 平台创建 resource_win32 文件夹
+          if [[ "${{ matrix.os }}" == "win" ]]; then
+            echo "Creating resource_win32 folder for Windows..."
+            mkdir -p install/resource_win32
+            cp -r assets/resource/* install/resource_win32/ 2>/dev/null || true
+            echo "resource_win32 folder created"
+          fi
+
           if [[ "${{ matrix.os }}" != "android" ]]; then
             if [ -d "MFA" ]; then
               echo "Copying MFA files to install directory..."
@@ -146,9 +154,11 @@ jobs:
       - run: |
           cd assets
           for f in *; do
-            (cd $f && zip -r ../$f-${{ needs.meta.outputs.tag }}.zip .)
+            if [ -d "$f" ]; then
+              (cd $f && zip -r ../$f-${{ needs.meta.outputs.tag }}.zip .)
+            fi
           done
-          
+        
       - uses: softprops/action-gh-release@v2
         with:
           files: assets/*
