@@ -24,7 +24,7 @@
   <img alt="license" src="https://img.shields.io/github/license/miaojiuqing/SLIMEIM_Maa">
   <img alt="platform" src="https://img.shields.io/badge/platform-Windows-blueviolet">
   <img alt="commit" src="https://img.shields.io/github/commit-activity/m/miaojiuqing/SLIMEIM_Maa">
-   <a href="https://mirrorchyan.com/zh/projects?source=maafw-badge&rid=SLIMEIM_Maa" target="_blank"><img alt="mirrorc" src="https://img.shields.io/badge/Mirror%E9%85%B1-%239af3f6?logo=countingworkspro&logoColor=4f46e5"></a>
+   <a href="https://mirrorchyan.com/zh/projects?rid=Maa_bbb" target="_blank"><img alt="mirrorc" src="https://img.shields.io/badge/Mirror%E9%85%B1-%239af3f6?logo=countingworkspro&logoColor=4f46e5"></a>
 </p>
 
   <br/>
