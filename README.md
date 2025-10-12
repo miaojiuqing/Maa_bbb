@@ -182,5 +182,5 @@
 还有开发群里的各位都很感谢
 
 <a href="https://github.com/miaojiuqing/MAA_bbb/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=miaojiuqingMAA_bbb&max=1000" alt="Contributors to MAA_bbb"/>
+  <img src="https://contrib.rocks/image?repo=miaojiuqing/MAA_bbb&max=1000" alt="Contributors to MAA_bbb"/>
 </a>
