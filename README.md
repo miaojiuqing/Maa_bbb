@@ -8,6 +8,8 @@
 
 ## Maa_bbb
 
+(识宝小助手)
+
 基于MAA框架制作的崩坏三小助手。图像技术 + 模拟控制，解放双手！由 [MaaFramework](https://github.com/MaaXYZ/MaaFramework) 强力驱动！
 
 [点击申请加入小助手交流群](<https://qm.qq.com/q/XrFQKgGvaI>)
