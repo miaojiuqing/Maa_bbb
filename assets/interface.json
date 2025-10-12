@@ -2,6 +2,8 @@
     "name": "MAA_bbb",
     "url": "https://github.com/miaojiuqing/MAA_bbb",
     "message": "欢迎舰长使用识宝小助手，我什么都做得到！",
+    "mirrorchyan_rid": "Maa_bbb",
+    "mirrorchyan_multiplatform": false,
     "controller": [
         {
             "name": "安卓端",
