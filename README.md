@@ -177,9 +177,7 @@
 
 本项目由 **[MaaFramework](https://github.com/MaaXYZ/MaaFramework)** 强力驱动！
 
-感谢以下开发者对本项目作出的贡献:
-
-还有开发群里的各位都很感谢
+感谢以下开发者对本项目作出的贡献(还有开发群里的各位都很感谢):
 
 <a href="https://github.com/miaojiuqing/MAA_bbb/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=miaojiuqing/MAA_bbb&max=1000" alt="Contributors to MAA_bbb"/>
