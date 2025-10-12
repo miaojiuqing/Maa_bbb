@@ -52,9 +52,6 @@
         {
             "name": "崩坏三 启动！",
             "entry": "启动并进入游戏",
-            "option": [
-                "登录渠道"
-            ],
             "doc": "左上角可选模拟器或者桌面端，桌面端需自行选择游戏窗口\n\n[size:15][color:tomato]桌面端运行必须管理员启动该软件[/color][/size]\n\n会自行确认/领取所有奖励"
         },
         {
@@ -169,37 +166,6 @@
         }
     ],
     "option": {
-        "登录渠道": {
-            "cases": [
-                {
-                    "name": "官服",
-                    "pipeline_override": {
-                        "启动并进入游戏": {
-                            "action": "StartApp",
-                            "package": "com.miHoYo.enterprise.NGHSoD"
-                        }
-                    }
-                },
-                {
-                    "name": "B服",
-                    "pipeline_override": {
-                        "启动并进入游戏": {
-                            "action": "StartApp",
-                            "package": "com.miHoYo.bh3.bilibili"
-                        }
-                    }
-                },
-                {
-                    "name": "电脑客户端",
-                    "pipeline_override": {
-                        "启动并进入游戏": {
-                            "action": "DoNothing"
-                        }
-                    }
-                }
-            ],
-            "default_case": "官服"
-        },
         "材料远征体力不足时吃药吗": {
             "cases": [
                 {
