@@ -5,7 +5,6 @@
     "mirrorchyan_rid": "Maa_bbb",
     "mirrorchyan_multiplatform": false,
     "controller": [
-        //我是分割线
         {
             "name": "桌面端",
             "type": "Win32",
@@ -16,12 +15,10 @@
                 "screencap": 1
             }
         },
-        //我是分割线
         {
             "name": "安卓端",
             "type": "Adb"
         }
-        //我是分割线
     ],
     "resource": [
         {
