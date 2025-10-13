@@ -429,7 +429,8 @@
         "expected": [
             "刷新"
         ],
-        "action": "Click"
+        "action": "Click",
+        "post_delay": 1000
     },
     "后崩2委托-委托接完了": {
         "roi": [
