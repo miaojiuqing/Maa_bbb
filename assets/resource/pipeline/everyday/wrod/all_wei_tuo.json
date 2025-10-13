@@ -61,7 +61,7 @@
         "expected": [
             "权限激活确认"
         ],
-        "action": "Click",
+        // "action": "Click",
         "target": [
             718,
             488,
