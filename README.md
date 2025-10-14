@@ -36,7 +36,7 @@
 **Maa_bbb** 是由miaojiuqing（淼九清）开发的游戏自动化工具，旨在帮助玩家完成每日任务，和以后会添加的一些小活动。  
 **注意：** 本项目推荐使用mumu模拟器(好用)、雷电模拟器，其他模拟器没测过,当然PC端也同步适配，请自己设置为16:9分辨率
 
-[视频链接]无
+[视频链接](<https://www.bilibili.com/video/BV1Ld42z1ERu/?vd_source=49383a2ec38e99b49eb1e3f17c256fb9#reply279196116704>)
 
 [点击链接加入群聊](<https://qm.qq.com/q/XrFQKgGvaI>)
 
