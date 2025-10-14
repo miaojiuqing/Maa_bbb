@@ -1,0 +1,122 @@
+{
+    "冒险委托通用-委托挑取优先级-0": {
+        "roi": [
+            22,
+            525,
+            1220,
+            95
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "周常/冒险委托/报酬/氵.png"
+        ],
+        "action": "Click",
+        "target_offset": [
+            0,
+            0,
+            0,
+            120
+        ]
+        //一切的王者，崩三的终点，氵！
+    },
+    "冒险委托通用-委托挑取优先级-1": {
+        "roi": [
+            22,
+            525,
+            1220,
+            95
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "周常/冒险委托/报酬/逆熵.png",
+            "周常/冒险委托/报酬/虚数核心.png",
+            "周常/冒险委托/报酬/后崩2-高级技能材料.png",
+            "周常/冒险委托/报酬/相转移镜面.png",
+            "周常/冒险委托/报酬/空间透镜.png",
+            "周常/冒险委托/报酬/崩坏结晶.png"
+        ],
+        "action": "Click",
+        "target_offset": [
+            0,
+            0,
+            0,
+            120
+        ],
+        "post_delay": 500
+    },
+    "冒险委托通用-委托挑取优先级-2": {
+        "roi": [
+            22,
+            525,
+            1220,
+            95
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "周常/冒险委托/报酬/虚数核心.png"
+        ],
+        "action": "Click",
+        "target_offset": [
+            0,
+            0,
+            0,
+            120
+        ],
+        "post_delay": 500
+    },
+    "冒险委托通用-委托挑取优先级-3": {
+        "roi": [
+            22,
+            525,
+            1220,
+            95
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "周常/冒险委托/报酬/虚数核心.png"
+        ],
+        "action": "Click",
+        "target_offset": [
+            0,
+            0,
+            0,
+            120
+        ],
+        "post_delay": 500
+    },
+    "冒险委托通用-委托挑取优先级-4": {
+        "roi": [
+            22,
+            525,
+            1220,
+            95
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "周常/冒险委托/报酬/虚数核心.png"
+        ],
+        "action": "Click",
+        "target_offset": [
+            0,
+            0,
+            0,
+            120
+        ],
+        "post_delay": 500
+    },
+    "冒险委托通用-委托挑取优先级-X": {
+        //乱选
+        "roi": [
+            154,
+            603,
+            150,
+            81
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "接取"
+        ],
+        "action": "Click",
+        "post_delay": 500
+    }
+}

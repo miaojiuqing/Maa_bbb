@@ -1,4 +1,23 @@
 {
+    "纯测试": {
+        "roi": [
+            534,
+            74,
+            220,
+            104
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "冒险委托"
+        ],
+        // "action": "Click",
+        "target": [
+            546,
+            549,
+            208,
+            38
+        ]
+    },
     "死循环点击测试": {
         "action": "Click",
         "target": [
