@@ -282,5 +282,25 @@
             "减负"
         ],
         "action": "Click"
+    },
+    "冒险委托通用-已使用体力药确认": {
+        "roi": [
+            511,
+            198,
+            261,
+            253
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "日常/家园/远征/家园远征用-体力图标.png"
+        ],
+        "post_delay": 200,
+        "action": "Click",
+        "target": [
+            501,
+            519,
+            277,
+            52
+        ]
     }
 }
