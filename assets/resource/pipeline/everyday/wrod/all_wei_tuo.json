@@ -61,7 +61,7 @@
         "expected": [
             "权限激活确认"
         ],
-        // "action": "Click",
+        "action": "Click",
         "target": [
             718,
             488,
@@ -86,6 +86,107 @@
             486,
             104,
             35
+        ]
+    },
+    "冒险委托通用-点击地图切换-后崩1": {
+        "roi": [
+            901,
+            622,
+            133,
+            97
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "周常/冒险委托/地图切换/后崩1地图选择.png"
+        ],
+        "action": "Click",
+        "post_delay": 1000
+    },
+    "冒险委托通用-点击地图切换-后崩2": {
+        "roi": [
+            127,
+            0,
+            92,
+            67
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "周常/冒险委托/地图切换/冒险委托地图选择-后崩2.png"
+        ],
+        "action": "Click",
+        "post_delay": 1000
+    },
+    "冒险委托通用-点击地图切换-文字": {
+        "roi": [
+            639,
+            604,
+            320,
+            104
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "地图选择"
+        ],
+        "action": "Click",
+        "post_delay": 1000
+    },
+    "冒险委托通用-已进入委托地图选择": {
+        "roi": [
+            1084,
+            356,
+            195,
+            251
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "周常/冒险委托/地图切换/已进入地图切换界面.png"
+        ],
+        "next": [
+            "冒险委托通用-已选中所选地图"
+        ],
+        "interrupt": [
+            "冒险委托通用-点击选择所需地图"
+        ]
+    },
+    "冒险委托通用-已选中所选地图": {
+        "roi": [
+            179,
+            98,
+            402,
+            195
+        ],
+        "recognition": "ColorMatch",
+        "upper": [
+            252,
+            253,
+            253
+        ],
+        "lower": [
+            160,
+            160,
+            170
+        ],
+        "count": 6000,
+        "pre_delay": 1000,
+        "action": "Click",
+        "target": [
+            1016,
+            637,
+            172,
+            45
+        ]
+    },
+    "冒险委托通用-点击选择所需地图": {
+        "recognition": "OCR",
+        "expected": [
+            "樱色轮回"
+        ],
+        "action": "Click",
+        "target_offset": [
+            0,
+            0,
+            0,
+            100
         ]
     }
 }
