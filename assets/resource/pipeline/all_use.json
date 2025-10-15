@@ -94,5 +94,32 @@
         "action": "ClickKey",
         "key": 27,
         "post_delay": 500
+    },
+    "点击主菜单处的出击": {
+        "roi": [
+            1089,
+            257,
+            174,
+            200
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "出击"
+        ],
+        "action": "Click",
+        "post_delay": 1500
+    },
+    "点击出击的挑战": {
+        "roi": [
+            615,
+            47,
+            236,
+            118
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "挑战"
+        ],
+        "action": "Click"
     }
 }

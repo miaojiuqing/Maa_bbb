@@ -11,6 +11,81 @@
         "recognition": "TemplateMatch",
         "template": [
             "主页UI/休伯利安主界面.png"
+        ],
+        "next": [
+            "记忆战场-已进入记忆战场"
+        ],
+        "interrupt": [
+            "记忆战场-点击进入进入记忆战场",
+            "点击主菜单处的出击",
+            "点击出击的挑战"
         ]
+    },
+    "记忆战场-已进入记忆战场": {
+        "roi": [
+            0,
+            436,
+            209,
+            273
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "周常/记忆战场/已进入记忆战场.png"
+        ],
+        "post_delay": 1000,
+        "next": []
+    },
+    "记忆战场-可以减负": {
+        "roi": [
+            827,
+            631,
+            187,
+            87
+        ],
+        "recognition": "ColorMatch",
+        "upper": [
+            0,
+            195,
+            255
+        ],
+        "lower": [
+            0,
+            195,
+            255
+        ],
+        "count": 3500
+    },
+    "记忆战场-不可减负": {
+        "roi": [
+            827,
+            631,
+            187,
+            87
+        ],
+        "recognition": "ColorMatch",
+        "upper": [
+            156,
+            156,
+            156
+        ],
+        "lower": [
+            156,
+            156,
+            156
+        ],
+        "count": 4000
+    },
+    "记忆战场-点击进入进入记忆战场": {
+        "roi": [
+            290,
+            108,
+            329,
+            584
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "周常/记忆战场/记忆战场入口.png"
+        ],
+        "action": "Click"
     }
 }
