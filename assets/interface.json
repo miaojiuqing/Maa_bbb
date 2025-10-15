@@ -53,7 +53,7 @@
             "name": "崩坏三 启动！",
             "entry": "启动并进入游戏",
             "check": true,
-            "doc": " [align:center]: ![识宝可爱](<https://imgchr.com/i/pVqPhRO>)\n\n左上角可选模拟器或者桌面端，桌面端需自行选择游戏窗口\n\n[size:15][color:tomato]桌面端运行必须管理员启动该软件[/color][/size]\n\n会自行确认/领取所有奖励"
+            "doc": "左上角可选模拟器或者桌面端，桌面端需自行选择游戏窗口\n\n[size:15][color:tomato]桌面端运行必须管理员启动该软件[/color][/size]\n\n会自行确认/领取所有奖励\n\n![loading...](https://s21.ax1x.com/2025/10/14/pVqPhRO.md.png)"
         },
         {
             "name": "日常奖励领取-第一次",
