@@ -52,6 +52,8 @@
         {
             "name": "崩坏三 启动！",
             "entry": "启动并进入游戏",
+            "repeatable": true,
+            "repeat_count": 2,
             "check": true,
             "doc": "左上角可选模拟器或者桌面端，桌面端需自行选择游戏窗口\n\n[size:15][color:tomato]桌面端运行必须管理员启动该软件[/color][/size]\n\n会自行确认/领取所有奖励\n\n![loading...](https://s21.ax1x.com/2025/10/14/pVqPhRO.md.png)"
         },
