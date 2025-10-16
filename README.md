@@ -42,7 +42,19 @@
 
 ---
 
-## 使用须知
+## 使用须知<https://s21.ax1x.com/2025/10/16/pVqBNid.md.png>
+
+  需提前在 [b]:设置 -辅助中，关闭显示菜单提示
+
+ ![操作图指引](<https://s21.ax1x.com/2025/10/16/pVqBJde.md.png>)
+
+  错误示例
+
+ ![错误示例](<https://s21.ax1x.com/2025/10/16/pVqBYIH.md.png>)
+
+  正确首页
+
+ ![正确页面](<https://s21.ax1x.com/2025/10/16/pVqBNid.md.png>)
 
 ## 主要功能
 
