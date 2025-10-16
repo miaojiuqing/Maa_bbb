@@ -62,6 +62,15 @@ body = """
 
 # 尾部
 footer = """
+
+
+[已有 Mirror酱 CDK？点击前往高速下载](https://mirrorchyan.com/zh/projects?source=maafw-badge&rid=Maa_bbb)
+<!--本软件完全免费，若您有付费购买请立即退款并举报！
+
+[视频教学](https://www.bilibili.com/video/BV1Ld42z1ERu/?vd_source=49383a2ec38e99b49eb1e3f17c256fb9#reply279196116704)
+
+若有疑惑[可加Q群](https://qm.qq.com/q/2I8BNwfZQA)作者亲自解答-->
+
 """
 
 [git]
