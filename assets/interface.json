@@ -55,6 +55,9 @@
             "repeatable": true,
             "repeat_count": 2,
             "check": true,
+            "option": [
+                "每次执行该启动任务间隔"
+            ],
             "doc": "左上角可选模拟器或者桌面端，桌面端需自行选择游戏窗口\n\n[size:15][color:tomato]桌面端运行必须管理员启动该软件[/color][/size]\n\n会自行确认/领取所有奖励\n\n![loading...](https://s21.ax1x.com/2025/10/14/pVqPhRO.md.png)"
         },
         {
@@ -201,6 +204,43 @@
         }
     ],
     "option": {
+        "每次执行该启动任务间隔": {
+            "cases": [
+                {
+                    "name": "无延迟(不推荐)",
+                    "pipeline_override": {
+                        "任务奖励领取-任务开始层": {
+                            "post_delay": 0
+                        }
+                    }
+                },
+                {
+                    "name": "延迟三秒",
+                    "pipeline_override": {
+                        "任务奖励领取-任务开始层": {
+                            "post_delay": 3000
+                        }
+                    }
+                },
+                {
+                    "name": "延迟五秒",
+                    "pipeline_override": {
+                        "任务奖励领取-任务开始层": {
+                            "post_delay": 5000
+                        }
+                    }
+                },
+                {
+                    "name": "延迟十秒(这么卡？)",
+                    "pipeline_override": {
+                        "任务奖励领取-任务开始层": {
+                            "post_delay": 10000
+                        }
+                    }
+                }
+            ],
+            "default_case": "延迟五秒"
+        },
         "材料远征体力不足时吃药吗": {
             "cases": [
                 {
