@@ -1,0 +1,42 @@
+{
+    "商店购买通用-家园内点击家园商店": {
+        "roi": [
+            482,
+            86,
+            173,
+            112
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "家园商店"
+        ],
+        "action": "LongPress",
+        "target_offset": [
+            0,
+            0,
+            0,
+            100
+        ],
+        "duration": 1000
+    },
+    "商店购买通用-主菜单点击家园": {
+        "roi": [
+            971,
+            615,
+            207,
+            98
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "主页UI/家园.png"
+        ],
+        "action": "Click",
+        "target_offset": [
+            30,
+            0,
+            0,
+            0
+        ],
+        "post_delay": 1000
+    }
+}
