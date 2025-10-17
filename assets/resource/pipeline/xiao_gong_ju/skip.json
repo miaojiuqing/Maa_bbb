@@ -10,6 +10,39 @@
             "空任务"
         ]
     },
+    "剧情辅助点击-点击对话跳过剧情": {
+        "roi": [
+            826,
+            195,
+            159,
+            357
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "小工具/剧情跳过/剧情跳过-过对话.png"
+        ],
+        "action": "Click"
+    },
+    "剧情辅助点击-点击空白处跳过剧情": {
+        "roi": [
+            826,
+            195,
+            159,
+            357
+        ],
+        "inverse": true,
+        "recognition": "TemplateMatch",
+        "template": [
+            "小工具/剧情跳过/剧情跳过-过对话.png"
+        ],
+        "action": "Click",
+        "target": [
+            497,
+            294,
+            85,
+            102
+        ]
+    },
     "剧情跳过-不处于剧情中": {
         "inverse": true,
         "roi": [
