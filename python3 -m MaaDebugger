@@ -1,0 +1,8 @@
+更新：
+python3 -m pip install MaaDebugger MaaFW --upgrade
+
+记录
+git commit -m
+
+上传
+git push origin HEAD -u
