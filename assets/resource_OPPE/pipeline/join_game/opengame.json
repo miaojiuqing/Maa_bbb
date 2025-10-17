@@ -1,7 +1,7 @@
 {
     "启动并进入游戏": {
         "action": "StartApp",
-        "package": "com.miHoYo.bh3.bilibili",
+        "package": "com.miHoYo.bh3.nearme.gamecenter",
         "next": [
             "成功进入游戏主菜单"
         ],
@@ -25,6 +25,6 @@
     },
     "模拟器包名游戏启动": {
         "action": "StartApp",
-        "package": "com.miHoYo.bh3.bilibili"
+        "package": "com.miHoYo.bh3.nearme.gamecenter"
     }
 }

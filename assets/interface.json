@@ -1094,7 +1094,7 @@
             "type": "string",
             "default": "cs.png",
             "pipeline_override": {
-                "任务A": {
+                "纯测试": {
                     "template": "logo.ico"
                 }
             }
@@ -1113,7 +1113,7 @@
                 "1"
             ],
             "pipeline_override": {
-                "任务A": {
+                "纯测试": {
                     "roi": [
                         "{x}",
                         "{y}",
