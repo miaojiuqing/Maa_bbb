@@ -35,6 +35,13 @@
             ]
         },
         {
+            "name": "模拟器-OPPE渠道服",
+            "path": [
+                "{PROJECT_DIR}/resource",
+                "{PROJECT_DIR}/resource_OPPE"
+            ]
+        },
+        {
             "name": "桌面端",
             "path": [
                 "{PROJECT_DIR}/resource",
