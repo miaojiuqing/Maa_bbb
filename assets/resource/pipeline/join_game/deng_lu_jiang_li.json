@@ -40,7 +40,8 @@
         ],
         "recognition": "OCR",
         "expected": [
-            "超弦空间结算"
+            "超弦空间结算",
+            "你在深渊表现不错"
         ],
         "action": "Click",
         "target": [
