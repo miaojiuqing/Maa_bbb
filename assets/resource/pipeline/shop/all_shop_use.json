@@ -38,5 +38,31 @@
             0
         ],
         "post_delay": 1000
+    },
+    "点击虚境商店": {
+        "roi": [
+            0,
+            75,
+            240,
+            644
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "虚境商店"
+        ],
+        "action": "Click"
+    },
+    "点击玩法商店": {
+        "roi": [
+            0,
+            75,
+            240,
+            644
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "玩法商店"
+        ],
+        "action": "Click"
     }
 }
