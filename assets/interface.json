@@ -10,7 +10,7 @@
             "type": "Win32",
             "win32": {
                 "class_regex": ".*",
-                "window_regex": "崩坏3",
+                "window_regex": "崩坏3|崩坏3 Steam版",
                 "input": 1,
                 "screencap": 1
             }
