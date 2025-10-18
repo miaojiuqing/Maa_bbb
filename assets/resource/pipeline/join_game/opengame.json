@@ -89,6 +89,7 @@
         "template": [
             "进入游戏/所有资源下载完毕，点击确定.png"
         ],
+        "threshold": 0.6,
         "action": "Click",
         "target": [
             562,
