@@ -1,0 +1,142 @@
+{
+    "自动战斗-乐土-薇塔战斗循环": {
+        "roi": [
+            0,
+            0,
+            143,
+            145
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "战斗相关/战中检查/战斗中.png"
+        ],
+        "next": [
+            "非战斗状态"
+        ],
+        "interrupt": [
+            "自动战斗-乐土-薇塔-启动机甲-星之环",
+            "自动战斗-乐土-薇塔-正在开机甲",
+            "空任务"
+        ]
+    },
+    "自动战斗-乐土-薇塔-正在开机甲": {
+        "roi": [
+            331,
+            577,
+            528,
+            56
+        ],
+        "green_mask": true,
+        "recognition": "TemplateMatch",
+        "template": [
+            "战斗相关/乐土/薇塔/普通开机甲.png"
+        ],
+        "next": [
+            "自动战斗-乐土-薇塔-处于超级机甲状态_进行平A",
+            "非战斗状态"
+        ],
+        "interrupt": [
+            "自动战斗-乐土-薇塔-处于攒条_E后平A",
+            "自动战斗-乐土-薇塔-启动机甲-星之环",
+            "空任务"
+        ]
+    },
+    "自动战斗-乐土-薇塔-启动机甲-星之环": {
+        "roi": [
+            975,
+            551,
+            116,
+            130
+        ],
+        "green_mask": true,
+        "recognition": "TemplateMatch",
+        "template": [
+            "战斗相关/星之环/星之环-可开启.png"
+        ],
+        "action": "ClickKey",
+        "key": 70
+    },
+    "左键单击": {
+        "action": "Click"
+    },
+    "非战斗状态": {
+        "roi": [
+            0,
+            0,
+            143,
+            145
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "战斗相关/战中检查/战斗中.png"
+        ],
+        "inverse": true,
+        "next": [
+            "自动战斗-乐土-薇塔战斗循环"
+        ],
+        "interrupt": [
+            "空任务"
+        ]
+    },
+    "自动战斗-乐土-薇塔-处于超级机甲状态_进行平A": {
+        "roi": [
+            479,
+            605,
+            62,
+            58
+        ],
+        "green_mask": true,
+        "recognition": "TemplateMatch",
+        "template": [
+            "战斗相关/乐土/薇塔/机甲形态.png"
+        ],
+        "action": "Click",
+        "next": [
+            "自动战斗-乐土-薇塔战斗循环"
+        ]
+    },
+    "自动战斗-乐土-薇塔-处于攒条_E后平A": {
+        "roi": [
+            331,
+            577,
+            528,
+            56
+        ],
+        "green_mask": true,
+        "recognition": "TemplateMatch",
+        "template": [
+            "战斗相关/乐土/薇塔/普通开机甲.png"
+        ],
+        "action": "ClickKey",
+        "key": 69,
+        "next": [
+            "非战斗状态",
+            "自动战斗-乐土-薇塔-能量条满"
+        ],
+        "interrupt": [
+            "左键单击"
+        ]
+    },
+    "自动战斗-乐土-薇塔-能量条满": {
+        "roi": [
+            525,
+            609,
+            201,
+            51
+        ],
+        "recognition": "ColorMatch",
+        "upper": [
+            114,
+            233,
+            255
+        ],
+        "lower": [
+            37,
+            62,
+            72
+        ],
+        "count": 1500,
+        "action": "LongPress",
+        "duration": 1000
+    }
+}
