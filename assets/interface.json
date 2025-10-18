@@ -112,6 +112,9 @@
             "name": "舰团每日委托",
             "entry": "舰团每日委托-开始任务层",
             "check": true,
+            "option": [
+                "委托材料不足时自动补货"
+            ],
             "doc": "要提交的材料自己先提前准备好，否则可能会一直卡住，但是可以人工购买完他就会接着交了"
         },
         {
@@ -351,6 +354,44 @@
                             ],
                             "interrupt": [
                                 "家园处-点击返回"
+                            ]
+                        }
+                    }
+                }
+            ],
+            "default_case": "YES"
+        },
+        "委托材料不足时自动补货": {
+            "cases": [
+                {
+                    "name": "YES",
+                    "pipeline_override": {
+                        "舰团每日委托-快捷补全道具": {
+                            "recognition": "OCR",
+                            "expected": [
+                                "快捷补全道具"
+                            ],
+                            "pre_delay": 200,
+                            "post_delay": 1000
+                        }
+                    }
+                },
+                {
+                    "name": "NO",
+                    "pipeline_override": {
+                        "舰团每日委托-快捷补全道具": {
+                            "recognition": "OCR",
+                            "expected": [
+                                "快捷补全道具"
+                            ],
+                            "pre_delay": 200,
+                            "post_delay": 1000,
+                            "next": [
+                                "返回主页后强制结束任务"
+                            ],
+                            "interrupt": [
+                                "点击叉叉",
+                                "点击返回主菜单"
                             ]
                         }
                     }
