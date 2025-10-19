@@ -56,6 +56,7 @@
             1036,
             162
         ],
+        "threshold": 0.85,
         "inverse": true,
         "recognition": "TemplateMatch",
         "template": [
