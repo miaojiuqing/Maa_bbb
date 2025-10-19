@@ -34,6 +34,26 @@
             "主页UI/休伯利安主界面.png"
         ]
     },
+    "点击确定月卡奖励": {
+        "recognition": "OCR",
+        "expected": [
+            "确定"
+        ],
+        "action": "Click"
+    },
+    "启动游戏-领取月卡": {
+        "roi": [
+            552,
+            599,
+            375,
+            115
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "进入游戏/月卡.png"
+        ],
+        "action": "Click"
+    },
     "资源下载": {
         "roi": [
             526,
