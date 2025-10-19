@@ -1,0 +1,20 @@
+{
+    "支援位_1": {
+        "action": "ClickKey",
+        "key": 49,
+        "next": [
+            "支援位_2"
+        ]
+    },
+    "支援位_2": {
+        "action": "ClickKey",
+        "key": 50,
+        "next": [
+            "英桀援助"
+        ]
+    },
+    "英桀援助": {
+        "action": "ClickKey",
+        "key": 84
+    }
+}
