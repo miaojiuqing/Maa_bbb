@@ -1,4 +1,34 @@
 {
+    "支援位12援助加人偶": {
+        // "inverse": true,
+        // "roi": [
+        //     988,
+        //     570,
+        //     96,
+        //     95
+        // ],
+        // "recognition": "ColorMatch",
+        // "upper": [
+        //     358,
+        //     37,
+        //     100
+        // ],
+        // "lower": [
+        //     0,
+        //     0,
+        //     40
+        // ],
+        // "count": 350,
+        // "method": 40,
+        "action": "ClickKey",
+        "key": [
+            49,
+            50,
+            84,
+            70,
+            81
+        ]
+    },
     "支援位_1": {
         "action": "ClickKey",
         "key": 49,
@@ -15,6 +45,27 @@
     },
     "英桀援助": {
         "action": "ClickKey",
-        "key": 84
+        "key": 84,
+        "next": [
+            "自动战斗-接口层"
+        ]
+    },
+    "召唤人偶后支援位12": {
+        "roi": [
+            988,
+            570,
+            96,
+            95
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "战斗相关/人偶-亮.png"
+        ],
+        "green_mask": true,
+        "action": "ClickKey",
+        "key": 70,
+        "next": [
+            "支援位_1"
+        ]
     }
 }

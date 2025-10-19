@@ -1,1 +1,74 @@
-{}
+{
+    "自动战斗-乐土-崩落华战斗循环": {
+        "roi": [
+            0,
+            0,
+            143,
+            145
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "战斗相关/战中检查/战斗中.png"
+        ],
+        "next": [
+            "非战斗状态-乐土崩落华"
+        ],
+        "interrupt": [
+            "自动战斗-乐土-崩落华-有大开大",
+            "自动战斗-乐土-崩落华-普攻"
+        ]
+    },
+    "非战斗状态-乐土崩落华": {
+        "roi": [
+            0,
+            0,
+            143,
+            145
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "战斗相关/战中检查/战斗中.png"
+        ],
+        "inverse": true,
+        "next": [
+            "自动战斗-乐土-崩落华战斗循环"
+        ],
+        "interrupt": [
+            "空任务"
+        ]
+    },
+    "自动战斗-乐土-崩落华-有大开大": {
+        "roi": [
+            1156,
+            505,
+            101,
+            101
+        ],
+        "green_mask": true,
+        "recognition": "TemplateMatch",
+        "threshold": 0.75,
+        "template": [
+            "战斗相关/乐土/崩落华/崩落华-可开大.png"
+        ],
+        "next": [
+            "支援位12援助加人偶"
+        ]
+    },
+    "开大": {
+        "action": "ClickKey",
+        "key": 81
+    },
+    "自动战斗-乐土-崩落华-普攻": {
+        "roi": [
+            0,
+            0,
+            143,
+            145
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "战斗相关/战中检查/战斗中.png"
+        ],
+        "action": "Click"
+    }
+}
