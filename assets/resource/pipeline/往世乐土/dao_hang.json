@@ -87,8 +87,7 @@
         "expected": [
             "快速出击"
         ],
-        "action": "ClickKey",
-        "key": 70
+        "action": "Click"
     },
     "往世乐土-点击选择深层序列": {
         "roi": [
