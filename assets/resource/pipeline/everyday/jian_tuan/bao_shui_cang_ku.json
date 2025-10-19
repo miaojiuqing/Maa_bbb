@@ -127,7 +127,7 @@
         ],
         "recognition": "TemplateMatch",
         "template": [
-            "日常/舰团/保税仓库/圣痕碎片/红晶(火)/一级红晶.png"
+            "日常/舰团/保税仓库/圣痕碎片/赤晶(火)/一级赤晶.png"
         ],
         "action": "Click"
     },
@@ -140,7 +140,7 @@
         ],
         "recognition": "TemplateMatch",
         "template": [
-            "日常/舰团/保税仓库/圣痕碎片/红晶(火)/一级红晶.png"
+            "日常/舰团/保税仓库/圣痕碎片/赤晶(火)/一级赤晶.png"
         ],
         "inverse": true,
         "action": "Swipe",
