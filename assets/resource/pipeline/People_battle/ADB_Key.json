@@ -1,20 +1,58 @@
 {
-    "队友1": {
+    "支援位一二接英桀援助接星之环或人偶": {
         "action": "Click",
         "target": [
             1176,
             133,
             48,
             28
+        ],
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": [
+            "队友1"
+        ]
+    },
+    "队友1": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "action": "Click",
+        "target": [
+            1176,
+            133,
+            48,
+            28
+        ],
+        "next": [
+            "队友2"
         ]
     },
     "队友2": {
+        "pre_delay": 0,
+        "post_delay": 0,
         "action": "Click",
         "target": [
             1175,
             275,
             47,
             42
+        ],
+        "next": [
+            "英桀助战"
+        ]
+    },
+    "英桀助战": {
+        "pre_delay": 0,
+        "post_delay": 0,
+        "action": "Click",
+        "target": [
+            895,
+            379,
+            85,
+            90
+        ],
+        "next": [
+            "人偶/星之环"
         ]
     },
     "技能": {
@@ -42,7 +80,8 @@
             542,
             65,
             34
-        ]
+        ],
+        "post_delay": 2500
     },
     "普攻": {
         "action": "Click",
