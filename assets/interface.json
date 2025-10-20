@@ -835,7 +835,7 @@
                     }
                 }
             ],
-            "default_case": "YES"
+            "default_case": "NO"
         },
         "是否消耗时序通行证": {
             "cases": [
