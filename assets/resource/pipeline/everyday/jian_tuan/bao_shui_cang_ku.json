@@ -126,7 +126,7 @@
             518
         ],
         "recognition": "TemplateMatch",
-        "threshold": 0.85,
+        "threshold": 0.82,
         "template": [
             "日常/舰团/保税仓库/圣痕碎片/赤晶(火)/一级赤晶.png"
         ],
@@ -139,6 +139,7 @@
             1216,
             518
         ],
+        "threshold": 0.82,
         "recognition": "TemplateMatch",
         "template": [
             "日常/舰团/保税仓库/圣痕碎片/赤晶(火)/一级赤晶.png"
