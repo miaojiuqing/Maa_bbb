@@ -150,10 +150,10 @@
     },
     "冒险委托通用-已选中所选地图": {
         "roi": [
-            257,
-            350,
-            346,
-            186
+            743,
+            114,
+            326,
+            184
         ],
         "recognition": "ColorMatch",
         "upper": [
@@ -179,7 +179,7 @@
     "冒险委托通用-点击选择所需地图": {
         "recognition": "OCR",
         "expected": [
-            "后崩坏书"
+            "天命总部"
         ],
         "action": "Click",
         "target_offset": [
