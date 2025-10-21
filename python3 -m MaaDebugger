@@ -10,3 +10,10 @@ git push origin HEAD -u
 版本
 git tag v1.2.1
 git push origin v1.2.1
+
+ "focus": {
+     "start": "start是检测前就弹一遍",
+     "succeeded": "success是命中了弹",
+     "failed": "failed是超时了弹",
+      "toast": "toast是windows弹窗通知吗"
+ }

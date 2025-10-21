@@ -179,7 +179,7 @@
     "冒险委托通用-点击选择所需地图": {
         "recognition": "OCR",
         "expected": [
-            "樱色轮回"
+            "后崩坏书"
         ],
         "action": "Click",
         "target_offset": [
