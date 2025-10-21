@@ -128,23 +128,16 @@
     },
     "记忆战场-已选中第一只怪": {
         "roi": [
-            13,
-            78,
-            307,
-            139
+            17,
+            80,
+            294,
+            132
         ],
-        "recognition": "ColorMatch",
-        "upper": [
-            110,
-            255,
-            255
+        "green_mask": true,
+        "recognition": "TemplateMatch",
+        "template": [
+            "周常/记忆战场/记忆战场-选中框.png"
         ],
-        "lower": [
-            24,
-            102,
-            186
-        ],
-        "count": 5000,
         "next": [
             "记忆战场-第一只怪-减负完毕"
         ],
@@ -240,23 +233,16 @@
     },
     "记忆战场-已选中第二只怪": {
         "roi": [
-            14,
-            189,
-            303,
-            132
+            10,
+            187,
+            316,
+            137
         ],
-        "recognition": "ColorMatch",
-        "upper": [
-            110,
-            255,
-            255
+        "green_mask": true,
+        "recognition": "TemplateMatch",
+        "template": [
+            "周常/记忆战场/记忆战场-选中框.png"
         ],
-        "lower": [
-            24,
-            102,
-            186
-        ],
-        "count": 5000,
         "next": [
             "记忆战场-第二只怪-减负完毕"
         ],
@@ -267,23 +253,16 @@
     },
     "记忆战场-已选中第三只怪": {
         "roi": [
-            17,
-            299,
+            13,
             296,
-            133
+            301,
+            139
         ],
-        "recognition": "ColorMatch",
-        "upper": [
-            110,
-            255,
-            255
+        "green_mask": true,
+        "recognition": "TemplateMatch",
+        "template": [
+            "周常/记忆战场/记忆战场-选中框.png"
         ],
-        "lower": [
-            24,
-            102,
-            186
-        ],
-        "count": 5000,
         "next": [
             "记忆战场-第三只怪-减负完毕"
         ],
