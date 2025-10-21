@@ -121,5 +121,18 @@
             "挑战"
         ],
         "action": "Click"
+    },
+    "点击出击的活动": {
+        "roi": [
+            844,
+            50,
+            117,
+            101
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "活动"
+        ],
+        "action": "Click"
     }
 }
