@@ -3,6 +3,7 @@ from pathlib import Path
 import shutil
 import sys
 import json
+import jsonc
 
 from configure import configure_ocr_model
 
@@ -66,12 +67,12 @@ def install_resource():
     )
 
     with open(install_path / "interface.json", "r", encoding="utf-8") as f:
-        interface = json.load(f)
+        interface = jsonc.load(f)
 
     interface["version"] = version
 
     with open(install_path / "interface.json", "w", encoding="utf-8") as f:
-        json.dump(interface, f, ensure_ascii=False, indent=4)
+        jsonc.dump(interface, f, ensure_ascii=False, indent=4)
 
 
 def install_chores():
