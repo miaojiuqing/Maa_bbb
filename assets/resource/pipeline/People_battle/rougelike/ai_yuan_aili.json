@@ -105,6 +105,12 @@
         "template": [
             "战斗相关/战中检查/战斗中.png"
         ],
-        "action": "Click"
+        "action": "Click",
+        "target": [
+            1186,
+            634,
+            32,
+            30
+        ]
     }
 }

@@ -86,7 +86,13 @@
         "template": [
             "战斗相关/战中检查/战斗中.png"
         ],
-        "action": "Click"
+        "action": "Click",
+        "target": [
+            1186,
+            634,
+            32,
+            30
+        ]
     },
     "非战斗状态-乐土乐土开环通用战斗逻辑": {
         "rate_limit": 0,
