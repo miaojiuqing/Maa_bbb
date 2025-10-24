@@ -146,6 +146,7 @@
         "template": [
             "通用/请注意休息.png"
         ],
+        "green_mask": true,
         "action": "Click",
         "focus": {
             "succeeded": "舰长，请注意休息"
@@ -159,6 +160,7 @@
             76,
             77
         ],
+        "green_mask": true,
         "recognition": "TemplateMatch",
         "template": [
             "通用/请注意休息.png"
