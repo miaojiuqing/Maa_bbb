@@ -134,5 +134,42 @@
             "活动"
         ],
         "action": "Click"
+    },
+    "请舰长注意休息": {
+        "roi": [
+            910,
+            62,
+            76,
+            77
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "通用/请注意休息.png"
+        ],
+        "action": "Click",
+        "focus": {
+            "succeeded": "舰长，请注意休息"
+        },
+        "post_delay": 1000
+    },
+    "请舰长注意休息-夹心": {
+        "roi": [
+            910,
+            62,
+            76,
+            77
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "通用/请注意休息.png"
+        ],
+        "action": "Click",
+        "next": [
+            "启动并进入游戏"
+        ],
+        "focus": {
+            "succeeded": "舰长，请注意休息"
+        },
+        "post_delay": 1000
     }
 }

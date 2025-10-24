@@ -3,10 +3,12 @@
         "action": "StartApp",
         "package": "com.miHoYo.enterprise.NGHSoD",
         "next": [
+            "请舰长注意休息-夹心",
             "进入游戏-超弦空间结算",
             "成功进入游戏主菜单"
         ],
         "interrupt": [
+            "请舰长注意休息",
             "点击返回主菜单",
             "点击叉叉",
             "点击空白位置关闭",
