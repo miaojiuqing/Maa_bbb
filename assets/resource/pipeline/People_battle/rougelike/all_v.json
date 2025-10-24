@@ -93,16 +93,16 @@
         "post_delay": 0,
         "pre_delay": 0,
         "roi": [
-            0,
-            0,
-            143,
-            145
+            1058,
+            619,
+            100,
+            100
         ],
         "recognition": "TemplateMatch",
         "template": [
-            "战斗相关/战中检查/战斗中.png"
+            "战斗相关/战中检查/已经不用再战斗了.png"
         ],
-        "inverse": true,
+        "green_mask": true,
         "next": [
             "自动战斗-乐土-乐土开环通用战斗逻辑循环"
         ],
