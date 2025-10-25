@@ -1,6 +1,0 @@
-{
-    "键码输入尝试-ESC": {
-        "action": "ClickKey",
-        "key": 27
-    }
-}
