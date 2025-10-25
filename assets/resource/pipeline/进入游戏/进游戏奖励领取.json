@@ -31,6 +31,25 @@
             27
         ]
     },
+    "点击领取签到奖励": {
+        "roi": [
+            475,
+            1,
+            491,
+            83
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "签到奖励"
+        ],
+        "action": "Click",
+        "target": [
+            654,
+            656,
+            195,
+            41
+        ]
+    },
     "进入游戏-超弦空间结算": {
         "recognition": "OCR",
         "expected": [
