@@ -8,7 +8,8 @@
         ],
         "recognition": "TemplateMatch",
         "template": [
-            "周常/冒险委托/报酬/氵.png"
+            "周常/冒险委托/报酬/后崩坏书二/氵.png",
+            "周常/冒险委托/报酬/后崩坏书一/氵.png"
         ],
         "action": "Click",
         "target_offset": [
@@ -16,7 +17,10 @@
             0,
             0,
             120
-        ]
+        ],
+        "focus": {
+            "succeeded": "冒险委托刷出氵啦！"
+        }
         //一切的王者，崩三的终点，氵！
     },
     "冒险委托通用-委托挑取优先级-1": {
@@ -28,12 +32,12 @@
         ],
         "recognition": "TemplateMatch",
         "template": [
-            "周常/冒险委托/报酬/逆熵.png"
-            // "周常/冒险委托/报酬/虚数核心.png",
-            // "周常/冒险委托/报酬/后崩2-高级技能材料.png",
-            // "周常/冒险委托/报酬/相转移镜面.png",
-            // "周常/冒险委托/报酬/空间透镜.png",
-            // "周常/冒险委托/报酬/崩坏结晶.png"
+            "周常/冒险委托/报酬/后崩坏书二/逆熵.png"
+            // "周常/冒险委托/报酬/后崩坏书二/虚数核心.png",
+            // "周常/冒险委托/报酬/后崩坏书二/后崩2-高级技能材料.png",
+            // "周常/冒险委托/报酬/后崩坏书二/相转移镜面.png",
+            // "周常/冒险委托/报酬/后崩坏书二/空间透镜.png",
+            // "周常/冒险委托/报酬/后崩坏书二/崩坏结晶.png"
         ],
         "action": "Click",
         "target_offset": [
@@ -53,7 +57,7 @@
         ],
         "recognition": "TemplateMatch",
         "template": [
-            "周常/冒险委托/报酬/虚数核心.png"
+            "周常/冒险委托/报酬/后崩坏书二/虚数核心.png"
         ],
         "action": "Click",
         "target_offset": [
@@ -73,7 +77,7 @@
         ],
         "recognition": "TemplateMatch",
         "template": [
-            "周常/冒险委托/报酬/虚数核心.png"
+            "周常/冒险委托/报酬/后崩坏书二/虚数核心.png"
         ],
         "action": "Click",
         "target_offset": [
@@ -93,7 +97,7 @@
         ],
         "recognition": "TemplateMatch",
         "template": [
-            "周常/冒险委托/报酬/虚数核心.png"
+            "周常/冒险委托/报酬/后崩坏书二/虚数核心.png"
         ],
         "action": "Click",
         "target_offset": [

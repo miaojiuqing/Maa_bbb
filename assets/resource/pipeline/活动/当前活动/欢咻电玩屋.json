@@ -97,7 +97,7 @@
         ],
         "recognition": "OCR",
         "expected": [
-            "解锁"
+            "未解锁"
         ],
         "next": [
             "返回主页后强制结束任务"
