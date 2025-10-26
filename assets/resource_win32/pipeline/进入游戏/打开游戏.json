@@ -3,9 +3,10 @@
         "action": "DoNothing"
     },
     "模拟器包名游戏启动": {
-        "action": "ClickKey",
-        "key": 27,
-        "post_delay": "1500"
+        "enabled": false
+        // "action": "ClickKey",
+        // "key": 27,
+        // "post_delay": "1500"
     },
     "关闭游戏": {
         "action": "DoNothing",
