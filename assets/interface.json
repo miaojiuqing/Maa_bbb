@@ -45,6 +45,13 @@
             ]
         },
         {
+            "name": "模拟器-华为渠道服",
+            "path": [
+                "{PROJECT_DIR}/resource",
+                "{PROJECT_DIR}/resource_huawei"
+            ]
+        },
+        {
             "name": "桌面端",
             "path": [
                 "{PROJECT_DIR}/resource",
