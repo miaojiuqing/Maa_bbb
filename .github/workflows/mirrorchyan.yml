@@ -34,7 +34,7 @@ jobs:
         with:
           filetype: latest-release
           filename: "Maa_bbb-win-x86_64-*.zip"
-          pick_files: '["resource", "resource_bilibili", "resource_win32", "resource_OPPE", "resource_huawei", "interface.json"]'
+          pick_files: '["resource", "resource_bilibili", "resource_win32", "resource_OPPE", "resource_huawei", "resource_yyb" , "interface.json"]'
           exclude_files: '["resource/model/ocr/**"]'
           mirrorchyan_rid: Maa_bbb
 

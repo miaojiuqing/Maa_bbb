@@ -52,6 +52,13 @@
             ]
         },
         {
+            "name": "模拟器-应用宝渠道服",
+            "path": [
+                "{PROJECT_DIR}/resource",
+                "{PROJECT_DIR}/resource_yyb"
+            ]
+        },
+        {
             "name": "桌面端",
             "path": [
                 "{PROJECT_DIR}/resource",
