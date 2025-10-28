@@ -222,6 +222,12 @@
             "name": "乐土每周商店购买",
             "check": true,
             "entry": "乐土每周商店-开始任务层",
+            "option": [
+                "聚能·空间透镜",
+                "相转移镜面",
+                "吼吼休假卷",
+                "时序通行证"
+            ],
             "doc": "没做完，先这样，可以导航到买东西的地方"
         },
         {
@@ -373,6 +379,86 @@
                 }
             ],
             "default_case": "不检查"
+        },
+        "聚能·空间透镜": {
+            "cases": [
+                {
+                    "name": "YES",
+                    "pipeline_override": {}
+                },
+                {
+                    "name": "NO",
+                    "pipeline_override": {
+                        "乐土商店-聚能空间透镜-可购买": {
+                            "enabled": false
+                        },
+                        "乐土商店-聚能空间透镜-不可购买": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ],
+            "default_case": "YES"
+        },
+        "相转移镜面": {
+            "cases": [
+                {
+                    "name": "YES",
+                    "pipeline_override": {}
+                },
+                {
+                    "name": "NO",
+                    "pipeline_override": {
+                        "乐土商店-相转移镜面-可购买": {
+                            "enabled": false
+                        },
+                        "乐土商店-相转移镜面-不可购买": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ],
+            "default_case": "YES"
+        },
+        "吼吼休假卷": {
+            "cases": [
+                {
+                    "name": "YES",
+                    "pipeline_override": {}
+                },
+                {
+                    "name": "NO",
+                    "pipeline_override": {
+                        "乐土商店-吼吼休假卷-可购买": {
+                            "enabled": false
+                        },
+                        "乐土商店-吼吼休假卷-不可购买": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ],
+            "default_case": "NO"
+        },
+        "时序通行证": {
+            "cases": [
+                {
+                    "name": "YES",
+                    "pipeline_override": {}
+                },
+                {
+                    "name": "NO",
+                    "pipeline_override": {
+                        "乐土商店-时序通行证-可购买": {
+                            "enabled": false
+                        },
+                        "乐土商店-时序通行证-不可购买": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ],
+            "default_case": "YES"
         },
         "每次执行该启动任务间隔": {
             "cases": [

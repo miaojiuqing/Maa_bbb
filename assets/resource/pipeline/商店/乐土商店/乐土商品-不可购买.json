@@ -1,0 +1,82 @@
+{
+    "乐土商店-吼吼休假卷-未解锁": {
+        "roi": [
+            249,
+            141,
+            1017,
+            578
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "商店/每周/乐土/商品不可购买/吼吼休假卷-未解锁.png"
+        ],
+        "next": [
+            "乐土商店-聚能空间透镜-不可购买",
+            "乐土商店-时序通行证-不可购买",
+            "乐土商店-相转移镜面-不可购买"
+        ],
+        "interrupt": [
+            "乐土每周商店-点击确认购买",
+            "乐土每周商店-购买界面",
+            "乐土商店-聚能空间透镜-可购买",
+            "乐土商店-时序通行证-可购买",
+            "乐土商店-相转移镜面-可购买"
+        ]
+    },
+    "乐土商店-吼吼休假卷-不可购买": {
+        "inverse": true,
+        "roi": [
+            249,
+            141,
+            1017,
+            578
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "商店/每周/乐土/商品可购买/吼吼休假卷.png"
+        ],
+        "action": "Click"
+    },
+    "乐土商店-聚能空间透镜-不可购买": {
+        "inverse": true,
+        "roi": [
+            249,
+            141,
+            1017,
+            578
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "商店/每周/乐土/商品可购买/聚能空间透镜.png"
+        ],
+        "action": "Click"
+    },
+    "乐土商店-时序通行证-不可购买": {
+        "inverse": true,
+        "roi": [
+            249,
+            141,
+            1017,
+            578
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "商店/每周/乐土/商品可购买/时序通行证.png"
+        ],
+        "action": "Click"
+    },
+    "乐土商店-相转移镜面-不可购买": {
+        "inverse": true,
+        "roi": [
+            249,
+            141,
+            1017,
+            578
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "商店/每周/乐土/商品可购买/相转移镜面.png"
+        ],
+        "action": "Click"
+    }
+}
