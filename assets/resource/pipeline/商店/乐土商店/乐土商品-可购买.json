@@ -10,7 +10,10 @@
         "template": [
             "商店/每周/乐土/商品可购买/吼吼休假卷.png"
         ],
-        "action": "Click"
+        "action": "Click",
+        "threshold": [
+            0.8
+        ]
     },
     "乐土商店-聚能空间透镜-可购买": {
         "roi": [
