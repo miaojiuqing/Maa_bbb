@@ -124,16 +124,16 @@
     },
     "图片识别测试": {
         "roi": [
-            337,
-            230,
-            663,
-            130
+            1058,
+            619,
+            100,
+            100
         ],
-        "green_mask": true,
         "recognition": "TemplateMatch",
         "template": [
-            "日常/任务奖励领取/可领取框框.png"
-        ]
+            "战斗相关/战中检查/已经不用再战斗了-PC.png"
+        ],
+        "green_mask": true
     },
     "色块识别测试": {
         "roi": [
