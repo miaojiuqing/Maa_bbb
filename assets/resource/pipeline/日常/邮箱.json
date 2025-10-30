@@ -29,7 +29,8 @@
         ],
         "recognition": "TemplateMatch",
         "template": [
-            "主页UI/邮件.png"
+            "主页UI/邮件.png",
+            "主页UI/邮件图标2.png"
         ],
         "action": "Click"
     },
