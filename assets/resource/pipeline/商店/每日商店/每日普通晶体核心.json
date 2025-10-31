@@ -32,7 +32,7 @@
         ],
         "recognition": "OCR",
         "expected": [
-            "金币"
+            "金币商店"
         ],
         "action": "Click"
     },
