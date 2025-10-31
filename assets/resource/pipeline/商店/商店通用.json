@@ -64,5 +64,18 @@
             "玩法商店"
         ],
         "action": "Click"
+    },
+    "点击基础货币": {
+        "roi": [
+            9,
+            79,
+            220,
+            640
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "基础货币"
+        ],
+        "action": "Click"
     }
 }
