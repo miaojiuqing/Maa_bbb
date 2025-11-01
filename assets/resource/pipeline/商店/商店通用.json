@@ -50,7 +50,8 @@
         "expected": [
             "虚境商店"
         ],
-        "action": "Click"
+        "action": "Click",
+        "post_delay": 500
     },
     "点击玩法商店": {
         "roi": [
@@ -63,7 +64,8 @@
         "expected": [
             "玩法商店"
         ],
-        "action": "Click"
+        "action": "Click",
+        "post_delay": 500
     },
     "点击基础货币": {
         "roi": [
