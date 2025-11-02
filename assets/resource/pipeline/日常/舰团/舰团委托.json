@@ -196,15 +196,15 @@
         "action": "Click"
     },
     "舰团每日委托-一键申请": {
-        "recognition": "OCR",
-        "expected": [
-            "一键申请"
-        ],
         "roi": [
             1018,
             100,
             211,
             67
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "一键申请"
         ],
         "action": "Click",
         "pre_delay": 500
