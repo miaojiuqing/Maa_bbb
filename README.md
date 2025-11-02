@@ -21,9 +21,9 @@
 </div>
 <p align="center">
   <img alt="Python" src="https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white">
-  <img alt="license" src="https://img.shields.io/github/license/miaojiuqing/SLIMEIM_Maa">
+  <img alt="license" src="https://img.shields.io/github/license/miaojiuqing/Maa_bbb">
   <img alt="platform" src="https://img.shields.io/badge/platform-Windows-blueviolet">
-  <img alt="commit" src="https://img.shields.io/github/commit-activity/m/miaojiuqing/SLIMEIM_Maa">
+  <img alt="commit" src="https://img.shields.io/github/commit-activity/m/miaojiuqing/Maa_bbb">
    <a href="https://mirrorchyan.com/zh/projects?rid=Maa_bbb" target="_blank"><img alt="mirrorc" src="https://img.shields.io/badge/Mirror%E9%85%B1-%239af3f6?logo=countingworkspro&logoColor=4f46e5"></a>
 </p>
 
