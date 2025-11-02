@@ -8,8 +8,10 @@
         ],
         "recognition": "TemplateMatch",
         "template": [
+            "周常/冒险委托/报酬/后崩坏书一/氵.png",
             "周常/冒险委托/报酬/后崩坏书二/氵.png",
-            "周常/冒险委托/报酬/后崩坏书一/氵.png"
+            "周常/冒险委托/报酬/天命总部/氵.png"
+            //,"周常/冒险委托/报酬/樱色轮回/氵.png"
         ],
         "action": "Click",
         "target_offset": [
