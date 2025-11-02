@@ -58,6 +58,13 @@
         ],
         "action": "Click"
     },
+    "点击红叉叉": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "通用/红叉叉.png"
+        ],
+        "action": "Click"
+    },
     "家园等级提升": {
         "recognition": "OCR",
         "expected": [
