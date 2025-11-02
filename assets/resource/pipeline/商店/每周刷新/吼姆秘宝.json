@@ -60,22 +60,40 @@
             "普通"
         ],
         "next": [
-            "每周吼姆秘宝-已进入礼包"
+            "每周吼姆秘宝-已进入礼包的周期"
+        ],
+        "interrupt": [
+            "每周吼姆秘宝-点击周期",
+            "每周吼姆秘宝-点击礼包"
         ]
     },
-    "每周吼姆秘宝-已进入礼包": {
+    "每周吼姆秘宝-点击周期": {
+        "roi": [
+            0,
+            123,
+            242,
+            394
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "周期"
+        ],
+        "action": "Click"
+    },
+    "每周吼姆秘宝-已进入礼包的周期": {
         "roi": [
             25,
             89,
             226,
             517
         ],
-        "recognition": "OCR",
-        "expected": [
-            "充值",
-            "热销"
+        "recognition": "TemplateMatch",
+        "template": [
+            "商店/每周/吼姆秘宝/已选中礼包的周期界面.png"
         ],
-        "action": "Click",
+        "threshold": [
+            0.85
+        ],
         "pre_delay": 500,
         "post_delay": 500,
         "target": [
