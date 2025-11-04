@@ -59,17 +59,17 @@
             ]
         },
         {
-            "name": "桌面端",
-            "path": [
-                "{PROJECT_DIR}/resource",
-                "{PROJECT_DIR}/resource_win32"
-            ]
-        },
-        {
             "name": "模拟器-VIVO服",
             "path": [
                 "{PROJECT_DIR}/resource",
                 "{PROJECT_DIR}/resource_vivo"
+            ]
+        },
+        {
+            "name": "桌面端",
+            "path": [
+                "{PROJECT_DIR}/resource",
+                "{PROJECT_DIR}/resource_win32"
             ]
         }
     ],
