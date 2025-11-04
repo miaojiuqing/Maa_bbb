@@ -1,0 +1,173 @@
+{
+    "万象虚境-点击出击": {
+        "roi": [
+            1072,
+            609,
+            197,
+            110
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "出击"
+        ],
+        "action": "Click"
+    },
+    "万象虚境-点击战斗准备": {
+        "roi": [
+            920,
+            604,
+            344,
+            114
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "战斗准备"
+        ],
+        "action": "Click",
+        "post_delay": 1000
+    },
+    "万象虚境-点击开战": {
+        "roi": [
+            975,
+            607,
+            289,
+            108
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "开战"
+        ],
+        "action": "Click"
+    },
+    "万象虚境-女武神未添加": {
+        "roi": [
+            19,
+            111,
+            239,
+            387
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "周常/万象虚境/战斗/女武神未选择.png"
+        ],
+        "action": "Click",
+        "next": [
+            "万象虚境-已选中一名女武神"
+        ],
+        "interrupt": [
+            "万象虚境-点击选中一名女武神"
+        ]
+    },
+    "万象虚境-已选中一名女武神": {
+        "roi": [
+            9,
+            69,
+            532,
+            85
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "1"
+        ],
+        "pre_delay": 500,
+        "action": "Click",
+        "target": [
+            1098,
+            654,
+            136,
+            21
+        ],
+        "post_delay": 1000,
+        "next": [
+            "万象虚境-一到五层战斗流程"
+        ]
+    },
+    "万象虚境-点击选中一名女武神": {
+        "roi": [
+            895,
+            10,
+            376,
+            187
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "队伍增益",
+            "预设队伍"
+        ],
+        "action": "Click",
+        "target": [
+            49,
+            127,
+            55,
+            44
+        ]
+    },
+    "万象虚境-正处于战斗状态": {
+        "roi": [
+            978,
+            463,
+            133,
+            132
+        ],
+        "recognition": "TemplateMatch",
+        "green_mask": true,
+        "threshold": [
+            0.8
+        ],
+        "template": [
+            "周常/万象虚境/战斗/正在战斗.png"
+        ],
+        "action": "ClickKey",
+        "key": [
+            81, //大招Q
+            69, //武器技
+            70 //星之环F
+        ],
+        "next": [
+            "万象虚境-普攻动作"
+        ]
+    },
+    "万象虚境-普攻动作": {
+        "roi": [
+            978,
+            463,
+            133,
+            132
+        ],
+        "recognition": "TemplateMatch",
+        "green_mask": true,
+        "threshold": [
+            0.8
+        ],
+        "template": [
+            "周常/万象虚境/战斗/正在战斗.png"
+        ],
+        "action": "Click",
+        "target": [
+            1186,
+            634,
+            32,
+            30
+        ],
+        "next": [
+            "万象虚境-正处于战斗状态",
+            "万象虚境-确认虚空秘藏奖励"
+        ],
+        "timeout": 500,
+        "on_error": []
+    },
+    "万象虚境-战斗结算": {
+        "roi": [
+            727,
+            263,
+            367,
+            267
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "最高连击数",
+            "战斗结束"
+        ],
+        "action": "Click"
+    }
+}
