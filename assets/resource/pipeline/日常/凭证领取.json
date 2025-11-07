@@ -196,6 +196,35 @@
         "pre_delay": 250,
         "action": "Click"
     },
+    "凭证奖励领取-氪金历练箱": {
+        "roi": [
+            850,
+            387,
+            203,
+            237
+        ],
+        "recognition": "ColorMatch",
+        "upper": [
+            198,
+            128,
+            254
+        ],
+        "lower": [
+            171,
+            114,
+            233
+        ],
+        "count": 450,
+        "pre_delay": 250,
+        "action": "Click",
+        "target": [
+            912,
+            486,
+            48,
+            58
+        ],
+        "enabled": true
+    },
     "凭证奖励领取-凭证升大级确认": {
         "roi": [
             644,
