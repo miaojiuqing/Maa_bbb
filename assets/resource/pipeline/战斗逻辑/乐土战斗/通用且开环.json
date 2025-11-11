@@ -44,22 +44,20 @@
         ]
     },
     "自动战斗-乐土乐土开环通用战斗逻辑-所有系统全部启动启动启动启动": {
+        "roi": [
+            0,
+            0,
+            143,
+            145
+        ],
         "rate_limit": 0,
         "post_delay": 0,
         "pre_delay": 0,
-        "roi": [
-            980,
-            560,
-            109,
-            122
-        ],
-        "green_mask": true,
         "recognition": "TemplateMatch",
-        "threshold": 0.75,
         "template": [
-            "战斗相关/乐土/主播爱莉/天衍之杯-可开启-PC.png",
-            "战斗相关/星之环/无存之仪-可开启.png"
+            "战斗相关/战中检查/战斗中.png"
         ],
+        "threshold": 0.75,
         "action": "ClickKey",
         "key": [
             49, //支援位1
