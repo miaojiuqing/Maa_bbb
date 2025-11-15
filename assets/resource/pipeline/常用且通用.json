@@ -39,6 +39,7 @@
             442,
             264
         ],
+        "threshold": 0.85,
         "recognition": "TemplateMatch",
         "template": [
             "通用/叉叉.png"
@@ -52,6 +53,7 @@
             442,
             264
         ],
+        "threshold": 0.85,
         "recognition": "TemplateMatch",
         "template": [
             "通用/叉叉.png"
