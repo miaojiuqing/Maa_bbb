@@ -326,6 +326,28 @@
                 "高级设置B"
             ],
             "doc": "作者弄来测试玩的，舰长也要玩吗\n\n[color:red]红[/color]\n\n size:20下划线\n\n[b]:粗体\n\n[i]:斜体\n\n[u]:下划线\n\n[s]:删除线"
+        },
+        {
+            "name": "截图",
+            "entry": "截图",
+            "check": true,
+            "doc": "可以快速填满你的硬盘(X)\n\n开发者弄样本用的",
+            "pipeline_override": {
+                "截图": {
+                    "action": {
+                        "type": "Custom",
+                        "param": {
+                            "custom_action": "ScreenShot",
+                            "custom_action_param": {
+                                "type": "TEST"
+                            }
+                        }
+                    },
+                    "next": [
+                        "截图"
+                    ]
+                }
+            }
         }
     ],
     "option": {
