@@ -12,7 +12,7 @@
             "win32": {
                 "class_regex": ".*",
                 "window_regex": "崩坏3|崩坏3 Steam版",
-                //"input": 1,//点击参数不设置了试了一下每个都能用
+                "input": 1, //点击参数不设置了试了一下每个都能用
                 "screencap": 1
             }
         },
