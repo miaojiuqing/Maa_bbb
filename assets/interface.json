@@ -319,6 +319,9 @@
         {
             "name": "只是测试",
             "entry": "纯测试",
+            "option": [
+                "测试类型"
+            ],
             "repeatable": true,
             "repeat_count": 1,
             "advanced": [
@@ -2672,6 +2675,41 @@
                 }
             ],
             "default_case": "不延迟"
+        },
+        "测试类型": {
+            "cases": [
+                {
+                    "name": "点击测试",
+                    "pipeline_override": {
+                        "测试任务接口": {
+                            "next": [
+                                "测试-点一下左上角"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "键码输入测试-ESC",
+                    "pipeline_override": {
+                        "测试任务接口": {
+                            "next": [
+                                "输入键码-ESC"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "单独运行某节点",
+                    "pipeline_override": {
+                        "测试任务接口": {
+                            "next": [
+                                "空任务"
+                            ]
+                        }
+                    }
+                }
+            ],
+            "default_case": "单独运行某节点"
         }
     },
     "advanced": {
