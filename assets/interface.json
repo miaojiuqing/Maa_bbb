@@ -13,7 +13,7 @@
                 "class_regex": ".*",
                 "window_regex": "崩坏3|崩坏3 Steam版",
                 "input": 1, //点击参数不设置了试了一下每个都能用
-                "screencap": 1
+                "screencap": 2
             }
         },
         //我是分割线,改完记得添加该加的逗号，该删的也要删哦，详见视频
