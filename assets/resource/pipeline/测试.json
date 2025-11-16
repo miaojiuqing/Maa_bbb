@@ -11,6 +11,7 @@
             "死循环-1"
         ]
     },
+    //1
     "键码点击测试": {
         "action": "MultiSwipe",
         "swipes": [
