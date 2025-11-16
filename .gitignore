@@ -444,6 +444,10 @@ deps
 build
 install
 
+# 允许跟踪 deps/tools/ 目录下的 Schema 文件（新增这两行）//豆包改的随时删
+!deps/tools/
+!deps/tools/*.schema.json
+
 # Tools
 tools/ImageCropper/**/*.png
 
