@@ -449,3 +449,7 @@ tools/ImageCropper/**/*.png
 
 config
 debug
+
+# Explicitly track schema directory for auto-sync
+!schema/
+!schema/**
