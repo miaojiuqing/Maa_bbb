@@ -114,7 +114,8 @@
             "entry": "进入家园领取金币/体力-开始任务层",
             "pipeline_override": {},
             "option": [
-                "是否检查并领取所有溢出体力"
+                "是否检查并领取所有溢出体力",
+                "识别到返回要怎么做"
             ],
             "doc": "活跃玩家可关闭体力领取，快几秒"
         },
@@ -1115,6 +1116,30 @@
                 }
             ],
             "default_case": "YES"
+        },
+        "识别到返回要怎么做": {
+            "cases": [
+                {
+                    "name": "正常点击",
+                    "pipeline_override": {
+                        "家园处-点击返回": {
+                            "action": "Click"
+                        }
+                    }
+                },
+                {
+                    "name": "尝试输入ESC键码-模拟器用户禁选",
+                    "pipeline_override": {
+                        "家园处-点击返回": {
+                            "action": "ClickKey",
+                            "key": [
+                                27
+                            ]
+                        }
+                    }
+                }
+            ],
+            "default_case": "正常点击"
         },
         "后勤终端购买物品货币类型": {
             "cases": [
