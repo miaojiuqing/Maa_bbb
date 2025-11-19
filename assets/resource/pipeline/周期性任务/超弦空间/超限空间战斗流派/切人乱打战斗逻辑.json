@@ -5,9 +5,9 @@
         "rate_limit": 0,
         "roi": [
             0,
-            77,
-            85,
-            84
+            54,
+            83,
+            150
         ],
         "recognition": "TemplateMatch",
         "green_mask": true,
