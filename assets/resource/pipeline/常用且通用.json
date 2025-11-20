@@ -1,10 +1,18 @@
 {
     "空任务": {},
     "返回主页后强制结束任务": {
+        "roi": [
+            896,
+            273,
+            270,
+            297
+        ],
         "recognition": "TemplateMatch",
         "template": [
-            "主页UI/休伯利安主界面.png"
+            "主页UI/休伯利安主界面.png",
+            "主页UI/休伯利安主界面绿幕.png"
         ],
+        "green_mask": true,
         "action": "StopTask"
     },
     "点击空白位置关闭": {
