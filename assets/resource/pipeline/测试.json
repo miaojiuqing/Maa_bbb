@@ -124,14 +124,14 @@
     },
     "图片识别测试": {
         "roi": [
-            896,
-            273,
-            270,
-            297
+            644,
+            611,
+            138,
+            109
         ],
         "recognition": "TemplateMatch",
         "template": [
-            "主页UI/休伯利安主界面绿幕.png"
+            "周常/万象虚境/不消耗时序通行证.png"
         ],
         "green_mask": true
     },
