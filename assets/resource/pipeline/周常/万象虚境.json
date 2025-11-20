@@ -292,15 +292,26 @@
         ]
     },
     "万象虚境-是否消耗时序通行证-状态切换点击": {
-        "pre_delay": 200,
+        "pre_delay": 500,
+        "post_delay": 200,
+        "roi": [
+            632,
+            624,
+            113,
+            85
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "周常/万象虚境/不消耗时序通行证.png"
+        ],
+        "inverse": true,
         "action": "Click",
         "target": [
             695,
             653,
             23,
             27
-        ],
-        "post_delay": 1000
+        ]
     },
     "万象虚境-选择挑战次数": {
         "roi": [
