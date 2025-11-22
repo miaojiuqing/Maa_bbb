@@ -249,7 +249,8 @@
 		],
 		"recognition": "TemplateMatch",
 		"template": [
-			"周期性任务/超弦空间/超弦空间-房间待挑战.png"
+			"周期性任务/超弦空间/天气房间图标/未知天气.png",
+			"周期性任务/超弦空间/天气房间图标/星之环天气.png"
 		],
 		"pre_delay": 500,
 		"action": "Click",
@@ -269,7 +270,8 @@
 		],
 		"recognition": "TemplateMatch",
 		"template": [
-			"周期性任务/超弦空间/超弦空间-房间待挑战.png"
+			"周期性任务/超弦空间/天气房间图标/未知天气.png",
+			"周期性任务/超弦空间/天气房间图标/星之环天气.png"
 		],
 		"pre_delay": 500,
 		"action": "Click",
