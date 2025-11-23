@@ -83,7 +83,7 @@
     "task": [
         {
             "name": "崩坏三 启动！",
-            "entry": "启动并进入游戏",
+            "entry": "登录方式选择接口",
             "repeatable": true,
             "repeat_count": 2,
             "check": true,
