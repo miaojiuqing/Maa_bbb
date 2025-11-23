@@ -8,8 +8,8 @@
         ]
     },
     "启动并进入游戏": {
-        // "action": "StartApp",
-        // "package": "com.miHoYo.enterprise.NGHSoD",
+        "action": "StartApp",
+        "package": "com.miHoYo.enterprise.NGHSoD",
         "next": [
             "请舰长注意休息-夹心",
             "进入游戏-超弦空间结算",
