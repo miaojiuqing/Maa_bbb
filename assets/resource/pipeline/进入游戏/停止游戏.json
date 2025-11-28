@@ -2,11 +2,6 @@
     "关闭游戏": {
         "action": "StopApp",
         "package": "com.miHoYo.enterprise.NGHSoD",
-        "next": [
-            "舰长~真的要退出游戏吗-是"
-        ],
-        "interrupt": [
-            "输入键码-ESC"
-        ]
+        "next": ["舰长~真的要退出游戏吗-是", "[JumpBack]输入键码-ESC"],
     }
 }
