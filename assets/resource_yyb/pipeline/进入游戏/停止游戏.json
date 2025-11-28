@@ -2,7 +2,6 @@
     "关闭游戏": {
         "action": "StopApp",
         "package": "com.tencent.tmgp.bh3",
-        "next": [],
-        "interrupt": []
+        "next": []
     }
 }
