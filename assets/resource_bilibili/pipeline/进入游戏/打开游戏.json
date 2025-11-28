@@ -6,5 +6,20 @@
     "模拟器包名游戏启动": {
         "action": "StartApp",
         "package": "com.miHoYo.bh3.bilibili"
+    },
+    "所有资源已下载完毕": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "进入游戏/所有资源下载完毕，点击确定.png"
+        ],
+        "threshold": 0.6,
+        "action": "Click",
+        "target": [
+            562,
+            394,
+            154,
+            50
+        ],
+        "post_delay": 5000
     }
 }
