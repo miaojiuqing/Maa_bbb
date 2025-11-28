@@ -87,8 +87,7 @@
         "pre_delay": 0,
         "next": [
             "测试任务接口"
-        ],
-        "interrupt": []
+        ]
     },
     "任务测试": {
         "next": [
