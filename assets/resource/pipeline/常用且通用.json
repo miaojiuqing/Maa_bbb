@@ -15,6 +15,25 @@
         "green_mask": true,
         "action": "StopTask"
     },
+    "特殊-双核协战返回": {
+        "roi": [
+            66,
+            1,
+            175,
+            99
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "双核协战"
+        ],
+        "action": "Click",
+        "target": [
+            51,
+            24,
+            27,
+            23
+        ]
+    },
     "点击空白位置关闭": {
         "recognition": "OCR",
         "expected": [
