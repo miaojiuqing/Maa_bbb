@@ -257,7 +257,7 @@
         },
         {
             "name": "乐土每周商店购买",
-            "check": true,
+            "check": false,
             "entry": "乐土每周商店-开始任务层",
             "option": [
                 "乐土商店检查锚点",
