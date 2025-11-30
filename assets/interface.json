@@ -313,6 +313,7 @@
         {
             "name": "乐土刷装甲等级",
             "entry": "乐土刷级-接口层",
+            "repeatable": true,
             "repeat_count": 3,
             "option": [
                 "要用什么刷等级"
