@@ -68,6 +68,9 @@
         "template": [
             "战斗相关/战中检查/战斗中.png"
         ],
-        "action": "Click"
+        "action": "ClickKey",
+        "key": [
+            74
+        ]
     }
 }
