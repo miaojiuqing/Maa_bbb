@@ -445,6 +445,13 @@
 			"[JumpBack]输入键码-ESC",
 			"[JumpBack]空任务"
 		],
+		"action": "Click",
+		"target": [
+			593,
+			407,
+			93,
+			34
+		],
 		"focus": {
 			"succeeded": "战斗失败，返回主菜单并提前结束任务"
 		}
