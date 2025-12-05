@@ -88,7 +88,7 @@
             "repeat_count": 2,
             "check": true,
             "option": [
-                "登录方式",
+                "登录打开二维码",
                 "每次执行该启动任务间隔",
                 "月卡领取"
             ],
@@ -381,6 +381,7 @@
     ],
     "option": {
         "月卡领取": {
+            "type": "switch",
             "cases": [
                 {
                     "name": "YES",
@@ -398,10 +399,10 @@
                         }
                     }
                 }
-            ],
-            "default_case": "NO"
+            ]
         },
         "你氪通行证了吗": {
+            "type": "select",
             "cases": [
                 {
                     "name": "氪了",
@@ -423,6 +424,7 @@
             "default_case": "没氪"
         },
         "识别可领取物品框框次数": {
+            "type": "select",
             "cases": [
                 {
                     "name": "不检查",
@@ -508,6 +510,7 @@
             "default_case": "不检查"
         },
         "乐土商店检查锚点": {
+            "type": "select",
             "cases": [
                 {
                     "name": "空间透镜(这周没动过)",
@@ -544,6 +547,7 @@
             "default_case": "都行(大概是都行？)"
         },
         "聚能·空间透镜": {
+            "type": "switch",
             "cases": [
                 {
                     "name": "YES",
@@ -560,10 +564,10 @@
                         }
                     }
                 }
-            ],
-            "default_case": "YES"
+            ]
         },
         "相转移镜面": {
+            "type": "switch",
             "cases": [
                 {
                     "name": "YES",
@@ -580,10 +584,10 @@
                         }
                     }
                 }
-            ],
-            "default_case": "YES"
+            ]
         },
         "吼吼休假卷": {
+            "type": "switch",
             "cases": [
                 {
                     "name": "YES",
@@ -600,10 +604,10 @@
                         }
                     }
                 }
-            ],
-            "default_case": "NO"
+            ]
         },
         "时序通行证": {
+            "type": "switch",
             "cases": [
                 {
                     "name": "YES",
@@ -620,13 +624,13 @@
                         }
                     }
                 }
-            ],
-            "default_case": "YES"
+            ]
         },
-        "登录方式": {
+        "登录打开二维码": {
+            "type": "switch",
             "cases": [
                 {
-                    "name": "正常登录",
+                    "name": "NO",
                     "pipeline_override": {
                         "登录方式选择接口": {
                             "next": [
@@ -636,7 +640,7 @@
                     }
                 },
                 {
-                    "name": "打开二维码(需自行配置扫码器)",
+                    "name": "YES",
                     "pipeline_override": {
                         "登录方式选择接口": {
                             "next": [
@@ -648,6 +652,7 @@
             ]
         },
         "每次执行该启动任务间隔": {
+            "type": "select",
             "cases": [
                 {
                     "name": "无延迟(不推荐)",
@@ -685,20 +690,8 @@
             "default_case": "延迟五秒"
         },
         "材料远征体力不足时吃药吗": {
+            "type": "switch",
             "cases": [
-                {
-                    "name": "YES",
-                    "pipeline_override": {
-                        "材料远征-体力不足处理": {
-                            "next": [
-                                "材料远征-未远征",
-                                "材料远征-已远征",
-                                "[JumpBack]材料远征-体力药已食用确认",
-                                "[JumpBack]材料远征-体力不足处理-一次一药动作"
-                            ]
-                        }
-                    }
-                },
                 {
                     "name": "NO",
                     "pipeline_override": {
@@ -711,12 +704,35 @@
                             ]
                         }
                     }
+                },
+                {
+                    "name": "YES",
+                    "pipeline_override": {
+                        "材料远征-体力不足处理": {
+                            "next": [
+                                "材料远征-未远征",
+                                "材料远征-已远征",
+                                "[JumpBack]材料远征-体力药已食用确认",
+                                "[JumpBack]材料远征-体力不足处理-一次一药动作"
+                            ]
+                        }
+                    }
                 }
-            ],
-            "default_case": "NO"
+            ]
         },
         "派遣时体力不足吃药吗": {
+            "type": "switch",
             "cases": [
+                {
+                    "name": "NO",
+                    "pipeline_override": {
+                        "家园远征-体力不足提示": {
+                            "next": [
+                                "启动并进入游戏"
+                            ]
+                        }
+                    }
+                },
                 {
                     "name": "YES",
                     "pipeline_override": {
@@ -728,21 +744,11 @@
                             ]
                         }
                     }
-                },
-                {
-                    "name": "NO",
-                    "pipeline_override": {
-                        "家园远征-体力不足提示": {
-                            "next": [
-                                "启动并进入游戏"
-                            ]
-                        }
-                    }
                 }
-            ],
-            "default_case": "NO"
+            ]
         },
         "存在S+的打工时是否继续派遣": {
+            "type": "switch",
             "cases": [
                 {
                     "name": "YES",
@@ -767,10 +773,10 @@
                         }
                     }
                 }
-            ],
-            "default_case": "YES"
+            ]
         },
         "委托材料不足时自动补货": {
+            "type": "switch",
             "cases": [
                 {
                     "name": "YES",
@@ -803,10 +809,10 @@
                         }
                     }
                 }
-            ],
-            "default_case": "YES"
+            ]
         },
         "保税仓库申请的委托物品": {
+            "type": "select",
             "cases": [
                 {
                     "name": "空幻的紫晶",
@@ -1046,10 +1052,10 @@
                         }
                     }
                 }
-            ],
-            "default_case": "幽晦的灰晶"
+            ]
         },
         "需求物品阈值选择": {
+            "type": "select",
             "cases": [
                 {
                     "name": "相似度80%",
@@ -1132,6 +1138,7 @@
             "default_case": "相似度83%"
         },
         "是否检查并领取所有溢出体力": {
+            "type": "switch",
             "cases": [
                 {
                     "name": "YES",
@@ -1155,10 +1162,10 @@
                         }
                     }
                 }
-            ],
-            "default_case": "YES"
+            ]
         },
         "识别到返回要怎么做": {
+            "type": "select",
             "cases": [
                 {
                     "name": "正常点击",
@@ -1183,6 +1190,7 @@
             "default_case": "正常点击"
         },
         "后勤终端购买物品货币类型": {
+            "type": "select",
             "cases": [
                 {
                     "name": "仅购买金币",
@@ -1251,6 +1259,7 @@
             "default_case": "仅购买金币"
         },
         "万象虚境-是否启用首通检查": {
+            "type": "switch",
             "cases": [
                 {
                     "name": "YES",
@@ -1268,10 +1277,10 @@
                         }
                     }
                 }
-            ],
-            "default_case": "YES"
+            ]
         },
         "万象虚境-层数选择": {
+            "type": "select",
             "cases": [
                 {
                     "name": "第1层(少量不推荐)",
@@ -1530,6 +1539,7 @@
             "default_case": "第7层(G4)"
         },
         "万象虚境-挑战模式选择": {
+            "type": "select",
             "cases": [
                 {
                     "name": "1-5战斗6-7减负",
@@ -1563,6 +1573,7 @@
             "default_case": "1-5战斗6-7减负"
         },
         "万象虚境-副本选择": {
+            "type": "select",
             "cases": [
                 {
                     "name": "幽寒之槛",
@@ -1632,6 +1643,7 @@
             "default_case": "幽寒之槛"
         },
         "虚境挑战卷为0时直接退出": {
+            "type": "switch",
             "cases": [
                 {
                     "name": "YES",
@@ -1658,43 +1670,11 @@
                         }
                     }
                 }
-            ],
-            "default_case": "NO"
+            ]
         },
         "是否消耗时序通行证": {
+            "type": "switch",
             "cases": [
-                {
-                    "name": "YES",
-                    "pipeline_override": {
-                        "万象虚境-是否消耗时序通行证": {
-                            "template": [
-                                "周常/万象虚境/消耗时序通行证.png"
-                            ]
-                        },
-                        "万象虚境-是否消耗时序通行证-状态切换点击": {
-                            "template": [
-                                "周常/万象虚境/消耗时序通行证.png"
-                            ]
-                        },
-                        "万象虚境-确认虚空秘藏奖励": {
-                            "roi": [
-                                515,
-                                349,
-                                225,
-                                89
-                            ],
-                            "expected": [
-                                "虚空秘藏"
-                            ],
-                            "target": [
-                                564,
-                                538,
-                                133,
-                                23
-                            ]
-                        }
-                    }
-                },
                 {
                     "name": "NO",
                     "pipeline_override": {
@@ -1726,12 +1706,62 @@
                             ]
                         }
                     }
+                },
+                {
+                    "name": "YES",
+                    "pipeline_override": {
+                        "万象虚境-是否消耗时序通行证": {
+                            "template": [
+                                "周常/万象虚境/消耗时序通行证.png"
+                            ]
+                        },
+                        "万象虚境-是否消耗时序通行证-状态切换点击": {
+                            "template": [
+                                "周常/万象虚境/消耗时序通行证.png"
+                            ]
+                        },
+                        "万象虚境-确认虚空秘藏奖励": {
+                            "roi": [
+                                515,
+                                349,
+                                225,
+                                89
+                            ],
+                            "expected": [
+                                "虚空秘藏"
+                            ],
+                            "target": [
+                                564,
+                                538,
+                                133,
+                                23
+                            ]
+                        }
+                    }
                 }
-            ],
-            "default_case": "NO"
+            ]
         },
         "虚境挑战次数大于剩余挑战机会时\n\n逐渐减1直到够打": {
+            "type": "switch",
             "cases": [
+                {
+                    "name": "NO",
+                    "pipeline_override": {
+                        "万象虚境-减负流程-不可减负": {
+                            "action": "DoNothing",
+                            "next": [
+                                "返回主页后强制结束任务",
+                                "[JumpBack]点击返回主菜单",
+                                "[JumpBack]家园处-点击返回",
+                                "[JumpBack]点击叉叉"
+                            ],
+                            "focus": {
+                                "succeeded": "舰长~虚境挑战书不足，任务结束喽",
+                                "toast": "舰长~虚境挑战书不足，任务结束喽"
+                            }
+                        }
+                    }
+                },
                 {
                     "name": "YES",
                     "pipeline_override": {
@@ -1752,29 +1782,11 @@
                             }
                         }
                     }
-                },
-                {
-                    "name": "NO",
-                    "pipeline_override": {
-                        "万象虚境-减负流程-不可减负": {
-                            "action": "DoNothing",
-                            "next": [
-                                "返回主页后强制结束任务",
-                                "[JumpBack]点击返回主菜单",
-                                "[JumpBack]家园处-点击返回",
-                                "[JumpBack]点击叉叉"
-                            ],
-                            "focus": {
-                                "succeeded": "舰长~虚境挑战书不足，任务结束喽",
-                                "toast": "舰长~虚境挑战书不足，任务结束喽"
-                            }
-                        }
-                    }
                 }
-            ],
-            "default_case": "NO"
+            ]
         },
         "万象虚境-挑战次数选择": {
+            "type": "select",
             "cases": [
                 {
                     "name": "不变",
@@ -1888,6 +1900,7 @@
             "default_case": "不变"
         },
         "出击模式战时检测条件": {
+            "type": "select",
             "cases": [
                 {
                     "name": "黑洞技能",
@@ -1933,6 +1946,7 @@
             "default_case": "黑洞技能"
         },
         "自行领取活动奖励": {
+            "type": "switch",
             "cases": [
                 {
                     "name": "YES",
@@ -1958,10 +1972,10 @@
                         }
                     }
                 }
-            ],
-            "default_case": "YES"
+            ]
         },
         "委托地图选择": {
+            "type": "select",
             "cases": [
                 {
                     "name": "樱色轮回",
@@ -2133,6 +2147,7 @@
             "default_case": "樱色轮回"
         },
         "有刷新次数时每次刷新间隔": {
+            "type": "select",
             "cases": [
                 {
                     "name": "1秒",
@@ -2223,6 +2238,7 @@
             "default_case": "3秒"
         },
         "接委托时体力不足处理": {
+            "type": "select",
             "cases": [
                 {
                     "name": "吃药",
@@ -2254,6 +2270,7 @@
             "default_case": "不吃药直接退"
         },
         "第五委托尝试刷氵": {
+            "type": "switch",
             "cases": [
                 {
                     "name": "NO",
@@ -2271,10 +2288,10 @@
                         }
                     }
                 }
-            ],
-            "default_case": "NO"
+            ]
         },
         "报酬接取优先级-1": {
+            "type": "select",
             "cases": [
                 {
                     "name": "逆熵",
@@ -2372,6 +2389,7 @@
             "default_case": "逆熵"
         },
         "报酬接取优先级-2": {
+            "type": "select",
             "cases": [
                 {
                     "name": "逆熵",
@@ -2469,6 +2487,7 @@
             "default_case": "高级技能材料"
         },
         "报酬接取优先级-3": {
+            "type": "select",
             "cases": [
                 {
                     "name": "逆熵",
@@ -2566,6 +2585,7 @@
             "default_case": "空间透镜"
         },
         "报酬接取优先级-4": {
+            "type": "select",
             "cases": [
                 {
                     "name": "逆熵",
@@ -2663,6 +2683,7 @@
             "default_case": "相转移镜面"
         },
         "打完自动检查领取奖励": {
+            "type": "switch",
             "cases": [
                 {
                     "name": "YES",
@@ -2710,10 +2731,10 @@
                         }
                     }
                 }
-            ],
-            "default_case": "YES"
+            ]
         },
         "预设编队更换": {
+            "type": "select",
             "cases": [
                 {
                     "name": "不更换编队",
@@ -2825,6 +2846,7 @@
             "default_case": "不更换编队"
         },
         "超限空间战斗逻辑": {
+            "type": "select",
             "cases": [
                 {
                     "name": "切人的通用战斗逻辑",
@@ -2844,6 +2866,7 @@
             "default_case": "切人的通用战斗逻辑"
         },
         "只打前三层": {
+            "type": "switch",
             "cases": [
                 {
                     "name": "YES",
@@ -2871,10 +2894,10 @@
                         }
                     }
                 }
-            ],
-            "default_case": "YES"
+            ]
         },
         "要用什么刷等级": {
+            "type": "select",
             "cases": [
                 {
                     "name": "减负模式刷",
@@ -2913,6 +2936,7 @@
             "default_case": "减负模式刷-只刷一次"
         },
         "无限刷取模式": {
+            "type": "switch",
             "cases": [
                 {
                     "name": "NO",
@@ -2977,6 +3001,7 @@
             ]
         },
         "选择过剧情模式": {
+            "type": "select",
             "cases": [
                 {
                     "name": "纯点击跳过",
@@ -3062,6 +3087,7 @@
             "default_case": "无视跳过正常过剧情-手动选择选项"
         },
         "战斗逻辑-乐土": {
+            "type": "select",
             "cases": [
                 {
                     "name": "薇塔-开环流",
@@ -3117,6 +3143,7 @@
             "default_case": "通用战斗逻辑-开环/用人偶"
         },
         "检查到星之环可开始后延迟时间": {
+            "type": "select",
             "cases": [
                 {
                     "name": "3秒",
@@ -3146,6 +3173,7 @@
             "default_case": "不延迟"
         },
         "测试类型": {
+            "type": "select",
             "cases": [
                 {
                     "name": "点击测试",
