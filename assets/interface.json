@@ -3064,7 +3064,6 @@
                             ]
                         },
                         "剧情辅助点击-点击对话跳过剧情": {
-                            "action": "DoNothing",
                             "focus": {
                                 "succeeded": "有可对话选项哦"
                             }
