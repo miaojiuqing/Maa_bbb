@@ -1,0 +1,54 @@
+{
+    "乐土刷级-通用-伪寻路-向前移动": { //通用选项修改
+        "roi": [
+            46,
+            270,
+            132,
+            49
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "启动传送锚点"
+        ],
+        "inverse": true,
+        "action": "LongPressKey",
+        "duration": 2000,
+        "key": [
+            87 //W
+        ],
+        "post_delay": 2000,
+        "max_hit": 10
+    },
+    "乐土刷级-通用-伪寻路-向后移动": {
+        "roi": [
+            46,
+            270,
+            132,
+            49
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "启动传送锚点"
+        ],
+        "inverse": true,
+        "action": "ClickKey",
+        "key": [
+            83 //S
+        ],
+        "post_delay": 2000,
+        "max_hit": 5
+    },
+    "乐土刷级-通用-伪寻路-退出重新寻路": {
+        "focus": {
+            "succeeded": "寻路失败，正在重新进入准备重新寻路"
+        },
+        "next": [
+            "乐土刷级-首层复刷-已进入往世乐土箱庭",
+            "[JumpBack]乐土刷级-通用-战斗失败",
+            "[JumpBack]乐土刷级-首层复刷-放弃并结算确认",
+            "[JumpBack]乐土刷级-首层复刷-点击放弃并结算",
+            "[JumpBack]乐土刷级-战斗结束了-pc专属在战斗界面输入键码ESC点击放弃",
+            "[JumpBack]点击空白位置关闭"
+        ]
+    }
+}
