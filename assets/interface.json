@@ -317,7 +317,9 @@
             "repeat_count": 1,
             "option": [
                 "要用什么刷等级",
-                "无限刷取模式"
+                "无限刷取模式",
+                "每次前进走多久",
+                "每次前进间隔"
             ],
             "doc": "暂未适配模拟器，会尽快适配欢迎催更\n\n减负模式的话那些buff记得自己选,没选的话识宝帮你乱选,女武神记得自己提前选好"
         },
@@ -3021,6 +3023,82 @@
                     }
                 }
             ]
+        },
+        "每次前进走多久": {
+            "type": "select",
+            "cases": [
+                {
+                    "name": "就点一下",
+                    "pipeline_override": {
+                        "乐土刷级-通用-伪寻路-向前移动": {
+                            "duration": 0
+                        }
+                    }
+                },
+                {
+                    "name": "每次按住半秒",
+                    "pipeline_override": {
+                        "乐土刷级-通用-伪寻路-向前移动": {
+                            "duration": 500
+                        }
+                    }
+                },
+                {
+                    "name": "每次按住1秒",
+                    "pipeline_override": {
+                        "乐土刷级-通用-伪寻路-向前移动": {
+                            "duration": 1000
+                        }
+                    }
+                },
+                {
+                    "name": "每次按住2秒",
+                    "pipeline_override": {
+                        "乐土刷级-通用-伪寻路-向前移动": {
+                            "duration": 2000
+                        }
+                    }
+                }
+            ],
+            "default_case": "就点一下"
+        },
+        "每次前进间隔": {
+            "type": "select",
+            "cases": [
+                {
+                    "name": "1秒",
+                    "pipeline_override": {
+                        "乐土刷级-通用-伪寻路-向前移动": {
+                            "post_delay": 1000
+                        }
+                    }
+                },
+                {
+                    "name": "2秒",
+                    "pipeline_override": {
+                        "乐土刷级-通用-伪寻路-向前移动": {
+                            "post_delay": 2000
+                        }
+                    }
+                },
+                {
+                    "name": "3秒",
+                    "pipeline_override": {
+                        "乐土刷级-通用-伪寻路-向前移动": {
+                            "post_delay": 3000
+                        }
+                    }
+                },
+                {
+                    "name": "5秒",
+                    "pipeline_override": {
+                        "乐土刷级-通用-伪寻路-向前移动": {
+                            "post_delay": 5000
+                        }
+                    }
+                }
+            ],
+            "default_case": "2秒"
         },
         "选择过剧情模式": {
             "type": "select",
