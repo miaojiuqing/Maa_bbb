@@ -141,7 +141,8 @@
             72
         ],
         "count": 1500,
-        "action": "LongPress",
+        "action": "ClickKey",
+        "key": 69,
         "duration": 1000
     }
 }
