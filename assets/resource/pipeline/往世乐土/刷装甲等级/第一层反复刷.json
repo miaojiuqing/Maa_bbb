@@ -231,7 +231,8 @@
         "expected": [
             "普通",
             "专属",
-            "核心"
+            "核心",
+            "增幅"
         ],
         "action": "Click",
         "target_offset": [
