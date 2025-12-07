@@ -243,7 +243,8 @@
             136
         ],
         "count": 5000,
-        "action": "Click"
+        "action": "Click",
+        "post_delay": 2500
     },
     "乐土刷级-减负模式-普通刻印选取": {
         "roi": [
