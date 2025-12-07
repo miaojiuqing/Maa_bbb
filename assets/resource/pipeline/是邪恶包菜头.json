@@ -1,7 +1,7 @@
 {
     "出现了！邪恶包菜头！": {
         "focus": {
-            "succeeded": "野生的邪恶包菜头出现了！"
+            "succeeded": "[color:tomato] 野生的邪恶包菜头出现了！[color:tomato]"
         },
         "roi": [
             939,
@@ -23,6 +23,9 @@
         ]
     },
     "包菜头！消灭完毕！": {
+        "focus": {
+            "succeeded": "[color:green] 报告舰长 包菜头已被消灭！[color:green]"
+        },
         "roi": [
             939,
             440,
