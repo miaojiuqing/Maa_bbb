@@ -1,0 +1,59 @@
+{
+    "出现了！邪恶包菜头！": {
+        "focus": {
+            "succeeded": "野生的邪恶包菜头出现了！"
+        },
+        "roi": [
+            939,
+            440,
+            340,
+            280
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "通用/邪恶包菜头/眯眼笑.png"
+        ],
+        "green_mask": true,
+        "next": [
+            "包菜头！消灭完毕！",
+            "[JumpBack]消灭包菜头计划-点击出击",
+            "[JumpBack]点击返回主菜单",
+            "[JumpBack]点击叉叉",
+            "[JumpBack]家园处-点击返回"
+        ]
+    },
+    "包菜头！消灭完毕！": {
+        "roi": [
+            939,
+            440,
+            340,
+            280
+        ],
+        "inverse": true,
+        "recognition": "TemplateMatch",
+        "template": [
+            "通用/邪恶包菜头/眯眼笑.png"
+        ],
+        "green_mask": true,
+        "next": [
+            "成功进入游戏主菜单",
+            "[JumpBack]点击返回主菜单",
+            "[JumpBack]点击叉叉",
+            "[JumpBack]家园处-点击返回"
+        ]
+    },
+    "消灭包菜头计划-点击出击": {
+        "roi": [
+            1089,
+            257,
+            174,
+            200
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "出击"
+        ],
+        "action": "Click",
+        "post_delay": 1500
+    }
+}
