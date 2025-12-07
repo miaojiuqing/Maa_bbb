@@ -11,6 +11,7 @@
         "action": "StartApp",
         "package": "com.miHoYo.enterprise.NGHSoD",
         "next": [
+            "[JumpBack]出现了！邪恶包菜头！",
             "[JumpBack]请舰长注意休息",
             "[JumpBack]进入游戏-超弦空间结算",
             "成功进入游戏主菜单",
@@ -37,7 +38,6 @@
             "[JumpBack]误触进入手机界面",
             "[JumpBack]误触进入聊天频道界面",
             "[JumpBack]版本活动-特工丽影-点击返回",
-            "出现了！邪恶包菜头！",
             "[JumpBack]模拟器包名游戏启动",
             "[JumpBack]空任务"
         ],
