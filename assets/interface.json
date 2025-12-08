@@ -1,9 +1,21 @@
 {
-    "name": "MAA_bbb-识宝Oᴗoಣ",
+    "interface_version": 2,
+    "agent": {
+        "child_exec": "python",
+        "child_args": [
+            "{PROJECT_DIR}/agent/main.py"
+        ]
+    },
+    "name": "MAA_bbb",
     "url": "https://github.com/miaojiuqing/MAA_bbb",
-    "message": "欢迎舰长使用识宝小助手，我什么都做得到！",
+    "github": "https://github.com/miaojiuqing/MAA_bbb",
+    "contact": "QQ群: 732903871 ; B站https://www.bilibili.com/video/BV1Ld42z1ERu/?spm_id_from=333.1387.homepage.video_card.click",
+    "description": "这是什么", //这是什么
+    // "message": "欢迎舰长使用识宝小助手，我什么都做得到！",
+    "icon": "/resource/image/logo.ico",
     "mirrorchyan_rid": "Maa_bbb",
     "mirrorchyan_multiplatform": false,
+    "welcome": "欢迎舰长使用识宝小助手Oᴗoಣ",
     "controller": [
         //我是分割线
         {
@@ -11,8 +23,11 @@
             "type": "Win32",
             "win32": {
                 "class_regex": ".*",
-                "window_regex": "崩坏3|崩坏3 Steam版|Honkai Impact 3"
-                // "input": 1 //点击参数不设置了试了一下每个都能用
+                "window_regex": "崩坏3|崩坏3 Steam版|Honkai Impact 3",
+                "screencap": "PrintWindow", //截图方式不设置
+                "mouse": "PostMessageWithCursorPos",
+                "keyboard": "PostMessageWithCursorPos"
+                // "input": 64 //点击参数不设置了试了一下每个都能用
                 // "mouse": 1,
                 // "screencap": 2
             }
@@ -74,12 +89,6 @@
             ]
         }
     ],
-    "agent_demo": {
-        "child_exec": "python",
-        "child_args": [
-            "{PROJECT_DIR}/agent/main.py"
-        ]
-    },
     "task": [
         {
             "name": "崩坏三 启动！",
