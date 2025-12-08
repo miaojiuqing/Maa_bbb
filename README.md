@@ -42,7 +42,9 @@
 
 ---
 <details>
-<summary> [size:25] PC端使用须知 [/size:25] </summary>
+<summary>PC端使用须知</summary>
+
+## [size:25] PC端使用须知 [/size:25]
 
   目前已经可以实现后台点击运行，请舰长在软件中的 设置——连接设置——鼠标输入/键盘输入中选择PostMessageWithCursorPos或者SendMessageWithCursorPos即可，请注意:自动战斗(和所有涉及键码输入的)无法使用后台运行功能
 
