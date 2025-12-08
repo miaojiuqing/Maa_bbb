@@ -41,7 +41,8 @@
 [点击链接加入群聊](<https://qm.qq.com/q/XrFQKgGvaI>)
 
 ---
-
+<details>
+<summary>PC端使用须知</summary>
 ## PC端使用须知
 
   目前已经可以实现后台点击运行，请舰长在软件中的 设置——连接设置——鼠标输入/键盘输入中选择PostMessageWithCursorPos或者SendMessageWithCursorPos即可，请注意:自动战斗(和所有涉及键码输入的)无法使用后台运行功能
@@ -57,6 +58,7 @@
   正确首页
 
  ![正确页面](<https://s21.ax1x.com/2025/10/16/pVqBNid.md.png>)
+</details>
 
 ## 主要功能
 
