@@ -268,6 +268,7 @@
             "check": false,
             "entry": "乐土每周商店-开始任务层",
             "option": [
+                "是否启用色块识别乐土币不足",
                 "乐土商店检查锚点",
                 "聚能·空间透镜",
                 "相转移镜面",
@@ -519,6 +520,27 @@
                 }
             ],
             "default_case": "不检查"
+        },
+        "是否启用色块识别乐土币不足": {
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "YES",
+                    "pipeline_override": {
+                        "乐土每周商店-购买界面-乐土币不足-色块检测": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "NO",
+                    "pipeline_override": {
+                        "乐土每周商店-购买界面-乐土币不足-色块检测": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
         },
         "乐土商店检查锚点": {
             "type": "select",
