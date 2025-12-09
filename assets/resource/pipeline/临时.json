@@ -1,5 +1,7 @@
 {
-    "自动战斗-乐土-临时战斗循环": {
+    "自动战斗-乐土-临时循环": {
+        "post_delay": 0,
+        "pre_delay": 0,
         "roi": [
             0,
             0,
@@ -12,11 +14,77 @@
         ],
         "next": [
             "非战斗状态-乐土临时",
-            "[JumpBack]自动战斗-乐土-临时-有大开大",
-            "[JumpBack]自动战斗-乐土-临时-普攻",
+            "[JumpBack]自动战斗-乐土临时-所有系统全部启动启动启动启动",
             "[JumpBack]空任务"
         ]
     },
+    "非战斗状态-临时": {
+        "rate_limit": 0,
+        "post_delay": 0,
+        "pre_delay": 0,
+        "roi": [
+            0,
+            0,
+            143,
+            145
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "战斗相关/战中检查/战斗中.png"
+        ],
+        "inverse": true,
+        "next": [
+            "[JumpBack]自动战斗-乐土临时-所有系统全部启动启动启动启动",
+            "非战斗状态-乐土临时",
+            "[JumpBack]空任务"
+        ]
+    },
+    "自动战斗-乐土临时-所有系统全部启动启动启动启动": {
+        "rate_limit": 0,
+        "post_delay": 0,
+        "pre_delay": 0,
+        "roi": [
+            0,
+            0,
+            143,
+            145
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "战斗相关/战中检查/战斗中.png"
+        ],
+        "action": "ClickKey",
+        "key": [
+            49, //支援位1
+            50, //支援位2
+            84, //英桀助战T
+            81, //大招Q
+            69, //武器技
+            74 //普攻
+        ]
+    },
+    // "自动战斗-乐土临时-所有系统全部启动启动启动启动_还有这个": {
+    //     "rate_limit": 0,
+    //     "post_delay": 0,
+    //     "pre_delay": 0,
+    //     "roi": [
+    //         0,
+    //         0,
+    //         143,
+    //         145
+    //     ],
+    //     "recognition": "TemplateMatch",
+    //     "template": [
+    //         "战斗相关/战中检查/战斗中.png"
+    //     ],
+    //     "action": "Click",
+    //     "target": [
+    //         1186,
+    //         634,
+    //         32,
+    //         30
+    //     ]
+    // },
     "非战斗状态-乐土临时": {
         "rate_limit": 0,
         "post_delay": 0,
@@ -33,46 +101,8 @@
         ],
         "green_mask": true,
         "next": [
-            "自动战斗-乐土-临时战斗循环",
+            "自动战斗-乐土-临时循环",
             "[JumpBack]空任务"
-        ]
-    },
-    "自动战斗-乐土-临时-有大开大": {
-        "roi": [
-            1156,
-            505,
-            101,
-            101
-        ],
-        "green_mask": true,
-        "recognition": "TemplateMatch",
-        "threshold": 0.75,
-        "template": [
-            "战斗相关/乐土/崩落华/崩落华-可开大.png"
-        ],
-        "action": "ClickKey",
-        "key": [
-            49, //支援位1
-            50, //支援位2
-            84, //英桀助战T
-            81, //大招Q
-            70 //人偶F
-        ]
-    },
-    "自动战斗-乐土-临时-普攻": {
-        "roi": [
-            0,
-            0,
-            143,
-            145
-        ],
-        "recognition": "TemplateMatch",
-        "template": [
-            "战斗相关/战中检查/战斗中.png"
-        ],
-        "action": "ClickKey",
-        "key": [
-            74 //J普攻
         ]
     }
 }
