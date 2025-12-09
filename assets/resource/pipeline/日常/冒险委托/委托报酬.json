@@ -20,6 +20,7 @@
             0,
             120
         ],
+        "post_delay": 1500,
         "focus": {
             "succeeded": "冒险委托刷出氵啦！"
         }
