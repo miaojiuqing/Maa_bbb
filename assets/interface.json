@@ -21,15 +21,13 @@
         {
             "name": "桌面端",
             "type": "Win32",
+            "description": "截图方式优先PrintWindow,不行自己改一下",
             "win32": {
                 "class_regex": ".*",
                 "window_regex": "崩坏3|崩坏3 Steam版|Honkai Impact 3",
-                "screencap": "PrintWindow", //截图方式不设置
+                // "screencap": "PrintWindow", //截图方式不设置默认
                 "mouse": "PostMessageWithCursorPos",
-                "keyboard": "PostMessageWithCursorPos"
-                // "input": 64 //点击参数不设置了试了一下每个都能用
-                // "mouse": 1,
-                // "screencap": 2
+                "keyboard": "Seize"
             }
         },
         //我是分割线,改完记得添加该加的逗号，该删的也要删哦，详见视频
