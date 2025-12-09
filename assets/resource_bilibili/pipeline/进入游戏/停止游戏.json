@@ -2,7 +2,6 @@
     "关闭游戏": {
         "action": "StopApp",
         "package": "com.miHoYo.bh3.bilibili",
-        "next": [],
-        "interrupt": []
+        "next": []
     }
 }
