@@ -321,7 +321,9 @@
         },
         {
             "name": "克莱茵在线乐土打灰",
+            "label": "克莱茵乐土打灰",
             "entry": "乐土刷级-接口层",
+            "icon": "./resource/images/任务图标/克莱茵.png",
             "repeatable": true,
             "repeat_count": 1,
             "option": [
@@ -2381,7 +2383,8 @@
                     }
                 }
             ],
-            "default_case": "逆熵"
+            "default_case": "逆熵",
+            "description": "最高优先级是氵，没人会拒绝所以是内置的最高优先级"
         },
         "报酬接取优先级-2": {
             "type": "select",
@@ -2838,7 +2841,8 @@
                     }
                 }
             ],
-            "default_case": "不更换编队"
+            "default_case": "不更换编队",
+            "description": "仅位置"
         },
         "超限空间战斗逻辑": {
             "type": "select",
