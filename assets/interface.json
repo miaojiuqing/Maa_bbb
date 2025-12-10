@@ -320,7 +320,6 @@
         {
             "name": "往世乐土",
             "entry": "往世乐土-开始任务层",
-            "message": "舰长~该打乐土了",
             "description": "只是导航，完整功能敬请期待"
         },
         {
@@ -330,7 +329,7 @@
             "icon": "./resource/image/任务图标/克莱茵.png",
             "repeatable": true,
             "repeat_count": 1,
-            "default_default_check": false,
+            "default_check": false,
             "option": [
                 "当进入时有正在进行的关卡",
                 "要用什么刷等级",

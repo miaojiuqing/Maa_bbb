@@ -97,6 +97,9 @@
         "action": "Click"
     },
     "往世乐土-已进入深层序列": {
+        "focus": {
+            "Node.Recognition.Succeeded": "任务结束，舰长，来配合自动战斗打乐土吧~"
+        },
         "roi": [
             132,
             509,
