@@ -71,6 +71,9 @@
         "action": "Click"
     },
     "乐土刷级-首层复刷-已进入往世乐土箱庭": {
+        "focus": {
+            "succeeded": "进入了乐土箱庭"
+        },
         "roi": [
             1142,
             189,
@@ -170,6 +173,9 @@
         "action": "Click"
     },
     "乐土刷级-首层复刷-已进入深层序列选buff准备出击界面": {
+        "focus": {
+            "succeeded": "已进入选择buff界面"
+        },
         "roi": [
             132,
             509,
@@ -208,6 +214,9 @@
         "post_delay": 4000
     },
     "乐土刷级-首层复刷-已进入女武神选择界面": {
+        "focus": {
+            "succeeded": "已进入女武神选择界面，准备出击"
+        },
         "roi": [
             61,
             134,
@@ -274,6 +283,9 @@
         "post_delay": 1000
     },
     "乐土刷级-首层复刷-刻印选择": {
+        "focus": {
+            "succeeded": "正在\"挑选\"专属刻印"
+        },
         "roi": [
             482,
             111,
@@ -316,6 +328,9 @@
         "post_delay": 1000
     },
     "乐土刷级-首层复刷-可同意该刻印": {
+        "focus": {
+            "Node.Action.Succeeded": "选择了一次刻印"
+        },
         "roi": [
             1005,
             637,
@@ -351,6 +366,9 @@
         "action": "Click"
     },
     "乐土刷级-首层复刷-刻印选完了": {
+        "focus": {
+            "Node.Recognition.Succeeded": "似乎选完刻印了?"
+        },
         "rate_limit": 0,
         "post_delay": 0,
         "pre_delay": 0,
@@ -377,6 +395,9 @@
         ]
     },
     "乐土刷级-首层复刷-伪寻路-到达目的": {
+        "focus": {
+            "Node.Action.Succeeded": "识别到交互键,交互并准备战斗"
+        },
         "roi": [
             46,
             270,
@@ -392,6 +413,7 @@
         "key": [
             82
         ],
+        "post_delay": 2000,
         "next": [
             "乐土刷级-首层复刷-已进入往世乐土箱庭",
             "乐土刷级-首层复刷-伪寻路-到达目的",
@@ -448,6 +470,9 @@
         }
     },
     "乐土刷级-首层复刷-战斗结束等待剧情或刻印": {
+        "focus": {
+            "Node.Recognition.Succeeded": "战斗结束，正在等待对话和刻印"
+        },
         "rate_limit": 0,
         "post_delay": 5000,
         "pre_delay": 0,
@@ -470,6 +495,9 @@
         ]
     },
     "乐土刷级-首层复刷-回到战场准备退出": {
+        "focus": {
+            "Node.Recognition.Succeeded": "回到战场,尝试退出回到乐土箱庭"
+        },
         "rate_limit": 0,
         "post_delay": 0,
         "pre_delay": 0,
@@ -498,6 +526,9 @@
         ]
     },
     "乐土刷级-首层复刷-已进入往世乐土箱庭-次数结束": {
+        "focus": {
+            "Node.Recognition.Succeeded": "✨成功完成一次挑战"
+        },
         "roi": [
             1142,
             189,
@@ -510,10 +541,7 @@
             "装甲强化",
             "追忆之皿"
         ],
-        "action": "StopTask",
-        "focus": {
-            "succeeded": "打完一把~"
-        }
+        "action": "StopTask"
     },
     // "乐土刷级-战斗结束了-pc专属在战斗界面输入键码ESC点击放弃": {
     //     "pre_delay": 0,
