@@ -92,6 +92,7 @@
         {
             "name": "崩坏三 启动！",
             "entry": "登录方式选择接口",
+            "default_check": true,
             "repeatable": true,
             "repeat_count": 2,
             "check": true,
@@ -100,7 +101,7 @@
                 "每次执行该启动任务间隔",
                 "月卡领取"
             ],
-            "description": "左上角可选模拟器或者桌面端<br/>PC端需提前在 [b]:设置 -辅助中，关闭显示菜单提示，且控制方式为键鼠而非纯键盘<br/>[size:15][color:tomato]桌面端运行必须管理员启动该软件[/color][/size]<br/>会自行确认/领取所有奖励<br/>截图参数请自行在PrintWindow、FramePool和GDI中选择，优先GDI<br/>![bydjl](resource/image/logo.ico)"
+            "description": "左上角可选模拟器或者桌面端<br/>PC端需提前在 [b]:设置 -辅助中，关闭显示菜单提示，且控制方式为键鼠而非纯键盘<br/>[size:15][color:red]桌面端运行必须管理员启动该软件[/color][/size]<br/>会自行确认/领取所有奖励<br/>截图参数请自行在PrintWindow、FramePool和GDI中选择，优先GDI<br/>FramePool可能会导致某些任务无法正常结束,请及时反馈<br/>![bydjl](resource/image/logo.ico)"
         },
         {
             "name": "日常奖励领取-第一次",
