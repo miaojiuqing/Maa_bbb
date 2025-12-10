@@ -99,7 +99,7 @@
                 "每次执行该启动任务间隔",
                 "月卡领取"
             ],
-            "description": "若新版本更新后显示资源加载失败,请备份config配置文件后重新下载软件<br/>左上角可选模拟器或者桌面端，桌面端需自行选择游戏窗口<br/>PC端需提前在 [b]:设置 -辅助中，关闭显示菜单提示，且控制方式为键鼠而非纯键盘<br/>[size:15][color:tomato]桌面端运行必须管理员启动该软件[/color][/size]<br/>会自行确认/领取所有奖励<br/>截图参数请自行在PrintWindow、FramePool和GDI中选择，优先GDI<br/>![loading...](https://s21.ax1x.com/2025/10/14/pVqPhRO.md.png)"
+            "description": "左上角可选模拟器或者桌面端<br/>PC端需提前在 [b]:设置 -辅助中，关闭显示菜单提示，且控制方式为键鼠而非纯键盘<br/>[size:15][color:tomato]桌面端运行必须管理员启动该软件[/color][/size]<br/>会自行确认/领取所有奖励<br/>截图参数请自行在PrintWindow、FramePool和GDI中选择，优先GDI<br/>![bydjl](resource/image/logo.ico)"
         },
         {
             "name": "日常奖励领取-第一次",
