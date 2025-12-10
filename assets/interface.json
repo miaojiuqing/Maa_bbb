@@ -1,11 +1,11 @@
 {
     "interface_version": 2,
-    "agent": {
-        "child_exec": "python",
-        "child_args": [
-            "{PROJECT_DIR}/agent/main.py"
-        ]
-    },
+    // "agent": {
+    //     "child_exec": "python",
+    //     "child_args": [
+    //         "{PROJECT_DIR}/agent/main.py"
+    //     ]
+    // },
     "name": "MAA_bbb",
     "url": "https://github.com/miaojiuqing/MAA_bbb",
     "github": "https://github.com/miaojiuqing/MAA_bbb",
@@ -321,7 +321,7 @@
             "name": "克莱茵在线乐土打灰",
             "label": "克莱茵乐土打灰",
             "entry": "乐土刷级-接口层",
-            "icon": "./resource/images/任务图标/克莱茵.png",
+            "icon": ".\\resource\\image\\任务图标\\克莱茵.png",
             "repeatable": true,
             "repeat_count": 1,
             "default_check": false,
