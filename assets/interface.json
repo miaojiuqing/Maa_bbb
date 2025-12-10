@@ -321,7 +321,7 @@
             "name": "克莱茵在线乐土打灰",
             "label": "克莱茵乐土打灰",
             "entry": "乐土刷级-接口层",
-            "icon": ".\\resource\\image\\任务图标\\克莱茵.png",
+            "icon": "./resource/image/任务图标/克莱茵.png",
             "repeatable": true,
             "repeat_count": 1,
             "default_check": false,
