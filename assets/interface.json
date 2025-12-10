@@ -95,32 +95,31 @@
             "default_check": true,
             "repeatable": true,
             "repeat_count": 2,
-            "check": true,
             "option": [
                 "登录打开二维码",
                 "每次执行该启动任务间隔",
                 "月卡领取"
             ],
-            "description": "左上角可选模拟器或者桌面端<br/>PC端需提前在 [b]:设置 -辅助中，关闭显示菜单提示，且控制方式为键鼠而非纯键盘<br/>[size:15][color:red]桌面端运行必须管理员启动该软件[/color][/size]<br/>会自行确认/领取所有奖励<br/>截图参数请自行在PrintWindow、FramePool和GDI中选择，优先GDI<br/>FramePool可能会导致某些任务无法正常结束,请及时反馈<br/>![bydjl](resource/image/logo.ico)"
+            "description": "左上角可选模拟器或者桌面端<br/>PC端需提前在 :设置 -辅助中，关闭显示菜单提示，且控制方式为键鼠而非纯键盘<br/><b><font color=\"red\">桌面端运行必须管理员启动该软件</font></b><br/>会自行确认/领取所有奖励<br/>截图参数请自行在PrintWindow、FramePool和GDI中选择，优先GDI<br/>![bydjl](resource/image/logo.ico)"
         },
         {
             "name": "日常奖励领取-第一次",
             "entry": "任务奖励领取-任务开始层",
-            "check": true,
+            "default_check": true,
             "option": [],
             "description": "日常奖励领取两个任务其实是一样的，进来先领是要领芽衣给的体力"
         },
         {
             "name": "材料远征",
             "entry": "材料远征-开始任务层",
-            "check": true,
+            "default_check": true,
             "option": [
                 "材料远征体力不足时吃药吗"
             ]
         },
         {
             "name": "家园资源领取",
-            "check": true,
+            "default_check": true,
             "entry": "进入家园领取金币/体力-开始任务层",
             "pipeline_override": {},
             "option": [
@@ -132,7 +131,7 @@
         {
             "name": "家园远征派遣",
             "entry": "家园远征-开始任务层",
-            "check": true,
+            "default_check": true,
             "option": [
                 "派遣时体力不足吃药吗"
             ]
@@ -140,7 +139,7 @@
         {
             "name": "家园打工",
             "entry": "家园打工-开始任务层",
-            "check": true,
+            "default_check": true,
             "description": "未收录无法上的班弹窗情况，遇到请F9截屏后提issue<br/>为啥默认是继续派遣？因为出现这个大概率你手动去上也条件不够",
             "option": [
                 "存在S+的打工时是否继续派遣"
@@ -151,7 +150,7 @@
             "entry": "舰团每日委托-开始任务层",
             "repeatable": true,
             "repeat_count": 1,
-            "check": true,
+            "default_check": true,
             "option": [
                 "委托材料不足时自动补货"
             ],
@@ -160,7 +159,7 @@
         {
             "name": "舰团保税仓库委托申请",
             "entry": "舰团保税仓库-开始任务层",
-            "check": true,
+            "default_check": true,
             "option": [
                 "保税仓库申请的委托物品",
                 "需求物品阈值选择"
@@ -170,13 +169,13 @@
         {
             "name": "舰团每周活跃奖励",
             "entry": "舰团活跃奖励-开始任务层",
-            "check": true,
+            "default_check": true,
             "description": "只检查并领取最高档的奖励，反正领了全都有"
         },
         {
             "name": "每日40晶体核心",
             "entry": "每日40晶体核心-开始任务层",
-            "check": false,
+            "default_check": false,
             "description": "萌新别选，还挺贵的<br/>后续有需求的话增加购买数量自选"
         },
         {
@@ -185,29 +184,29 @@
             "option": [
                 "后勤终端购买物品货币类型"
             ],
-            "check": false,
+            "default_check": false,
             "description": "萌新别选，还挺贵的<br/>后续有需求的话增加购买数量自选"
         },
         {
             "name": "模拟作战室-减负",
-            "check": true,
+            "default_check": true,
             "entry": "模拟作战室-任务开始层"
         },
         {
             "name": "拓境战幕-减负",
-            "check": true,
+            "default_check": true,
             "entry": "拓境战幕-开始任务层"
         },
         {
             "name": "每周答题-减负",
             "entry": "答题-开始任务层",
-            "check": true,
+            "default_check": true,
             "description": "做完题不会马上领日常任务那边的奖励，请配合日常任务领取的任务食用"
         },
         {
             "name": "每周分享",
             "entry": "每周分享-开始任务层",
-            "check": true,
+            "default_check": true,
             "description": "很内向，不会检查是否已分享过，每次运行都会一直点"
         },
         {
@@ -215,7 +214,7 @@
             "entry": "万象虚境-任务开始层",
             "repeatable": true,
             "repeat_count": 1,
-            "check": true,
+            "default_check": true,
             "option": [
                 "万象虚境-挑战模式选择",
                 "万象虚境-层数选择",
@@ -235,12 +234,12 @@
         {
             "name": "日常奖励领取-第二次",
             "entry": "任务奖励领取-任务开始层",
-            "check": true,
+            "default_check": true,
             "description": "日常奖励领取两个任务其实是一样的，这个是正式要下线了领个奖励"
         },
         {
             "name": "凭证奖励尝试领取",
-            "check": true,
+            "default_check": true,
             "entry": "凭证奖励领取-任务开始层",
             "option": [
                 "识别可领取物品框框次数",
@@ -250,22 +249,22 @@
         },
         {
             "name": "领取邮箱奖励",
-            "check": true,
+            "default_check": true,
             "entry": "邮箱-任务开始层"
         },
         {
             "name": "每周吼姆秘宝",
-            "check": true,
+            "default_check": true,
             "entry": "每周吼姆秘宝-开始任务层"
         },
         {
             "name": "每周虚境商店1星石的90张虚境挑战卷",
-            "check": true,
+            "default_check": true,
             "entry": "一元时序通行证-开始任务层"
         },
         {
             "name": "乐土每周商店购买",
-            "check": false,
+            "default_check": false,
             "entry": "乐土每周商店-开始任务层",
             "option": [
                 "锚点识别契合阈值",
@@ -288,7 +287,7 @@
         },
         {
             "name": "冒险委托-减负",
-            "check": true,
+            "default_check": true,
             "entry": "冒险委托任务-选择层",
             "description": "[color:tomato]PC端是后崩2默认的话不会自己切其他地图[/color]<br/>资源文件什么的，舰长要自己提前下好哦<br/>优先级最高是水晶，提供的选项是除了氵之外的优先级",
             "option": [
@@ -327,7 +326,7 @@
             "icon": "./resource/image/任务图标/克莱茵.png",
             "repeatable": true,
             "repeat_count": 1,
-            "default_check": false,
+            "default_default_check": false,
             "option": [
                 "当进入时有正在进行的关卡",
                 "要用什么刷等级",
@@ -378,7 +377,7 @@
         {
             "name": "截图",
             "entry": "截图",
-            "check": true,
+            "default_check": true,
             "description": "可以快速填满你的硬盘(X)<br/>开发者弄样本用的",
             "pipeline_override": {
                 "截图": {
