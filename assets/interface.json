@@ -285,7 +285,7 @@
             "option": [
                 "自行领取活动奖励"
             ],
-            "description": "当期活动为 特工丽影<br/>[color:tomato]把活动日常解锁了再用[/color]<br/>自行领取活动奖励还没测试"
+            "description": "当期活动为 特工丽影<br/><font color=\"red\">把活动日常解锁了再用</font><br/>自行领取活动奖励应该没有拒绝的吧"
         },
         {
             "name": "冒险委托-减负",
