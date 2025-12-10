@@ -198,6 +198,7 @@
             353
         ],
         "recognition": "OCR",
+        "threshold": 0.7,
         "expected": [
             "战术体总览",
             "协战链总览",
