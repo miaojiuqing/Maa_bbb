@@ -229,6 +229,7 @@
         {
             "name": "记忆战场-减负",
             "entry": "记忆战场-开始任务层",
+            "default_check": true,
             "description": "舰长！ 减负完记得打一把保持下周的减负"
         },
         {
@@ -282,6 +283,7 @@
         {
             "name": "当期版本活动日常",
             "label": "特工丽影-活动日常",
+            "default_check": true,
             "icon": "./resource/image/任务图标/特工丽影活动.png",
             "entry": "版本活动-特工丽影-任务开始层", // "版本活动专属空任务"
             "option": [
@@ -307,6 +309,7 @@
         },
         {
             "name": "超弦空间(深渊)",
+            "default_check": false,
             "entry": "超弦空间-开始任务层",
             "option": [
                 "打完自动检查领取奖励",
@@ -319,6 +322,7 @@
         },
         {
             "name": "往世乐土",
+            "default_check": false,
             "label": "进入往世乐土-仅导航",
             "entry": "往世乐土-开始任务层",
             "description": "<font size=\"7\" color=\"red\"><b>⚠️ 只是导航❗</b></font><br/><font color=\"#FFD700\"><b>已可配合自动战斗进行半自动乐土</b></font>"
@@ -344,6 +348,7 @@
         },
         {
             "name": "自动点击剧情跳过",
+            "default_check": false,
             "entry": "剧情跳过-循环器",
             "option": [
                 "选择过剧情模式"
@@ -361,6 +366,7 @@
         },
         {
             "name": "退出/关闭游戏",
+            "default_check": false,
             "entry": "关闭游戏",
             "description": "仅关闭游戏，运行结束关闭游戏和软件可在软件内设置"
         },
@@ -381,7 +387,7 @@
         {
             "name": "截图",
             "entry": "截图",
-            "default_check": true,
+            "default_check": false,
             "description": "可以快速填满你的硬盘(X)<br/>开发者弄样本用的",
             "pipeline_override": {
                 "截图": {
