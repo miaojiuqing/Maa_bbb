@@ -174,7 +174,7 @@
         "count": 150,
         "next": [
             "成功进入游戏主菜单",
-            "[[JumpBack]点击返回主菜单",
+            "[JumpBack]点击返回主菜单",
             "[JumpBack]家园处-点击返回",
             "[JumpBack]点击叉叉"
         ]
@@ -301,7 +301,8 @@
         "inverse": true,
         "recognition": "TemplateMatch",
         "template": [
-            "商店/每周/乐土/购买已呈现.png"
+            "商店/每周/乐土/购买已呈现.png",
+            "商店/每周/乐土/购买已呈现-2.png"
         ],
         "action": "Swipe",
         "begin": [
