@@ -219,7 +219,7 @@
         ],
         "recognition": "OCR",
         "expected": [
-            ".键打工"
+            ".*键打工"
         ],
         "action": "Click"
     },
