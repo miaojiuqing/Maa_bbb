@@ -79,7 +79,7 @@
         ],
         "recognition": "TemplateMatch",
         "template": [
-            "商店/每周/每周分享/每周分享-水晶图标.png"
+            "商店/每周/每周分享/每周分享-小水晶图标.png"
         ],
         "inverse": true,
         "action": "Swipe",
@@ -105,12 +105,12 @@
         ],
         "recognition": "TemplateMatch",
         "template": [
-            "商店/每周/每周分享/每周分享-水晶图标.png"
+            "商店/每周/每周分享/每周分享-小水晶图标.png"
         ],
         "action": "Click",
         "target_offset": [
-            380,
-            50,
+            300,
+            0,
             0,
             0
         ]
