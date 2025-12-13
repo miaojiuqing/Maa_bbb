@@ -39,7 +39,8 @@
         ],
         "recognition": "OCR",
         "expected": [
-            "保税仓库"
+            "保税.*",
+            ".*仓库"
         ],
         "action": "Click"
     },
