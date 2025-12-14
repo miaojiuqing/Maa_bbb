@@ -139,7 +139,9 @@
             "name": "日常奖励领取-第一次",
             "entry": "任务奖励领取-任务开始层",
             "default_check": true,
-            "option": [],
+            "option": [
+                "辅助菜单是否关闭检查"
+            ],
             "description": "日常奖励领取两个任务其实是一样的，进来先领是要领芽衣给的体力"
         },
         {
@@ -818,6 +820,28 @@
                 }
             ],
             "default_case": "延迟五秒"
+        },
+        "辅助菜单是否关闭检查": {
+            "description": "如果你能运行所有任务，请关闭该功能",
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "YES",
+                    "pipeline_override": {
+                        "辅助显示关闭-未关闭辅助菜单显示": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "NO",
+                    "pipeline_override": {
+                        "辅助显示关闭-未关闭辅助菜单显示": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
         },
         "材料远征体力不足时吃药吗": {
             "type": "switch",
