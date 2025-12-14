@@ -1,0 +1,15 @@
+{
+    "启动并进入游戏": {
+        "action": "DoNothing"
+    },
+    "模拟器包名游戏启动": {
+        "enabled": false
+        // "action": "ClickKey",
+        // "key": 27,
+        // "post_delay": "1500"
+    },
+    "关闭游戏": {
+        "action": "DoNothing",
+        "next": ["舰长~真的要退出游戏吗-是", "[JumpBack]输入键码-ESC"],
+    }
+}

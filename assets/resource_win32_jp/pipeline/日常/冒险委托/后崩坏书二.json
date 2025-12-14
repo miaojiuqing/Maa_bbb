@@ -1,0 +1,128 @@
+{
+    "后崩2委托-点击进入接受委托界面": {
+        "roi": [
+            718,
+            321,
+            303,
+            137
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "查看委托"
+        ],
+        "action": "ClickKey",
+        "key": 82
+    },
+    "后崩2委托-不可开启委托": {
+        "roi": [
+            462,
+            301,
+            365,
+            107
+        ],
+        "recognition": "ColorMatch",
+        "upper": [
+            138,
+            117,
+            123
+        ],
+        "lower": [
+            106,
+            104,
+            110
+        ],
+        "count": 20000,
+        "next": [
+            "成功进入游戏主菜单",
+            "[JumpBack]点击返回主菜单",
+            "[JumpBack]输入键码-ESC"
+        ],
+    },
+    "后崩2委托-确认减负奖励": {
+        "roi": [
+            513,
+            412,
+            256,
+            88
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "委托任务奖励"
+        ],
+        "action": "Click",
+        "target": [
+            569,
+            552,
+            141,
+            34
+        ],
+        "next": [
+            "成功进入游戏主菜单",
+            "[JumpBack]点击返回主菜单",
+            "[JumpBack]输入键码-ESC"
+        ],
+    },
+    "后崩2委托-寻路-往右走": {
+        "roi": [
+            131,
+            0,
+            81,
+            72
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "周常/冒险委托/后崩坏书2/后崩2已进入委托室.png"
+        ],
+        "action": "LongPressKey",
+        "key": 68,
+        "duration": 200,
+        "post_delay": 200
+    },
+    "后崩2委托-寻路-大门": {
+        "roi": [
+            718,
+            321,
+            303,
+            137
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "出击"
+        ],
+        "action": "LongPressKey",
+        "key": 87,
+        "duration": 520,
+        "post_delay": 200
+    },
+    "后崩2委托-寻路-芽衣": {
+        "roi": [
+            718,
+            321,
+            303,
+            137
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "芽衣"
+        ],
+        "action": "LongPressKey",
+        "key": 65,
+        "duration": 200,
+        "post_delay": 200
+    },
+    "后崩2委托-寻路-误触对话芽衣": {
+        "roi": [
+            594,
+            509,
+            98,
+            69
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "芽衣"
+        ],
+        "pre_delay": 500,
+        "action": "ClickKey",
+        "key": 51
+    }
+}

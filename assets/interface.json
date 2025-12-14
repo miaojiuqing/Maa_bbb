@@ -40,48 +40,79 @@
     ],
     "resource": [
         {
-            "name": "桌面端",
+            "name": "键鼠操作",
+            "controller": [
+                "桌面端"
+            ],
             "path": [
                 "{PROJECT_DIR}/resource",
                 "{PROJECT_DIR}/resource_win32"
             ]
         },
         {
-            "name": "模拟器-官服",
+            "name": "纯键盘操作",
+            "controller": [
+                "桌面端"
+            ],
+            "path": [
+                "{PROJECT_DIR}/resource",
+                "{PROJECT_DIR}/resource_win32_jp"
+            ]
+        },
+        {
+            "name": "官服",
+            "controller": [
+                "安卓端"
+            ],
             "path": [
                 "{PROJECT_DIR}/resource"
             ]
         },
         {
-            "name": "模拟器-B服",
+            "name": "B服",
+            "controller": [
+                "安卓端"
+            ],
             "path": [
                 "{PROJECT_DIR}/resource",
                 "{PROJECT_DIR}/resource_bilibili"
             ]
         },
         {
-            "name": "模拟器-OPPO渠道服",
+            "name": "OPPO渠道服",
+            "controller": [
+                "安卓端"
+            ],
             "path": [
                 "{PROJECT_DIR}/resource",
                 "{PROJECT_DIR}/resource_OPPE"
             ]
         },
         {
-            "name": "模拟器-华为渠道服",
+            "name": "华为渠道服",
+            "controller": [
+                "安卓端"
+            ],
             "path": [
                 "{PROJECT_DIR}/resource",
                 "{PROJECT_DIR}/resource_huawei"
             ]
         },
         {
-            "name": "模拟器-应用宝渠道服",
+            "name": "应用宝渠道服",
+            "controller": [
+                "安卓端"
+            ],
             "path": [
                 "{PROJECT_DIR}/resource",
                 "{PROJECT_DIR}/resource_yyb"
             ]
         },
         {
-            "name": "模拟器-VIVO服",
+            "name": "VIVO服",
+            "controller": [
+                "安卓端"
+            ],
             "path": [
                 "{PROJECT_DIR}/resource",
                 "{PROJECT_DIR}/resource_vivo"
@@ -359,6 +390,7 @@
             "name": "自动战斗",
             "entry": "自动战斗-接口层",
             "option": [
+                // "键位/操作设置",
                 "战斗逻辑-乐土",
                 "检查到星之环可开始后延迟时间"
             ],
@@ -3419,6 +3451,67 @@
             ],
             "default_case": "无视跳过正常过剧情-手动选择选项"
         },
+        // "键位/操作设置": {
+        //     "type": "select",
+        //     "description": "两个选项会互相影响，所以不用的端一定要为空",
+        //     "cases": [
+        //         {
+        //             "name": "模拟器",
+        //             "description": "还没做，一直卡退，右边先用着",
+        //             // "description": "自己乱改位置的自食其力吧(",
+        //             "option": [
+        //                 "键位设置"
+        //             ]
+        //         },
+        //         {
+        //             "name": "PC端",
+        //             "description": "PC端的键位设置不会影响按键的键码",
+        //             "option": [
+        //                 "操作设置"
+        //             ]
+        //         }
+        //     ]
+        // },
+        // "键位设置": {
+        //     "type": "select",
+        //     "cases": [
+        //         {
+        //             "name": "经典键位",
+        //             "pipeline_override": {}
+        //         },
+        //         {
+        //             "name": "推荐键位",
+        //             "pipeline_override": {}
+        //         }
+        //     ]
+        // },
+        // "操作设置": {
+        //     "type": "select",
+        //     "cases": [
+        //         {
+        //             "name": "空放不改",
+        //             "pipeline_override": {}
+        //         },
+        //         {
+        //             "name": "键鼠",
+        //             "pipeline_override": {}
+        //         },
+        //         {
+        //             "name": "纯键盘",
+        //             "pipeline_override": {
+        //                 "自动战斗-乐土-爱愿主播爱莉-星环启动": {
+        //                     "key": [
+        //                         49, //支援位1
+        //                         50, //支援位2
+        //                         84, //英桀助战T
+        //                         81, //大招Q
+        //                         70 //星之环F
+        //                     ]
+        //                 }
+        //             }
+        //         }
+        //     ]
+        // },
         "战斗逻辑-乐土": {
             "type": "select",
             "cases": [
