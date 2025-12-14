@@ -1,0 +1,104 @@
+{
+    "辅助显示关闭-未关闭辅助菜单显示": {
+        "roi": [
+            1227,
+            666,
+            53,
+            54
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "特殊情况/辅助显示没关/辅助显示未关闭.png"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": "哇你这个人，不看文档 \n正在前往设置-辅助-关闭显示菜单提示"
+        },
+        "next": [
+            "辅助显示关闭-成功关闭显示菜单",
+            "[JumpBack]辅助显示关闭-点击关闭显示菜单",
+            "[JumpBack]辅助显示关闭-点击设置的辅助",
+            "[JumpBack]辅助显示关闭-点击手机",
+            "[JumpBack]辅助显示关闭-点击设置"
+        ]
+    },
+    "辅助显示关闭-点击手机": {
+        "roi": [
+            1115,
+            566,
+            165,
+            154
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "特殊情况/辅助显示没关/手机.png"
+        ],
+        "action": "Click",
+        "post_delay": 4000
+    },
+    "辅助显示关闭-点击设置": {
+        "roi": [
+            1076,
+            566,
+            204,
+            154
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "特殊情况/辅助显示没关/设置.png"
+        ],
+        "action": "Click",
+        "post_delay": 4000
+    },
+    "辅助显示关闭-点击关闭显示菜单": {
+        "roi": [
+            1144,
+            621,
+            118,
+            61
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "开"
+        ],
+        "action": "Click",
+        "post_delay": 5000,
+        "focus": {
+            "Node.Action.Succeeded": "正在尝试关闭辅助菜单显示"
+        }
+    },
+    "辅助显示关闭-点击设置的辅助": {
+        "roi": [
+            0,
+            219,
+            166,
+            78
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "辅助"
+        ],
+        "action": "Click",
+        "post_delay": 1500
+    },
+    "辅助显示关闭-成功关闭显示菜单": {
+        "roi": [
+            1144,
+            621,
+            118,
+            61
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "关"
+        ],
+        "post_delay": 3000,
+        "focus": {
+            "Node.Recognition.Succeeded": "关闭辅助菜单显示成功，正在返回主界面继续执行任务"
+        },
+        "next": [
+            "成功进入游戏主菜单",
+            "[JumpBack]点击返回主菜单",
+            "[JumpBack]误触进入手机界面"
+        ]
+    }
+}
