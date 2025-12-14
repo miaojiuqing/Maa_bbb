@@ -11,21 +11,21 @@
     },
     "支援位_1": {
         "action": "ClickKey",
-        "key": 49,
+        "key": 49, //1
         "next": [
             "支援位_2"
         ]
     },
     "支援位_2": {
         "action": "ClickKey",
-        "key": 50,
+        "key": 50, //2
         "next": [
             "英桀援助"
         ]
     },
     "英桀援助": {
         "action": "ClickKey",
-        "key": 84,
+        "key": 70, //F
         "next": [
             "自动战斗-接口层"
         ]
@@ -43,7 +43,7 @@
         ],
         "green_mask": true,
         "action": "ClickKey",
-        "key": 70,
+        "key": 76, //人偶/星之环L
         "next": [
             "支援位_1"
         ]
