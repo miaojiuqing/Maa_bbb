@@ -45,7 +45,7 @@
     "记忆战场-开启通知处理": {
         "recognition": "OCR",
         "expected": [
-            "级难度开启"
+            ".*级难度开启"
         ],
         "action": "Click",
         "target": [
