@@ -3151,19 +3151,19 @@
                         }
                     }
                 },
-                {
-                    "name": "浅层序列刷",
-                    "pipeline_override": {
-                        "乐土刷级-接口层": {
-                            "next": [
-                                "空任务"
-                            ],
-                            "focus": {
-                                "succeeded": "还没写，任务结束"
-                            }
-                        }
-                    }
-                },
+                // {
+                //     "name": "浅层序列刷",
+                //     "pipeline_override": {
+                //         "乐土刷级-接口层": {
+                //             "next": [
+                //                 "空任务"
+                //             ],
+                //             "focus": {
+                //                 "succeeded": "还没写，任务结束"
+                //             }
+                //         }
+                //     }
+                // },
                 {
                     "name": "只打一层",
                     "pipeline_override": {
