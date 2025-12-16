@@ -3,7 +3,7 @@
     // "agent": {
     //     "child_exec": "python",
     //     "child_args": [
-    //         "{PROJECT_DIR}/agent/main.py"
+    //         "./agent/main.py"
     //     ]
     // },
     "name": "MAA_bbb",
@@ -46,8 +46,8 @@
                 "桌面端"
             ],
             "path": [
-                "{PROJECT_DIR}/resource",
-                "{PROJECT_DIR}/resource_win32"
+                "./resource",
+                "./resource_win32"
             ]
         },
         {
@@ -57,8 +57,8 @@
                 "桌面端"
             ],
             "path": [
-                "{PROJECT_DIR}/resource",
-                "{PROJECT_DIR}/resource_win32_jp"
+                "./resource",
+                "./resource_win32_jp"
             ]
         },
         {
@@ -67,7 +67,7 @@
                 "安卓端"
             ],
             "path": [
-                "{PROJECT_DIR}/resource"
+                "./resource"
             ]
         },
         {
@@ -76,8 +76,8 @@
                 "安卓端"
             ],
             "path": [
-                "{PROJECT_DIR}/resource",
-                "{PROJECT_DIR}/resource_bilibili"
+                "./resource",
+                "./resource_bilibili"
             ]
         },
         {
@@ -86,8 +86,8 @@
                 "安卓端"
             ],
             "path": [
-                "{PROJECT_DIR}/resource",
-                "{PROJECT_DIR}/resource_OPPE"
+                "./resource",
+                "./resource_OPPE"
             ]
         },
         {
@@ -96,8 +96,8 @@
                 "安卓端"
             ],
             "path": [
-                "{PROJECT_DIR}/resource",
-                "{PROJECT_DIR}/resource_huawei"
+                "./resource",
+                "./resource_huawei"
             ]
         },
         {
@@ -106,8 +106,8 @@
                 "安卓端"
             ],
             "path": [
-                "{PROJECT_DIR}/resource",
-                "{PROJECT_DIR}/resource_yyb"
+                "./resource",
+                "./resource_yyb"
             ]
         },
         {
@@ -116,8 +116,8 @@
                 "安卓端"
             ],
             "path": [
-                "{PROJECT_DIR}/resource",
-                "{PROJECT_DIR}/resource_vivo"
+                "./resource",
+                "./resource_vivo"
             ]
         }
     ],
