@@ -49,7 +49,8 @@
         ],
         "recognition": "OCR",
         "expected": [
-            "出击"
+            "出击",
+            "出主"
         ],
         "action": "Click",
         "post_delay": 1000
