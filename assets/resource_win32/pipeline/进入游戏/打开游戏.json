@@ -10,6 +10,27 @@
     },
     "关闭游戏": {
         "action": "DoNothing",
-        "next": ["舰长~真的要退出游戏吗-是", "[JumpBack]输入键码-ESC"],
+        "next": [
+            "舰长~真的要退出游戏吗-是",
+            "[JumpBack]输入键码-ESC"
+        ]
+    },
+    "离开火星": {
+        "roi": [
+            658,
+            12,
+            622,
+            83
+        ],
+        "green_mask": true,
+        "recognition": "TemplateMatch",
+        "template": [
+            "火星/处于火星ing.png"
+        ],
+        "action": "ClickKey",
+        "key": [
+            27,
+            192
+        ]
     }
 }
