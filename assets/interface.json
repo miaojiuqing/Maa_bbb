@@ -131,7 +131,8 @@
             "option": [
                 "登录打开二维码",
                 "每次执行该启动任务间隔",
-                "月卡领取"
+                "月卡领取",
+                "若误触进了剧情"
             ],
             "description": "左上角可选模拟器或者桌面端<br/>PC端需提前在 :设置 -辅助中，关闭显示菜单提示，且控制方式为键鼠而非纯键盘<br/><b><font color=\"red\">桌面端运行必须管理员启动该软件且分辨率为16:9</font></b><br/>会自行确认/领取所有奖励<br/>截图参数请自行在PrintWindow、FramePool和GDI中选择，优先PrintWindow<br/>![bydjl](resource/image/logo.ico)"
         },
@@ -472,6 +473,34 @@
                     }
                 }
             ]
+        },
+        "若误触进了剧情": {
+            "type": "select",
+            "cases": [
+                {
+                    "name": "直接跳过",
+                    "pipeline_override": {
+                        "剧情跳过辅助点击-文字": {
+                            "enabled": "true"
+                        },
+                        "剧情跳过辅助点击-图片": {
+                            "enabled": "true"
+                        }
+                    }
+                },
+                {
+                    "name": "慢慢过剧情",
+                    "pipeline_override": {
+                        "剧情跳过辅助点击-文字": {
+                            "enabled": "false"
+                        },
+                        "剧情跳过辅助点击-图片": {
+                            "enabled": "false"
+                        }
+                    }
+                }
+            ],
+            "default_case": "慢慢过剧情"
         },
         "你氪通行证了吗": {
             "type": "select",

@@ -8,8 +8,8 @@
         ]
     },
     "启动并进入游戏": {
-        "action": "StartApp",
-        "package": "com.miHoYo.enterprise.NGHSoD",
+        // "action": "StartApp",
+        // "package": "com.miHoYo.enterprise.NGHSoD",
         "next": [
             "[JumpBack]出现了！邪恶包菜头！",
             "[JumpBack]请舰长注意休息",
@@ -18,8 +18,11 @@
             "[JumpBack]所有资源已下载完成",
             "[JumpBack]热更新-数据已更新-官方热补丁",
             "[JumpBack]相关资源下载-取消",
-            "[JumpBack]特殊-双核协战返回",
+            "[JumpBack]特殊-双核协战返回", //活动
             "[JumpBack]点击返回主菜单",
+            "[JumpBack]离开火星确认", //火星处理
+            "[JumpBack]离开火星", //火星处理
+            "[JumpBack]今日不再提示是否跳过剧情-单次确认动作",
             "[JumpBack]点击叉叉",
             "[JumpBack]领取一切确认",
             "[JumpBack]领取一切",
@@ -47,6 +50,48 @@
         "focus": {
             "failed": "舰长！请检查左上角资源是否配置错误！"
         }
+    },
+    "离开火星": {
+        // "resource": [
+        //     "键鼠操作",
+        //     "纯键盘操作"
+        // ], //待适配
+        "roi": [
+            658,
+            12,
+            622,
+            83
+        ],
+        "green_mask": true,
+        "recognition": "TemplateMatch",
+        "template": [
+            "火星/处于火星ing.png"
+        ],
+        "action": "ClickKey",
+        "key": [
+            27,
+            192
+        ]
+    },
+    "离开火星确认": {
+        "roi": [
+            536,
+            297,
+            211,
+            98
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "是否确认返回?",
+            "是否确认返回？"
+        ],
+        "action": "Click",
+        "target": [
+            447,
+            485,
+            87,
+            24
+        ]
     },
     "热更新-数据已更新-官方热补丁": {
         "roi": [
