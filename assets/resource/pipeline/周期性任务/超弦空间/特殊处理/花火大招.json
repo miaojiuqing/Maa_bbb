@@ -1,0 +1,20 @@
+{
+    "处于花火大招中": {
+        "roi": [
+            1089,
+            540,
+            137,
+            145
+        ],
+        "green_mask": true,
+        "recognition": "TemplateMatch",
+        "template": [
+            "特殊情况/战斗特殊情况/花火大招.png"
+        ],
+        "action": "ClickKey",
+        "key": [
+            81
+        ],
+        "enabled": false
+    }
+}
