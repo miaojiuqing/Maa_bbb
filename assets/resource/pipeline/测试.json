@@ -12,7 +12,7 @@
         ]
     },
     //1
-    "键码点击测试": {
+    "多点测试": {
         "action": "MultiSwipe",
         "swipes": [
             {
@@ -80,6 +80,13 @@
                 "starting": 300
             }
         ]
+    },
+    "键码点击测试": {
+        "action": "LongPressKey",
+        "key": [
+            81
+        ],
+        "duration": 160
     },
     "纯测试": {
         "next": [
