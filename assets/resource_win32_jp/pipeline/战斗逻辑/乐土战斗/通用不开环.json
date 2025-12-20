@@ -118,6 +118,7 @@
         "green_mask": true,
         "next": [
             "自动战斗-乐土-乐土不开环通用战斗逻辑循环",
+            "[JumpBack]处于花火大招中",
             "[JumpBack]空任务"
         ]
     }

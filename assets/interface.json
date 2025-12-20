@@ -3066,7 +3066,7 @@
                     "name": "No",
                     "pipeline_override": {
                         "处于花火大招中": {
-                            "enabled": "false"
+                            "enabled": false
                         }
                     }
                 },
@@ -3074,7 +3074,7 @@
                     "name": "YES",
                     "pipeline_override": {
                         "处于花火大招中": {
-                            "enabled": "true"
+                            "enabled": true
                         }
                     }
                 }
@@ -4854,7 +4854,7 @@
         },
         "自动战斗逻辑的战斗时特殊处理": {
             "label": "特殊处理",
-            "description": "用于快速过掉部分角色的特殊大招",
+            "description": "用于快速过掉部分角色的特殊大招<br/>仅适用于通用战斗逻辑",
             "type": "switch",
             "cases": [
                 {
