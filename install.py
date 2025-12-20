@@ -53,7 +53,7 @@ def install_resource():
     )
     shutil.copytree(
         working_dir / "assets" / "resource_win32_jp",
-        install_path / "resource_win32",
+        install_path / "resource_win32_jp",
         dirs_exist_ok=True,
     )
     shutil.copytree(
