@@ -460,6 +460,9 @@
                     "pipeline_override": {
                         "月份每日登录奖励": {
                             "enabled": true
+                        },
+                        "进入游戏-月卡领取-15天奖励": {
+                            "enabled": true
                         }
                     }
                 },
@@ -467,6 +470,9 @@
                     "name": "NO",
                     "pipeline_override": {
                         "月份每日登录奖励": {
+                            "enabled": false
+                        },
+                        "进入游戏-月卡领取-15天奖励": {
                             "enabled": false
                         }
                     }
