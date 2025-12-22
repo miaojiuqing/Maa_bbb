@@ -486,13 +486,13 @@
                     "name": "直接跳过",
                     "pipeline_override": {
                         "剧情跳过辅助点击-文字": {
-                            "enabled": "true"
+                            "enabled": true
                         },
                         "剧情跳过辅助点击-图片": {
-                            "enabled": "true"
+                            "enabled": true
                         },
                         "剧情辅助点击-点击空白处跳过剧情": {
-                            "enabled": "false",
+                            "enabled": false,
                             "next": []
                         }
                     }
@@ -501,13 +501,13 @@
                     "name": "慢慢过剧情",
                     "pipeline_override": {
                         "剧情跳过辅助点击-文字": {
-                            "enabled": "false"
+                            "enabled": false
                         },
                         "剧情跳过辅助点击-图片": {
-                            "enabled": "false"
+                            "enabled": false
                         },
                         "剧情辅助点击-点击空白处跳过剧情": {
-                            "enabled": "true",
+                            "enabled": true,
                             "next": []
                         }
                     }
@@ -4544,10 +4544,10 @@
                     "description": "不选的话，游戏会自己会默认改成已解锁的最高难度",
                     "pipeline_override": {
                         "乐土刷级-浅层序列-点击选择序列难度": {
-                            "enabled": "false"
+                            "enabled": false
                         },
                         "乐土刷级-浅层序列-已选中所需序列难度": {
-                            "enabled": "false"
+                            "enabled": false
                         }
                     }
                 },
@@ -4634,7 +4634,7 @@
                             ]
                         },
                         "乐土刷级-浅层序列-已进入序列难度选择界面-次数结束": {
-                            "enabled": "true"
+                            "enabled": true
                         }
                     }
                 },
@@ -4667,7 +4667,7 @@
                             ]
                         },
                         "乐土刷级-浅层序列-已进入序列难度选择界面-次数结束": {
-                            "enabled": "false"
+                            "enabled": false
                         }
                     }
                 }
@@ -4825,7 +4825,7 @@
                     "name": "No",
                     "pipeline_override": {
                         "处于花火大招中": {
-                            "enabled": "false"
+                            "enabled": false
                         }
                     }
                 },
@@ -4833,7 +4833,7 @@
                     "name": "YES",
                     "pipeline_override": {
                         "处于花火大招中": {
-                            "enabled": "true"
+                            "enabled": true
                         }
                     }
                 }

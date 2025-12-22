@@ -8,8 +8,8 @@
         ]
     },
     "启动并进入游戏": {
-        // "action": "StartApp",
-        // "package": "com.miHoYo.enterprise.NGHSoD",
+        "action": "StartApp",
+        "package": "com.miHoYo.enterprise.NGHSoD",
         "next": [
             "[JumpBack]出现了！邪恶包菜头！",
             "[JumpBack]请舰长注意休息",
