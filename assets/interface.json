@@ -366,7 +366,7 @@
             "default_check": false,
             "label": "进入往世乐土-仅导航",
             "entry": "往世乐土-开始任务层",
-            "description": "<font size=\"7\" color=\"red\"><b>⚠️ 只是导航❗</b></font><br/><font color=\"#FFD700\"><b>已可配合自动战斗进行半自动乐土</b></font>"
+            "description": "<font size=\"7\" color=\"red\"><b>⚠️ 只是导航❗</b></font><br/><font color=\"#FFD700\"><b>已可配合自动战斗进行半自动乐土</b></font><br/>不需要和克莱茵打灰放一起，克莱茵打灰自带导航，这个任务目前唯一的作用基本就是提醒你打乐土"
         },
         {
             "name": "克莱茵在线乐土打灰",
