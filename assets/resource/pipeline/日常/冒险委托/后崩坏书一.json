@@ -46,6 +46,7 @@
     "后崩1-地图切换-非此世界进行切换": {
         "recognition": "TemplateMatch",
         "threshold": 0.8,
+        "green_mask": true,
         "template": [
             "周常/冒险委托/樱色轮回/已进入樱色轮回世界菜单.png",
             "周常/冒险委托/樱色轮回/已进入樱色轮回世界菜单2.png",
