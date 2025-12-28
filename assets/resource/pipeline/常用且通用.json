@@ -182,7 +182,7 @@
     "输入键码-ESC": {
         "action": "ClickKey",
         "key": 27,
-        "post_delay": 500
+        "post_delay": 5000
     },
     "点击主菜单处的出击": {
         "roi": [
