@@ -1,7 +1,5 @@
 {
     "自动战斗-乐土-临时战斗循环": {
-        "post_delay": 0,
-        "pre_delay": 0,
         "roi": [
             0,
             0,
@@ -13,104 +11,138 @@
             "战斗相关/战中检查/战斗中.png"
         ],
         "next": [
-            "非战斗状态-乐土临时",
-            "[JumpBack]自动战斗-乐土-临时-星环启动",
-            "[JumpBack]自动战斗-乐土-临时-所有系统全部启动启动启动启动",
+            "非战斗状态",
+            "[JumpBack]自动战斗-乐土-临时-启动机甲-星之环",
+            "[JumpBack]自动战斗-乐土-临时-正在开机甲",
             "[JumpBack]空任务"
         ]
     },
-    "非战斗状态-乐土临时": {
-        "rate_limit": 0,
-        "post_delay": 0,
-        "pre_delay": 0,
+    "自动战斗-乐土-临时-正在开机甲": {
         "roi": [
-            1058,
-            619,
-            100,
-            100
-        ],
-        "recognition": "TemplateMatch",
-        "template": [
-            "战斗相关/战中检查/已经不用再战斗了-PC.png"
-        ],
-        "green_mask": true,
-        "next": [
-            "自动战斗-乐土-临时战斗循环",
-            "[JumpBack]空任务"
-        ]
-    },
-    "自动战斗-乐土-临时-星环启动": {
-        "rate_limit": 0,
-        "post_delay": 0,
-        "pre_delay": 0,
-        "roi": [
-            980,
-            560,
-            109,
-            122
+            331,
+            577,
+            528,
+            56
         ],
         "green_mask": true,
         "recognition": "TemplateMatch",
-        "threshold": 0.75,
         "template": [
-            "战斗相关/乐土/主播爱莉/天衍之杯-可开启-PC.png"
-        ],
-        "action": "ClickKey",
-        "key": [
-            49, //支援位1
-            50, //支援位2
-            84, //英桀助战T
-            81, //大招Q
-            70 //星之环F
-        ]
-    },
-    "自动战斗-乐土-临时-所有系统全部启动启动启动启动": {
-        "post_delay": 0,
-        "pre_delay": 0,
-        "roi": [
-            0,
-            0,
-            143,
-            145
-        ],
-        "recognition": "TemplateMatch",
-        "template": [
-            "战斗相关/战中检查/战斗中.png"
-        ],
-        "action": "ClickKey",
-        "key": [
-            81, //大招Q
-            69, //武器技E
-            74 //普攻J
+            "战斗相关/乐土/薇塔/普通开机甲.png"
         ],
         "next": [
-            // "自动战斗-乐土-临时-普攻动作",
-            "自动战斗-乐土-临时战斗循环",
-            "非战斗状态-乐土临时",
+            "自动战斗-乐土-临时-处于超级机甲状态_进行平A",
+            "非战斗状态",
+            "[JumpBack]自动战斗-乐土-临时-启动机甲-星之环",
+            "[JumpBack]自动战斗-乐土-临时-处于攒条_E后平A",
             "[JumpBack]空任务"
         ]
-    }
-    // "自动战斗-乐土-临时-普攻动作": {
-    //     "enabled": true,
+    },
+    "自动战斗-乐土-临时-启动机甲-星之环": {
+        "roi": [
+            975,
+            551,
+            116,
+            130
+        ],
+        "green_mask": true,
+        "recognition": "TemplateMatch",
+        "template": [
+            "战斗相关/星之环/无存之仪-可开启.png"
+        ],
+        "action": "ClickKey",
+        "key": [
+            49,
+            50,
+            84,
+            70,
+            81
+        ]
+    },
+    "自动战斗-乐土-临时-无识别普攻": {
+        "action": "ClickKey",
+        "key": 74 //普攻
+    },
+    // "非战斗状态": {
     //     "rate_limit": 0,
     //     "post_delay": 0,
     //     "pre_delay": 0,
     //     "roi": [
-    //         0,
-    //         0,
-    //         143,
-    //         145
+    //         1058,
+    //         619,
+    //         100,
+    //         100
     //     ],
     //     "recognition": "TemplateMatch",
     //     "template": [
-    //         "战斗相关/战中检查/战斗中.png"
+    //         "战斗相关/战中检查/已经不用再战斗了-PC.png"
     //     ],
-    //     "action": "Click",
-    //     "target": [
-    //         1186,
-    //         634,
-    //         32,
-    //         30
+    //     "green_mask": true,
+    //     "next": [
+    //         "自动战斗-乐土-临时战斗循环",
+    //         "[JumpBack]空任务"
     //     ]
-    // }
+    // },
+    "自动战斗-乐土-临时-处于超级机甲状态_进行平A": {
+        "roi": [
+            479,
+            605,
+            62,
+            58
+        ],
+        "green_mask": true,
+        "recognition": "TemplateMatch",
+        "template": [
+            "战斗相关/乐土/薇塔/机甲形态.png"
+        ],
+        "action": "ClickKey",
+        "key": [
+            74 //普攻
+        ],
+        "next": [
+            "自动战斗-乐土-临时战斗循环"
+        ]
+    },
+    "自动战斗-乐土-临时-处于攒条_E后平A": {
+        "roi": [
+            331,
+            577,
+            528,
+            56
+        ],
+        "green_mask": true,
+        "recognition": "TemplateMatch",
+        "template": [
+            "战斗相关/乐土/薇塔/普通开机甲.png"
+        ],
+        "action": "ClickKey",
+        "key": 69,
+        "next": [
+            "非战斗状态",
+            "自动战斗-乐土-临时-能量条满",
+            "[JumpBack]自动战斗-乐土-临时-无识别普攻"
+        ]
+    },
+    "自动战斗-乐土-临时-能量条满": {
+        "roi": [
+            525,
+            609,
+            201,
+            51
+        ],
+        "recognition": "ColorMatch",
+        "upper": [
+            114,
+            233,
+            255
+        ],
+        "lower": [
+            37,
+            62,
+            72
+        ],
+        "count": 1500,
+        "action": "ClickKey",
+        "key": 69
+        // "duration": 1000
+    }
 }

@@ -189,8 +189,9 @@
         "recognition": "TemplateMatch",
         "template": [
             "战斗相关/战中检查/战斗中.png"
+            // "战斗相关/战中检查/已经不用再战斗了-PC.png"
         ],
-        "inverse": true,
+        // "inverse": true,
         "next": [
             "自动战斗-乐土-薇塔战斗循环",
             "[JumpBack]空任务"
