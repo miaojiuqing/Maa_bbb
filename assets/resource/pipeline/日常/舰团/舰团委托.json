@@ -270,13 +270,14 @@
         "count": 5000,
         "action": "Click",
         "next": [
+            "[JumpBack]舰团每日委托-快捷补全道具",
             "舰团每日委托-不可以做委托",
             "[JumpBack]舰团每日委托-放入舰团奖池",
             "[JumpBack]舰团每日委托-提交委托物品",
             "[JumpBack]舰团每日委托-可以做委托",
             "[JumpBack]点击叉叉",
-            "[JumpBack]舰团每日委托-快捷补全道具",
-            "[JumpBack]舰团每日委托-防材料不足小节点"
+            "[JumpBack]舰团每日委托-防材料不足小节点",
+            "舰团每日委托-总任务层"
         ],
         "timeout": 10000
     },
@@ -317,9 +318,9 @@
         ],
         "recognition": "OCR",
         "expected": [
-            "快捷补全道具"
+            ".*快捷补全道具"
         ],
-        "pre_delay": 200,
+        "pre_delay": 1200,
         "post_delay": 1000,
         "action": "Click",
         "target": [
