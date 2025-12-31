@@ -187,7 +187,8 @@
         ],
         "recognition": "OCR",
         "expected": [
-            ".*第4层"
+            // ".*第4层"
+            ".*第7层"
         ],
         "post_delay": 1000,
         "next": [
@@ -261,7 +262,7 @@
         ],
         "recognition": "TemplateMatch",
         "template": [
-            "周常/万象虚境/不消耗时序通行证.png"
+            "周常/万象虚境/消耗时序通行证.png"
         ],
         "post_delay": 200,
         "pre_delay": 500,
