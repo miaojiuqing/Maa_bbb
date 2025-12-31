@@ -1858,6 +1858,7 @@
             "default_case": "千刃之冢"
         },
         "是否消耗时序通行证": {
+            "default_case": "No",
             "type": "switch",
             "cases": [
                 {
