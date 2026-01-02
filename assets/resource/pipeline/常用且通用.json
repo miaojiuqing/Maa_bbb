@@ -34,6 +34,20 @@
             23
         ]
     },
+    "特殊-英雄远征记返回": {
+        "roi": [
+            0,
+            0,
+            155,
+            83
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "版本活动/无日常活动/英雄远征记-返回.png"
+        ],
+        "action": "Click",
+        "post_delay": 1000
+    },
     "点击空白位置关闭": {
         "recognition": "OCR",
         "expected": [
