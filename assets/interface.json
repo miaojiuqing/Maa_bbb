@@ -132,6 +132,7 @@
                 "登录打开二维码",
                 "每次执行该启动任务间隔",
                 "月卡领取",
+                "防误触模式",
                 "若误触进了剧情"
             ],
             "description": "左上角可选模拟器或者桌面端<br/>PC端需提前在 :设置 -辅助中，关闭显示菜单提示，且控制方式依照个人喜好自行想选择，请保证资源选择类型与游戏设置一致<br/><b><font color=\"red\">桌面端运行必须管理员启动该软件且分辨率为16:9</font></b><br/>会自行确认/领取所有奖励<br/>截图参数请自行在PrintWindow、FramePool和GDI中选择，优先PrintWindow<br/>![bydjl](resource/image/logo.ico)"
@@ -478,6 +479,29 @@
                     }
                 }
             ]
+        },
+        "防误触模式": {
+            "type": "switch",
+            "description": "开启后将不再尝试点击\"点击空白位置关闭\"<br/>防止点进奇怪的界面难以退出",
+            "cases": [
+                {
+                    "name": "YES",
+                    "pipeline_override": {
+                        "点击空白位置关闭": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "NO",
+                    "pipeline_override": {
+                        "点击空白位置关闭": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ],
+            "default_case": "No"
         },
         "若误触进了剧情": { //未测试
             "type": "select",
