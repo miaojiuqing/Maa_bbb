@@ -19,11 +19,35 @@
             "[JumpBack]材料远征-主菜单的点击出击",
             "[JumpBack]拓境战幕-返回",
             "[JumpBack]请舰长注意休息",
+            "[JumpBack]材料远征-误触-记忆战场",
             "材料远征-总任务层"
         ],
         "on_error": [
             "材料远征-开始任务层"
         ]
+    },
+    "材料远征-误触-记忆战场": {
+        "roi": [
+            837,
+            631,
+            174,
+            89
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "战场减负"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": "误触进入了记忆战场，究竟是为什么呢"
+        },
+        "action": "Click",
+        "target": [
+            27,
+            23,
+            62,
+            23
+        ],
+        "post_delay": 1500
     },
     "材料远征-主菜单的点击出击": {
         "roi": [
