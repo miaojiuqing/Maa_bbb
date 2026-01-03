@@ -267,6 +267,9 @@
             "name": "记忆战场-减负",
             "entry": "记忆战场-开始任务层",
             "default_check": true,
+            "option": [
+                "记忆战场-尝试打最后一层"
+            ],
             "description": "舰长！ 减负完记得打一把保持下周的减负"
         },
         {
@@ -2155,6 +2158,179 @@
                 }
             ],
             "default_case": "黑洞技能"
+        },
+        "记忆战场-尝试打最后一层": {
+            "label": "出击",
+            "description": "开启后将在减负完成后尝试讨伐积分怪",
+            "default_case": "NO",
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "YES",
+                    "pipeline_override": {
+                        "记忆战场-讨伐模式-第一只怪": {
+                            "enabled": true
+                        },
+                        "option": [
+                            "记忆战场-增益模式",
+                            "记忆战场-编队"
+                        ]
+                    }
+                },
+                {
+                    "name": "NO",
+                    "pipeline_override": {
+                        "记忆战场-讨伐模式-第一只怪": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "记忆战场-增益模式": {
+            "type": "switch",
+            "label": "增益模式",
+            "default_case": "YES",
+            "cases": [
+                {
+                    "name": "YES",
+                    "pipeline_override": {
+                        "记忆战场-增益模式": {
+                            "recognition": {
+                                "expected": [
+                                    "OFF"
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "NO",
+                    "pipeline_override": {
+                        "记忆战场-增益模式": {
+                            "recognition": {
+                                "expected": [
+                                    "ON"
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "记忆战场-编队": {
+            "type": "select",
+            "label": "预设编队切换",
+            "cases": [
+                {
+                    "name": "不更换编队",
+                    "pipeline_override": {
+                        "记忆战场-出击模式-已选中所需编队": {
+                            "recognition": "DirectHit",
+                            "action": "DoNothing"
+                        }
+                    }
+                },
+                {
+                    "name": "左上角编队",
+                    "pipeline_override": {
+                        "记忆战场-出击模式-已选中所需编队": {
+                            "roi": [
+                                405,
+                                58,
+                                253,
+                                91
+                            ]
+                        },
+                        "记忆战场-出击模式-点击选择所需编队": {
+                            "target": [
+                                337,
+                                98,
+                                218,
+                                37
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "右上角编队",
+                    "pipeline_override": {
+                        "记忆战场-出击模式-已选中所需编队": {
+                            "roi": [
+                                902,
+                                65,
+                                249,
+                                79
+                            ]
+                        },
+                        "记忆战场-出击模式-点击选择所需编队": {
+                            "target": [
+                                806,
+                                94,
+                                171,
+                                34
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "左下角编队",
+                    "pipeline_override": {
+                        "记忆战场-出击模式-已选中所需编队": {
+                            "roi": [
+                                418,
+                                282,
+                                223,
+                                86
+                            ]
+                        },
+                        "记忆战场-出击模式-点击选择所需编队": {
+                            "target": [
+                                328,
+                                309,
+                                141,
+                                28
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "右下角编队",
+                    "pipeline_override": {
+                        "记忆战场-出击模式-已选中所需编队": {
+                            //此处范围为右下角编队
+                            "roi": [
+                                808,
+                                276,
+                                369,
+                                115
+                            ]
+                        },
+                        "记忆战场-出击模式-点击选择所需编队": { //此处点击位置为右下角
+                            "target": [
+                                850,
+                                309,
+                                90,
+                                29
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "官方推荐编队完整度最高",
+                    "pipeline_override": {
+                        "记忆战场-出击模式-已选中所需编队": {
+                            "recognition": "DirectHit",
+                            "action": "DoNothing",
+                            "focus": {
+                                "succeeded": "还没想好怎么写，已使用默认编队"
+                            }
+                        }
+                    }
+                }
+            ],
+            "default_case": "不更换编队",
+            "description": "仅位置，自行输入队伍名切换这种以后再说吧"
         },
         "自行领取活动奖励": {
             "type": "switch",
