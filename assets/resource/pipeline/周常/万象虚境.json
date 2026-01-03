@@ -288,7 +288,8 @@
         ],
         "recognition": "TemplateMatch",
         "template": [
-            "周常/万象虚境/不消耗时序通行证.png"
+            "周常/万象虚境/不消耗时序通行证.png",
+            "周常/万象虚境/消耗时序通行证.png"
         ],
         "green_mask": true,
         "inverse": true,
@@ -371,6 +372,9 @@
         "expected": [
             "^0/10"
         ],
+        "focus": {
+            "Node.Recognition.Succeeded": "虚境挑战卷为0，正在退出并结束任务"
+        },
         "next": [
             "成功进入游戏主菜单",
             "[JumpBack]点击返回主菜单",
