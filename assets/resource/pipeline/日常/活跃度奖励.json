@@ -85,6 +85,7 @@
         "template": [
             "通用/误触/误触点击确认.png"
         ],
-        "action": "Click"
+        "action": "Click",
+        "post_delay": 500
     }
 }
