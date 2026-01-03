@@ -476,11 +476,12 @@
 			"超弦空间-死人了退出任务",
 			"成功进入游戏主菜单",
 			"超弦空间-战斗结束-失败",
-			"[JumpBack]家园处-点击返回",
 			"[JumpBack]点击叉叉",
 			"[JumpBack]点击返回主菜单",
+			"[JumpBack]超弦空间-少年，何弃疗",
 			"[JumpBack]超弦空间-点击放弃战斗",
-			"[JumpBack]输入键码-ESC",
+			"[JumpBack]超弦空间-角色死亡-正处于战斗界面点击ESC",
+			"[JumpBack]家园处-点击返回",
 			"[JumpBack]空任务"
 		],
 		"action": "Click",
@@ -494,6 +495,54 @@
 			"succeeded": "战斗失败，返回主菜单并提前结束任务"
 		}
 	},
+	"超弦空间-少年，何弃疗": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"roi": [
+					481,
+					146,
+					351,
+					92
+				],
+				"expected": [
+					"少年.*",
+					".*何弃疗"
+				]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {
+				"target": [
+					380,
+					483,
+					192,
+					45
+				]
+			}
+		},
+		"post_delay": 1000
+	},
+	"超弦空间-角色死亡-正处于战斗界面点击ESC": {
+		"roi": [
+			0,
+			54,
+			83,
+			150
+		],
+		"recognition": "TemplateMatch",
+		"green_mask": true,
+		"template": [
+			"周期性任务/超弦空间/超弦空间-战斗中.png"
+		],
+		"action": "ClickKey",
+		"key": [
+			27 //ESC
+		],
+		"post_delay": 500,
+		"pre_delay": 500
+	},
 	"超弦空间-点击放弃战斗": {
 		"roi": [
 			603,
@@ -505,7 +554,8 @@
 		"expected": [
 			"放弃战斗"
 		],
-		"action": "Click"
+		"action": "Click",
+		"post_delay": 2000
 	},
 	"超弦空间-战斗结束-胜利": {
 		"roi": [
