@@ -130,7 +130,7 @@ jobs:
           import os
 
           exe_path = "MFAAvalonia.exe"
-          icon_path = "../assets/resource/image/logo.ico"
+          icon_path = "../../assets/resource/image/logo.ico"
 
           if not os.path.exists(icon_path):
               print("❌ Icon file not found:", icon_path)
