@@ -119,34 +119,44 @@ jobs:
       - name: Create Windows shortcut named "点我启动识宝"
         if: matrix.os == 'win'
         shell: bash
-        run: |-
-          echo "✅ Installing pylnk3..."
+        run: |
+          # 安装依赖
           pip install --quiet pylnk3
 
-          echo "✅ Creating shortcut: 点我启动识宝.lnk"
+          # 创建 install 目录（确保存在）
+          mkdir -p install
+
+          # 复制图标到 install/
+          cp "assets/resource/image/logo.ico" install/
+
+          # 切换到 install/ 目录生成快捷方式
+          cd install
 
           python3 -c '
           from pylnk3 import Lnk
           import os
 
-          exe_path = "MFAAvalonia.exe"
-          icon_path = "assets/resource/image/logo.ico"
+          exe = "MFAAvalonia.exe"
+          icon = "logo.ico"
 
-          if not os.path.exists(icon_path):
-              print("❌ Icon file not found:", icon_path)
+          if not os.path.exists(exe):
+              print("❌ ERROR: Executable not found:", exe)
+              exit(1)
+          if not os.path.exists(icon):
+              print("❌ ERROR: Icon file not found:", icon)
               exit(1)
 
           lnk = Lnk()
           lnk.description = "启动 MFAAvalonia 识宝程序"
-          lnk.icon = icon_path
+          lnk.target = exe
+          lnk.icon = icon
           lnk.work_dir = "."
-          lnk.target = exe_path
-          lnk.save("../点我启动识宝.lnk")
+          lnk.save("点我启动识宝.lnk")
 
-          print("✅ Shortcut created.")
+          print("✅ Shortcut created in install/ directory.")
           '
 
-          if [ -f "../点我启动识宝.lnk" ]; then
+          if [ -f "点我启动识宝.lnk" ]; then
             echo "✅ Shortcut verified."
           else
             echo "❌ Shortcut creation failed!"
@@ -166,17 +176,6 @@ jobs:
               rsync -av --ignore-existing MFA/ install/
             else
               echo "MFA directory not found, skipping copy."
-            fi
-
-            # ✅ 新增：Windows 平台复制快捷方式到 install/
-            if [[ "${{ matrix.os }}" == "win" ]]; then
-              SHORTCUT="../点我启动识宝.lnk"
-              if [ -f "$SHORTCUT" ]; then
-                echo "Copying Windows shortcut to install/..."
-                cp "$SHORTCUT" install/
-              else
-                echo "⚠️ Warning: Shortcut not found at $SHORTCUT"
-              fi
             fi
           else
             echo "Skipping copy MFA for Android."
