@@ -51,7 +51,8 @@ jobs:
 
   install:
     needs: meta
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest原版
+    runs-on: ${{ matrix.os == 'win' && 'windows-latest' || 'ubuntu-latest' }}//AI改的
     strategy:
       matrix:
         os: [win, macos, linux, android]
@@ -92,6 +93,32 @@ jobs:
           rm -f "${ARCHIVE_FILE_PATH}"
           echo "Archive cleanup command executed for MFAAvalonia."
 
+      # ===========================================================================
+      # ✅【当前使用】新方案：直接使用预置的 logo.ico 文件
+      #     路径：assets/resource/image/logo.ico
+      #     不依赖 PNG，不调用 ImageMagick，更稳定高效。
+      # ===========================================================================
+      - name: Apply custom icon using pre-existing logo.ico (new method)
+        if: matrix.os == 'win'
+        shell: bash
+        run: |
+          ICON_PATH="assets/resource/image/logo.ico"
+          if [ ! -f "$ICON_PATH" ]; then
+            echo "❌ ERROR: Required icon file not found at $ICON_PATH"
+            exit 1
+          fi
+
+          echo "✅ Found icon at $ICON_PATH. Applying to MFAAvalonia.exe..."
+
+          # Download rcedit to modify the EXE icon
+          curl -L https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
+
+          # Directly use your logo.ico — no intermediate file
+          ./rcedit.exe "MFA/MFAAvalonia.exe" --set-icon "$ICON_PATH"
+
+          echo "✅ Successfully set EXE icon using $ICON_PATH"
+
+      # ===========================================================================    
       - name: Install
         shell: bash
         run: |
