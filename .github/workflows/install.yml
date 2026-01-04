@@ -79,10 +79,9 @@ jobs:
         with:
           repository: SweetSmellFox/MFAAvalonia
           fileName: "MFAAvalonia-*-${{ (matrix.os == 'win' && 'win') || (matrix.os == 'macos' && 'osx') || (matrix.os == 'linux' && 'linux') }}-${{ (matrix.arch == 'x86_64' && 'x64') || (matrix.arch == 'aarch64' && 'arm64') }}*"
-          latest: true # 是否为最新版本开关-当前为：是
+          latest: true
           out-file-path: "MFA"
           extract: true
-          # "tag": "v2.0.0" #版本号指定
 
       - name: Clean up MFAAvalonia archive
         if: matrix.os != 'android'
@@ -93,8 +92,7 @@ jobs:
           echo "Archive cleanup command executed for MFAAvalonia."
 
       # ===========================================================================
-      # ✅ Set Windows EXE icon using pre-existing logo.ico (no ImageMagick)
-      #     Only runs on Windows, uses rcedit to embed assets/resource/image/logo.ico
+      # ✅ Set Windows EXE icon using logo.ico via Wine + rcedit (works on Ubuntu Runner)
       # ===========================================================================
       - name: Apply custom icon to MFAAvalonia.exe on Windows
         if: matrix.os == 'win'
@@ -108,11 +106,12 @@ jobs:
 
           echo "✅ Applying icon from $ICON_PATH to MFA/MFAAvalonia.exe..."
 
-          # Download rcedit (Windows-only tool to edit EXE resources)
+          # Download rcedit.exe (Windows tool for editing EXE resources)
           curl -L https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
 
-          # Set the icon directly
-          ./rcedit.exe "MFA/MFAAvalonia.exe" --set-icon "$ICON_PATH"
+          # Make it executable and run via Wine
+          chmod +x rcedit.exe
+          wine ./rcedit.exe "MFA/MFAAvalonia.exe" --set-icon "$ICON_PATH"
 
           echo "✅ Icon successfully applied."
 
