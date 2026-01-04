@@ -92,36 +92,81 @@ jobs:
           echo "Archive cleanup command executed for MFAAvalonia."
 
       # ===========================================================================
-      # ✅ Set Windows EXE icon using logo.ico via Wine + rcedit (works on Ubuntu Runner)
-      #     Auto-installs wine if missing
+      # ✅ Step 1: Apply custom icon to MFAAvalonia.exe using rcedit + wine
       # ===========================================================================
       - name: Apply custom icon to MFAAvalonia.exe on Windows
         if: matrix.os == 'win'
         shell: bash
         run: |
-          ICON_PATH="./assets/resource/image/logo.ico"
+          ICON_PATH="assets/resource/image/logo.ico"
+          EXE_PATH="MFA/MFAAvalonia.exe"
+
           if [ ! -f "$ICON_PATH" ]; then
             echo "❌ ERROR: Icon file not found at $ICON_PATH"
             exit 1
           fi
 
-          echo "✅ Applying icon from $ICON_PATH to MFA/MFAAvalonia.exe..."
+          echo "✅ Applying icon from $ICON_PATH to $EXE_PATH..."
 
-          # Download rcedit.exe (Windows tool)
+          # Download rcedit
           curl -L https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
 
-          # Install wine if not present
+          # Install wine if missing
           if ! command -v wine &> /dev/null; then
             echo "📦 Installing wine..."
             sudo apt-get update
             sudo apt-get install -y wine
           fi
 
-          # Make it executable and run via wine
           chmod +x rcedit.exe
-          wine ./rcedit.exe "MFA/MFAAvalonia.exe" --set-icon "$ICON_PATH"
+          wine ./rcedit.exe "$EXE_PATH" --set-icon "$ICON_PATH"
 
-          echo "✅ Icon successfully applied."
+          echo "✅ Icon applied."
+
+      # ===========================================================================
+      # ✅ Step 2: Create Windows shortcut (.lnk) named "点我启动识宝"
+      # ===========================================================================
+      - name: Create Windows shortcut (.lnk) named "点我启动识宝"
+        if: matrix.os == 'win'
+        shell: bash
+        run: |
+          EXE_PATH="MFA/MFAAvalonia.exe"
+          SHORTCUT_NAME="点我启动识宝.lnk"
+          SHORTCUT_PATH="MFA/$SHORTCUT_NAME"
+
+          echo "✅ Creating shortcut: $SHORTCUT_NAME"
+
+          # Write PowerShell script line by line (avoid << 'EOF')
+          cat > create_shortcut.ps1 << 'END_SCRIPT'
+          $WshShell = New-Object -ComObject WScript.Shell
+          $Shortcut = $WshShell.CreateShortcut("$env:SHORTCUT_PATH")
+          $Shortcut.TargetPath = "$env:EXE_PATH"
+          $Shortcut.IconLocation = "$env:EXE_PATH,0"
+          $Shortcut.Description = "启动 MFAAvalonia 识宝程序"
+          $Shortcut.WorkingDirectory = [System.IO.Path]::GetDirectoryName("$env:EXE_PATH")
+          $Shortcut.Save()
+          END_SCRIPT
+
+          # Export env vars
+          export EXE_PATH="$EXE_PATH"
+          export SHORTCUT_PATH="$SHORTCUT_PATH"
+
+          # Install PowerShell Core if missing
+          if ! command -v pwsh &> /dev/null; then
+            echo "📦 Installing PowerShell Core..."
+            sudo apt-get install -y powershell
+          fi
+
+          # Run via Wine + PowerShell
+          wine pwsh ./create_shortcut.ps1
+
+          # Verify
+          if [ -f "$SHORTCUT_PATH" ]; then
+            echo "✅ Shortcut created successfully."
+          else
+            echo "❌ Failed to create shortcut!"
+            exit 1
+          fi
 
       - name: Install
         shell: bash
