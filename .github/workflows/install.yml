@@ -92,43 +92,42 @@ jobs:
           echo "Archive cleanup command executed for MFAAvalonia."
 
       # ===========================================================================
-      # ✅ Step 1: Apply custom icon to MFAAvalonia.exe using rcedit + wine64
-      # (This still works because rcedit is a CLI tool)
+      # ✅ Set Windows EXE icon using logo.ico via Wine + rcedit (works on Ubuntu Runner)
+      #     Auto-installs wine if missing
       # ===========================================================================
       - name: Apply custom icon to MFAAvalonia.exe on Windows
         if: matrix.os == 'win'
         shell: bash
         run: |
           ICON_PATH="assets/resource/image/logo.ico"
-          EXE_PATH="MFA/MFAAvalonia.exe"
-
           if [ ! -f "$ICON_PATH" ]; then
             echo "❌ ERROR: Icon file not found at $ICON_PATH"
             exit 1
           fi
 
-          echo "✅ Applying icon from $ICON_PATH to $EXE_PATH..."
+          echo "✅ Applying icon from $ICON_PATH to MFA/MFAAvalonia.exe..."
 
-          # Download rcedit
+          # Download rcedit.exe (Windows tool)
           curl -L https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
 
-          # Install wine if missing (for rcedit only)
+          # Install wine if not present
           if ! command -v wine &> /dev/null; then
             echo "📦 Installing wine..."
             sudo apt-get update
             sudo apt-get install -y wine
           fi
 
+          # Make it executable and run via wine
           chmod +x rcedit.exe
-          wine ./rcedit.exe "$EXE_PATH" --set-icon "$ICON_PATH"
+          wine ./rcedit.exe "MFA/MFAAvalonia.exe" --set-icon "$ICON_PATH"
 
-          echo "✅ Icon applied."
+          echo "✅ Icon successfully applied."
 
       # ===========================================================================
-      # ✅ Step 2: Create Windows shortcut (.lnk) using PURE PYTHON (no Wine!)
-      # Uses pylnk3 — reliable in headless CI
+      # ✅ Create Windows shortcut (.lnk) using pylnk3 (pure Python, no Wine!)
+      #     Works in headless CI, supports Chinese name and EXE icon
       # ===========================================================================
-      - name: Create Windows shortcut (.lnk) named "点我启动识宝" (Python method)
+      - name: Create Windows shortcut named "点我启动识宝"
         if: matrix.os == 'win'
         shell: bash
         run: |
@@ -140,20 +139,20 @@ jobs:
           echo "✅ Creating shortcut: 点我启动识宝.lnk"
 
           python3 -c "
-from pylnk3 import Lnk
-lnk = Lnk()
-lnk.description = '启动 MFAAvalonia 识宝程序'
-lnk.icon = 'MFAAvalonia.exe'          # Use icon embedded in EXE
-lnk.work_dir = '.'
-lnk.target = 'MFAAvalonia.exe'
-lnk.save('点我启动识宝.lnk')
-print('✅ Shortcut created successfully.')
-"
+          from pylnk3 import Lnk
+          lnk = Lnk()
+          lnk.description = '启动 MFAAvalonia 识宝程序'
+          lnk.icon = 'MFAAvalonia.exe'
+          lnk.work_dir = '.'
+          lnk.target = 'MFAAvalonia.exe'
+          lnk.save('点我启动识宝.lnk')
+          print('✅ Shortcut created.')
+          "
 
-          if [ -f "点我启动识宝.lnk" ]; then
-            echo "✅ Verification passed."
+          if [ -f '点我启动识宝.lnk' ]; then
+            echo "✅ Shortcut verified."
           else
-            echo "❌ Shortcut not found!"
+            echo "❌ Shortcut creation failed!"
             exit 1
           fi
 
