@@ -93,6 +93,7 @@ jobs:
 
       # ===========================================================================
       # ✅ Set Windows EXE icon using logo.ico via Wine + rcedit (works on Ubuntu Runner)
+      #     Auto-installs wine if missing
       # ===========================================================================
       - name: Apply custom icon to MFAAvalonia.exe on Windows
         if: matrix.os == 'win'
@@ -106,10 +107,17 @@ jobs:
 
           echo "✅ Applying icon from $ICON_PATH to MFA/MFAAvalonia.exe..."
 
-          # Download rcedit.exe (Windows tool for editing EXE resources)
+          # Download rcedit.exe (Windows tool)
           curl -L https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
 
-          # Make it executable and run via Wine
+          # Install wine if not present
+          if ! command -v wine &> /dev/null; then
+            echo "📦 Installing wine..."
+            sudo apt-get update
+            sudo apt-get install -y wine
+          fi
+
+          # Make it executable and run via wine
           chmod +x rcedit.exe
           wine ./rcedit.exe "MFA/MFAAvalonia.exe" --set-icon "$ICON_PATH"
 
