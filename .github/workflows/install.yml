@@ -43,8 +43,8 @@ jobs:
             tag="$prefix-ci.$suffix"
           fi
 
-          echo tag=$tag | tee -a $GITHUB_OUTPUT
-          echo is_release=$is_release | tee -a $GITHUB_OUTPUT
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          echo "is_release=$is_release" >> "$GITHUB_OUTPUT"
     outputs:
       tag: ${{ steps.set_tag.outputs.tag }}
       is_release: ${{ steps.set_tag.outputs.is_release }}
@@ -91,10 +91,6 @@ jobs:
           rm -f "${ARCHIVE_FILE_PATH}"
           echo "Archive cleanup command executed for MFAAvalonia."
 
-      # ===========================================================================
-      # ✅ Set Windows EXE icon using logo.ico via Wine + rcedit (works on Ubuntu Runner)
-      #     Auto-installs wine if missing
-      # ===========================================================================
       - name: Apply custom icon to MFAAvalonia.exe on Windows
         if: matrix.os == 'win'
         shell: bash
@@ -107,49 +103,50 @@ jobs:
 
           echo "✅ Applying icon from $ICON_PATH to MFA/MFAAvalonia.exe..."
 
-          # Download rcedit.exe (Windows tool)
           curl -L https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
 
-          # Install wine if not present
           if ! command -v wine &> /dev/null; then
             echo "📦 Installing wine..."
             sudo apt-get update
             sudo apt-get install -y wine
           fi
 
-          # Make it executable and run via wine
           chmod +x rcedit.exe
           wine ./rcedit.exe "MFA/MFAAvalonia.exe" --set-icon "$ICON_PATH"
 
           echo "✅ Icon successfully applied."
 
-      # ===========================================================================
-      # ✅ Create Windows shortcut (.lnk) using pylnk3 (pure Python, no Wine!)
-      #     Works in headless CI, supports Chinese name and EXE icon
-      # ===========================================================================
       - name: Create Windows shortcut named "点我启动识宝"
         if: matrix.os == 'win'
         shell: bash
-        run: |
-          cd MFA
-
+        run: |-
           echo "✅ Installing pylnk3..."
           pip install --quiet pylnk3
 
           echo "✅ Creating shortcut: 点我启动识宝.lnk"
 
-          python3 -c "
+          python3 -c '
           from pylnk3 import Lnk
-          lnk = Lnk()
-          lnk.description = '启动 MFAAvalonia 识宝程序'
-          lnk.icon = 'MFAAvalonia.exe'
-          lnk.work_dir = '.'
-          lnk.target = 'MFAAvalonia.exe'
-          lnk.save('点我启动识宝.lnk')
-          print('✅ Shortcut created.')
-          "
+          import os
 
-          if [ -f '点我启动识宝.lnk' ]; then
+          exe_path = "MFAAvalonia.exe"
+          icon_path = "../assets/resource/image/logo.ico"
+
+          if not os.path.exists(icon_path):
+              print("❌ Icon file not found:", icon_path)
+              exit(1)
+
+          lnk = Lnk()
+          lnk.description = "启动 MFAAvalonia 识宝程序"
+          lnk.icon = icon_path
+          lnk.work_dir = "."
+          lnk.target = exe_path
+          lnk.save("../点我启动识宝.lnk")
+
+          print("✅ Shortcut created.")
+          '
+
+          if [ -f "../点我启动识宝.lnk" ]; then
             echo "✅ Shortcut verified."
           else
             echo "❌ Shortcut creation failed!"
@@ -212,9 +209,9 @@ jobs:
       - run: |
           cd assets
           for f in *; do
-            (cd $f && zip -r ../$f-${{ needs.meta.outputs.tag }}.zip .)
+            (cd "$f" && zip -r "../$f-${{ needs.meta.outputs.tag }}.zip" .)
           done
-          
+
       - uses: softprops/action-gh-release@v2
         with:
           files: assets/*
@@ -225,7 +222,7 @@ jobs:
 
       - name: Trigger MirrorChyanUploading
         run: |
-          gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan
-          gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan_release_note
+          gh workflow run --repo "$GITHUB_REPOSITORY" mirrorchyan
+          gh workflow run --repo "$GITHUB_REPOSITORY" mirrorchyan_release_note
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
