@@ -92,6 +92,30 @@ jobs:
           rm -f "${ARCHIVE_FILE_PATH}"
           echo "Archive cleanup command executed for MFAAvalonia."
 
+      # ===========================================================================
+      # ✅ Set Windows EXE icon using pre-existing logo.ico (no ImageMagick)
+      #     Only runs on Windows, uses rcedit to embed assets/resource/image/logo.ico
+      # ===========================================================================
+      - name: Apply custom icon to MFAAvalonia.exe on Windows
+        if: matrix.os == 'win'
+        shell: bash
+        run: |
+          ICON_PATH="assets/resource/image/logo.ico"
+          if [ ! -f "$ICON_PATH" ]; then
+            echo "❌ ERROR: Icon file not found at $ICON_PATH"
+            exit 1
+          fi
+
+          echo "✅ Applying icon from $ICON_PATH to MFA/MFAAvalonia.exe..."
+
+          # Download rcedit (Windows-only tool to edit EXE resources)
+          curl -L https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
+
+          # Set the icon directly
+          ./rcedit.exe "MFA/MFAAvalonia.exe" --set-icon "$ICON_PATH"
+
+          echo "✅ Icon successfully applied."
+
       - name: Install
         shell: bash
         run: |
