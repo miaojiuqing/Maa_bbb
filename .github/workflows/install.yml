@@ -43,8 +43,8 @@ jobs:
             tag="$prefix-ci.$suffix"
           fi
 
-          echo "tag=$tag" >> "$GITHUB_OUTPUT"
-          echo "is_release=$is_release" >> "$GITHUB_OUTPUT"
+          echo tag=$tag | tee -a $GITHUB_OUTPUT
+          echo is_release=$is_release | tee -a $GITHUB_OUTPUT
     outputs:
       tag: ${{ steps.set_tag.outputs.tag }}
       is_release: ${{ steps.set_tag.outputs.is_release }}
@@ -91,11 +91,15 @@ jobs:
           rm -f "${ARCHIVE_FILE_PATH}"
           echo "Archive cleanup command executed for MFAAvalonia."
 
+      # ===========================================================================
+      # ✅ Set Windows EXE icon using logo.ico via Wine + rcedit (works on Ubuntu Runner)
+      #     Auto-installs wine if missing
+      # ===========================================================================
       - name: Apply custom icon to MFAAvalonia.exe on Windows
         if: matrix.os == 'win'
         shell: bash
         run: |
-          ICON_PATH="assets/resource/image/logo.ico"
+          ICON_PATH="./assets/resource/image/logo.ico"
           if [ ! -f "$ICON_PATH" ]; then
             echo "❌ ERROR: Icon file not found at $ICON_PATH"
             exit 1
@@ -103,14 +107,17 @@ jobs:
 
           echo "✅ Applying icon from $ICON_PATH to MFA/MFAAvalonia.exe..."
 
+          # Download rcedit.exe (Windows tool)
           curl -L https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
 
+          # Install wine if not present
           if ! command -v wine &> /dev/null; then
             echo "📦 Installing wine..."
             sudo apt-get update
             sudo apt-get install -y wine
           fi
 
+          # Make it executable and run via wine
           chmod +x rcedit.exe
           wine ./rcedit.exe "MFA/MFAAvalonia.exe" --set-icon "$ICON_PATH"
 
@@ -130,45 +137,9 @@ jobs:
             else
               echo "MFA directory not found, skipping copy."
             fi
-
-            # ✅ Windows: 在 install/ 中生成快捷方式（此时 exe 已存在）
-            if [[ "${{ matrix.os }}" == "win" ]]; then
-              # 复制图标
-              cp "assets/resource/image/logo.ico" install/
-
-              # 进入 install 目录
-              cd install
-
-              # 安装 pylnk3 并生成快捷方式
-              python -m pip install --quiet pylnk3
-
-              python3 -c '
-          import os, sys
-          from pylnk3 import Lnk
-
-          exe = "MFAAvalonia.exe"
-          icon = "logo.ico"
-
-          if not os.path.exists(exe):
-              print("❌ ERROR: Executable not found:", exe, file=sys.stderr)
-              exit(1)
-          if not os.path.exists(icon):
-              print("❌ ERROR: Icon not found:", icon, file=sys.stderr)
-              exit(1)
-
-          lnk = Lnk()
-          lnk.description = "启动 MFAAvalonia 识宝程序"
-          lnk.target = exe
-          lnk.icon = icon
-          lnk.work_dir = "."
-          lnk.save("点我启动识宝.lnk")
-
-          print("✅ Shortcut created in install/ directory.")
-          '
-                      fi
-                    else
-                      echo "Skipping copy MFA for Android."
-                    fi
+          else
+            echo "Skipping copy MFA for Android."
+          fi
 
       - uses: actions/upload-artifact@v4
         with:
@@ -208,9 +179,9 @@ jobs:
       - run: |
           cd assets
           for f in *; do
-            (cd "$f" && zip -r "../$f-${{ needs.meta.outputs.tag }}.zip" .)
+            (cd $f && zip -r ../$f-${{ needs.meta.outputs.tag }}.zip .)
           done
-
+          
       - uses: softprops/action-gh-release@v2
         with:
           files: assets/*
@@ -221,7 +192,7 @@ jobs:
 
       - name: Trigger MirrorChyanUploading
         run: |
-          gh workflow run --repo "$GITHUB_REPOSITORY" mirrorchyan
-          gh workflow run --repo "$GITHUB_REPOSITORY" mirrorchyan_release_note
+          gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan
+          gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan_release_note
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
