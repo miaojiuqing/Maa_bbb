@@ -116,53 +116,6 @@ jobs:
 
           echo "✅ Icon successfully applied."
 
-      - name: Create Windows shortcut named "点我启动识宝"
-        if: matrix.os == 'win'
-        shell: bash
-        run: |
-          # 安装依赖
-          pip install --quiet pylnk3
-
-          # 创建 install 目录（确保存在）
-          mkdir -p install
-
-          # 复制图标到 install/
-          cp "assets/resource/image/logo.ico" install/
-
-          # 切换到 install/ 目录生成快捷方式
-          cd install
-
-          python3 -c '
-          from pylnk3 import Lnk
-          import os
-
-          exe = "MFAAvalonia.exe"
-          icon = "logo.ico"
-
-          if not os.path.exists(exe):
-              print("❌ ERROR: Executable not found:", exe)
-              exit(1)
-          if not os.path.exists(icon):
-              print("❌ ERROR: Icon file not found:", icon)
-              exit(1)
-
-          lnk = Lnk()
-          lnk.description = "启动 MFAAvalonia 识宝程序"
-          lnk.target = exe
-          lnk.icon = icon
-          lnk.work_dir = "."
-          lnk.save("点我启动识宝.lnk")
-
-          print("✅ Shortcut created in install/ directory.")
-          '
-
-          if [ -f "点我启动识宝.lnk" ]; then
-            echo "✅ Shortcut verified."
-          else
-            echo "❌ Shortcut creation failed!"
-            exit 1
-          fi
-
       - name: Install
         shell: bash
         run: |
@@ -177,9 +130,45 @@ jobs:
             else
               echo "MFA directory not found, skipping copy."
             fi
-          else
-            echo "Skipping copy MFA for Android."
-          fi
+
+            # ✅ Windows: 在 install/ 中生成快捷方式（此时 exe 已存在）
+            if [[ "${{ matrix.os }}" == "win" ]]; then
+              # 复制图标
+              cp "assets/resource/image/logo.ico" install/
+
+              # 进入 install 目录
+              cd install
+
+              # 安装 pylnk3 并生成快捷方式
+              python -m pip install --quiet pylnk3
+
+              python3 -c '
+          import os, sys
+          from pylnk3 import Lnk
+
+          exe = "MFAAvalonia.exe"
+          icon = "logo.ico"
+
+          if not os.path.exists(exe):
+              print("❌ ERROR: Executable not found:", exe, file=sys.stderr)
+              exit(1)
+          if not os.path.exists(icon):
+              print("❌ ERROR: Icon not found:", icon, file=sys.stderr)
+              exit(1)
+
+          lnk = Lnk()
+          lnk.description = "启动 MFAAvalonia 识宝程序"
+          lnk.target = exe
+          lnk.icon = icon
+          lnk.work_dir = "."
+          lnk.save("点我启动识宝.lnk")
+
+          print("✅ Shortcut created in install/ directory.")
+          '
+                      fi
+                    else
+                      echo "Skipping copy MFA for Android."
+                    fi
 
       - uses: actions/upload-artifact@v4
         with:
