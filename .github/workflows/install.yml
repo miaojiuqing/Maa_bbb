@@ -93,6 +93,7 @@ jobs:
 
       # ===========================================================================
       # ✅ Step 1: Apply custom icon to MFAAvalonia.exe using rcedit + wine64
+      # (This still works because rcedit is a CLI tool)
       # ===========================================================================
       - name: Apply custom icon to MFAAvalonia.exe on Windows
         if: matrix.os == 'win'
@@ -111,9 +112,9 @@ jobs:
           # Download rcedit
           curl -L https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
 
-          # Install wine64 if missing
+          # Install wine if missing (for rcedit only)
           if ! command -v wine &> /dev/null; then
-            echo "📦 Installing wine64..."
+            echo "📦 Installing wine..."
             sudo apt-get update
             sudo apt-get install -y wine
           fi
@@ -124,55 +125,35 @@ jobs:
           echo "✅ Icon applied."
 
       # ===========================================================================
-      # ✅ Step 2: Create Windows shortcut (.lnk) named "点我启动识宝"
+      # ✅ Step 2: Create Windows shortcut (.lnk) using PURE PYTHON (no Wine!)
+      # Uses pylnk3 — reliable in headless CI
       # ===========================================================================
-      - name: Create Windows shortcut (.lnk) named "点我启动识宝"
+      - name: Create Windows shortcut (.lnk) named "点我启动识宝" (Python method)
         if: matrix.os == 'win'
         shell: bash
         run: |
-          EXE_PATH="MFA/MFAAvalonia.exe"
-          SHORTCUT_NAME="点我启动识宝.lnk"
-          SHORTCUT_PATH="MFA/$SHORTCUT_NAME"
+          cd MFA
 
-          echo "✅ Creating shortcut: $SHORTCUT_NAME"
+          echo "✅ Installing pylnk3..."
+          pip install --quiet pylnk3
 
-          # Enable multiarch and install wine32 (required for WScript.Shell)
-          if ! command -v wine32 &> /dev/null; then
-            echo "📦 Installing wine32 (32-bit Wine)..."
-            sudo dpkg --add-architecture i386
-            sudo apt-get update
-            sudo apt-get install -y wine32:i386
-          fi
+          echo "✅ Creating shortcut: 点我启动识宝.lnk"
 
-          # Write PowerShell script to create .lnk
-          cat > create_shortcut.ps1 << 'END_SCRIPT'
-          $WshShell = New-Object -ComObject WScript.Shell
-          $Shortcut = $WshShell.CreateShortcut("$env:SHORTCUT_PATH")
-          $Shortcut.TargetPath = "$env:EXE_PATH"
-          $Shortcut.IconLocation = "$env:EXE_PATH,0"
-          $Shortcut.Description = "启动 MFAAvalonia 识宝程序"
-          $Shortcut.WorkingDirectory = [System.IO.Path]::GetDirectoryName("$env:EXE_PATH")
-          $Shortcut.Save()
-          END_SCRIPT
+          python3 -c "
+from pylnk3 import Lnk
+lnk = Lnk()
+lnk.description = '启动 MFAAvalonia 识宝程序'
+lnk.icon = 'MFAAvalonia.exe'          # Use icon embedded in EXE
+lnk.work_dir = '.'
+lnk.target = 'MFAAvalonia.exe'
+lnk.save('点我启动识宝.lnk')
+print('✅ Shortcut created successfully.')
+"
 
-          # Export env vars for PowerShell
-          export EXE_PATH="$EXE_PATH"
-          export SHORTCUT_PATH="$SHORTCUT_PATH"
-
-          # Install PowerShell Core if missing
-          if ! command -v pwsh &> /dev/null; then
-            echo "📦 Installing PowerShell Core..."
-            sudo apt-get install -y powershell
-          fi
-
-          # Run via wine32 (32-bit mode required for COM objects)
-          wine32 pwsh ./create_shortcut.ps1
-
-          # Verify shortcut was created
-          if [ -f "$SHORTCUT_PATH" ]; then
-            echo "✅ Shortcut created successfully."
+          if [ -f "点我启动识宝.lnk" ]; then
+            echo "✅ Verification passed."
           else
-            echo "❌ Failed to create shortcut!"
+            echo "❌ Shortcut not found!"
             exit 1
           fi
 
