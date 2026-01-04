@@ -92,7 +92,7 @@ jobs:
           echo "Archive cleanup command executed for MFAAvalonia."
 
       # ===========================================================================
-      # ✅ Step 1: Apply custom icon to MFAAvalonia.exe using rcedit + wine
+      # ✅ Step 1: Apply custom icon to MFAAvalonia.exe using rcedit + wine64
       # ===========================================================================
       - name: Apply custom icon to MFAAvalonia.exe on Windows
         if: matrix.os == 'win'
@@ -111,9 +111,9 @@ jobs:
           # Download rcedit
           curl -L https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
 
-          # Install wine if missing
+          # Install wine64 if missing
           if ! command -v wine &> /dev/null; then
-            echo "📦 Installing wine..."
+            echo "📦 Installing wine64..."
             sudo apt-get update
             sudo apt-get install -y wine
           fi
@@ -136,7 +136,15 @@ jobs:
 
           echo "✅ Creating shortcut: $SHORTCUT_NAME"
 
-          # Write PowerShell script line by line (avoid << 'EOF')
+          # Enable multiarch and install wine32 (required for WScript.Shell)
+          if ! command -v wine32 &> /dev/null; then
+            echo "📦 Installing wine32 (32-bit Wine)..."
+            sudo dpkg --add-architecture i386
+            sudo apt-get update
+            sudo apt-get install -y wine32:i386
+          fi
+
+          # Write PowerShell script to create .lnk
           cat > create_shortcut.ps1 << 'END_SCRIPT'
           $WshShell = New-Object -ComObject WScript.Shell
           $Shortcut = $WshShell.CreateShortcut("$env:SHORTCUT_PATH")
@@ -147,7 +155,7 @@ jobs:
           $Shortcut.Save()
           END_SCRIPT
 
-          # Export env vars
+          # Export env vars for PowerShell
           export EXE_PATH="$EXE_PATH"
           export SHORTCUT_PATH="$SHORTCUT_PATH"
 
@@ -157,10 +165,10 @@ jobs:
             sudo apt-get install -y powershell
           fi
 
-          # Run via Wine + PowerShell
-          wine pwsh ./create_shortcut.ps1
+          # Run via wine32 (32-bit mode required for COM objects)
+          wine32 pwsh ./create_shortcut.ps1
 
-          # Verify
+          # Verify shortcut was created
           if [ -f "$SHORTCUT_PATH" ]; then
             echo "✅ Shortcut created successfully."
           else
