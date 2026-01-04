@@ -96,7 +96,7 @@ jobs:
       # ===========================================================================
       # ✅【当前使用】新方案：直接使用预置的 logo.ico 文件
       #     路径：assets/resource/image/logo.ico
-      #     不依赖 PNG，不调用 ImageMagick，更稳定高效。
+      #     不依赖 PNG，不调用 ImageMagick，更稳定高效
       # ===========================================================================
       - name: Apply custom icon using pre-existing logo.ico (new method)
         if: matrix.os == 'win'
