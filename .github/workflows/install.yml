@@ -167,6 +167,17 @@ jobs:
             else
               echo "MFA directory not found, skipping copy."
             fi
+
+            # ✅ 新增：Windows 平台复制快捷方式到 install/
+            if [[ "${{ matrix.os }}" == "win" ]]; then
+              SHORTCUT="../点我启动识宝.lnk"
+              if [ -f "$SHORTCUT" ]; then
+                echo "Copying Windows shortcut to install/..."
+                cp "$SHORTCUT" install/
+              else
+                echo "⚠️ Warning: Shortcut not found at $SHORTCUT"
+              fi
+            fi
           else
             echo "Skipping copy MFA for Android."
           fi
