@@ -1,0 +1,18 @@
+{
+    "战斗中": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    0,
+                    0,
+                    197,
+                    140
+                ],
+                "template": [
+                    "自动战斗识别/战斗中.png"
+                ]
+            }
+        }
+    }
+}

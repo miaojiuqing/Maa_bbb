@@ -1,0 +1,144 @@
+{
+    "攻击_action": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1173,
+                    615,
+                    1,
+                    1
+                ]
+            }
+        }
+    },
+    "长按攻击_action": {
+        "action": {
+            "type": "LongPress",
+            "param": {
+                "target": [
+                    1173,
+                    615,
+                    1,
+                    1
+                ]
+            }
+        }
+    },
+    "按下攻击_action": {
+        "action": {
+            "type": "TouchDown",
+            "param": {
+                "target": [
+                    1173,
+                    615,
+                    1,
+                    1
+                ]
+            }
+        }
+    },
+    "松开攻击_action": {
+        "action": {
+            "type": "TouchUp",
+            "param": {}
+        }
+    },
+    "闪避_action": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1021,
+                    649,
+                    1,
+                    1
+                ]
+            }
+        }
+    },
+    "长按闪避_action": {
+        "action": {
+            "type": "LongPress",
+            "param": {
+                "target": [
+                    1021,
+                    649,
+                    1,
+                    1
+                ]
+            }
+        }
+    },
+    "按下闪避_action": {
+        "action": {
+            "type": "TouchDown",
+            "param": {
+                "target": [
+                    1021,
+                    649,
+                    1,
+                    1
+                ]
+            }
+        }
+    },
+    "松开闪避_action": {
+        "action": {
+            "type": "TouchUp",
+            "param": {}
+        }
+    },
+    "技能_action": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1045,
+                    512,
+                    1,
+                    1
+                ]
+            }
+        }
+    },
+    "必杀_action": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1183,
+                    467,
+                    1,
+                    1
+                ]
+            }
+        }
+    },
+    "协同者_action": { //不准确
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1183,
+                    467,
+                    1,
+                    1
+                ]
+            }
+        }
+    },
+    "锁定视角_action": { //不准确
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1183,
+                    467,
+                    1,
+                    1
+                ]
+            }
+        }
+    }
+}
