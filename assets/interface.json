@@ -5417,6 +5417,16 @@
             "type": "select",
             "cases": [
                 {
+                    "name": "通知测试",
+                    "pipeline_override": {
+                        "测试任务接口": {
+                            "next": [
+                                "通知发送测试"
+                            ]
+                        }
+                    }
+                },
+                {
                     "name": "点击测试",
                     "pipeline_override": {
                         "测试任务接口": {
@@ -5447,7 +5457,7 @@
                     }
                 }
             ],
-            "default_case": "单独运行某节点"
+            "default_case": "通知发送测试"
         }
     },
     "advanced": {

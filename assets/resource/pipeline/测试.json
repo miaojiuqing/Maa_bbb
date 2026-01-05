@@ -204,6 +204,22 @@
             "输入键码-ESC"
         ]
     },
+    "通知发送测试": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "expected": []
+            }
+        },
+        "focus": {
+            "Node.Recognition.Starting": "识别开始",
+            "Node.Recognition.Succeeded": "识别成功",
+            "Node.Recognition.Failed": "识别失败",
+            "Node.Action.Starting": "动作开始",
+            "Node.Action.Succeeded": "动作成功",
+            "Node.Action.Failed": "动作失败"
+        }
+    },
     "万象虚境-灰色减负色块数据": {
         "roi": [
             898,
