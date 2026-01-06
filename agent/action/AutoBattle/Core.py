@@ -5,7 +5,7 @@ v1.0.0
 """
 
 from maa.context import Context
-from maa.define import ColorMatchResult, TemplateMatchResult
+from maa.define import ColorMatchResult, TemplateMatchResult, OCRResult
 import time
 
 import logging
@@ -231,7 +231,29 @@ class CombatActions:
             image = self.context.tasker.controller.post_screencap().wait().get()
             # 识别并返回结果
             energy_result = self.context.run_recognition("技能_能量条", image)
-            return bool(energy_result and energy_result.hit)
+            ultimate_energy_result = self.context.run_recognition(
+                "技能_必杀能量", image
+            )
+            if (
+                energy_result
+                and energy_result.hit
+                and isinstance(energy_result.best_result, OCRResult)
+                and ultimate_energy_result
+                and ultimate_energy_result.hit
+                and isinstance(ultimate_energy_result.best_result, OCRResult)
+            ):
+                result = energy_result.best_result.text
+                try:
+                    current_energy, max_energy = map(int, result.split("/"))
+                    # 返回int百分比血量
+                    if current_energy >= int(ultimate_energy_result.best_result.text):
+                        return True
+                    else:
+                        return False
+                except ValueError:
+                    return False
+            else:
+                return False
 
         except Exception as e:
             self.logger.exception("检查技能_能量条:" + str(e))
@@ -246,9 +268,14 @@ class CombatActions:
         image = self.context.tasker.controller.post_screencap().wait().get()
         result = self.context.run_recognition("检查血量百分比", image)
 
-        if result and result.hit and isinstance(result.best_result, ColorMatchResult):
-            hp_pixels = int(result.best_result.count)
-            hp_percent = int((hp_pixels / 429) * 100)
-            return min(max(hp_percent, 0), 100)
+        if result and result.hit and isinstance(result.best_result, OCRResult):
+            result = result.best_result.text
+            try:
+                current_hp, max_hp = map(int, result.split("/"))
+                # 返回int百分比血量
+                hp_percent = int((current_hp / max_hp) * 100)
+                return min(max(hp_percent, 0), 100)
+            except ValueError:
+                return 0
         else:
             return 0

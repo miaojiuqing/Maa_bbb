@@ -115,26 +115,26 @@
             }
         }
     },
-    "协同者_action": { //不准确
+    "协同者_action": {
         "action": {
             "type": "Click",
             "param": {
                 "target": [
-                    1183,
-                    467,
+                    917,
+                    567,
                     1,
                     1
                 ]
             }
         }
     },
-    "锁定视角_action": { //不准确
+    "锁定视角_action": {
         "action": {
             "type": "Click",
             "param": {
                 "target": [
-                    1183,
-                    467,
+                    861,
+                    300,
                     1,
                     1
                 ]
