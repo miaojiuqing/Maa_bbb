@@ -3560,7 +3560,9 @@
                     "option": [
                         "克莱茵打灰浅层序列女武神选择",
                         "克莱茵打灰浅层序列是否使用试用女武神",
-                        "克莱茵打灰浅层序列-难度选择"
+                        "克莱茵打灰浅层序列-难度选择",
+                        "克莱茵打灰浅层序列-可升级时是否主动升级",
+                        "克莱茵打灰浅层序列-升满级后停止任务"
                     ],
                     "pipeline_override": {
                         "乐土刷级-接口层": {
@@ -5144,6 +5146,43 @@
                 }
             ],
             "default_case": "浅层序列难度选择-不选"
+        },
+        "克莱茵打灰浅层序列-可升级时是否主动升级": {
+            "type": "switch",
+            "label": "是否主动升级女武神装甲",
+            "description": "当前选中的女武神装甲可升级时进行升级",
+            "default_case": "YES",
+            "cases": [
+                {
+                    "name": "YES",
+                    "pipeline_override": {
+                        "乐土刷级-浅层序列-当前女武神装甲可进行升级": {
+                            "enabled": "true"
+                        }
+                    }
+                },
+                {
+                    "name": "NO",
+                    "pipeline_override": {
+                        "乐土刷级-浅层序列-当前女武神装甲可进行升级": {
+                            "enabled": "false"
+                        }
+                    }
+                }
+            ]
+        },
+        "克莱茵打灰浅层序列-升满级后停止任务": {
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "YES",
+                    "pipeline_override": {}
+                },
+                {
+                    "name": "NO",
+                    "pipeline_override": {}
+                }
+            ]
         },
         "无限刷取模式": {
             "type": "switch",
