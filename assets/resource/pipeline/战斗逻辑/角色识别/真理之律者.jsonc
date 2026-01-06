@@ -1,0 +1,18 @@
+{
+    "检查常规状态_真理之律者": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1061,
+                    494,
+                    219,
+                    226
+                ],
+                "template": [
+                    "自动战斗识别/真理之律者_atk.png"
+                ]
+            }
+        }
+    }
+}
