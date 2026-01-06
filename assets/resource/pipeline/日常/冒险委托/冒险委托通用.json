@@ -171,6 +171,26 @@
         ],
         "action": "Click"
     },
+    "冒险委托通用-后崩1的叉叉": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1098,
+                    4,
+                    133,
+                    91
+                ],
+                "template": [
+                    "周常/冒险委托/后崩坏书1/后崩1攻略叉叉.png"
+                ]
+            }
+        },
+        "post_delay": 1000,
+        "action": {
+            "type": "Click"
+        }
+    },
     "冒险委托通用-点击进入委托界面": {
         "roi": [
             31,
