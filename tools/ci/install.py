@@ -9,7 +9,6 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(script_dir)
 
 from configure import configure_ocr_model
-from generate_manifest_cache import generate_manifest_cache
 
 working_dir = Path(__file__).parent.parent.parent
 install_path = working_dir / Path("install")
@@ -19,13 +18,13 @@ platform_tag = len(sys.argv) > 2 and sys.argv[2] or ""
 
 def install_deps(platform_tag: str):
     """安装 MaaFramework 依赖到对应架构路径
-    
+
     Args:
         platform_tag: 平台标签，如 win-x64, linux-arm64, osx-arm64
     """
     if not platform_tag:
         raise ValueError("platform_tag is required")
-    
+
     shutil.copytree(
         working_dir / "deps" / "bin",
         install_path / "runtimes" / platform_tag / "native",
@@ -101,21 +100,10 @@ def install_agent():
         interface["agent"]["child_exec"] = r"python3"
 
     interface["agent"]["child_args"] = ["-u", r"./agent/main.py"]
+    interface["agent"]["embedded"] = True  # 给CFA留的内置Agent模式开关
 
     with open(install_path / "interface.json", "w", encoding="utf-8") as f:
         json.dump(interface, f, ensure_ascii=False, indent=4)
-
-
-def install_manifest_cache():
-    """生成初始 manifest 缓存，加速用户首次启动"""
-    config_dir = install_path / "config"
-    success = generate_manifest_cache(config_dir)
-    if success:
-        print("Manifest cache generated successfully.")
-    else:
-        print(
-            "Warning: Manifest cache generation failed, users will do full check on first run."
-        )
 
 
 if __name__ == "__main__":
@@ -123,6 +111,5 @@ if __name__ == "__main__":
     install_resource()
     install_chores()
     install_agent()
-    install_manifest_cache()
 
     print(f"Install to {install_path} successfully.")
