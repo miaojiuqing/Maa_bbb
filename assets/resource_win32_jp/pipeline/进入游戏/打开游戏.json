@@ -10,6 +10,9 @@
     },
     "关闭游戏": {
         "action": "DoNothing",
-        "next": ["舰长~真的要退出游戏吗-是", "[JumpBack]输入键码-ESC"],
+        "next": [
+            "舰长~真的要退出游戏吗-是",
+            "[JumpBack]输入键码-ESC"
+        ]
     }
 }
