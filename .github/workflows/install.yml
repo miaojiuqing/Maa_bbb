@@ -132,7 +132,7 @@ jobs:
           choco install imagemagick -y
 
           # 转换 PNG 到 ICO
-          magick convert assets/logo.png -define icon:auto-resize=256,128,64,48,32,24,16 Maa_bbb.ico
+          magick convert logo.png -define icon:auto-resize=256,128,64,48,32,24,16 Maa_bbb.ico
 
       - name: Modify MFAAvalonia exe icon
         if: matrix.arch == 'x86_64'
@@ -260,7 +260,7 @@ jobs:
           sudo apt-get update && sudo apt-get install -y imagemagick
 
           # 转换 PNG 到 ICO
-          convert assets/logo.png -define icon:auto-resize=256,128,64,48,32,24,16 Maa_bbb.ico
+          convert logo.png -define icon:auto-resize=256,128,64,48,32,24,16 Maa_bbb.ico
 
       - name: Download Python dependencies
         shell: bash
@@ -375,7 +375,7 @@ jobs:
           brew install imagemagick
 
           # 转换 PNG 到 ICO
-          magick convert assets/logo.png -define icon:auto-resize=256,128,64,48,32,24,16 Maa_bbb.ico
+          magick convert logo.png -define icon:auto-resize=256,128,64,48,32,24,16 Maa_bbb.ico
 
       - name: Setup Embed Python on macOS
         shell: bash
