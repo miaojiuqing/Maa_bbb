@@ -123,7 +123,7 @@ def check_resource_version(interface_file_path: str = "./interface.json") -> dic
         machine = platform.machine().lower()
 
         # 调用API检查最新版本
-        api_url = f"https://mirrorchyan.com/api/resources/{rid}/latest/?os={os_type}&arch={machine}&channel={channel}&user_agent=M9A-Agent"
+        api_url = f"https://mirrorchyan.com/api/resources/{rid}/latest/?os={os_type}&arch={machine}&channel={channel}&user_agent=Maa_bbb-Agent"
         logger.debug(f"正在检查资源版本: {api_url}")
 
         response = requests.get(api_url, timeout=10)
