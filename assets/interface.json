@@ -17,6 +17,13 @@
     "mirrorchyan_rid": "Maa_bbb",
     "mirrorchyan_multiplatform": false,
     "welcome": "欢迎舰长使用识宝小助手Oᴗoಣ",
+    "agent": {
+        "child_exec": "python.exe",
+        "child_args": [
+            "{PROJECT_DIR}/custom/main.py"
+        ],
+        "embedded": true
+    },
     "controller": [
         //我是分割线
         {
