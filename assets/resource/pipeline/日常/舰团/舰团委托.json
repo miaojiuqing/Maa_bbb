@@ -414,7 +414,8 @@
         ],
         "recognition": "OCR",
         "expected": [
-            "领取"
+            "领取",
+            "保存选择"
         ],
         "action": "Click",
         "post_delay": 500
