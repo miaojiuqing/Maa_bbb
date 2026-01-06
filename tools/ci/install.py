@@ -2,7 +2,7 @@ from pathlib import Path
 
 import shutil
 import sys
-import json
+import jsonc
 import os
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -59,13 +59,13 @@ def install_resource():
     )
 
     with open(install_path / "interface.json", "r", encoding="utf-8") as f:
-        interface = json.load(f)
+        interface = jsonc.load(f)
 
     interface["version"] = version
-    interface["custom_title"] = f"Maa_bbb {version} | 亿韭韭韭小助手"
+    interface["custom_title"] = f"Maa_bbb {version} | 识宝小助手"
 
     with open(install_path / "interface.json", "w", encoding="utf-8") as f:
-        json.dump(interface, f, ensure_ascii=False, indent=4)
+        jsonc.dump(interface, f, ensure_ascii=False, indent=4)
 
 
 def install_chores():
@@ -90,7 +90,7 @@ def install_agent():
     )
 
     with open(install_path / "interface.json", "r", encoding="utf-8") as f:
-        interface = json.load(f)
+        interface = jsonc.load(f)
 
     if sys.platform.startswith("win"):
         interface["agent"]["child_exec"] = r"./python/python.exe"
@@ -103,7 +103,7 @@ def install_agent():
     interface["agent"]["embedded"] = True  # 给CFA留的内置Agent模式开关
 
     with open(install_path / "interface.json", "w", encoding="utf-8") as f:
-        json.dump(interface, f, ensure_ascii=False, indent=4)
+        jsonc.dump(interface, f, ensure_ascii=False, indent=4)
 
 
 if __name__ == "__main__":

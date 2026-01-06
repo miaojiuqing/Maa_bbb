@@ -167,7 +167,7 @@ jobs:
         shell: bash
         run: |
           PLATFORM_TAG="win-${{ steps.platform.outputs.tag }}"
-          pip install jsonWithComments
+          pip install json-with-comments
           ./install/python/python.exe ./tools/ci/install.py ${{ needs.meta.outputs.tag }} $PLATFORM_TAG
           cp -rpvn tools/registry/. install/
 
@@ -278,7 +278,7 @@ jobs:
       - name: Install on Linux
         shell: bash
         run: |
-          pip install jsonWithComments
+          pip install json-with-comments
           PYTHON_EXECUTABLE="python"
           PLATFORM_TAG="linux-${{ steps.platform.outputs.tag }}"
           echo "Using Python executable: $PYTHON_EXECUTABLE for Linux"
@@ -406,9 +406,7 @@ jobs:
       - name: Install on macOS
         shell: bash
         run: |
-          # 安装 jsonWithComments 模块
-          pip install jsonWithComments
-
+          pip install json-with-comments
           PYTHON_EXECUTABLE="./install/python/bin/python3"
           PLATFORM_TAG="osx-${{ steps.platform.outputs.tag }}"
           echo "Using Python executable: $PYTHON_EXECUTABLE for macOS"
