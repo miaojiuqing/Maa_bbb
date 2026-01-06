@@ -5172,15 +5172,26 @@
             ]
         },
         "克莱茵打灰浅层序列-升满级后停止任务": {
+            "default_case": "No",
+            "label": "当前装甲满级后停止任务",
+            "description": "与重复执行冲突",
             "type": "switch",
             "cases": [
                 {
                     "name": "YES",
-                    "pipeline_override": {}
+                    "pipeline_override": {
+                        "乐土刷级-浅层序列-当前女武神装甲已是满级": {
+                            "enabled": "true"
+                        }
+                    }
                 },
                 {
                     "name": "NO",
-                    "pipeline_override": {}
+                    "pipeline_override": {
+                        "乐土刷级-浅层序列-当前女武神装甲已是满级": {
+                            "enabled": "false"
+                        }
+                    }
                 }
             ]
         },
