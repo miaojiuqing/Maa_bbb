@@ -76,6 +76,11 @@ def install_resource():
         install_path / "resource_vivo",
         dirs_exist_ok=True,
     )
+    shutil.copytree(
+        working_dir / "assets" / "resource_jiuyou",
+        install_path / "resource_jiuyou",
+        dirs_exist_ok=True,
+    )
     shutil.copy2(
         working_dir / "assets" / "interface.json",
         install_path,

@@ -1,0 +1,10 @@
+{
+    "启动并进入游戏": {
+        "action": "StartApp",
+        "package": "com.miHoYo.bh3.uc"
+    },
+    "模拟器包名游戏启动": {
+        "action": "StartApp",
+        "package": "com.miHoYo.bh3.uc"
+    }
+}

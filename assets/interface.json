@@ -119,6 +119,16 @@
                 "./resource",
                 "./resource_vivo"
             ]
+        },
+        {
+            "name": "九游服",
+            "controller": [
+                "安卓端"
+            ],
+            "path": [
+                "./resource",
+                "./resource_jiuyou"
+            ]
         }
     ],
     "task": [
