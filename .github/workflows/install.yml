@@ -51,12 +51,43 @@ jobs:
 
   install:
     needs: meta
-    runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [win, macos, linux, android]
-        arch: [aarch64, x86_64]
+        include:
+          # Windows x86_64
+          - os: win
+            arch: x86_64
+            runs-on: windows-latest
+          # Windows aarch64
+          - os: win
+            arch: aarch64
+            runs-on: windows-11-arm
+          # macOS x86_64 (Intel)
+          - os: macos
+            arch: x86_64
+            runs-on: macos-15-intel
+          # macOS aarch64 (Apple Silicon)
+          - os: macos
+            arch: aarch64
+            runs-on: macos-latest
+          # Linux x86_64
+          - os: linux
+            arch: x86_64
+            runs-on: ubuntu-latest
+          # Linux aarch64
+          - os: linux
+            arch: aarch64
+            runs-on: ubuntu-24.04-arm
+          # Android x86_64
+          - os: android
+            arch: x86_64
+            runs-on: ubuntu-latest
+          # Android aarch64
+          - os: android
+            arch: aarch64
+            runs-on: ubuntu-latest
       fail-fast: false
+    runs-on: ${{ matrix.runs-on }}
 
     steps:
       - uses: actions/checkout@v4
@@ -140,6 +171,7 @@ jobs:
 
       - name: install python embed
         shell: bash
+        if: matrix.os != 'android'
         run: |
           python ./tools/install_python.py install/python
 

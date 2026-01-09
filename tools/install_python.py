@@ -50,18 +50,18 @@ def get_python_url() -> tuple[str, str, str]:
     )
 
     if system == "Darwin":
-        url = f"{base_url}/cpython-{PYTHON_VERSION}+20251209-{arch}-apple-darwin-install_only.tar.gz"
+        url = f"{base_url}/cpython-{PYTHON_VERSION}+20251209-{arch}-apple-darwin-install_only_stripped.tar.gz"
     elif system == "Windows":
-        url = f"{base_url}/cpython-{PYTHON_VERSION}+20251209-{arch}-pc-windows-msvc-install_only.tar.gz"
+        url = f"{base_url}/cpython-{PYTHON_VERSION}+20251209-{arch}-pc-windows-msvc-install_only_stripped.tar.gz"
     elif system == "Linux":
-        url = f"{base_url}/cpython-{PYTHON_VERSION}+20251209-{arch}-unknown-linux-gnu-install_only.tar.gz"
+        url = f"{base_url}/cpython-{PYTHON_VERSION}+20251209-{arch}-unknown-linux-gnu-install_only_stripped.tar.gz"
     else:
         log(f"错误: 不支持的操作系统 {system}", "\033[31m")
         sys.exit(1)
 
     return (
         url,
-        f"python-{PYTHON_VERSION}+20251209-{arch}-{system}-install_only.tar.gz",
+        f"python-{PYTHON_VERSION}+20251209-{arch}-{system}-install_only_stripped.tar.gz",
         "python3",
     )
 
