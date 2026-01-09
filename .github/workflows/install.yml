@@ -88,14 +88,6 @@ jobs:
           - os: linux
             arch: aarch64
             runs-on: ubuntu-24.04-arm
-          # Android x86_64
-          - os: android
-            arch: x86_64
-            runs-on: ubuntu-latest
-          # Android aarch64
-          - os: android
-            arch: aarch64
-            runs-on: ubuntu-latest
       fail-fast: false
     runs-on: ${{ matrix.runs-on }}
 

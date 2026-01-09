@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 嵌入式Python安装脚本（跨平台）
 功能：下载并解压Python嵌入式版本，然后配置pip
@@ -12,6 +13,15 @@ import subprocess
 import urllib.request
 import zipfile
 from pathlib import Path
+
+# 修复Windows中文输出编码问题
+if sys.platform == "win32":
+    import io
+    # 设置标准输出和错误输出使用UTF-8编码
+    if sys.stdout.encoding != "utf-8":
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+    if sys.stderr.encoding != "utf-8":
+        sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")
 
 
 # 配置常量
