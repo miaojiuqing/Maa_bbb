@@ -96,6 +96,11 @@ jobs:
         with:
           submodules: true
 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+          architecture: ${{ matrix.arch == 'x86_64' && 'x64' || 'arm64' }}
       - name: Download Python embed
         shell: bash
         run: |

@@ -13,6 +13,7 @@ import subprocess
 import urllib.request
 import zipfile
 from pathlib import Path
+from typing import Optional
 
 # 修复Windows中文输出编码问题
 if sys.platform == "win32":
@@ -154,7 +155,7 @@ def extract_python(archive: Path, dest: Path, is_zip: bool, keep_archive: bool =
             archive.unlink()
 
 
-def find_python_exe(dest_dir: Path, exe_name: str) -> Path | None:
+def find_python_exe(dest_dir: Path, exe_name: str) -> Optional[Path]:
     """查找Python可执行文件，如果不存在则返回None"""
     system = platform.system()
 
