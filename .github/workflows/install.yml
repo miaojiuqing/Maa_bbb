@@ -101,6 +101,7 @@ jobs:
         with:
           python-version: '3.12'
           architecture: ${{ matrix.arch == 'x86_64' && 'x64' || 'arm64' }}
+
       - name: Download Python embed
         shell: bash
         run: |
@@ -210,14 +211,8 @@ jobs:
         if: matrix.os != 'android'
         shell: bash
         run: |
-          if [ -d "python-embed-${{ matrix.os }}-${{ matrix.arch }}/python" ]; then
-            echo "Copying Python embed to install directory..."
-            mkdir -p install
-            cp -r python-embed-${{ matrix.os }}-${{ matrix.arch }}/python install/
-            echo "✅ Python embed copied to install/python"
-          else
-            echo "⚠️  Warning: Python embed directory not found"
-          fi
+          cp -r python-embed-${{ matrix.os }}-${{ matrix.arch }}/python install/
+
 
       - uses: actions/upload-artifact@v4
         with:

@@ -1,8 +1,8 @@
 from maa.agent.agent_server import AgentServer
-from .custom.action.Count import Count
-from .custom.action.OverridePipe import OverridePipe
+from agent.custom.action.Count import Count
+from agent.custom.action.OverridePipe import OverridePipe
 
-from .custom.recongition.CheckResolution import CheckResolution
+from agent.custom.recongition.CheckResolution import CheckResolution
 
 
 @AgentServer.custom_action("Count")

@@ -41,41 +41,22 @@ def install_resource():
 
     configure_ocr_model()
 
-    shutil.copytree(
-        working_dir / "assets" / "resource",
-        install_path / "resource",
-        dirs_exist_ok=True,
-    )
-    shutil.copytree(
-        working_dir / "assets" / "resource_win32",
-        install_path / "resource_win32",
-        dirs_exist_ok=True,
-    )
-    shutil.copytree(
-        working_dir / "assets" / "resource_win32_jp",
-        install_path / "resource_win32_jp",
-        dirs_exist_ok=True,
-    )
-    shutil.copytree(
-        working_dir / "assets" / "resource_bilibili",
-        install_path / "resource_bilibili",
-        dirs_exist_ok=True,
-    )
-    shutil.copytree(
-        working_dir / "assets" / "resource_OPPE",
-        install_path / "resource_OPPE",
-        dirs_exist_ok=True,
-    )
-    shutil.copytree(
-        working_dir / "assets" / "resource_yyb",
-        install_path / "resource_yyb",
-        dirs_exist_ok=True,
-    )
-    shutil.copytree(
-        working_dir / "assets" / "resource_vivo",
-        install_path / "resource_vivo",
-        dirs_exist_ok=True,
-    )
+    for resource in [
+        "resource",
+        "resource_bilibili",
+        "resource_huawei",
+        "resource_OPPE",
+        "resource_vivo",
+        "resource_win32",
+        "resource_win32_jp",
+        "resource_yyb",
+    ]:
+        shutil.copytree(
+            working_dir / "assets" / resource,
+            install_path / resource,
+            dirs_exist_ok=True,
+        )
+
     shutil.copy2(
         working_dir / "assets" / "interface.json",
         install_path,
@@ -104,6 +85,21 @@ def install_agent():
         install_path / "agent",
         dirs_exist_ok=True,
     )
+
+    with open(install_path / "interface.json", "r", encoding="utf-8") as f:
+        interface = jsonc.load(f)
+
+    if sys.platform.startswith("win"):
+        interface["agent"]["child_exec"] = r"./python/python.exe"
+    elif sys.platform.startswith("darwin"):
+        interface["agent"]["child_exec"] = r"./python/bin/python3"
+    elif sys.platform.startswith("linux"):
+        interface["agent"]["child_exec"] = r"python3"
+
+    interface["agent"]["child_args"] = ["-u", r"./agent/main.py"]
+
+    with open(install_path / "interface.json", "w", encoding="utf-8") as f:
+        json.dump(interface, f, ensure_ascii=False, indent=4)
 
 
 # ✅ 新增：安装 Open.bat

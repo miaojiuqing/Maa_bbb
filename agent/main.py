@@ -3,6 +3,9 @@ import os
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from agent.deploy.deploy import deploy
 
 
@@ -26,6 +29,6 @@ if __name__ == "__main__":
         print("部署检查失败，程序退出")
         sys.exit(1)
 
-    from .CustomFile import *
+    from agent.CustomFile import *
 
     main()
