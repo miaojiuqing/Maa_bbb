@@ -97,6 +97,7 @@ def install_agent():
         interface["agent"]["child_exec"] = r"python3"
 
     interface["agent"]["child_args"] = ["-u", r"./agent/main.py"]
+    interface["agent"]["embedded"] = True  # MFW-CFA内置模式
 
     with open(install_path / "interface.json", "w", encoding="utf-8") as f:
         json.dump(interface, f, ensure_ascii=False, indent=4)
