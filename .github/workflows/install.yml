@@ -91,10 +91,6 @@ jobs:
           rm -f "${ARCHIVE_FILE_PATH}"
           echo "Archive cleanup command executed for MFAAvalonia."
 
-      # ===========================================================================
-      # ✅ Set Windows EXE icon using logo.ico via Wine + rcedit (works on Ubuntu Runner)
-      #     Auto-installs wine if missing
-      # ===========================================================================
       - name: Apply custom icon to MFAAvalonia.exe on Windows
         if: matrix.os == 'win'
         shell: bash
@@ -127,7 +123,7 @@ jobs:
         shell: bash
         run: |
           python -m pip install json-with-comments
-          python ./install.py ${{ needs.meta.outputs.tag }}
+          python ./tools/install.py ${{ needs.meta.outputs.tag }}
 
           if [[ "${{ matrix.os }}" != "android" ]]; then
             if [ -d "MFA" ]; then
@@ -140,6 +136,12 @@ jobs:
           else
             echo "Skipping copy MFA for Android."
           fi
+      
+
+      - name: install python embed
+        shell: bash
+        run: |
+          python ./tools/install_python.py install/python
 
       - uses: actions/upload-artifact@v4
         with:
