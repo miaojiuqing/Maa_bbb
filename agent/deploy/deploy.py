@@ -172,6 +172,7 @@ def check_and_install_dependencies():
         print(f"info: 正在安装 {package_spec}...")
         try:
             # 使用 subprocess 调用 pip 安装，保留完整版本号
+            # 使用清华源加速下载
             result = subprocess.run(
                 [
                     sys.executable,
@@ -179,8 +180,9 @@ def check_and_install_dependencies():
                     "pip",
                     "install",
                     "--upgrade",
+                    "-i",
+                    "https://pypi.tuna.tsinghua.edu.cn/simple",
                     package_spec,
-                    "--pre",
                 ],
                 capture_output=True,
                 text=True,
