@@ -77,7 +77,7 @@ def get_interface_version():
     # 以 main.py 为基准路径
     main_py_path = get_main_py_path()
     # interface.json 在 assets/interface.json，从 main.py 看是 ../assets/interface.json
-    interface_path = main_py_path.parent.parent / "assets" / "interface.json"
+    interface_path = main_py_path.parent.parent / "interface.json"
 
     if not interface_path.exists():
         raise FileNotFoundError(f"无法找到 interface.json 文件: {interface_path}")
@@ -89,10 +89,10 @@ def get_interface_version():
 
             interface_data = jsonc.load(f)
 
-            version = interface_data.get("interface_version")
+            version = interface_data.get("version")
 
             if version is None:
-                raise ValueError("interface.json 中未找到 interface_version 字段")
+                raise ValueError("interface.json 中未找到 version 字段")
 
             return str(version)
     except (json.JSONDecodeError, ValueError) as e:

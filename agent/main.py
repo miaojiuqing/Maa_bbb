@@ -1,7 +1,6 @@
 import sys
 import os
 
-print("info: 1111111")
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 import sys
@@ -9,9 +8,6 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from agent.deploy.deploy import deploy
-
-print(f"info: {os.getcwd()}")
-
 
 def main():
 
