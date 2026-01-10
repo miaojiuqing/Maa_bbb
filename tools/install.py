@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import os
 import shutil
 import sys
 import json
@@ -89,20 +90,26 @@ def install_agent():
     with open(install_path / "interface.json", "r", encoding="utf-8") as f:
         interface = jsonc.load(f)
 
-    # 根据文件是否存在来设置 child_exec
-    python_win = install_path / "python" / "python.exe"
-    python_unix = install_path / "python" / "bin" / "python3"
+    # 根据 CI 传入的 OS 环境变量来设置 child_exec
+    target_os = os.getenv("TARGET_OS", "").lower()
     
-    if python_win.exists():
-        interface["agent"]["child_exec"] = r"./python/python.exe"
-    elif python_unix.exists():
-        interface["agent"]["child_exec"] = r"./python/bin/python3"
-    else:
-        # 如果都不存在，使用系统的 python3
-        interface["agent"]["child_exec"] = r"python3"
+    # OS 到 child_exec 的映射
+    os_exec_map = {
+        "win": r"./python/python.exe",
+        "macos": r"./python/bin/python3",
+        "linux": r"python3",
+    }
 
-    interface["agent"]["child_args"] = ["-u", r"./agent/main.py"]
-    interface["agent"]["embedded"] = True  # MFW-CFA内置模式
+    match target_os:
+        case "android":
+            # Android 不使用嵌入式 Python
+            interface.pop("agent", None)
+        case os_name if os_name in os_exec_map:
+            interface["agent"]["child_exec"] = os_exec_map[os_name]
+            interface["agent"]["child_args"] = ["-u", r"./agent/main.py"]
+            interface["agent"]["embedded"] = True
+        case _:
+            raise ValueError(f"Unknown OS: {target_os}")
 
     with open(install_path / "interface.json", "w", encoding="utf-8") as f:
         json.dump(interface, f, ensure_ascii=False, indent=4)
