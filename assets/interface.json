@@ -1960,6 +1960,45 @@
                                 23
                             ]
                         }
+                    },
+                    "option": [
+                        "万象虚境-时序通行证不足处理"
+                    ]
+                }
+            ]
+        },
+        "万象虚境-时序通行证不足处理": {
+            "label": "时序通行证不足处理",
+            "type": "select",
+            "cases": [
+                {
+                    "name": "返回主菜单",
+                    "pipeline_override": {
+                        "万象虚境-时序通行证不足": {
+                            "focus": {
+                                "Node.Recognition.Succeeded": "<font color=\"red\">时序通行证不足，正在返回菜单</font>"
+                            },
+                            "next": [
+                                "成功进入游戏主菜单",
+                                "[JumpBack]点击返回主菜单",
+                                "[JumpBack]家园处-点击返回"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "改为不消耗时序通行证后继续任务",
+                    "pipeline_override": {
+                        "万象虚境-时序通行证不足": {
+                            "focus": {
+                                "Node.Recognition.Succeeded": "<font color=\"red\">时序通行证不足，将切换为不消耗时序通行证的模式后继续任务</font>"
+                            },
+                            "next": [
+                                "万象虚境-时序通行证不足-已切换为不消耗时序通行证",
+                                "[JumpBack]万象虚境-时序通行证不足-点击切换为不消耗状态",
+                                "[JumpBack]点击叉叉-延迟一秒版"
+                            ]
+                        }
                     }
                 }
             ]
