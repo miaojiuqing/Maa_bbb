@@ -5167,7 +5167,7 @@
                     "name": "YES",
                     "pipeline_override": {
                         "乐土刷级-浅层序列-当前女武神装甲可进行升级": {
-                            "enabled": "true"
+                            "enabled": true
                         }
                     }
                 },
@@ -5175,7 +5175,7 @@
                     "name": "NO",
                     "pipeline_override": {
                         "乐土刷级-浅层序列-当前女武神装甲可进行升级": {
-                            "enabled": "false"
+                            "enabled": false
                         }
                     }
                 }
@@ -5191,7 +5191,7 @@
                     "name": "YES",
                     "pipeline_override": {
                         "乐土刷级-浅层序列-当前女武神装甲已是满级": {
-                            "enabled": "true"
+                            "enabled": true
                         }
                     }
                 },
@@ -5199,7 +5199,7 @@
                     "name": "NO",
                     "pipeline_override": {
                         "乐土刷级-浅层序列-当前女武神装甲已是满级": {
-                            "enabled": "false"
+                            "enabled": false
                         }
                     }
                 }
