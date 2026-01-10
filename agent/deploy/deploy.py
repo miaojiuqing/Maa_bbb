@@ -21,8 +21,13 @@ except ImportError:
 
 def setup_logger():
     """配置日志系统，同时输出到控制台和文件"""
-    # 获取日志文件路径（在 deploy 目录下）
-    log_dir = Path(__file__).parent
+    # 获取日志文件路径：__file__ 的上3层目录中的 debug/deploy.log
+    # __file__ = ./agent/deploy/deploy.py
+    # parent = ./agent/deploy/
+    # parent.parent = ./agent/
+    # parent.parent.parent = ./
+    # 所以日志文件路径 = ./debug/deploy.log
+    log_dir = Path(__file__).parent.parent.parent / "debug"
     log_file = log_dir / "deploy.log"
 
     # 创建 logger

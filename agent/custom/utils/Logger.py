@@ -50,8 +50,15 @@ class Logger:
 
     def _setup_handlers(self):
         """设置日志处理器"""
-        # 获取日志文件路径（在 custom/utils 目录下）
-        log_dir = Path(__file__).parent.parent.parent / "debug"
+        # 获取日志文件路径：__file__ 的上4层目录中的 debug/agent.log
+        # __file__ = ./agent/custom/utils/Logger.py
+        # parent = ./agent/custom/utils/
+        # parent.parent = ./agent/custom/
+        # parent.parent.parent = ./agent/
+        # parent.parent.parent.parent = ./
+        # 所以日志文件路径 = ./debug/agent.log
+        log_dir = Path(__file__).parent.parent.parent.parent / "debug"
+        log_dir.mkdir(parents=True, exist_ok=True)
         log_file = log_dir / "agent.log"
 
         # 创建格式器
