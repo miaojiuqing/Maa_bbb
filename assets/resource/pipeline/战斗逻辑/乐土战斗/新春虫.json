@@ -1,5 +1,8 @@
 {
     "自动战斗-乐土-新春虫战斗循环": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "roi": [
             0,
             0,
@@ -15,9 +18,12 @@
             "[JumpBack]自动战斗-乐土-新春虫-星环启动",
             "[JumpBack]自动战斗-乐土-新春虫-有大开大",
             "[JumpBack]自动战斗-乐土-新春虫-跳跃"
-        ],
+        ]
     },
     "自动战斗-乐土-新春虫-星环启动": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "roi": [
             975,
             551,
@@ -39,6 +45,9 @@
         ]
     },
     "非战斗状态-乐土新春虫": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "roi": [
             0,
             0,
@@ -50,9 +59,15 @@
             "战斗相关/战中检查/战斗中.png"
         ],
         "inverse": true,
-        "next": ["自动战斗-乐土-新春虫战斗循环", "[JumpBack]空任务"],
+        "next": [
+            "自动战斗-乐土-新春虫战斗循环",
+            "[JumpBack]空任务"
+        ]
     },
     "自动战斗-乐土-新春虫-有大开大": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "roi": [
             1156,
             505,
@@ -71,6 +86,9 @@
         ]
     },
     "自动战斗-乐土-新春虫-跳跃": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "roi": [
             0,
             0,

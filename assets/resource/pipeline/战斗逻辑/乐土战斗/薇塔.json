@@ -1,5 +1,8 @@
 {
     "自动战斗-乐土-薇塔战斗循环": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "roi": [
             0,
             0,
@@ -18,6 +21,9 @@
         ]
     },
     "自动战斗-乐土-薇塔-正在开机甲": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "roi": [
             319,
             545,
@@ -137,10 +143,14 @@
                 "duration": 50
             }
         ],
+        "post_delay": 0,
         "pre_delay": 0,
-        "post_delay": 0
+        "rate_limit": 0
     },
     "自动战斗-乐土-薇塔-无识别普攻": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "action": "MultiSwipe",
         "swipes": [
             {
@@ -180,6 +190,9 @@
         ]
     },
     "非战斗状态": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "roi": [
             0,
             0,
@@ -198,6 +211,9 @@
         ]
     },
     "自动战斗-乐土-薇塔-处于超级机甲状态_进行平A": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "roi": [
             455,
             600,
@@ -224,6 +240,9 @@
         ]
     },
     "自动战斗-乐土-薇塔-处于攒条_E后平A": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "roi": [
             319,
             545,
