@@ -1,5 +1,7 @@
 {
     "自动战斗-乐土-崩落华战斗循环": {
+        "post_delay": 0,
+        "pre_delay": 0,
         "rate_limit": 0,
         "roi": [
             0,
@@ -20,6 +22,9 @@
         // }
     },
     "非战斗状态-乐土崩落华": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "roi": [
             0,
             0,
@@ -37,6 +42,8 @@
         ]
     },
     "自动战斗-乐土-崩落华-有大开大": {
+        "post_delay": 0,
+        "pre_delay": 0,
         "rate_limit": 0,
         "roi": [
             1156,
@@ -55,10 +62,15 @@
         ]
     }, //模拟器将其并入普攻动作
     "开大": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "action": "ClickKey",
         "key": 81
     }, //同上
     "自动战斗-乐土-崩落华-普攻": {
+        "post_delay": 0,
+        "pre_delay": 0,
         "rate_limit": 0,
         "action": "MultiSwipe",
         "swipes": [
