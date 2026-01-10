@@ -129,10 +129,11 @@ def load_requirements_from_file():
     """从requirements.txt读取依赖列表（必须存在）"""
     # 以 main.py 为基准路径
     main_py_path = get_main_py_path()
-    # requirements.txt 在 main.py 同级目录，即 agent/requirements.txt
-    requirements_path = main_py_path.parent / "requirements.txt"
+    # requirements.txt 在 main.py 上层目录，即 ../requirements.txt
+    requirements_path = main_py_path.parent.parent / "requirements.txt"
 
     if not requirements_path.exists():
+        print(f"error: 无法找到 requirements.txt 文件: {requirements_path}")
         raise FileNotFoundError(f"无法找到 requirements.txt 文件: {requirements_path}")
 
     packages = []
@@ -147,18 +148,20 @@ def load_requirements_from_file():
                 packages.append(line)
 
         if not packages:
+            print(f"error: requirements.txt 文件中没有找到任何依赖包")
             raise ValueError("requirements.txt 文件中没有找到任何依赖包")
 
         return packages
     except Exception as e:
+        print(f"error: 读取 requirements.txt 失败: {e}")
         raise ValueError(f"读取 requirements.txt 失败: {e}")
 
 
 def check_and_install_dependencies():
     """检查并安装必要的依赖库"""
     # 从 requirements.txt 读取所有依赖
+    print("info: 开始安装依赖")
     required_packages = load_requirements_from_file()
-
     if not required_packages:
         raise ValueError("requirements.txt 中没有找到任何依赖包")
 
@@ -166,6 +169,7 @@ def check_and_install_dependencies():
 
     for package_spec in required_packages:
         logger.info(f"正在安装 {package_spec}...")
+        print(f"info: 正在安装 {package_spec}...")
         try:
             # 使用 subprocess 调用 pip 安装，保留完整版本号
             result = subprocess.run(
@@ -186,6 +190,7 @@ def check_and_install_dependencies():
             # 记录 pip 输出（如果有）
             if result.stdout:
                 logger.debug(f"pip 输出: {result.stdout}")
+                print(f"info: {result.stdout}")
         except subprocess.CalledProcessError as e:
             logger.error(f"✗ {package_spec} 安装失败:")
             logger.error(f"  错误输出: {e.stderr}")
@@ -201,6 +206,7 @@ def deploy():
     logger.info("=" * 50)
     logger.info("开始部署前检查...")
     logger.info("=" * 50)
+    print("info:开始部署检查")
 
     try:
         # 如果 jsonc 不存在，说明依赖还没安装，直接安装
@@ -229,6 +235,7 @@ def deploy():
         if saved_version == current_version:
             logger.info(f"版本一致 (v{saved_version})，跳过依赖检查")
             logger.info("=" * 50)
+            print("info: 版本一致，跳过依赖检查")
             return True
 
         if saved_version:

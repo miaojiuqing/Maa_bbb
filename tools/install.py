@@ -89,11 +89,16 @@ def install_agent():
     with open(install_path / "interface.json", "r", encoding="utf-8") as f:
         interface = jsonc.load(f)
 
-    if sys.platform.startswith("win"):
+    # 根据文件是否存在来设置 child_exec
+    python_win = install_path / "python" / "python.exe"
+    python_unix = install_path / "python" / "bin" / "python3"
+    
+    if python_win.exists():
         interface["agent"]["child_exec"] = r"./python/python.exe"
-    elif sys.platform.startswith("darwin"):
+    elif python_unix.exists():
         interface["agent"]["child_exec"] = r"./python/bin/python3"
-    elif sys.platform.startswith("linux"):
+    else:
+        # 如果都不存在，使用系统的 python3
         interface["agent"]["child_exec"] = r"python3"
 
     interface["agent"]["child_args"] = ["-u", r"./agent/main.py"]
@@ -101,6 +106,11 @@ def install_agent():
 
     with open(install_path / "interface.json", "w", encoding="utf-8") as f:
         json.dump(interface, f, ensure_ascii=False, indent=4)
+
+    shutil.copy2(
+        working_dir / "requirements.txt",
+        install_path / "requirements.txt",
+    )
 
 
 # ✅ 新增：安装 Open.bat

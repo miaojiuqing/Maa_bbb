@@ -51,12 +51,12 @@ class Logger:
     def _setup_handlers(self):
         """设置日志处理器"""
         # 获取日志文件路径（在 custom/utils 目录下）
-        log_dir = Path(__file__).parent
-        log_file = log_dir / f"{self.name}.log"
+        log_dir = Path(__file__).parent.parent.parent / "debug"
+        log_file = log_dir / "agent.log"
 
         # 创建格式器
         formatter = logging.Formatter(
-            "%(asctime)s - [%(name)s] - %(levelname)s - %(message)s",
+            "%(asctime)s - [%(name)s] - %(levelname)s - %(message)s - {self.name}",
             datefmt="%Y-%m-%d %H:%M:%S",
         )
 
