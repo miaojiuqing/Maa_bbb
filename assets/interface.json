@@ -470,7 +470,7 @@
             "type": "switch",
             "cases": [
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {
                         "月份每日登录奖励": {
                             "enabled": true
@@ -481,7 +481,7 @@
                     }
                 },
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "月份每日登录奖励": {
                             "enabled": false
@@ -498,7 +498,7 @@
             "description": "开启后将不再尝试点击\"点击空白位置关闭\"<br/>防止点进奇怪的界面难以退出",
             "cases": [
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {
                         "点击空白位置关闭": {
                             "enabled": true
@@ -506,7 +506,7 @@
                     }
                 },
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "点击空白位置关闭": {
                             "enabled": false
@@ -695,7 +695,7 @@
             "type": "switch",
             "cases": [
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {
                         "乐土每周商店-购买界面-乐土币不足-色块检测": {
                             "enabled": true
@@ -703,7 +703,7 @@
                     }
                 },
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "乐土每周商店-购买界面-乐土币不足-色块检测": {
                             "enabled": false
@@ -770,11 +770,11 @@
             "type": "switch",
             "cases": [
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {}
                 },
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "乐土商店-聚能空间透镜-可购买": {
                             "enabled": false
@@ -791,11 +791,11 @@
             "type": "switch",
             "cases": [
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {}
                 },
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "乐土商店-相转移镜面-可购买": {
                             "enabled": false
@@ -811,11 +811,11 @@
             "type": "switch",
             "cases": [
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {}
                 },
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "乐土商店-吼吼休假卷-可购买": {
                             "enabled": false
@@ -831,11 +831,11 @@
             "type": "switch",
             "cases": [
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {}
                 },
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "乐土商店-时序通行证-可购买": {
                             "enabled": false
@@ -851,7 +851,7 @@
             "type": "switch",
             "cases": [
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "登录方式选择接口": {
                             "next": [
@@ -861,7 +861,7 @@
                     }
                 },
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {
                         "登录方式选择接口": {
                             "next": [
@@ -915,7 +915,7 @@
             "type": "switch",
             "cases": [
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {
                         "辅助显示关闭-未关闭辅助菜单显示": {
                             "enabled": true
@@ -923,7 +923,7 @@
                     }
                 },
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "辅助显示关闭-未关闭辅助菜单显示": {
                             "enabled": false
@@ -937,7 +937,7 @@
             "type": "switch",
             "cases": [
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "材料远征-体力不足处理": {
                             "next": [
@@ -950,7 +950,7 @@
                     }
                 },
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {
                         "材料远征-体力不足处理": {
                             "next": [
@@ -969,7 +969,7 @@
             "type": "switch",
             "cases": [
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "家园远征-体力不足提示": {
                             "next": [
@@ -979,7 +979,7 @@
                     }
                 },
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {
                         "家园远征-体力不足提示": {
                             "next": [
@@ -996,7 +996,7 @@
             "type": "switch",
             "cases": [
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {
                         "家园打工-可以打工": {
                             "next": [
@@ -1008,7 +1008,7 @@
                     }
                 },
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "家园打工-可以打工": {
                             "next": [
@@ -1024,7 +1024,7 @@
             "type": "switch",
             "cases": [
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {
                         "舰团每日委托-快捷补全道具": {
                             "recognition": "OCR",
@@ -1037,7 +1037,7 @@
                     }
                 },
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "舰团每日委托-快捷补全道具": {
                             "recognition": "OCR",
@@ -1387,7 +1387,7 @@
             "type": "switch",
             "cases": [
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {
                         "家园资源领取-没有可领取金币了": {
                             "next": [
@@ -1398,7 +1398,7 @@
                     }
                 },
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "家园资源领取-没有可领取金币了": {
                             "next": [
@@ -1510,7 +1510,7 @@
             "type": "switch",
             "cases": [
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {
                         "万象虚境-首通检查": {
                             "enabled": true
@@ -1518,7 +1518,7 @@
                     }
                 },
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "万象虚境-首通检查": {
                             "enabled": false
@@ -1526,7 +1526,7 @@
                     }
                 }
             ],
-            "default_case": "YES"
+            "default_case": "Yes"
         },
         "万象虚境-层数选择": {
             "label": "层数选择",
@@ -1899,7 +1899,7 @@
             "type": "switch",
             "cases": [
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "万象虚境-是否消耗时序通行证": {
                             "template": [
@@ -1931,7 +1931,7 @@
                     }
                 },
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {
                         "万象虚境-是否消耗时序通行证": {
                             "template": [
@@ -1968,7 +1968,7 @@
             "type": "switch",
             "cases": [
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "万象虚境-减负流程-不可减负": {
                             "action": "DoNothing",
@@ -1986,7 +1986,7 @@
                     }
                 },
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {
                         "万象虚境-减负流程-不可减负": { //有bug,但是目前不知道怎么修
                             "action": "Click",
@@ -2172,11 +2172,11 @@
         "记忆战场-尝试打最后一层": {
             "label": "出击模式",
             "description": "开启后将在减负完成后尝试讨伐积分怪",
-            "default_case": "NO",
+            "default_case": "No",
             "type": "switch",
             "cases": [
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {
                         "记忆战场-讨伐模式-第一只怪": {
                             "enabled": true
@@ -2189,7 +2189,7 @@
                     }
                 },
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "记忆战场-讨伐模式-第一只怪": {
                             "enabled": false
@@ -2201,10 +2201,10 @@
         "记忆战场-增益模式": {
             "type": "switch",
             "label": "增益模式",
-            "default_case": "YES",
+            "default_case": "Yes",
             "cases": [
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {
                         "记忆战场-增益模式": {
                             "recognition": {
@@ -2216,7 +2216,7 @@
                     }
                 },
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "记忆战场-增益模式": {
                             "recognition": {
@@ -2405,7 +2405,7 @@
             "type": "switch",
             "cases": [
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {
                         "版本活动-特工丽影-有可领取奖励": {
                             "enabled": true
@@ -2413,7 +2413,7 @@
                     }
                 },
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "版本活动-特工丽影-有可领取奖励": {
                             "enabled": false
@@ -2723,7 +2723,7 @@
             "type": "switch",
             "cases": [
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "冒险委托通用-委托还差一个接完了-开始尝试刷氵": {
                             "enabled": false
@@ -2731,7 +2731,7 @@
                     }
                 },
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {
                         "冒险委托通用-委托还差一个接完了-开始尝试刷氵": {
                             "enabled": true
@@ -3137,7 +3137,7 @@
             "type": "switch",
             "cases": [
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {
                         "超弦空间-四层均已挑战完毕": {
                             "next": [
@@ -3166,7 +3166,7 @@
                     }
                 },
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "超弦空间-四层均已挑战完毕": {
                             "next": [
@@ -3343,7 +3343,7 @@
                     "name": "No"
                 },
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "option": [
                         "超限空间花火大招处理"
                     ]
@@ -3364,7 +3364,7 @@
                     }
                 },
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {
                         "处于花火大招中": {
                             "enabled": true
@@ -3377,7 +3377,7 @@
             "type": "switch",
             "cases": [
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {
                         "超限空间-检查当期深渊挑战情况": {
                             "next": [
@@ -3390,7 +3390,7 @@
                     }
                 },
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "超限空间-检查当期深渊挑战情况": {
                             "next": [
@@ -3408,7 +3408,7 @@
             "type": "switch",
             "cases": [
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {
                         "超弦空间-这段位打不过口牙": {
                             "enabled": true
@@ -3416,7 +3416,7 @@
                     }
                 },
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "超弦空间-这段位打不过口牙": {
                             "enabled": false
@@ -5062,7 +5062,7 @@
             "type": "switch",
             "cases": [
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {
                         "乐土刷级-浅层序列-未选择出战女武神流程-点击选择女武神": {
                             "target_offset": [
@@ -5161,10 +5161,10 @@
             "type": "switch",
             "label": "是否主动升级女武神装甲",
             "description": "当前选中的女武神装甲可升级时进行升级",
-            "default_case": "YES",
+            "default_case": "Yes",
             "cases": [
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {
                         "乐土刷级-浅层序列-当前女武神装甲可进行升级": {
                             "enabled": true
@@ -5172,7 +5172,7 @@
                     }
                 },
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "乐土刷级-浅层序列-当前女武神装甲可进行升级": {
                             "enabled": false
@@ -5188,7 +5188,7 @@
             "type": "switch",
             "cases": [
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {
                         "乐土刷级-浅层序列-当前女武神装甲已是满级": {
                             "enabled": true
@@ -5196,7 +5196,7 @@
                     }
                 },
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "乐土刷级-浅层序列-当前女武神装甲已是满级": {
                             "enabled": false
@@ -5209,7 +5209,7 @@
             "type": "switch",
             "cases": [
                 {
-                    "name": "NO",
+                    "name": "No",
                     "pipeline_override": {
                         "乐土刷级-减负模式-回到战场准备退出": {
                             "next": [
@@ -5242,7 +5242,7 @@
                     }
                 },
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {
                         "乐土刷级-减负模式-回到战场准备退出": {
                             "next": [
@@ -5412,7 +5412,7 @@
                     "name": "No"
                 },
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "option": [
                         "自动战斗逻辑的战斗时特殊处理_之花火大招"
                     ]
@@ -5433,7 +5433,7 @@
                     }
                 },
                 {
-                    "name": "YES",
+                    "name": "Yes",
                     "pipeline_override": {
                         "处于花火大招中": {
                             "enabled": true

@@ -292,7 +292,7 @@
             "周常/万象虚境/消耗时序通行证.png"
         ],
         "green_mask": true,
-        "inverse": true,
+        // "inverse": true,
         "action": "Click",
         "target": [
             695,
@@ -449,11 +449,36 @@
         ],
         "count": 6000,
         "next": [
+            "万象虚境-时序通行证不足",
             "万象虚境-确认虚空秘藏奖励",
             "万象虚境-虚境挑战书不足",
             "[JumpBack]万象虚境-使用吼吼休假卷",
             "[JumpBack]万象虚境-点击减负",
             "[JumpBack]点击左上角返回-延迟两秒"
+        ]
+    },
+    "万象虚境-时序通行证不足": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    508,
+                    140,
+                    313,
+                    108
+                ],
+                "expected": [
+                    "时序通行证"
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "<font color=\"red\">时序通行证不足，正在返回菜单</font>"
+        },
+        "next": [
+            "成功进入游戏主菜单",
+            "[JumpBack]点击返回主菜单",
+            "[JumpBack]家园处-点击返回"
         ]
     },
     "万象虚境-减负流程-不可减负": {
