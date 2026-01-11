@@ -23,23 +23,16 @@
                 ]
             }
         },
-        "action": {
-            "type": "Custom",
-            "param": {
-                "custom_action": "Count",
-                "custom_action_param": {}
-            }
-        },
         "next": [
             "[JumpBack]识别人物",
-            "战斗程序"
+            "[JumpBack]战斗程序"
         ]
     },
     "识别人物": {
         "action": {
             "type": "Custom",
             "param": {
-                "custom_action": "RecognitionRole"
+                "custom_action": "IDFRole"
             }
         }
     },

@@ -17,49 +17,69 @@ from agent.custom.recongition.CheckResolution import CheckResolution
 
 @AgentServer.custom_action("GeneralFight")
 class GeneralFight_Cls(GeneralFight):
-    pass
+    def __init__(self):
+        super().__init__()
+        print(f"{self.__class__.__name__} 初始化")
 
 
 @AgentServer.custom_action("IDFRole")
 class IDFRole_Cls(RecognitionRole):
-    pass
+    def __init__(self):
+        super().__init__()
+        print(f"{self.__class__.__name__} 初始化")
 
 
 @AgentServer.custom_action("Count")
 class Count_Cls(Count):
-    pass
+    def __init__(self):
+        super().__init__()
+        print(f"{self.__class__.__name__} 初始化")
 
 
 @AgentServer.custom_action("OverridePipe")
 class OverridePipe_Cls(OverridePipe):
-    pass
+    def __init__(self):
+        super().__init__()
+        print(f"{self.__class__.__name__} 初始化")
 
 
 @AgentServer.custom_recognition("CheckResolution")
 class CheckResolution_Cls(CheckResolution):
-    pass
+    def __init__(self):
+        super().__init__()
+        print(f"{self.__class__.__name__} 初始化")
 
 
 @AgentServer.custom_action("FieryWishingStar")
 class FieryWishingStar_Cls(FieryWishingStar):
-    pass
+    def __init__(self):
+        super().__init__()
+        print(f"{self.__class__.__name__} 初始化")
 
 
 @AgentServer.custom_action("SpinaAstera")
 class SpinaAstera_Cls(SpinaAstera):
-    pass
+    def __init__(self):
+        super().__init__()
+        print(f"{self.__class__.__name__} 初始化")
 
 
 @AgentServer.custom_action("HerrscherOfTruth")
 class HerrscherOfTruth_Cls(HerrscherOfTruth):
-    pass
+    def __init__(self):
+        super().__init__()
+        print(f"{self.__class__.__name__} 初始化")
 
 
 @AgentServer.custom_action("LoveElf")
 class LoveElf_Cls(LoveElf):
-    pass
+    def __init__(self):
+        super().__init__()
+        print(f"{self.__class__.__name__} 初始化")
 
 
 @AgentServer.custom_action("FengHuangOfVicissitude")
 class FengHuangOfVicissitude_Cls(FengHuangOfVicissitude):
-    pass
+    def __init__(self):
+        super().__init__()
+        print(f"{self.__class__.__name__} 初始化")

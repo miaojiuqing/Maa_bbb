@@ -17,6 +17,8 @@ class RecognitionRole(CustomAction):
         self, context: Context, argv: CustomAction.RunArg
     ) -> CustomAction.RunResult:
         image = context.tasker.controller.post_screencap().wait().get()
+        print(f"识别角色 ")
+
         for role_name, role_info in ROLE_CONFIG.items():
             result = context.run_recognition(
                 entry="在战斗中检查角色",
@@ -42,6 +44,7 @@ class RecognitionRole(CustomAction):
                         },
                     }
                 )
+                print(f"识别角色 {role_name} 成功")
                 return CustomAction.RunResult(success=True)
         context.override_pipeline(
             {
@@ -52,5 +55,6 @@ class RecognitionRole(CustomAction):
                 },
             }
         )
+        print(f"识别角色 失败,使用通用逻辑")
 
         return CustomAction.RunResult(success=True)

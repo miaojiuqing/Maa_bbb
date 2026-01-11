@@ -3,7 +3,8 @@
     "agent": {
         "child_exec": "python",
         "child_args": [
-            "./agent/main.py"
+            "../agent/main.py",
+            "-dev"
         ]
     },
     "name": "MAA_bbb",
