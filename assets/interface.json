@@ -15,7 +15,7 @@
     // "message": "欢迎舰长使用识宝小助手，我什么都做得到！",
     "icon": ".\\resource\\image\\logo.ico",
     "mirrorchyan_rid": "Maa_bbb",
-    "mirrorchyan_multiplatform": false,
+    "mirrorchyan_multiplatform": true,
     "welcome": "欢迎舰长使用识宝小助手Oᴗoಣ",
     "controller": [
         //我是分割线
