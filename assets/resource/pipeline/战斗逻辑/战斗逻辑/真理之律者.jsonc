@@ -1,0 +1,54 @@
+{
+    "检查常规状态_真理之律者": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1061,
+                    494,
+                    219,
+                    226
+                ],
+                "template": [
+                    "自动战斗索引/真理之律者.png"
+                ]
+            }
+        }
+    },
+    "检查必杀阶段动能条满_真理之律者": {
+        "recognition": {
+            "type": "ColorMatch",
+            "param": {
+                "roi": [
+                    651,
+                    627,
+                    16,
+                    19
+                ],
+                "lower": [
+                    223,
+                    146,
+                    50
+                ],
+                "upper": [
+                    255,
+                    152,
+                    86
+                ],
+                "count": 20,
+                "connected": true
+            }
+        }
+    },
+    "战斗测试_真理之律者": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "HerrscherOfTruth"
+            }
+        },
+        "next": [
+            "战斗测试_真理之律者"
+        ]
+    }
+}

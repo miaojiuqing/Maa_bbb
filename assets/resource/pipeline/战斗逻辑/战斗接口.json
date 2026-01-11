@@ -29,16 +29,24 @@
                 "custom_action": "Count",
                 "custom_action_param": {}
             }
-        }
+        },
+        "next": [
+            "[JumpBack]识别人物",
+            "战斗程序"
+        ]
     },
-    "识别角色": {
+    "识别人物": {
         "action": {
             "type": "Custom",
             "param": {
-                "custom_action": "IDFRole",
-                "custom_action_param": {}
+                "custom_action": "RecognitionRole"
             }
         }
+    },
+    "战斗程序": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0
     }
     // "自动战斗-失败": {
     //     "roi": [
