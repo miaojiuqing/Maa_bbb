@@ -2,7 +2,7 @@ from maa.context import Context
 from maa.custom_action import CustomAction
 import json
 from ..utils.Logger import Logger
-
+"""计数"""
 
 class Count(CustomAction):
     def run(

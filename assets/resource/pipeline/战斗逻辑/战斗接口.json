@@ -4,6 +4,41 @@
             "自动战斗-乐土-爱愿主播爱莉战斗循环",
             "[JumpBack]空任务"
         ]
+    },
+    "自动战斗": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    0,
+                    0,
+                    143,
+                    145
+                ],
+                "template": [
+                    "战斗相关/战中检查/战斗中.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "Count",
+                "custom_action_param": {}
+            }
+        }
+    },
+    "识别角色": {
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "IDFRole",
+                "custom_action_param": {}
+            }
+        }
     }
     // "自动战斗-失败": {
     //     "roi": [

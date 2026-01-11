@@ -3,7 +3,7 @@ from maa.custom_action import CustomAction
 import json
 from ..utils.Logger import Logger
 
-
+"""覆盖pipeline配置"""
 class OverridePipe(CustomAction):
     def run(
         self, context: Context, argv: CustomAction.RunArg
