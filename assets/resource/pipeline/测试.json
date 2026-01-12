@@ -212,7 +212,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Starting": "识别开始",
+            "Node.Recognition.Starting": "<font color=\"red\">识别开始</font>",
             "Node.Recognition.Succeeded": "识别成功",
             "Node.Recognition.Failed": "识别失败",
             "Node.Action.Starting": "动作开始",
