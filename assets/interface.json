@@ -254,7 +254,10 @@
             "name": "每周分享",
             "entry": "每周分享-开始任务层",
             "default_check": true,
-            "description": "很内向，不会检查是否已分享过，每次运行都会一直点"
+            "description": "很内向，不会检查是否已分享过，每次运行都会一直点",
+            "option": [
+                "每周分享-重复点击复制按钮次数"
+            ]
         },
         {
             "name": "万象虚境",
@@ -1510,6 +1513,53 @@
                 }
             ],
             "default_case": "仅购买金币"
+        },
+        "每周分享-重复点击复制按钮次数": {
+            "type": "select",
+            "label": "点击复制重复次数",
+            "cases": [
+                {
+                    "name": "一次",
+                    "pipeline_override": {
+                        "每周分享-重复点击复制按钮次数": {
+                            "repeat": 1
+                        }
+                    }
+                },
+                {
+                    "name": "两次",
+                    "pipeline_override": {
+                        "每周分享-重复点击复制按钮次数": {
+                            "repeat": 2
+                        }
+                    }
+                },
+                {
+                    "name": "三次",
+                    "pipeline_override": {
+                        "每周分享-重复点击复制按钮次数": {
+                            "repeat": 3
+                        }
+                    }
+                },
+                {
+                    "name": "五次",
+                    "pipeline_override": {
+                        "每周分享-重复点击复制按钮次数": {
+                            "repeat": 5
+                        }
+                    }
+                },
+                {
+                    "name": "十次",
+                    "pipeline_override": {
+                        "每周分享-重复点击复制按钮次数": {
+                            "repeat": 10
+                        }
+                    }
+                }
+            ],
+            "default_case": "三次"
         },
         "万象虚境-是否启用首通检查": {
             "description": "不是萌新可以关了",
