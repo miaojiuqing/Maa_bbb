@@ -33,7 +33,7 @@
         "action": {
             "type": "ClickKey",
             "param": {
-                "key": 75
+                "key": 160
             }
         }
     },
@@ -41,7 +41,7 @@
         "action": {
             "type": "LongPressKey",
             "param": {
-                "key": 75
+                "key": 160
             }
         }
     },
@@ -49,7 +49,7 @@
         "action": {
             "type": "KeyDown",
             "param": {
-                "key": 75
+                "key": 160
             }
         }
     },
@@ -63,7 +63,7 @@
         "action": {
             "type": "ClickKey",
             "param": {
-                "key": 85
+                "key": 70
             }
         }
     },
@@ -71,7 +71,7 @@
         "action": {
             "type": "ClickKey",
             "param": {
-                "key": 73
+                "key": 81
             }
         }
     },
@@ -79,7 +79,7 @@
         "action": {
             "type": "ClickKey",
             "param": {
-                "key": 76
+                "key": 70
             }
         }
     },
