@@ -299,6 +299,7 @@ class CombatActions:
         else:
             target = target_node.get("post_delay", 1)
             if target not in [1, 2]:
+                print("没有目标可切换")
                 return
 
         self.trigger_qte(target)
@@ -313,7 +314,9 @@ class CombatActions:
                 if target == 1:
                     print("切换失败，切换到角色2")
                     target = 2
+                    self.context.override_pipeline({"准备切换角色": {"post_delay": 2}})
                 else:
+                    self.context.override_pipeline({"准备切换角色": {"post_delay": 3}})
                     print("切换失败，无法切换到角色")
                     return
             self.trigger_qte(target)  # 尝试重新点击
