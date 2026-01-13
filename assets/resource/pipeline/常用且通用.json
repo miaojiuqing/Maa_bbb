@@ -279,5 +279,25 @@
             "succeeded": "舰长，请注意休息"
         },
         "post_delay": 1000
+    },
+    "点击首页的活动": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    52,
+                    142,
+                    92,
+                    94
+                ],
+                "template": [
+                    "主页UI/活动.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {}
+        }
     }
 }
