@@ -1,0 +1,135 @@
+{
+    "攻击_action": {
+        "action": {
+            "type": "ClickKey",
+            "param": {
+                "key": 74
+            }
+        }
+    },
+    "长按攻击_action": {
+        "action": {
+            "type": "LongPressKey",
+            "param": {
+                "key": 74
+            }
+        }
+    },
+    "按下攻击_action": {
+        "action": {
+            "type": "KeyDown",
+            "param": {
+                "key": 74
+            }
+        }
+    },
+    "松开攻击_action": {
+        "action": {
+            "type": "KeyUp",
+            "param": {}
+        }
+    },
+    "闪避_action": {
+        "action": {
+            "type": "ClickKey",
+            "param": {
+                "key": 75
+            }
+        }
+    },
+    "长按闪避_action": {
+        "action": {
+            "type": "LongPressKey",
+            "param": {
+                "key": 75
+            }
+        }
+    },
+    "按下闪避_action": {
+        "action": {
+            "type": "KeyDown",
+            "param": {
+                "key": 75
+            }
+        }
+    },
+    "松开闪避_action": {
+        "action": {
+            "type": "KeyUp",
+            "param": {}
+        }
+    },
+    "技能_action": {
+        "action": {
+            "type": "ClickKey",
+            "param": {
+                "key": 85
+            }
+        }
+    },
+    "必杀_action": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1183,
+                    467,
+                    1,
+                    1
+                ]
+            }
+        }
+    },
+    "协同者_action": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    917,
+                    567,
+                    1,
+                    1
+                ]
+            }
+        }
+    },
+    "锁定视角_action": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    861,
+                    300,
+                    1,
+                    1
+                ]
+            }
+        }
+    },
+    "qte1": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1208,
+                    147,
+                    1,
+                    1
+                ]
+            }
+        }
+    },
+    "qte2": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1203,
+                    285,
+                    1,
+                    1
+                ]
+            }
+        }
+    }
+}
