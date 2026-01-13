@@ -140,5 +140,31 @@
                 ]
             }
         }
+    },
+    "qte1": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1208,
+                    147,
+                    1,
+                    1
+                ]
+            }
+        }
+    },
+    "qte2": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1203,
+                    285,
+                    1,
+                    1
+                ]
+            }
+        }
     }
 }

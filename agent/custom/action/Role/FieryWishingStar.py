@@ -13,5 +13,7 @@ class FieryWishingStar(CustomAction):
     def run(
         self, context: Context, argv: CustomAction.RunArg
     ) -> CustomAction.RunResult:
+        ATC = CombatActions(context=context, role_name="炽愿吉星")
         context.run_action("自动战斗-乐土-新春虫战斗循环")
+        ATC.switch()
         return CustomAction.RunResult(success=True)

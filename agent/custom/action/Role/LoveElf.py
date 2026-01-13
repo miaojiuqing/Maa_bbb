@@ -13,5 +13,7 @@ class LoveElf(CustomAction):
     def run(
         self, context: Context, argv: CustomAction.RunArg
     ) -> CustomAction.RunResult:
+        ATC = CombatActions(context=context, role_name="爱愿妖精")
         context.run_action("自动战斗-乐土-爱愿主播爱莉战斗循环")
+        ATC.switch()
         return CustomAction.RunResult(success=True)

@@ -13,5 +13,7 @@ class FengHuangOfVicissitude(CustomAction):
     def run(
         self, context: Context, argv: CustomAction.RunArg
     ) -> CustomAction.RunResult:
+        ATC = CombatActions(context=context, role_name="符华崩落")
         context.run_action("自动战斗-乐土-崩落华战斗循环")
+        ATC.switch()
         return CustomAction.RunResult(success=True)

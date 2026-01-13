@@ -262,7 +262,7 @@ class CombatActions:
             self.logger.exception("检查技能_能量条:" + str(e))
             return False
 
-    def get_hp_percent(self) -> int:
+    def get_hp_percent(self, return_percent: bool = True) -> int:
         """
         获取当前血量百分比
         识别当前角色血量百分比。
@@ -276,9 +276,46 @@ class CombatActions:
             try:
                 current_hp, max_hp = map(int, result.split("/"))
                 # 返回int百分比血量
-                hp_percent = int((current_hp / max_hp) * 100)
-                return min(max(hp_percent, 0), 100)
+                if return_percent:
+                    hp_percent = int((current_hp / max_hp) * 100)
+                    return min(max(hp_percent, 0), 100)
+                else:
+                    return max_hp
             except ValueError:
                 return 0
         else:
             return 0
+
+    def switch(self):
+        """
+        切换角色
+        切换当前战斗中的角色。
+        """
+        # 记录目前角色生命值
+        current_hp = self.get_hp_percent(False)
+        target_node = self.context.get_node_data("准备切换角色")
+        if target_node is None:
+            target = 1
+        else:
+            target = target_node.get("post_delay", 1)
+            if target not in [1, 2]:
+                return
+
+        self.trigger_qte(target)
+        print(f"切换目标: {target}")
+
+        for _ in range(100):  # 等待切换完成
+            if self.get_hp_percent(False) != current_hp:  # 切换成功
+                print(f"切换成功")
+                break
+            elif self.check_status("本关卡无法复活"):  # 弹窗无法复活
+                self.context.tasker.controller.post_click(642, 420)  # 点击确认
+                if target == 1:
+                    print("切换失败，切换到角色2")
+                    target = 2
+                else:
+                    print("切换失败，无法切换到角色")
+                    return
+            self.trigger_qte(target)  # 尝试重新点击
+            self.attack()  # 防止发呆
+        self.context.override_pipeline({"识别人物": {"enabled": True}})

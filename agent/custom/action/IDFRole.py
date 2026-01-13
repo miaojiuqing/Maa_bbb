@@ -20,6 +20,7 @@ class RecognitionRole(CustomAction):
         print(f"识别角色 ")
 
         for role_name, role_info in ROLE_CONFIG.items():
+            print(f"识别角色 {role_name}")
             result = context.run_recognition(
                 entry="在战斗中检查角色",
                 image=image,
@@ -34,6 +35,7 @@ class RecognitionRole(CustomAction):
                     }
                 },
             )
+            context.run_action("攻击_action")  # 攻击一下,防止发呆
             if result and result.hit:
                 context.override_pipeline(
                     {
