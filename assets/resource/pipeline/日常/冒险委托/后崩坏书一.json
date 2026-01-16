@@ -69,6 +69,7 @@
             278
         ],
         "recognition": "TemplateMatch",
+        "green_mask": true,
         "template": [
             "周常/冒险委托/后崩坏书1/已进入后崩一世界菜单.png"
         ],

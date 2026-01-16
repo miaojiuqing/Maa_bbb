@@ -86,6 +86,8 @@
                 ]
             }
         },
-        "action": "Click"
+        "action": {
+            "type": "Click"
+        }
     }
 }
