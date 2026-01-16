@@ -391,7 +391,7 @@
         ],
         "recognition": "OCR",
         "expected": [
-            "委托任务奖励"
+            ".*委托任务奖励"
         ],
         "action": "Click",
         "target": [
@@ -404,7 +404,9 @@
             "返回主页后强制结束任务",
             "[JumpBack]家园处-点击返回",
             "[JumpBack]后崩2委托-点击返回",
-            "[JumpBack]点击返回主菜单"
+            "[JumpBack]点击返回主菜单",
+            "[JumoBack]点击叉叉",
+            "[JumpBack]点击空白位置关闭"
         ]
     },
     "冒险委托通用-确认减负": {
