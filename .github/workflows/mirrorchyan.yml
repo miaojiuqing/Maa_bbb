@@ -9,8 +9,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [win]
-        arch: [x86_64]
+        os: [win, macos, linux]
+        arch: [aarch64, x86_64]
     steps:
       - id: uploading
         uses: MirrorChyan/uploading-action@v1

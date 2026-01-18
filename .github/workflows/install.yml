@@ -26,6 +26,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
       - id: set_tag
         run: |
           is_release=${{ startsWith(github.ref, 'refs/tags/v') }}
@@ -43,14 +44,78 @@ jobs:
             tag="$prefix-ci.$suffix"
           fi
 
+          # Determine if this is a prerelease (contains -alpha, -beta, -rc, -ci, etc.)
+          is_prerelease="false"
+          if [[ "$tag" == *"-alpha"* ]] || [[ "$tag" == *"-beta"* ]] || [[ "$tag" == *"-rc"* ]] || [[ "$tag" == *"-ci"* ]] || [[ "$tag" == *"-"* ]]; then
+            is_prerelease="true"
+          fi
+
           echo tag=$tag | tee -a $GITHUB_OUTPUT
           echo is_release=$is_release | tee -a $GITHUB_OUTPUT
+          echo is_prerelease=$is_prerelease | tee -a $GITHUB_OUTPUT
+
     outputs:
       tag: ${{ steps.set_tag.outputs.tag }}
       is_release: ${{ steps.set_tag.outputs.is_release }}
+      is_prerelease: ${{ steps.set_tag.outputs.is_prerelease }}
+
+  download-python-embed:
+    needs: meta
+    strategy:
+      matrix:
+        include:
+          # Windows x86_64
+          - os: win
+            arch: x86_64
+            runs-on: windows-latest
+          # Windows aarch64
+          - os: win
+            arch: aarch64
+            runs-on: windows-11-arm
+          # macOS x86_64 (Intel)
+          - os: macos
+            arch: x86_64
+            runs-on: macos-15-intel
+          # macOS aarch64 (Apple Silicon)
+          - os: macos
+            arch: aarch64
+            runs-on: macos-latest
+          # Linux x86_64
+          - os: linux
+            arch: x86_64
+            runs-on: ubuntu-latest
+          # Linux aarch64
+          - os: linux
+            arch: aarch64
+            runs-on: ubuntu-24.04-arm
+      fail-fast: false
+    runs-on: ${{ matrix.runs-on }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+          architecture: ${{ matrix.arch == 'x86_64' && 'x64' || 'arm64' }}
+
+      - name: Download Python embed
+        shell: bash
+        run: |
+          python ./tools/install_python.py ./python
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: python-embed-${{ matrix.os }}-${{ matrix.arch }}
+          path: ./python
 
   install:
-    needs: meta
+    needs:
+      - meta
+      - download-python-embed
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -91,10 +156,6 @@ jobs:
           rm -f "${ARCHIVE_FILE_PATH}"
           echo "Archive cleanup command executed for MFAAvalonia."
 
-      # ===========================================================================
-      # ✅ Set Windows EXE icon using logo.ico via Wine + rcedit (works on Ubuntu Runner)
-      #     Auto-installs wine if missing
-      # ===========================================================================
       - name: Apply custom icon to MFAAvalonia.exe on Windows
         if: matrix.os == 'win'
         shell: bash
@@ -125,9 +186,11 @@ jobs:
 
       - name: Install
         shell: bash
+        env:
+          TARGET_OS: ${{ matrix.os }}
         run: |
           python -m pip install json-with-comments
-          python ./install.py ${{ needs.meta.outputs.tag }}
+          python ./tools/install.py ${{ needs.meta.outputs.tag }}
 
           if [[ "${{ matrix.os }}" != "android" ]]; then
             if [ -d "MFA" ]; then
@@ -141,6 +204,12 @@ jobs:
             echo "Skipping copy MFA for Android."
           fi
 
+      - uses: actions/download-artifact@v4
+        if: matrix.os != 'android'
+        with:
+          name: python-embed-${{ matrix.os }}-${{ matrix.arch }}
+          path: ./install/python
+
       - uses: actions/upload-artifact@v4
         with:
           name: Maa_bbb-${{ matrix.os }}-${{ matrix.arch }}
@@ -151,6 +220,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       release_body: ${{ steps.git-cliff.outputs.content }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -169,8 +239,12 @@ jobs:
 
   release:
     if: ${{ needs.meta.outputs.is_release == 'true' }}
-    needs: [meta, install, changelog]
+    needs:
+      - meta
+      - install
+      - changelog
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/download-artifact@v4
         with:
@@ -181,7 +255,7 @@ jobs:
           for f in *; do
             (cd $f && zip -r ../$f-${{ needs.meta.outputs.tag }}.zip .)
           done
-          
+
       - uses: softprops/action-gh-release@v2
         with:
           files: assets/*
