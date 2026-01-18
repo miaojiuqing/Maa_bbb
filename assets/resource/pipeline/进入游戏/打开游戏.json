@@ -222,6 +222,12 @@
         "package": "com.miHoYo.enterprise.NGHSoD"
     },
     "成功进入游戏主菜单": {
+        "roi": [
+            890,
+            293,
+            269,
+            245
+        ],
         "recognition": "TemplateMatch",
         "template": [
             "主页UI/休伯利安主界面.png"
