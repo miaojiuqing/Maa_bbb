@@ -1,33 +1,42 @@
-name: mirrorchyan_release
+name: mirrorchyan
 
 on:
   workflow_dispatch:
-    inputs:
-        tag:
-            default: ''
-            required: false
-  release:
-    types: [released]
 
 jobs:
   mirrorchyan:
     runs-on: macos-latest
-    if: ${{ github.repository_owner == 'miaojiuqing' }}
     strategy:
       fail-fast: false
       matrix:
         os: [win, macos, linux]
         arch: [aarch64, x86_64]
     steps:
-      - uses: MirrorChyan/uploading-action@v1
+      - id: uploading
+        uses: MirrorChyan/uploading-action@v1
         with:
           filetype: latest-release
           filename: "Maa_bbb-${{ matrix.os }}-${{ matrix.arch }}-*.zip"
           mirrorchyan_rid: Maa_bbb
-          tag: ${{ inputs.tag }}
 
+          owner: miaojiuqing
+          repo: Maa_bbb
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          upload_token: ${{ secrets.MirrorChyanUploadToken }}
           os: ${{ matrix.os }}
           arch: ${{ matrix.arch }}
+
+  mirrorchyan_res:
+    runs-on: macos-latest
+    steps:
+      - id: uploading
+        uses: MirrorChyan/uploading-action@v1
+        with:
+          filetype: latest-release
+          filename: "Maa_bbb-win-x86_64-*.zip"
+          pick_files: '["resource", "resource_bilibili", "resource_win32", "resource_win32_jp", "resource_OPPE", "resource_huawei", "resource_yyb", "resource_vivo", "resource_jiuyou", "interface.json"]'
+          exclude_files: '["resource/model/ocr/**"]'
+          mirrorchyan_rid: Maa_bbb
 
           owner: miaojiuqing
           repo: Maa_bbb
