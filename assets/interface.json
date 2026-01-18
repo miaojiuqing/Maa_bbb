@@ -13,7 +13,7 @@
     "contact": "<a href=\"https://qm.qq.com/q/XrFQKgGvaI\"><font color=\"#12B7F5\"><b>💬 加入群聊</b></font></a><br/><a href=\"https://www.bilibili.com/video/BV1Ld42z1ERu/?spm_id_from=333.1387.homepage.video_card.click\"><font color=\"#FB7299\"><b>🎥 B站视频链接</b></font></a>",
     "description": "PC端使用一定要分辨率16:9！", //这是什么
     // "message": "欢迎舰长使用识宝小助手，我什么都做得到！",
-    //提交检查
+    //？
     "icon": ".\\resource\\image\\logo.ico",
     "mirrorchyan_rid": "Maa_bbb",
     "mirrorchyan_multiplatform": true,
