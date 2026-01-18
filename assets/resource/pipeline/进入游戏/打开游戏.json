@@ -72,7 +72,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Starting": "网络连接失败",
+            "Node.Recognition.Succeeded": "网络连接失败",
             "Node.Action.Starting": "正在点击重试"
         },
         "action": {
