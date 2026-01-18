@@ -19,6 +19,7 @@
             "[JumpBack]热更新-数据已更新-官方热补丁",
             "[JumpBack]相关资源下载-取消",
             "[JumpBack]特殊-英雄远征记返回", //活动
+            "[JumpBack]特殊-天命特殊教室返回", //活动
             "[JumpBack]点击返回主菜单",
             "[JumpBack]离开火星确认", //火星处理
             "[JumpBack]离开火星", //火星处理
@@ -45,6 +46,7 @@
             "[JumpBack]舰长~真的要退出游戏吗-否",
             "[JumpBack]误触进入手机界面",
             "[JumpBack]误触进入聊天频道界面",
+            "[JumpBack]网络连接失败-重试",
             "[JumpBack]版本活动-特工丽影-大厅退出确认", //活动
             "[JumpBack]版本活动-特工丽影-点击返回", //活动
             "[JumpBack]模拟器包名游戏启动",
@@ -53,6 +55,63 @@
         "focus": {
             "failed": "舰长！请检查左上角资源是否配置错误！"
         }
+    },
+    "网络连接失败-重试": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    471,
+                    116,
+                    320,
+                    137
+                ],
+                "expected": [
+                    "网络连接失败"
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "网络连接失败",
+            "Node.Action.Starting": "正在点击重试"
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    407,
+                    486,
+                    131,
+                    46
+                ]
+            }
+        }
+        // "recognition": "And",
+        // "all_of": [
+        //     {
+        //         // "sub_name": "icon",
+        //         "recognition": "OCR",
+        //         "roi": [
+        //             361,
+        //             435,
+        //             217,
+        //             152
+        //         ],
+        //         "expected": "重试",
+        //         "action": "Click"
+        //     },
+        //     {
+        //         "recognition": "OCR",
+        //         "roi": [
+        //             498,
+        //             143,
+        //             278,
+        //             100
+        //         ],
+        //         "expected": "网络连接失败"
+        //     }
+        // ],
+        // "box_index": 0
     },
     "离开火星": {
         "roi": [
@@ -163,6 +222,12 @@
         "package": "com.miHoYo.enterprise.NGHSoD"
     },
     "成功进入游戏主菜单": {
+        "roi": [
+            890,
+            293,
+            269,
+            245
+        ],
         "recognition": "TemplateMatch",
         "template": [
             "主页UI/休伯利安主界面.png"

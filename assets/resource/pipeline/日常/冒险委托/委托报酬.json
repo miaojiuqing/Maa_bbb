@@ -22,7 +22,7 @@
         ],
         "post_delay": 1500,
         "focus": {
-            "succeeded": "冒险委托刷出氵啦！"
+            "succeeded": "<font color=\"blue\">冒险委托刷出氵啦！</font>"
         }
         //一切的王者，崩三的终点，氵！
     },

@@ -449,11 +449,80 @@
         ],
         "count": 6000,
         "next": [
+            "万象虚境-时序通行证不足",
             "万象虚境-确认虚空秘藏奖励",
             "万象虚境-虚境挑战书不足",
             "[JumpBack]万象虚境-使用吼吼休假卷",
             "[JumpBack]万象虚境-点击减负",
             "[JumpBack]点击左上角返回-延迟两秒"
+        ]
+    },
+    "万象虚境-时序通行证不足": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    508,
+                    140,
+                    313,
+                    108
+                ],
+                "expected": [
+                    "时序通行证"
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "<font color=\"red\">时序通行证不足，正在返回菜单</font>"
+        },
+        "next": [
+            "万象虚境-时序通行证不足-已切换为不消耗时序通行证",
+            "[JumpBack]万象虚境-时序通行证不足-点击切换为不消耗状态",
+            "[JumpBack]点击叉叉-延迟一秒版"
+        ]
+    },
+    "万象虚境-时序通行证不足-已切换为不消耗时序通行证": {
+        "roi": [
+            632,
+            624,
+            113,
+            85
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "周常/万象虚境/不消耗时序通行证.png"
+        ],
+        "post_delay": 200,
+        "pre_delay": 500,
+        "rate_limit": 500,
+        "green_mask": true,
+        "next": [
+            "万象虚境-减负流程-可减负",
+            "[JumpBack]万象虚境-时序通行证不足-点击切换为不消耗状态"
+        ]
+    },
+    "万象虚境-时序通行证不足-点击切换为不消耗状态": {
+        "pre_delay": 500,
+        "post_delay": 200,
+        "roi": [
+            632,
+            624,
+            113,
+            85
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            // "周常/万象虚境/不消耗时序通行证.png",
+            "周常/万象虚境/消耗时序通行证.png"
+        ],
+        "green_mask": true,
+        // "inverse": true,
+        "action": "Click",
+        "target": [
+            695,
+            653,
+            23,
+            27
         ]
     },
     "万象虚境-减负流程-不可减负": {

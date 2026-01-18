@@ -184,6 +184,8 @@
         "template": [
             "商店/每周/每周分享/分享方式-复制.png"
         ],
+        "repeat": 2,
+        "repeat_delay": 500,
         "pre_delay": 2500,
         "action": "Click",
         "next": [
