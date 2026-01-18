@@ -1,0 +1,110 @@
+{
+    "攻击_action": {
+        "action": {
+            "type": "ClickKey",
+            "param": {
+                "key": 74
+            }
+        }
+    },
+    "长按攻击_action": {
+        "action": {
+            "type": "LongPressKey",
+            "param": {
+                "key": 74
+            }
+        }
+    },
+    "按下攻击_action": {
+        "action": {
+            "type": "KeyDown",
+            "param": {
+                "key": 74
+            }
+        }
+    },
+    "松开攻击_action": {
+        "action": {
+            "type": "KeyUp",
+            "param": {}
+        }
+    },
+    "闪避_action": {
+        "action": {
+            "type": "ClickKey",
+            "param": {
+                "key": 160
+            }
+        }
+    },
+    "长按闪避_action": {
+        "action": {
+            "type": "LongPressKey",
+            "param": {
+                "key": 160
+            }
+        }
+    },
+    "按下闪避_action": {
+        "action": {
+            "type": "KeyDown",
+            "param": {
+                "key": 160
+            }
+        }
+    },
+    "松开闪避_action": {
+        "action": {
+            "type": "KeyUp",
+            "param": {}
+        }
+    },
+    "技能_action": {
+        "action": {
+            "type": "ClickKey",
+            "param": {
+                "key": 70
+            }
+        }
+    },
+    "必杀_action": {
+        "action": {
+            "type": "ClickKey",
+            "param": {
+                "key": 81
+            }
+        }
+    },
+    "协同者_action": {
+        "action": {
+            "type": "ClickKey",
+            "param": {
+                "key": 70
+            }
+        }
+    },
+    "锁定视角_action": {
+        "action": {
+            "type": "ClickKey",
+            "param": {
+                "key": 85 //不确定
+            }
+        }
+    },
+    "qte1": {
+        "action": {
+            "type": "ClickKey",
+            "param": {
+                "key": 49
+            }
+        }
+    },
+    "qte2": {
+        "action": {
+            "type": "ClickKey",
+            "param": {
+                "key": 50
+            }
+        }
+    }
+}

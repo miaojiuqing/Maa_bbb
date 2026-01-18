@@ -1,0 +1,106 @@
+{
+    "战斗中": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    0,
+                    0,
+                    197,
+                    140
+                ],
+                "template": [
+                    "战斗相关/战中检查/战斗中.png"
+                ]
+            }
+        }
+    },
+    "技能_能量条": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    829,
+                    686,
+                    85,
+                    34
+                ],
+                "expected": [
+                    "\\d+/\\d+"
+                ],
+                "only_rec": true
+            }
+        }
+    },
+    "技能_必杀能量": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1198,
+                    407,
+                    55,
+                    37
+                ],
+                "expected": [
+                    "\\d+"
+                ],
+                "only_rec": true
+            }
+        }
+    },
+    "检查血量百分比": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    303,
+                    627,
+                    123,
+                    34
+                ],
+                "expected": [
+                    "\\d+/\\d+"
+                ],
+                "only_rec": true
+            }
+        }
+    },
+    "在战斗中检查角色": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1113,
+                    556,
+                    138,
+                    142
+                ],
+                "template": [],
+                "green_mask": true
+            }
+        }
+    },
+    "本关卡无法复活": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    483,
+                    241,
+                    338,
+                    118
+                ],
+                "expected": [
+                    "本关卡无法复活"
+                ]
+            }
+        }
+    },
+    "准备切换角色": {
+        "post_delay": 1 // 这个是用来标记下次切换角色序号的,无法执行
+    }
+}
