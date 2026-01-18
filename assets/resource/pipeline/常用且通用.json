@@ -51,26 +51,6 @@
         "action": "Click",
         "post_delay": 1000
     },
-    "特殊-天命特殊教室返回": {
-        "recognition": {
-            "type": "TemplateMatch",
-            "param": {
-                "roi": [
-                    0,
-                    0,
-                    220,
-                    123
-                ],
-                "template": [
-                    "版本活动/当期活动/天命特殊教室/天命特殊教室-点击返回.png"
-                ]
-            }
-        },
-        "post_delay": 500,
-        "action": {
-            "type": "Click"
-        }
-    },
     "点击空白位置关闭": {
         "recognition": "OCR",
         "expected": [
