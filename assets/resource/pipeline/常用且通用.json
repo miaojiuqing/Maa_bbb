@@ -299,5 +299,21 @@
             "type": "Click",
             "param": {}
         }
+    },
+    "黑屏计数": {
+        "recognition": "ColorMatch",
+        "upper": [
+            0,
+            0,
+            0
+        ],
+        "lower": [
+            0,
+            0,
+            0
+        ],
+        "connected": true,
+        "count": 80000,
+        "post_delay": 3000
     }
 }
