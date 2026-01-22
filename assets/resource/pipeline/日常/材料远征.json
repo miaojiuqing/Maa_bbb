@@ -99,8 +99,37 @@
         "next": [
             "材料远征-未远征",
             "材料远征-已远征",
-            "[JumpBack]相关资源下载-取消"
+            "[JumpBack]相关资源下载-取消",
+            "[JumpBack]材料远征-误触处理-点进材料关卡详细了"
         ]
+    },
+    "材料远征-误触处理-点进材料关卡详细了": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1050,
+                    575,
+                    230,
+                    145
+                ],
+                "expected": [
+                    "世界地图"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    19,
+                    22,
+                    84,
+                    30
+                ]
+            }
+        },
+        "post_delay": 2500
     },
     "材料远征-未远征": {
         "recognition": "TemplateMatch",
