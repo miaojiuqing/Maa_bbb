@@ -11,6 +11,7 @@
         "action": "StartApp",
         "package": "com.miHoYo.enterprise.NGHSoD",
         "next": [
+            "[JumpBack]舰长~真的要退出游戏吗-否",
             "[JumpBack]出现了！邪恶包菜头！",
             "[JumpBack]请舰长注意休息",
             "[JumpBack]进入游戏-超弦空间结算",
@@ -30,7 +31,8 @@
             "[JumpBack]启动游戏-领取月卡",
             "[JumpBack]领取一切确认",
             "[JumpBack]领取一切",
-            "[JumpBack]点击空白位置关闭",
+            "[JumpBack]点击空白位置关闭-启动游戏特别处理版", //PC端做特殊处理
+            // "[JumpBack]点击空白位置关闭", //PC端做特殊处理
             "[JumpBack]领取签到奖励",
             "[JumpBack]月份每日登录奖励",
             "[JumpBack]点击领取签到奖励",
@@ -44,7 +46,6 @@
             "[JumpBack]剧情跳过辅助点击-文字",
             "[JumpBack]剧情跳过辅助点击-图片",
             "[JumpBack]剧情辅助点击-点击空白处跳过剧情",
-            "[JumpBack]舰长~真的要退出游戏吗-否",
             "[JumpBack]误触进入手机界面",
             "[JumpBack]误触进入聊天频道界面",
             "[JumpBack]网络连接失败-重试",
@@ -401,5 +402,15 @@
             138,
             29
         ]
+    },
+    "点击空白位置关闭-启动游戏特别处理版": {
+        //模拟器保持原版
+        "recognition": "OCR",
+        "expected": [
+            "点击空白处关闭",
+            "点击空白区域关闭",
+            "点击空白位置关闭"
+        ],
+        "action": "Click"
     }
 }

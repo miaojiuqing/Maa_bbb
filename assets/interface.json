@@ -523,7 +523,7 @@
                 {
                     "name": "Yes",
                     "pipeline_override": {
-                        "点击空白位置关闭": {
+                        "点击空白位置关闭-启动游戏特别处理版": {
                             "enabled": true
                         }
                     }
@@ -531,7 +531,7 @@
                 {
                     "name": "No",
                     "pipeline_override": {
-                        "点击空白位置关闭": {
+                        "点击空白位置关闭-启动游戏特别处理版": {
                             "enabled": false
                         }
                     }
