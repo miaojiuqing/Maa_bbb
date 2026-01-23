@@ -42,21 +42,11 @@ def install_resource():
 
     configure_ocr_model()
 
-    for resource in [
-        "resource",
-        "resource_bilibili",
-        "resource_huawei",
-        "resource_OPPE",
-        "resource_vivo",
-        "resource_win32",
-        "resource_win32_jp",
-        "resource_yyb",
-    ]:
-        shutil.copytree(
-            working_dir / "assets" / resource,
-            install_path / resource,
-            dirs_exist_ok=True,
-        )
+    shutil.copytree(
+        working_dir / "assets" / "resource",
+        install_path / "resource",
+        dirs_exist_ok=True,
+    )
 
     shutil.copy2(
         working_dir / "assets" / "interface.json",
@@ -92,7 +82,7 @@ def install_agent():
 
     # 根据 CI 传入的 OS 环境变量来设置 child_exec
     target_os = os.getenv("TARGET_OS", "").lower()
-    
+
     # OS 到 child_exec 的映射
     os_exec_map = {
         "win": r"./python/python.exe",
