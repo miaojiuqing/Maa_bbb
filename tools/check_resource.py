@@ -30,7 +30,8 @@ def main():
 
     Tasker.set_stdout_level(LoggingLevelEnum.All)
 
-    dirs = [Path(arg) for arg in sys.argv[1:]]
+    base_dir = Path(sys.argv[1])
+    dirs = [d for d in base_dir.iterdir() if d.is_dir()]
     if not check(dirs):
         sys.exit(1)
 
