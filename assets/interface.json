@@ -14,7 +14,7 @@
     "description": "PC端使用一定要分辨率16:9！", //这是什么
     // "message": "欢迎舰长使用识宝小助手，我什么都做得到！",
     //原来如此，改ci就没有那个
-    "icon": ".\\resource\\image\\logo.ico",
+    "icon": ".\\resource\\base\\image\\logo.ico",
     "mirrorchyan_rid": "Maa_bbb",
     "mirrorchyan_multiplatform": true,
     "welcome": "欢迎舰长使用识宝小助手Oᴗoಣ",
@@ -47,8 +47,8 @@
                 "桌面端"
             ],
             "path": [
-                "./resource",
-                "./resource_win32"
+                "./resource/base",
+                "./resource/resource_win32"
             ]
         },
         {
@@ -58,8 +58,8 @@
                 "桌面端"
             ],
             "path": [
-                "./resource",
-                "./resource_win32_jp"
+                "./resource/base",
+                "./resource/resource_win32_jp"
             ]
         },
         {
@@ -68,7 +68,7 @@
                 "安卓端"
             ],
             "path": [
-                "./resource"
+                "./resource/base"
             ]
         },
         {
@@ -77,8 +77,8 @@
                 "安卓端"
             ],
             "path": [
-                "./resource",
-                "./resource_bilibili"
+                "./resource/base",
+                "./resource/resource_bilibili"
             ]
         },
         {
@@ -87,8 +87,8 @@
                 "安卓端"
             ],
             "path": [
-                "./resource",
-                "./resource_OPPE"
+                "./resource/base",
+                "./resource/resource_OPPE"
             ]
         },
         {
@@ -97,8 +97,8 @@
                 "安卓端"
             ],
             "path": [
-                "./resource",
-                "./resource_huawei"
+                "./resource/base",
+                "./resource/resource_huawei"
             ]
         },
         {
@@ -107,8 +107,8 @@
                 "安卓端"
             ],
             "path": [
-                "./resource",
-                "./resource_yyb"
+                "./resource/base",
+                "./resource/resource_yyb"
             ]
         },
         {
@@ -117,8 +117,8 @@
                 "安卓端"
             ],
             "path": [
-                "./resource",
-                "./resource_vivo"
+                "./resource/base",
+                "./resource/resource_vivo"
             ]
         },
         {
@@ -127,8 +127,8 @@
                 "安卓端"
             ],
             "path": [
-                "./resource",
-                "./resource_jiuyou"
+                "./resource/base",
+                "./resource/resource_jiuyou"
             ]
         }
     ],

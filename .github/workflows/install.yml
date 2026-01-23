@@ -160,7 +160,7 @@ jobs:
         if: matrix.os == 'win'
         shell: bash
         run: |
-          ICON_PATH="./assets/resource/image/logo.ico"
+          ICON_PATH="./assets/resource/base/image/logo.ico"
           if [ ! -f "$ICON_PATH" ]; then
             echo "❌ ERROR: Icon file not found at $ICON_PATH"
             exit 1
