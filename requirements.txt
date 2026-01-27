@@ -1,2 +1,2 @@
-maafw
+maafw == 5.4.3
 json-with-comments
