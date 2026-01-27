@@ -162,6 +162,67 @@ def load_requirements_from_file():
         raise ValueError(f"读取 requirements.txt 失败: {e}")
 
 
+def install_package_with_fallback(package_spec):
+    """
+    尝试使用多个源安装包，按顺序回退
+    1. 清华源
+    2. 阿里源
+    3. PyPI 官方源
+    """
+    sources = [
+        ("清华源", "https://pypi.tuna.tsinghua.edu.cn/simple"),
+        ("阿里源", "https://mirrors.aliyun.com/pypi/simple/"),
+        ("PyPI官方源", "https://pypi.org/simple"),
+    ]
+
+    last_error = None
+    for source_name, source_url in sources:
+        try:
+            logger.info(f"尝试使用 {source_name} 安装 {package_spec}...")
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "pip",
+                    "install",
+                    "--upgrade",
+                    "-i",
+                    source_url,
+                    package_spec,
+                ],
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+            logger.info(f"✓ {package_spec} 安装成功 (使用 {source_name})")
+            # 记录 pip 输出（如果有）
+            if result.stdout:
+                logger.debug(f"pip 输出: {result.stdout}")
+                print(f"info: {result.stdout}")
+            return True
+        except subprocess.CalledProcessError as e:
+            last_error = e
+            logger.warning(
+                f"使用 {source_name} 安装 {package_spec} 失败，尝试下一个源..."
+            )
+            print(
+                f"error: 使用 {source_name} 安装 {package_spec} 失败，尝试下一个源..."
+            )
+            if e.stderr:
+                logger.debug(f"  错误输出: {e.stderr}")
+            if e.stdout:
+                logger.debug(f"  标准输出: {e.stdout}")
+            # 继续尝试下一个源
+
+    # 所有源都失败了
+    logger.error(f"✗ {package_spec} 安装失败（所有源都尝试失败）:")
+    if last_error:
+        logger.error(f"  最后错误输出: {last_error.stderr}")
+        if last_error.stdout:
+            logger.debug(f"  最后标准输出: {last_error.stdout}")
+    return False
+
+
 def check_and_install_dependencies():
     """检查并安装必要的依赖库"""
     # 从 requirements.txt 读取所有依赖
@@ -175,34 +236,8 @@ def check_and_install_dependencies():
     for package_spec in required_packages:
         logger.info(f"正在安装 {package_spec}...")
         print(f"info: 正在安装 {package_spec}...")
-        try:
-            # 使用 subprocess 调用 pip 安装，保留完整版本号
-            # 使用清华源加速下载
-            result = subprocess.run(
-                [
-                    sys.executable,
-                    "-m",
-                    "pip",
-                    "install",
-                    "--upgrade",
-                    "-i",
-                    "https://pypi.tuna.tsinghua.edu.cn/simple",
-                    package_spec,
-                ],
-                capture_output=True,
-                text=True,
-                check=True,
-            )
-            logger.info(f"✓ {package_spec} 安装成功")
-            # 记录 pip 输出（如果有）
-            if result.stdout:
-                logger.debug(f"pip 输出: {result.stdout}")
-                print(f"info: {result.stdout}")
-        except subprocess.CalledProcessError as e:
-            logger.error(f"✗ {package_spec} 安装失败:")
-            logger.error(f"  错误输出: {e.stderr}")
-            if e.stdout:
-                logger.debug(f"  标准输出: {e.stdout}")
+        success = install_package_with_fallback(package_spec)
+        if not success:
             all_installed = False
 
     return all_installed
