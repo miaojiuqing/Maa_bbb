@@ -8,7 +8,7 @@
         ]
     },
     "name": "MAA_bbb",
-    "title": "识宝小助手 Oᴗoಣ 新年快乐~ | 版本号:1.8.9 | 自定义动作接入尝试",
+    "title": "识宝小助手 Oᴗoಣ 新年快乐~ | 版本号:1.8.10 | 自定义动作接入尝试",
     "github": "https://github.com/miaojiuqing/MAA_bbb",
     "contact": "<a href=\"https://qm.qq.com/q/XrFQKgGvaI\"><font color=\"#12B7F5\"><b>💬 加入群聊</b></font></a><br/><a href=\"https://www.bilibili.com/video/BV1Ld42z1ERu/?spm_id_from=333.1387.homepage.video_card.click\"><font color=\"#FB7299\"><b>🎥 B站视频链接</b></font></a>",
     "description": "PC端使用一定要分辨率16:9！", //这是什么
@@ -297,7 +297,6 @@
             "default_check": true,
             "entry": "凭证奖励领取-任务开始层",
             "option": [
-                "识别可领取物品框框次数",
                 "你氪通行证了吗"
             ],
             "description": "不知道该怎么判断有没有奖励，干脆每次进去点一下，有就有没有就没有"
@@ -596,92 +595,6 @@
                 }
             ],
             "default_case": "没氪"
-        },
-        "识别可领取物品框框次数": {
-            "type": "select",
-            "cases": [
-                {
-                    "name": "不检查",
-                    "pipeline_override": {
-                        "凭证奖励领取-已处于凭证奖励领取界面": {
-                            "next": [
-                                "成功进入游戏主菜单",
-                                "[JumpBack]凭证奖励领取-凭证升大级确认",
-                                "[JumpBack]凭证奖励领取-每周历练箱",
-                                "[JumpBack]点击叉叉",
-                                "[JumpBack]点击返回主菜单"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "检查一次",
-                    "pipeline_override": {
-                        "凭证奖励领取-已处于凭证奖励领取界面": {
-                            "next": [
-                                "可领取框框识别-第一次",
-                                "成功进入游戏主菜单",
-                                "[JumpBack]凭证奖励领取-凭证升大级确认",
-                                "[JumpBack]凭证奖励领取-每周历练箱",
-                                "[JumpBack]点击叉叉",
-                                "[JumpBack]点击返回主菜单"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "检查二次",
-                    "pipeline_override": {
-                        "凭证奖励领取-已处于凭证奖励领取界面": {
-                            "next": [
-                                "可领取框框识别-第一次",
-                                "可领取框框识别-第二次",
-                                "成功进入游戏主菜单",
-                                "[JumpBack]凭证奖励领取-凭证升大级确认",
-                                "[JumpBack]凭证奖励领取-每周历练箱",
-                                "[JumpBack]点击叉叉",
-                                "[JumpBack]点击返回主菜单"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "检查三次",
-                    "pipeline_override": {
-                        "凭证奖励领取-已处于凭证奖励领取界面": {
-                            "next": [
-                                "可领取框框识别-第一次",
-                                "可领取框框识别-第二次",
-                                "可领取框框识别-第三次",
-                                "成功进入游戏主菜单",
-                                "[JumpBack]凭证奖励领取-凭证升大级确认",
-                                "[JumpBack]凭证奖励领取-每周历练箱",
-                                "[JumpBack]点击叉叉",
-                                "[JumpBack]点击返回主菜单"
-                            ]
-                        }
-                    }
-                },
-                {
-                    "name": "检查四次",
-                    "pipeline_override": {
-                        "凭证奖励领取-已处于凭证奖励领取界面": {
-                            "next": [
-                                "可领取框框识别-第一次",
-                                "可领取框框识别-第二次",
-                                "可领取框框识别-第三次",
-                                "可领取框框识别-第四次",
-                                "成功进入游戏主菜单",
-                                "[JumpBack]凭证奖励领取-凭证升大级确认",
-                                "[JumpBack]凭证奖励领取-每周历练箱",
-                                "[JumpBack]点击叉叉",
-                                "[JumpBack]点击返回主菜单"
-                            ]
-                        }
-                    }
-                }
-            ],
-            "default_case": "不检查"
         },
         "锚点识别契合阈值": {
             "type": "select",

@@ -148,12 +148,6 @@
         ]
     },
     "文字识别测试": {
-        "roi": [
-            967,
-            212,
-            270,
-            287
-        ],
         "recognition": "OCR",
         "expected": [
             "装备|协同者|出击|女武神"
@@ -172,24 +166,40 @@
         ]
     },
     "色块识别测试": {
-        "roi": [
-            947,
-            592,
-            333,
-            116
-        ],
-        "recognition": "ColorMatch",
-        "upper": [
-            92,
-            95,
-            102
-        ],
-        "lower": [
-            92,
-            95,
-            102
-        ],
-        "count": 150
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    10,
+                    -35,
+                    0,
+                    0
+                ]
+            }
+        },
+        "recognition": {
+            "type": "ColorMatch",
+            "param": {
+                "connected": true,
+                "count": 250,
+                "roi": [
+                    343,
+                    288,
+                    591,
+                    62
+                ],
+                "upper": [
+                    143,
+                    143,
+                    143
+                ],
+                "lower": [
+                    143,
+                    143,
+                    143
+                ]
+            }
+        }
     },
     "测试任务接口": {
         "rate_limit": 0,

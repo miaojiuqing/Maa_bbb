@@ -2,6 +2,7 @@
     "凭证奖励领取-任务开始层": {
         "next": [
             "凭证奖励领取-总任务层",
+            "凭证奖励领取-已进入任务领取界面",
             "[JumpBack]启动并进入游戏"
         ]
     },
@@ -50,7 +51,7 @@
         ],
         "action": "Click"
     },
-    "凭证奖励领取-已处于凭证奖励领取界面": {
+    "凭证奖励领取-已处于凭证奖励领取界面": { //开始重构
         "roi": [
             206,
             212,
@@ -62,28 +63,104 @@
             "日常/任务奖励领取/先锋凭证.png"
         ],
         "pre_delay": 500,
-        "action": "Click",
-        "target_offset": [
-            130,
-            0,
-            0,
-            0
-        ],
-        "rate_limit": 0,
+        "focus": {
+            "Node.Recognition.Succeeded": "已处于凭证奖励领取界面，开始检查先锋凭证奖励状态"
+        },
         "next": [
-            "可领取框框识别-第一次",
-            "可领取框框识别-第二次",
-            "可领取框框识别-第三次",
-            "可领取框框识别-第四次",
-            "成功进入游戏主菜单",
-            "凭证奖励领取-有红点点",
-            "[JumpBack]凭证奖励领取-凭证升大级确认",
-            "[JumpBack]凭证奖励领取-每周历练箱",
             "[JumpBack]点击叉叉",
-            "[JumpBack]点击返回主菜单"
+            "[JumpBack]点击空白位置关闭",
+            "凭证奖励领取-先锋凭证检查-无可领取奖励",
+            "凭证奖励领取-先锋凭证检查-有可领取奖励",
+            "[JumpBack]凭证奖励领取-氪金历练箱",
+            "[JumpBack]凭证奖励领取-每周历练箱",
+            "[JumpBack]凭证奖励领取-正处于物品详细界面-误触版"
         ]
     },
-    "凭证奖励领取-有红点点": {
+    "凭证奖励领取-先锋凭证检查-有可领取奖励": {
+        "recognition": {
+            "type": "ColorMatch",
+            "param": {
+                "connected": true,
+                "count": 250,
+                "roi": [
+                    343,
+                    288,
+                    591,
+                    62
+                ],
+                "upper": [
+                    255,
+                    255,
+                    255
+                ],
+                "lower": [
+                    255,
+                    255,
+                    255
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    10,
+                    -35,
+                    0,
+                    0
+                ]
+            }
+        },
+        "post_delay": 300,
+        "focus": {
+            "Node.Recognition.Succeeded": "检查到先锋凭证存在未领取奖励",
+            "Node.Action.Succeeded": "点击领取可领取奖励"
+        },
+        "next": [
+            "凭证奖励领取-正处于物品详细界面-目的版-用于先锋凭证",
+            "凭证奖励领取-奖励获得弹窗-结束任务",
+            "[JumpBack]点击叉叉",
+            "凭证奖励领取-已处于凭证奖励领取界面",
+            "凭证奖励领取-先锋凭证检查-有可领取奖励"
+        ]
+    },
+    "凭证奖励领取-先锋凭证检查-无可领取奖励": {
+        "recognition": {
+            "type": "ColorMatch",
+            "param": {
+                "connected": true,
+                "count": 250,
+                "roi": [
+                    326,
+                    266,
+                    633,
+                    89
+                ],
+                "upper": [
+                    143,
+                    143,
+                    143
+                ],
+                "lower": [
+                    143,
+                    143,
+                    143
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "先锋凭证无可领取奖励，将检查其余档位奖励"
+        },
+        "next": [
+            "凭证奖励领取-氪金检查中间层-进阶凭证",
+            "[JumpBack]点击叉叉",
+            "[JumpBack]点击空白位置关闭",
+            "[JumpBack]凭证奖励领取-氪金历练箱",
+            "[JumpBack]凭证奖励领取-每周历练箱",
+            "[JumpBack]凭证奖励领取-正处于物品详细界面-误触版"
+        ]
+    },
+    "凭证奖励领取-有红点点-点绿勾": {
         "recognition": {
             "type": "ColorMatch",
             "param": {
@@ -102,11 +179,13 @@
                     255,
                     94,
                     65
-                ]
+                ],
+                "count": 60
             }
         },
         "next": [
             "[JumpBack]点击叉叉",
+            "[JumpBack]凭证奖励领取-正处于物品详细界面-误触版",
             "凭证奖励领取-点击已领取完毕的奖励的右侧"
         ]
     },
@@ -123,6 +202,181 @@
                 "green_mask": true,
                 "template": [
                     "日常/任务奖励领取/凭证领取-勾勾.png"
+                ],
+                // "order_by": "Vertical",
+                "index": -1
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    -10,
+                    10,
+                    0,
+                    0
+                ]
+            }
+        },
+        "next": [
+            // "[JumpBack]点击叉叉",
+            // "[JumpBack]凭证奖励领取-正处于物品详细界面-误触版",
+            // "凭证奖励领取-有红点点",
+            // "凭证奖励领取-已处于凭证奖励领取界面"
+        ]
+    },
+    "凭证奖励领取-正处于物品详细界面-误触版": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    478,
+                    258,
+                    208,
+                    150
+                ],
+                "expected": [
+                    "拥有数量.*",
+                    "水晶"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    522,
+                    59,
+                    213,
+                    37
+                ]
+            }
+        }
+    },
+    "凭证奖励领取-正处于物品详细界面-目的版-用于先锋凭证": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    478,
+                    258,
+                    208,
+                    150
+                ],
+                "expected": [
+                    "拥有数量.*",
+                    "水晶"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    522,
+                    59,
+                    213,
+                    37
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "先锋凭证奖励领取失败,开始检查进阶凭证是否可以领取"
+        },
+        "next": [
+            "凭证奖励领取-氪金检查中间层-进阶凭证",
+            "[JumpBack]点击叉叉",
+            "[JumpBack]点击空白位置关闭",
+            "[JumpBack]凭证奖励领取-氪金历练箱",
+            "[JumpBack]凭证奖励领取-每周历练箱",
+            "[JumpBack]凭证奖励领取-正处于物品详细界面-误触版"
+        ]
+    },
+    "凭证奖励领取-氪金检查中间层-进阶凭证": {
+        "roi": [
+            206,
+            212,
+            170,
+            163
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "日常/任务奖励领取/先锋凭证.png"
+        ],
+        "pre_delay": 500,
+        "next": [
+            "凭证奖励领取-进阶凭证-开启状态检查-未开启",
+            "凭证奖励领取-进阶凭证-开启状态检查-已开启"
+        ]
+    },
+    "凭证奖励领取-进阶凭证-开启状态检查-未开启": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    294,
+                    395,
+                    57,
+                    64
+                ],
+                "template": [
+                    "日常/任务奖励领取/进阶凭证-锁定.png"
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "进阶凭证未开启，结束任务返回主菜单"
+        },
+        "next": [
+            "成功进入游戏主菜单",
+            "[JumpBack]点击叉叉",
+            "[JumpBack]点击返回主菜单"
+        ]
+    },
+    "凭证奖励领取-进阶凭证-开启状态检查-已开启": {
+        "inverse": true,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    294,
+                    395,
+                    57,
+                    64
+                ],
+                "template": [
+                    "日常/任务奖励领取/进阶凭证-锁定.png"
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "进阶凭证已开启，开始检查进阶凭证奖励领取状态"
+        },
+        "next": [
+            "凭证奖励领取-进阶凭证检查-无可领取奖励"
+        ]
+    },
+    "凭证奖励领取-进阶凭证检查-有可领取奖励": {
+        "recognition": {
+            "type": "ColorMatch",
+            "param": {
+                "connected": true,
+                "count": 250,
+                "roi": [
+                    339,
+                    441,
+                    561,
+                    55
+                ],
+                "upper": [
+                    255,
+                    255,
+                    255
+                ],
+                "lower": [
+                    255,
+                    255,
+                    255
                 ]
             }
         },
@@ -130,98 +384,237 @@
             "type": "Click",
             "param": {
                 "target_offset": [
-                    50,
-                    -30,
+                    10,
+                    -35,
                     0,
                     0
                 ]
             }
         },
+        "post_delay": 300,
+        "focus": {
+            "Node.Recognition.Succeeded": "检查到进阶凭证存在未领取奖励",
+            "Node.Action.Succeeded": "点击领取可领取奖励"
+        },
         "next": [
-            "[JumpBack]点击叉叉",
-            "凭证奖励领取-已处于凭证奖励领取界面"
+            "凭证奖励领取-进阶凭证检查-有可领取奖励",
+            "凭证奖励领取-进阶凭证检查-无可领取奖励",
+            "凭证奖励领取-奖励获得弹窗-结束任务",
+            "[JumpBack]点击叉叉"
         ]
     },
-    "可领取框框识别-第一次": {
+    "凭证奖励领取-进阶凭证检查-无可领取奖励": {
+        "recognition": {
+            "type": "ColorMatch",
+            "param": {
+                "connected": true,
+                "count": 250,
+                "roi": [
+                    339,
+                    441,
+                    561,
+                    55
+                ],
+                "upper": [
+                    143,
+                    143,
+                    143
+                ],
+                "lower": [
+                    143,
+                    143,
+                    143
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "进阶凭证无可领取奖励，将检查精英档位开启状态"
+        },
+        "next": [
+            "凭证奖励领取-氪金检查中间层-进阶凭证",
+            "[JumpBack]点击叉叉",
+            "[JumpBack]点击空白位置关闭",
+            "[JumpBack]凭证奖励领取-氪金历练箱",
+            "[JumpBack]凭证奖励领取-每周历练箱",
+            "[JumpBack]凭证奖励领取-正处于物品详细界面-误触版"
+        ]
+    },
+    "凭证奖励领取-氪金检查中间层-精英凭证": {
         "roi": [
-            337,
-            230,
-            663,
-            130
+            206,
+            212,
+            170,
+            163
         ],
-        "green_mask": true,
         "recognition": "TemplateMatch",
         "template": [
-            "日常/任务奖励领取/可领取框框.png"
+            "日常/任务奖励领取/先锋凭证.png"
         ],
-        "action": "Click",
+        "pre_delay": 500,
         "next": [
-            "凭证奖励领取-已处于凭证奖励领取界面",
-            "[JumpBack]凭证奖励领取-凭证升大级确认",
-            "[JumpBack]凭证奖励领取-每周历练箱",
+            "凭证奖励领取-精英凭证-开启状态检查-未开启",
+            "凭证奖励领取-精英凭证-开启状态检查-已开启"
+        ]
+    },
+    "凭证奖励领取-精英凭证-开启状态检查-未开启": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    276,
+                    524,
+                    89,
+                    100
+                ],
+                "template": [
+                    "日常/任务奖励领取/精英凭证-锁定.png"
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "精英凭证未开启，结束任务返回主菜单"
+        },
+        "next": [
+            "成功进入游戏主菜单",
             "[JumpBack]点击叉叉",
             "[JumpBack]点击返回主菜单"
         ]
     },
-    "可领取框框识别-第二次": {
-        "roi": [
-            337,
-            230,
-            663,
-            130
-        ],
-        "green_mask": true,
-        "recognition": "TemplateMatch",
-        "template": [
-            "日常/任务奖励领取/可领取框框.png"
-        ],
-        "action": "Click",
+    "凭证奖励领取-精英凭证-开启状态检查-已开启": {
+        "inverse": true,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    294,
+                    395,
+                    57,
+                    64
+                ],
+                "template": [
+                    "日常/任务奖励领取/进阶凭证-锁定.png"
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "精英凭证已开启，开始检查进阶凭证奖励领取状态"
+        },
         "next": [
-            "凭证奖励领取-已处于凭证奖励领取界面",
-            "[JumpBack]凭证奖励领取-凭证升大级确认",
-            "[JumpBack]凭证奖励领取-每周历练箱",
+            "凭证奖励领取-精英凭证检查-无可领取奖励",
+            "凭证奖励领取-精英凭证检查-有可领取奖励"
+        ]
+    },
+    "凭证奖励领取-精英凭证检查-有可领取奖励": {
+        "recognition": {
+            "type": "ColorMatch",
+            "param": {
+                "connected": true,
+                "count": 250,
+                "roi": [
+                    340,
+                    592,
+                    573,
+                    46
+                ],
+                "upper": [
+                    255,
+                    255,
+                    255
+                ],
+                "lower": [
+                    255,
+                    255,
+                    255
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    10,
+                    -35,
+                    0,
+                    0
+                ]
+            }
+        },
+        "post_delay": 300,
+        "focus": {
+            "Node.Recognition.Succeeded": "检查到精英凭证存在未领取奖励",
+            "Node.Action.Succeeded": "点击领取可领取奖励"
+        },
+        "next": [
+            "凭证奖励领取-精英凭证检查-有可领取奖励",
+            "凭证奖励领取-精英凭证检查-无可领取奖励",
+            "凭证奖励领取-奖励获得弹窗-结束任务",
+            "[JumpBack]点击叉叉"
+        ]
+    },
+    "凭证奖励领取-精英凭证检查-无可领取奖励": {
+        "recognition": {
+            "type": "ColorMatch",
+            "param": {
+                "connected": true,
+                "count": 250,
+                "roi": [
+                    340,
+                    592,
+                    573,
+                    46
+                ],
+                "upper": [
+                    143,
+                    143,
+                    143
+                ],
+                "lower": [
+                    143,
+                    143,
+                    143
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "精英凭证无可领取奖励,开始返回主菜单并结束任务"
+        },
+        "next": [
+            "成功进入游戏主菜单",
             "[JumpBack]点击叉叉",
             "[JumpBack]点击返回主菜单"
         ]
     },
-    "可领取框框识别-第三次": {
-        "roi": [
-            337,
-            230,
-            663,
-            130
-        ],
-        "green_mask": true,
-        "recognition": "TemplateMatch",
-        "template": [
-            "日常/任务奖励领取/可领取框框.png"
-        ],
-        "action": "Click",
+    "凭证奖励领取-奖励获得弹窗-结束任务": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    529,
+                    79,
+                    222,
+                    103
+                ],
+                "expected": [
+                    ".*键领取"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    721,
+                    558,
+                    194,
+                    41
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "成功领取所有凭证奖励，开始返回主菜单"
+        },
         "next": [
-            "凭证奖励领取-已处于凭证奖励领取界面",
-            "[JumpBack]凭证奖励领取-凭证升大级确认",
-            "[JumpBack]凭证奖励领取-每周历练箱",
-            "[JumpBack]点击叉叉",
-            "[JumpBack]点击返回主菜单"
-        ]
-    },
-    "可领取框框识别-第四次": {
-        "roi": [
-            337,
-            230,
-            663,
-            130
-        ],
-        "green_mask": true,
-        "recognition": "TemplateMatch",
-        "template": [
-            "日常/任务奖励领取/可领取框框.png"
-        ],
-        "action": "Click",
-        "next": [
-            "凭证奖励领取-已处于凭证奖励领取界面",
-            "[JumpBack]凭证奖励领取-凭证升大级确认",
-            "[JumpBack]凭证奖励领取-每周历练箱",
+            "成功进入游戏主菜单",
             "[JumpBack]点击叉叉",
             "[JumpBack]点击返回主菜单"
         ]
