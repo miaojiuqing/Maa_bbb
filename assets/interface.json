@@ -351,7 +351,7 @@
             "name": "当期版本活动日常",
             "label": "特工丽影-活动日常",
             "default_check": true,
-            "icon": "./resource/image/任务图标/特工丽影活动.png",
+            "icon": "./resource/base/image/任务图标/特工丽影活动.png",
             "entry": "版本活动-特工丽影-任务开始层", // "版本活动专属空任务"
             "option": [
                 "自行领取活动奖励"
@@ -407,7 +407,7 @@
             ], //待适配
             "label": "克莱茵乐土打灰",
             "entry": "乐土刷级-接口层",
-            "icon": "./resource/image/任务图标/克莱茵.png",
+            "icon": "./resource/base/image/任务图标/克莱茵.png",
             "repeatable": true,
             "repeat_count": 1,
             "default_check": false,
