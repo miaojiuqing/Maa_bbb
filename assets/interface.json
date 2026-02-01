@@ -257,7 +257,7 @@
             "default_check": true,
             "description": "很内向，不会检查是否已分享过，每次运行都会一直点",
             "option": [
-                "每周分享-重复点击复制按钮次数"
+                "每周分享-点击分享"
             ]
         },
         {
@@ -1440,14 +1440,14 @@
             ],
             "default_case": "仅购买金币"
         },
-        "每周分享-重复点击复制按钮次数": {
+        "每周分享-点击分享": {
             "type": "select",
             "label": "点击复制重复次数",
             "cases": [
                 {
                     "name": "一次",
                     "pipeline_override": {
-                        "每周分享-重复点击复制按钮次数": {
+                        "每周分享-点击分享": {
                             "repeat": 1
                         }
                     }
@@ -1455,7 +1455,7 @@
                 {
                     "name": "两次",
                     "pipeline_override": {
-                        "每周分享-重复点击复制按钮次数": {
+                        "每周分享-点击分享": {
                             "repeat": 2
                         }
                     }
@@ -1463,7 +1463,7 @@
                 {
                     "name": "三次",
                     "pipeline_override": {
-                        "每周分享-重复点击复制按钮次数": {
+                        "每周分享-点击分享": {
                             "repeat": 3
                         }
                     }
@@ -1471,7 +1471,7 @@
                 {
                     "name": "五次",
                     "pipeline_override": {
-                        "每周分享-重复点击复制按钮次数": {
+                        "每周分享-点击分享": {
                             "repeat": 5
                         }
                     }
@@ -1479,7 +1479,7 @@
                 {
                     "name": "十次",
                     "pipeline_override": {
-                        "每周分享-重复点击复制按钮次数": {
+                        "每周分享-点击分享": {
                             "repeat": 10
                         }
                     }
@@ -2205,7 +2205,7 @@
                             "enabled": true
                         },
                         "option": [
-                            "记忆战场-增益模式",
+                            "记忆战场-增益模式开关",
                             "记忆战场-编队",
                             "记忆战场-战斗逻辑"
                         ]
@@ -2221,7 +2221,7 @@
                 }
             ]
         },
-        "记忆战场-增益模式": {
+        "记忆战场-增益模式开关": {
             "type": "switch",
             "label": "增益模式",
             "default_case": "Yes",
@@ -2624,7 +2624,7 @@
                 {
                     "name": "1秒",
                     "pipeline_override": {
-                        "樱色轮回一-挑选委托-有刷新次数": {
+                        "樱色轮回-挑选委托-有刷新次数": {
                             "post_delay": 1000
                         },
                         "天命总部-挑选委托-有刷新次数": {
@@ -2641,7 +2641,7 @@
                 {
                     "name": "3秒",
                     "pipeline_override": {
-                        "樱色轮回一-挑选委托-有刷新次数": {
+                        "樱色轮回-挑选委托-有刷新次数": {
                             "post_delay": 3000
                         },
                         "天命总部-挑选委托-有刷新次数": {
@@ -2658,7 +2658,7 @@
                 {
                     "name": "5秒",
                     "pipeline_override": {
-                        "樱色轮回一-挑选委托-有刷新次数": {
+                        "樱色轮回-挑选委托-有刷新次数": {
                             "post_delay": 5000
                         },
                         "天命总部-挑选委托-有刷新次数": {
@@ -2675,7 +2675,7 @@
                 {
                     "name": "8秒",
                     "pipeline_override": {
-                        "樱色轮回一-挑选委托-有刷新次数": {
+                        "樱色轮回-挑选委托-有刷新次数": {
                             "post_delay": 8000
                         },
                         "天命总部-挑选委托-有刷新次数": {
@@ -2692,7 +2692,7 @@
                 {
                     "name": "10秒",
                     "pipeline_override": {
-                        "樱色轮回一-挑选委托-有刷新次数": {
+                        "樱色轮回-挑选委托-有刷新次数": {
                             "post_delay": 10000
                         },
                         "天命总部-挑选委托-有刷新次数": {
@@ -2771,7 +2771,7 @@
                 {
                     "name": "逆熵",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-1": {
+                        "冒险委托通用-委托挑取优先级-1": {
                             "recognition": "TemplateMatch",
                             "template": [
                                 "周常/冒险委托/报酬/后崩坏书二/逆熵.png",
@@ -2785,7 +2785,7 @@
                 {
                     "name": "空间透镜",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-1": {
+                        "冒险委托通用-委托挑取优先级-1": {
                             "recognition": "TemplateMatch",
                             "template": [
                                 "周常/冒险委托/报酬/后崩坏书二/空间透镜.png",
@@ -2799,7 +2799,7 @@
                 {
                     "name": "相转移镜面",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-1": {
+                        "冒险委托通用-委托挑取优先级-1": {
                             "recognition": "TemplateMatch",
                             "template": [
                                 "周常/冒险委托/报酬/后崩坏书二/相转移镜面.png",
@@ -2813,7 +2813,7 @@
                 {
                     "name": "崩坏结晶",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-1": {
+                        "冒险委托通用-委托挑取优先级-1": {
                             "recognition": "TemplateMatch",
                             "template": [
                                 "周常/冒险委托/报酬/后崩坏书二/崩坏结晶.png",
@@ -2827,7 +2827,7 @@
                 {
                     "name": "高级技能材料",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-1": {
+                        "冒险委托通用-委托挑取优先级-1": {
                             "recognition": "TemplateMatch",
                             "template": [
                                 "周常/冒险委托/报酬/后崩坏书二/高级技能材料.png",
@@ -2841,7 +2841,7 @@
                 {
                     "name": "虚数核心",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-1": {
+                        "冒险委托通用-委托挑取优先级-1": {
                             "recognition": "TemplateMatch",
                             "template": [
                                 "周常/冒险委托/报酬/后崩坏书二/虚数核心.png",
@@ -2855,7 +2855,7 @@
                 {
                     "name": "不选",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-1": {
+                        "冒险委托通用-委托挑取优先级-1": {
                             "enabled": false
                         }
                     }
@@ -2870,7 +2870,7 @@
                 {
                     "name": "逆熵",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-2": {
+                        "冒险委托通用-委托挑取优先级-2": {
                             "recognition": "TemplateMatch",
                             "template": [
                                 "周常/冒险委托/报酬/后崩坏书二/逆熵.png",
@@ -2884,7 +2884,7 @@
                 {
                     "name": "空间透镜",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-2": {
+                        "冒险委托通用-委托挑取优先级-2": {
                             "recognition": "TemplateMatch",
                             "template": [
                                 "周常/冒险委托/报酬/后崩坏书二/空间透镜.png",
@@ -2898,7 +2898,7 @@
                 {
                     "name": "相转移镜面",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-2": {
+                        "冒险委托通用-委托挑取优先级-2": {
                             "recognition": "TemplateMatch",
                             "template": [
                                 "周常/冒险委托/报酬/后崩坏书二/相转移镜面.png",
@@ -2912,7 +2912,7 @@
                 {
                     "name": "崩坏结晶",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-2": {
+                        "冒险委托通用-委托挑取优先级-2": {
                             "recognition": "TemplateMatch",
                             "template": [
                                 "周常/冒险委托/报酬/后崩坏书二/崩坏结晶.png",
@@ -2926,7 +2926,7 @@
                 {
                     "name": "高级技能材料",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-2": {
+                        "冒险委托通用-委托挑取优先级-2": {
                             "recognition": "TemplateMatch",
                             "template": [
                                 "周常/冒险委托/报酬/后崩坏书二/高级技能材料.png",
@@ -2940,7 +2940,7 @@
                 {
                     "name": "虚数核心",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-2": {
+                        "冒险委托通用-委托挑取优先级-2": {
                             "recognition": "TemplateMatch",
                             "template": [
                                 "周常/冒险委托/报酬/后崩坏书二/虚数核心.png",
@@ -2954,7 +2954,7 @@
                 {
                     "name": "不选",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-2": {
+                        "冒险委托通用-委托挑取优先级-2": {
                             "enabled": false
                         }
                     }
@@ -2968,7 +2968,7 @@
                 {
                     "name": "逆熵",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-3": {
+                        "冒险委托通用-委托挑取优先级-3": {
                             "recognition": "TemplateMatch",
                             "template": [
                                 "周常/冒险委托/报酬/后崩坏书二/逆熵.png",
@@ -2982,7 +2982,7 @@
                 {
                     "name": "空间透镜",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-3": {
+                        "冒险委托通用-委托挑取优先级-3": {
                             "recognition": "TemplateMatch",
                             "template": [
                                 "周常/冒险委托/报酬/后崩坏书二/空间透镜.png",
@@ -2996,7 +2996,7 @@
                 {
                     "name": "相转移镜面",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-3": {
+                        "冒险委托通用-委托挑取优先级-3": {
                             "recognition": "TemplateMatch",
                             "template": [
                                 "周常/冒险委托/报酬/后崩坏书二/相转移镜面.png",
@@ -3010,7 +3010,7 @@
                 {
                     "name": "崩坏结晶",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-3": {
+                        "冒险委托通用-委托挑取优先级-3": {
                             "recognition": "TemplateMatch",
                             "template": [
                                 "周常/冒险委托/报酬/后崩坏书二/崩坏结晶.png",
@@ -3024,7 +3024,7 @@
                 {
                     "name": "高级技能材料",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-3": {
+                        "冒险委托通用-委托挑取优先级-3": {
                             "recognition": "TemplateMatch",
                             "template": [
                                 "周常/冒险委托/报酬/后崩坏书二/高级技能材料.png",
@@ -3038,7 +3038,7 @@
                 {
                     "name": "虚数核心",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-3": {
+                        "冒险委托通用-委托挑取优先级-3": {
                             "recognition": "TemplateMatch",
                             "template": [
                                 "周常/冒险委托/报酬/后崩坏书二/虚数核心.png",
@@ -3052,7 +3052,7 @@
                 {
                     "name": "不选",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-3": {
+                        "冒险委托通用-委托挑取优先级-3": {
                             "enabled": false
                         }
                     }
@@ -3066,7 +3066,7 @@
                 {
                     "name": "逆熵",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-4": {
+                        "冒险委托通用-委托挑取优先级-4": {
                             "recognition": "TemplateMatch",
                             "template": [
                                 "周常/冒险委托/报酬/后崩坏书二/逆熵.png",
@@ -3080,7 +3080,7 @@
                 {
                     "name": "空间透镜",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-4": {
+                        "冒险委托通用-委托挑取优先级-4": {
                             "recognition": "TemplateMatch",
                             "template": [
                                 "周常/冒险委托/报酬/后崩坏书二/空间透镜.png",
@@ -3094,7 +3094,7 @@
                 {
                     "name": "相转移镜面",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-4": {
+                        "冒险委托通用-委托挑取优先级-4": {
                             "recognition": "TemplateMatch",
                             "template": [
                                 "周常/冒险委托/报酬/后崩坏书二/相转移镜面.png",
@@ -3108,7 +3108,7 @@
                 {
                     "name": "崩坏结晶",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-4": {
+                        "冒险委托通用-委托挑取优先级-4": {
                             "recognition": "TemplateMatch",
                             "template": [
                                 "周常/冒险委托/报酬/后崩坏书二/崩坏结晶.png",
@@ -3122,7 +3122,7 @@
                 {
                     "name": "高级技能材料",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-4": {
+                        "冒险委托通用-委托挑取优先级-4": {
                             "recognition": "TemplateMatch",
                             "template": [
                                 "周常/冒险委托/报酬/后崩坏书二/高级技能材料.png",
@@ -3136,7 +3136,7 @@
                 {
                     "name": "虚数核心",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-4": {
+                        "冒险委托通用-委托挑取优先级-4": {
                             "recognition": "TemplateMatch",
                             "template": [
                                 "周常/冒险委托/报酬/后崩坏书二/虚数核心.png",
@@ -3150,7 +3150,7 @@
                 {
                     "name": "不选",
                     "pipeline_override": {
-                        "冒险委托报酬接取优先级-4": {
+                        "冒险委托通用-委托挑取优先级-4": {
                             "enabled": false
                         }
                     }
