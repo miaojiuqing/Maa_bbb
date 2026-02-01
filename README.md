@@ -340,3 +340,10 @@ A:邪恶的微软犯病了，请右键MFAAvalonia.exe->属性->最下面的安�
 <a href="https://github.com/miaojiuqing/MAA_bbb/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=miaojiuqing/MAA_bbb&max=1000" alt="Contributors to MAA_bbb"/>
 </a>
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=miaojiuqing/Maa_bbb&type=Date)](https://star-history.com/#miaojiuqing/Maa_bbb&Date)
+
+> 📈 星标增长趋势由 [star-history.com](https://star-history.com) 提供
+
