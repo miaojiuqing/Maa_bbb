@@ -343,7 +343,6 @@ A:邪恶的微软犯病了，请右键MFAAvalonia.exe->属性->最下面的安�
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=miaojiuqing/Maa_bbb&type=Date)](https://star-history.com/#miaojiuqing/Maa_bbb&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=miaojiuqing/Maa_bbb&type=date&legend=top-left)](https://www.star-history.com/#miaojiuqing/Maa_bbb&type=date&legend=top-left)
 
 > 📈 星标增长趋势由 [star-history.com](https://star-history.com) 提供
-
