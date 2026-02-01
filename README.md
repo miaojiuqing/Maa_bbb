@@ -341,7 +341,7 @@ A:邪恶的微软犯病了，请右键MFAAvalonia.exe->属性->最下面的安�
   <img src="https://contrib.rocks/image?repo=miaojiuqing/MAA_bbb&max=1000" alt="Contributors to MAA_bbb"/>
 </a>
 
-## Star History
+## Star数量历史趋势
 
 [![Star History Chart](https://api.star-history.com/svg?repos=miaojiuqing/Maa_bbb&type=date&legend=top-left)](https://www.star-history.com/#miaojiuqing/Maa_bbb&type=date&legend=top-left)
 
