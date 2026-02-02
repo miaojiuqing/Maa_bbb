@@ -3608,7 +3608,7 @@
                     }
                 }
             ],
-            "default_case": "首层复刷"
+            "default_case": "只打一层"
         },
         "克莱茵打灰减负模式的走路配置之————每次前进走多久": {
             "label": "每次前进走多久",
@@ -5503,7 +5503,7 @@
             "type": "select",
             "cases": [
                 {
-                    "name": "通知测试",
+                    "name": "通知发送测试",
                     "pipeline_override": {
                         "测试任务接口": {
                             "next": [
