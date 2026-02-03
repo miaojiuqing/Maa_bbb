@@ -51,6 +51,9 @@
             "[JumpBack]网络连接失败-重试",
             "[JumpBack]版本活动-特工丽影-大厅退出确认", //活动
             "[JumpBack]版本活动-特工丽影-点击返回", //活动
+            "[JumpBack]预告完网页处理-点击复制确认",
+            "[JumpBack]预告完网页处理-点击复制",
+            "[JumpBack]预告完网页处理-点击复制点击叉叉",
             "[JumpBack]模拟器包名游戏启动",
             "[JumpBack]空任务"
         ],
@@ -114,6 +117,72 @@
         //     }
         // ],
         // "box_index": 0
+    },
+    "预告完网页处理-点击复制确认": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    406,
+                    306,
+                    488,
+                    119
+                ],
+                "expected": [
+                    "复制成功.*",
+                    ".*赶快分享给好友吧"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    576,
+                    453,
+                    137,
+                    37
+                ]
+            }
+        }
+    },
+    "预告完网页处理-点击复制": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    792,
+                    577,
+                    167,
+                    117
+                ],
+                "expected": [
+                    "复制"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        }
+    },
+    "预告完网页处理-点击复制点击叉叉": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    52,
+                    35,
+                    42,
+                    43
+                ],
+                "template": [
+                    "进入游戏/版本角色预告/预告叉叉.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        }
     },
     "离开火星": {
         "roi": [
