@@ -243,6 +243,7 @@ jobs:
       - meta
       - install
       - changelog
+      - download-python-embed
     runs-on: ubuntu-latest
 
     steps:
@@ -253,6 +254,10 @@ jobs:
       - run: |
           cd assets
           for f in *; do
+            if [[ "$f" == *"python-embed"* ]]; then
+              echo "Skipping $f (python-embed)."
+              continue
+            fi
             (cd $f && zip -r ../$f-${{ needs.meta.outputs.tag }}.zip .)
           done
 
