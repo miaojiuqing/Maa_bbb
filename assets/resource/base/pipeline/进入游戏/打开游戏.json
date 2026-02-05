@@ -63,7 +63,7 @@
         }
     },
     "游戏需在客户端进行更新": {
-        // "enabled": false,
+        "enabled": false,
         "recognition": {
             "type": "OCR",
             "param": {
