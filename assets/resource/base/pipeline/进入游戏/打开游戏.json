@@ -63,7 +63,7 @@
         }
     },
     "游戏需在客户端进行更新": {
-        "enabled": false,
+        // "enabled": false,
         "recognition": {
             "type": "OCR",
             "param": {
@@ -74,7 +74,8 @@
                     135
                 ],
                 "expected": [
-                    "发现新版本"
+                    "发现新版本",
+                    "停服维护中"
                 ]
             }
         },
@@ -82,7 +83,7 @@
             "type": "Click" //这个点击动作单纯为了多发条通知（
         },
         "focus": {
-            "Node.Action.Succeeded": "崩坏三需前往客户端进行更新",
+            "Node.Action.Succeeded": "崩坏三需前往客户端进行更新或是停服维护中",
             "Node.Recognition.Succeeded": "所有任务都已完成" //骗MAS用的
         }
     },
