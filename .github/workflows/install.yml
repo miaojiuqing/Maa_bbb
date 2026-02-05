@@ -1,5 +1,10 @@
 name: install
 
+# 依赖版本号：留空使用最新版，或指定如 "v4.6.0" / "v0.6.0"
+env:
+  MAAFRAMEWORK_VERSION: "v5.5.0"   # MaaXYZ/MaaFramework 版本
+  MFAAVALONIA_VERSION: "v2.6.0"   # SweetSmellFox/MFAAvalonia 版本
+
 on:
   push:
     tags:
@@ -133,7 +138,8 @@ jobs:
         with:
           repository: MaaXYZ/MaaFramework
           fileName: "MAA-${{ matrix.os }}-${{ matrix.arch }}*"
-          latest: true
+          tag: ${{ env.MAAFRAMEWORK_VERSION }}
+          latest: ${{ env.MAAFRAMEWORK_VERSION == '' }}
           out-file-path: "deps"
           extract: true
 
@@ -144,7 +150,8 @@ jobs:
         with:
           repository: SweetSmellFox/MFAAvalonia
           fileName: "MFAAvalonia-*-${{ (matrix.os == 'win' && 'win') || (matrix.os == 'macos' && 'osx') || (matrix.os == 'linux' && 'linux') }}-${{ (matrix.arch == 'x86_64' && 'x64') || (matrix.arch == 'aarch64' && 'arm64') }}*"
-          latest: true
+          tag: ${{ env.MFAAVALONIA_VERSION }}
+          latest: ${{ env.MFAAVALONIA_VERSION == '' }}
           out-file-path: "MFA"
           extract: true
 
