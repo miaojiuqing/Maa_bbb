@@ -11,6 +11,7 @@
         "action": "StartApp",
         "package": "com.miHoYo.enterprise.NGHSoD",
         "next": [
+            "[JumpBack]游戏需在客户端进行更新",
             "[JumpBack]舰长~真的要退出游戏吗-否",
             "[JumpBack]出现了！邪恶包菜头！",
             "[JumpBack]请舰长注意休息",
@@ -59,6 +60,30 @@
         ],
         "focus": {
             "failed": "舰长！请检查左上角资源是否配置错误！"
+        }
+    },
+    "游戏需在客户端进行更新": {
+        "enabled": false,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    513,
+                    127,
+                    270,
+                    135
+                ],
+                "expected": [
+                    "发现新版本"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click" //这个点击动作单纯为了多发条通知（
+        },
+        "focus": {
+            "Node.Action.Succeeded": "崩坏三需前往客户端进行更新",
+            "Node.Recognition.Succeeded": "所有任务都已完成" //骗MAS用的
         }
     },
     "网络连接失败-重试": {

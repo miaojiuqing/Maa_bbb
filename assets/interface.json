@@ -144,7 +144,8 @@
                 "每次执行该启动任务间隔",
                 "月卡领取",
                 "防误触模式",
-                "若误触进了剧情"
+                "若误触进了剧情",
+                "是否在MAS内调度"
             ],
             "description": "左上角可选模拟器或者桌面端<br/>PC端需提前在 :设置 -辅助中，关闭显示菜单提示，且控制方式依照个人喜好自行想选择，请保证资源选择类型与游戏设置一致<br/>PC端用户请注意：自动战斗功能运行战斗时，请一定不要点击键盘上的特殊键(如win、ctrl、alt等),否则可能会导致整个电脑界面被各种各样快捷键唤出的窗口占满导致无法操作！！！<br/><b><font color=\"red\">桌面端运行必须管理员启动该软件且分辨率为16:9</font></b><br/>会自行确认/领取所有奖励<br/>截图参数请自行在PrintWindow、FramePool和GDI中选择，优先PrintWindow<br/>![bydjl](resource/image/logo.ico)"
         },
@@ -573,6 +574,28 @@
                 }
             ],
             "default_case": "慢慢过剧情"
+        },
+        "是否在MAS内调度": {
+            "description": "崩坏三维护时会发送任务完成通知避免MAS的队列中卡住",
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "游戏需在客户端进行更新": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "游戏需在客户端进行更新": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
         },
         "你氪通行证了吗": {
             "type": "select",
