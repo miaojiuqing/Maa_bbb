@@ -1,0 +1,19 @@
+{
+    "版本活动-年夜奇缘-返回": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    0,
+                    0,
+                    122,
+                    98
+                ],
+                "template": "版本活动/当期活动/年夜奇缘/返回.png"
+            }
+        },
+        "action": {
+            "type": "Click"
+        }
+    }
+}
