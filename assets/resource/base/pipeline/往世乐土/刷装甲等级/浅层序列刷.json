@@ -223,7 +223,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Succeeded": "当前女武神已满级", //识别成功
+            "Node.Recognition.Node.Recognition.Succeeded": "当前女武神已满级", //识别成功
             "Node.Recognition.Failed": "女武神等级未满，开始下一把" //识别失败
         },
         "pre_delay": 300,
@@ -279,7 +279,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Succeeded": "已回到女武神选择界面", //识别成功
+            "Node.Recognition.Node.Recognition.Succeeded": "已回到女武神选择界面", //识别成功
             "Node.Action.Starting": "正在滑动至最左边开头" //动作开始
         },
         "pre_delay": 500,
@@ -453,7 +453,7 @@
             }
         },
         "focus": {
-            "Node.Recognition.Succeeded": "当前装甲记忆碎片掉落已达上限"
+            "Node.Recognition.Node.Recognition.Succeeded": "当前装甲记忆碎片掉落已达上限"
         },
         "action": {
             "type": "Click",
@@ -629,7 +629,7 @@
             "[JumpBack]空任务"
         ],
         "focus": {
-            "succeeded": "战斗失败，返回主菜单并提前结束任务"
+            "Node.Recognition.Succeeded": "战斗失败，返回主菜单并提前结束任务"
         }
     },
     "乐土刷级-浅层序列-战斗结算": {

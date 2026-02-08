@@ -72,7 +72,7 @@
     },
     "乐土刷级-首层复刷-已进入往世乐土箱庭": {
         "focus": {
-            "succeeded": "进入了乐土箱庭"
+            "Node.Recognition.Succeeded": "进入了乐土箱庭"
         },
         "roi": [
             1142,
@@ -96,7 +96,7 @@
     },
     "乐土刷级-首层复刷-有未完成的进度": {
         "focus": {
-            "succeeded": "检测到有未完成的乐土挑战进度"
+            "Node.Recognition.Succeeded": "检测到有未完成的乐土挑战进度"
         },
         "roi": [
             668,
@@ -174,7 +174,7 @@
     },
     "乐土刷级-首层复刷-已进入深层序列选buff准备出击界面": {
         "focus": {
-            "succeeded": "已进入选择buff界面"
+            "Node.Recognition.Succeeded": "已进入选择buff界面"
         },
         "roi": [
             132,
@@ -215,7 +215,7 @@
     },
     "乐土刷级-首层复刷-已进入女武神选择界面": {
         "focus": {
-            "succeeded": "已进入女武神选择界面，准备出击"
+            "Node.Recognition.Succeeded": "已进入女武神选择界面，准备出击"
         },
         "roi": [
             61,
@@ -284,7 +284,7 @@
     },
     "乐土刷级-首层复刷-刻印选择": {
         "focus": {
-            "succeeded": "正在\"挑选\"专属刻印"
+            "Node.Recognition.Succeeded": "正在\"挑选\"专属刻印"
         },
         "roi": [
             482,
@@ -329,7 +329,7 @@
     },
     "乐土刷级-首层复刷-可同意该刻印": {
         "focus": {
-            "Node.Action.Succeeded": "选择了一次刻印"
+            "Node.Recognition.Succeeded": "选择了一次刻印"
         },
         "roi": [
             1005,
@@ -396,7 +396,7 @@
     },
     "乐土刷级-首层复刷-伪寻路-到达目的": {
         "focus": {
-            "Node.Action.Succeeded": "识别到交互键,交互并准备战斗"
+            "Node.Recognition.Succeeded": "识别到交互键,交互并准备战斗"
         },
         "roi": [
             46,
@@ -466,7 +466,7 @@
             "[JumpBack]空任务"
         ],
         "focus": {
-            "succeeded": "战斗失败，返回主菜单并提前结束任务"
+            "Node.Recognition.Succeeded": "战斗失败，返回主菜单并提前结束任务"
         }
     },
     "乐土刷级-首层复刷-战斗结束等待剧情或刻印": {

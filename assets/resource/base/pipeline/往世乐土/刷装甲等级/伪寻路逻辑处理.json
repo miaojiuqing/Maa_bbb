@@ -45,8 +45,11 @@
         "max_hit": 5
     },
     "乐土刷级-通用-伪寻路-退出重新寻路": {
+        "recognition": {
+            "type": "DirectHit"
+        },
         "focus": {
-            "succeeded": "寻路失败，正在重新进入准备重新寻路"
+            "Node.Recognition.Succeeded": "寻路失败，正在重新进入准备重新寻路"
         },
         "next": [
             "乐土刷级-首层复刷-已进入往世乐土箱庭",
