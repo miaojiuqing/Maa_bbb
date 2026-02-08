@@ -189,6 +189,9 @@
                 ]
             }
         },
+        "focus": {
+            "Node.Recognition.Succeeded": "当前女武神装甲等级可升级"
+        },
         "action": {
             "type": "Click",
             "param": {
@@ -333,6 +336,9 @@
                 ],
                 "count": 6000
             }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "当前女武神装甲LV+1"
         },
         "action": {
             "type": "Click"
