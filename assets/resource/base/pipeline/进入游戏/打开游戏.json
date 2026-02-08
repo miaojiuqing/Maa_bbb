@@ -317,7 +317,10 @@
     },
     "模拟器包名游戏启动": {
         "action": "StartApp",
-        "package": "com.miHoYo.enterprise.NGHSoD"
+        "package": "com.miHoYo.enterprise.NGHSoD",
+        "focus": {
+            "Node.Action.Failed": "舰长！请检查左上角资源是否配置错误！"
+        }
     },
     "成功进入游戏主菜单": {
         "roi": [
