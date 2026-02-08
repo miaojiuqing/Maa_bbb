@@ -24,6 +24,7 @@
             "name": "桌面端",
             "type": "Win32",
             "description": "截图方式优先PrintWindow,不行自己改一下",
+            "permission_required": true,
             "win32": {
                 "class_regex": "UnityWndClass",
                 "window_regex": "崩坏3|崩坏3 Steam版|Honkai Impact 3",
