@@ -77,7 +77,7 @@
                 "template": [
                     "通用/左上角返回.png"
                 ]
-            },
+            }
         },
         "action": {
             "type": "Click"
