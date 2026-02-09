@@ -67,6 +67,7 @@
         "recognition": {
             "type": "TemplateMatch",
             "param": {
+                "threshold": 0.85,
                 "roi": [
                     0,
                     0,
@@ -76,7 +77,7 @@
                 "template": [
                     "通用/左上角返回.png"
                 ]
-            }
+            },
         },
         "action": {
             "type": "Click"
