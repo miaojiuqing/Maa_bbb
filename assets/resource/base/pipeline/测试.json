@@ -82,11 +82,17 @@
         ]
     },
     "键码点击测试": {
-        "action": "LongPressKey",
-        "key": [
-            81
-        ],
-        "duration": 160
+        "action": {
+            "type": "LongPressKey",
+            "param": {
+                "key": [
+                    // 81//ESC
+                    76
+                ],
+                "duration": 160
+            }
+        },
+        "repeat": 10
     },
     "纯测试": {
         "next": [
