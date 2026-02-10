@@ -1,0 +1,93 @@
+{
+    "自动战斗-乐土-乐土禁武器技通用战斗逻辑循环": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "roi": [
+            0,
+            0,
+            143,
+            145
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "战斗相关/战中检查/战斗中.png"
+        ],
+        "next": [
+            "非战斗状态-乐土乐土禁武器技通用战斗逻辑", //识别到非战斗状态则跳转进入循环
+            "[JumpBack]自动战斗-乐土乐土禁武器技通用战斗逻辑-所有系统全部启动启动启动启动",
+            "[JumpBack]处于花火大招中",
+            "[JumpBack]空任务"
+        ]
+    },
+    "非战斗状态-乐土禁武器技通用战斗逻辑": {
+        "rate_limit": 0,
+        "post_delay": 0,
+        "pre_delay": 0,
+        "roi": [
+            0,
+            0,
+            143,
+            145
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "战斗相关/战中检查/战斗中.png"
+        ],
+        "inverse": true,
+        "next": [
+            //识别是否为buff的节点，若是则开始进行buff选择逻辑
+            //非战斗状态，跳转至寻路逻辑进行循环，识别到目的地时回到该循环
+            "[JumpBack]自动战斗-乐土乐土禁武器技通用战斗逻辑-所有系统全部启动启动启动启动",
+            "非战斗状态-乐土乐土禁武器技通用战斗逻辑",
+            "[JumpBack]处于花火大招中",
+            "[JumpBack]空任务"
+        ]
+    },
+    "自动战斗-乐土乐土禁武器技通用战斗逻辑-所有系统全部启动启动启动启动": {
+        "roi": [
+            0,
+            0,
+            143,
+            145
+        ],
+        "rate_limit": 0,
+        "post_delay": 0,
+        "pre_delay": 0,
+        "recognition": "TemplateMatch",
+        "template": [
+            "战斗相关/战中检查/战斗中.png"
+        ],
+        "threshold": 0.75,
+        "action": "ClickKey",
+        "key": [
+            49, //支援位1
+            50, //支援位2
+            84, //英桀助战T
+            81, //大招Q
+            // 69, //武器技E
+            70, //星之环F
+            74 //普攻
+        ]
+    },
+    "非战斗状态-乐土乐土禁武器技通用战斗逻辑": {
+        "rate_limit": 0,
+        "post_delay": 0,
+        "pre_delay": 0,
+        "roi": [
+            1058,
+            619,
+            100,
+            100
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "战斗相关/战中检查/已经不用再战斗了-PC.png"
+        ],
+        "green_mask": true,
+        "next": [
+            "自动战斗-乐土-乐土禁武器技通用战斗逻辑循环",
+            "[JumpBack]处于花火大招中",
+            "[JumpBack]空任务"
+        ]
+    }
+}
