@@ -60,6 +60,7 @@
             ],
             "path": [
                 "./resource/base",
+                "./resource/resource_win32",
                 "./resource/resource_win32_jp"
             ]
         },
