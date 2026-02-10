@@ -378,7 +378,7 @@
         },
         {
             "name": "超弦空间(深渊)",
-            "resource": [
+            "controller": [
                 "桌面端"
             ], //待适配
             "default_check": false,
@@ -402,7 +402,7 @@
         },
         {
             "name": "克莱茵在线乐土打灰",
-            "resource": [
+            "controller": [
                 "桌面端"
             ], //待适配
             "label": "克莱茵乐土打灰",
