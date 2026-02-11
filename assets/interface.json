@@ -147,7 +147,8 @@
                 "月卡领取",
                 "防误触模式",
                 "若误触进了剧情",
-                "是否启动维护/升级检查"
+                "是否启动维护/升级检查",
+                "不自行启动游戏"
             ],
             "description": "左上角可选模拟器或者桌面端<br/>PC端需提前在 :设置 -辅助中，关闭显示菜单提示，且控制方式依照个人喜好自行想选择，请保证资源选择类型与游戏设置一致<br/>PC端用户请注意：自动战斗功能运行战斗时，请一定不要点击键盘上的特殊键(如win、ctrl、alt等),否则可能会导致整个电脑界面被各种各样快捷键唤出的窗口占满导致无法操作！！！<br/><b><font color=\"red\">桌面端运行必须管理员启动该软件且分辨率为16:9</font></b><br/>会自行确认/领取所有奖励<br/>截图参数请自行在PrintWindow、FramePool和GDI中选择，优先PrintWindow<br/>![bydjl](resource/image/logo.ico)"
         },
@@ -594,6 +595,25 @@
                             "enabled": false
                         }
                     }
+                }
+            ]
+        },
+        "不自行启动游戏": {
+            "label": "空包名模式",
+            "description": "仍会尝试启动游戏，但是会慢几秒",
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "启动并进入游戏": {
+                            "action": "DoNothing"
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {}
                 }
             ]
         },
