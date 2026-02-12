@@ -1,0 +1,57 @@
+{
+    "新春聊天室-退出": {
+        "action": {
+            "type": "ClickKey",
+            "param": {
+                "key": [
+                    27
+                ]
+            }
+        }
+    },
+    "新春聊天室每日签到-新春吼运签-按R交互": {
+        "repeat_delay": 1000,
+        "action": {
+            "type": "ClickKey",
+            "param": {
+                "key": [
+                    82, //R
+                    70 //F
+                ]
+            }
+        }
+    },
+    "新春聊天室每日签到-是芽衣-左拐": {
+        "action": {
+            "type": "LongPressKey",
+            "param": {
+                "duration": 250,
+                "key": [
+                    65
+                ]
+            }
+        }
+    },
+    "新春聊天室每日签到-没有其他锚点-前进": {
+        "action": {
+            "type": "LongPressKey",
+            "param": {
+                "duration": 500,
+                "key": [
+                    87
+                ]
+            }
+        }
+    },
+    "新春聊天室每日签到-可与爱酱交互-左拐": {
+        "action": {
+            "type": "LongPressKey",
+            "param": {
+                "duration": 250,
+                "key": [
+                    65
+                ]
+            }
+        }
+    }
+}

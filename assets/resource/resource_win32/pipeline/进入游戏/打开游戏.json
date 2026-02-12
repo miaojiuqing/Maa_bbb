@@ -36,30 +36,6 @@
     "冒险委托-后崩2特殊处理-处于后崩二会客厅—点击ESC": {
         "enabled": true
     },
-    "新春聊天室-退出": {
-        "recognition": {
-            "type": "OCR",
-            "param": {
-                "roi": [
-                    965,
-                    3,
-                    218,
-                    77
-                ],
-                "expected": [
-                    "新春聊天室"
-                ]
-            }
-        },
-        "action": {
-            "type": "ClickKey",
-            "param": {
-                "key": [
-                    27
-                ]
-            }
-        }
-    },
     "点击空白位置关闭-启动游戏特别处理版": {
         "recognition": "OCR",
         "expected": [
