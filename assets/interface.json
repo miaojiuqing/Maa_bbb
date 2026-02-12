@@ -599,23 +599,28 @@
             ]
         },
         "不自行启动游戏": {
-            "label": "空包名模式",
-            "description": "仍会尝试启动游戏，但是会慢几秒",
+            "label": "极速启动游戏模式",
+            "description": "执行后会直接发送报名启动游戏,若频繁卡在某界面更新多次无果请关闭此功能",
             "type": "switch",
             "cases": [
                 {
                     "name": "Yes",
                     "pipeline_override": {
                         "启动并进入游戏": {
-                            "action": "DoNothing"
+                            "action": "StartApp"
                         }
                     }
                 },
                 {
                     "name": "No",
-                    "pipeline_override": {}
+                    "pipeline_override": {
+                        "启动并进入游戏": {
+                            "action": "DoNothing"
+                        }
+                    }
                 }
-            ]
+            ],
+            "default_case": "Yes"
         },
         "你氪通行证了吗": {
             "type": "select",

@@ -1,6 +1,6 @@
 {
     "启动并进入游戏": {
-        "action": "StartApp",
+        // "action": "StartApp",
         "package": "com.miHoYo.bh3.nearme.gamecenter"
     },
     "模拟器包名游戏启动": {
