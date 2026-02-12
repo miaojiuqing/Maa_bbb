@@ -1,0 +1,29 @@
+{
+    "新春聊天室-退出": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    965,
+                    3,
+                    218,
+                    77
+                ],
+                "expected": [
+                    "新春聊天室"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    11,
+                    21,
+                    109,
+                    34
+                ]
+            }
+        }
+    }
+}
