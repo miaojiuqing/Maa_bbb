@@ -1,0 +1,124 @@
+{
+    "启动并进入游戏": {
+        // "action": "StartApp",
+        "package": "com.miHoYo.bh3.bilibili",
+        "next": [
+            "[JumpBack]游戏需在客户端进行更新",
+            "[JumpBack]舰长~真的要退出游戏吗-否",
+            "[JumpBack]出现了！邪恶包菜头！",
+            "[JumpBack]请舰长注意休息",
+            "[JumpBack]进入游戏-超弦空间结算",
+            "成功进入游戏主菜单",
+            "[JumpBack]所有资源已下载完成",
+            "[JumpBack]热更新-数据已更新-官方热补丁",
+            "[JumpBack]相关资源下载-取消",
+            "[JumpBack]B服账号登录",
+            "[JumpBack]版本活动-年夜奇缘-返回", //活动
+            // "[JumpBack]特殊-英雄远征记返回", //活动
+            // "[JumpBack]特殊-天命特殊教室返回", //活动
+            // "[JumpBack]淬星激斗-返回",
+            "[JumpBack]点击返回主菜单",
+            "[JumpBack]离开火星确认", //火星处理
+            "[JumpBack]离开火星", //火星处理
+            "[JumpBack]误触-不进入第二部确认",
+            "[JumpBack]今日不再提示是否跳过剧情-单次确认动作",
+            "[JumpBack]点击叉叉",
+            "[JumpBack]进入游戏-月卡领取-15天奖励",
+            "[JumpBack]启动游戏-领取月卡",
+            "[JumpBack]领取一切确认",
+            "[JumpBack]领取一切",
+            "[JumpBack]新春聊天室-退出",
+            "[JumpBack]点击空白位置关闭-启动游戏特别处理版", //PC端做特殊处理
+            // "[JumpBack]点击空白位置关闭", //PC端做特殊处理
+            "[JumpBack]领取签到奖励",
+            "[JumpBack]月份每日登录奖励",
+            "[JumpBack]点击领取签到奖励",
+            "[JumpBack]点击任意位置进入游戏",
+            "[JumpBack]所有资源已下载完毕",
+            "[JumpBack]着色器编译中",
+            "[JumpBack]点击左上角返回",
+            // "[JumpBack]拓境战幕-返回",
+            "[JumpBack]资源下载",
+            "[JumpBack]今日不再跳过剧情确认",
+            "[JumpBack]剧情跳过辅助点击-文字",
+            "[JumpBack]剧情跳过辅助点击-图片",
+            "[JumpBack]剧情辅助点击-点击空白处跳过剧情",
+            "[JumpBack]误触进入手机界面",
+            "[JumpBack]误触进入聊天频道界面",
+            "[JumpBack]网络连接失败-重试",
+            // "[JumpBack]版本活动-特工丽影-大厅退出确认", //活动
+            // "[JumpBack]版本活动-特工丽影-点击返回", //活动
+            "[JumpBack]预告网页处理-点击复制确认",
+            "[JumpBack]预告网页处理-点击复制",
+            "[JumpBack]预告网页处理-点击复制点击叉叉",
+            "[JumpBack]模拟器包名游戏启动",
+            "[JumpBack]空任务"
+        ]
+    },
+    "模拟器包名游戏启动": {
+        "action": "StartApp",
+        "package": "com.miHoYo.bh3.bilibili"
+    },
+    "B服账号登录": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    559,
+                    639,
+                    166,
+                    42
+                ],
+                "expected": [
+                    "账号登录"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    559,
+                    639,
+                    166,
+                    42
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "账号未登录",
+            "Node.Action.Succeeded": "点击账号登录"
+        },
+        "next": [
+            "B服登录"
+        ]
+    },
+    "B服登录": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    418,
+                    373,
+                    470,
+                    90
+                ],
+                "expected": [
+                    "登录"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    418,
+                    373,
+                    470,
+                    90
+                ]
+            }
+        },
+        "post_delay": 5000
+    }
+}
