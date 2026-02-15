@@ -1,6 +1,7 @@
 {
     "启动并进入游戏": {
         "action": "DoNothing"
+        // "package": "com.miHoYo.enterprise.NGHSoD"
     },
     "模拟器包名游戏启动": {
         "enabled": false

@@ -9,7 +9,7 @@
     },
     "启动并进入游戏": {
         // "action": "StartApp",
-        "package": "com.miHoYo.enterprise.NGHSoD",
+        // "package": "com.miHoYo.enterprise.NGHSoD",
         "next": [
             "[JumpBack]游戏需在客户端进行更新",
             "[JumpBack]舰长~真的要退出游戏吗-否",
