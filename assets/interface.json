@@ -446,6 +446,15 @@
             "description": "模拟器运行会比较卡,键位选择为推荐模式<br/>仅在检测到战斗状态(左上角暂停)才会运行<br/>星之环延迟是防止空大用的，不过亲测无延迟也能用就是慢点(不选鏖灭的情况下)"
         },
         {
+            "name": "洗词缀",
+            "entry": "洗词缀",
+            "default_check": false,
+            "option": [
+                "严格模式",
+                "需要词缀"
+            ]
+        },
+        {
             "name": "退出/关闭游戏",
             "default_check": false,
             "entry": "关闭游戏",
@@ -495,6 +504,122 @@
         }
     ],
     "option": {
+        "严格模式": {
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "识别参数_严格模式": {
+                            "enabled": true
+                        },
+                        "识别参数_宽松模式": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "识别参数_严格模式": {
+                            "enabled": false
+                        },
+                        "识别参数_宽松模式": {
+                            "enabled": true
+                        }
+                    }
+                }
+            ]
+        },
+        "需要词缀": {
+            "label": "请输入需要包含的关键词\n比如你需要机械角色攻击力,请不要简单输入 攻击提升 ,要完整输入机械角色攻击力\n如果有多种想要的词缀,使用|分割\n注意!词缀识别基于OCR,可能会出现错误,请谨慎使用",
+            "type": "input",
+            "inputs": [
+                {
+                    "name": "输入词缀",
+                    "label": "输入词缀",
+                    "description": "<p>请尽可能输入完整词缀，支持正则表达式,例如：^(机械角色攻击提升\\d+|攻击提升\\d+)$</p>",
+                    "default": "^(机械角色攻击提升\\d+|攻击提升\\d+)$",
+                    "pipeline_type": "string"
+                }
+            ],
+            "pipeline_override": {
+                "识别参数_严格模式": {
+                    "recognition": {
+                        "type": "And",
+                        "param": {
+                            "all_of": [
+                                {
+                                    "recognition": {
+                                        "type": "OCR",
+                                        "param": {
+                                            "roi": [
+                                                647,
+                                                412,
+                                                595,
+                                                113
+                                            ],
+                                            "expected": "{输入词缀}"
+                                        }
+                                    }
+                                },
+                                {
+                                    "recognition": {
+                                        "type": "OCR",
+                                        "param": {
+                                            "roi": [
+                                                630,
+                                                507,
+                                                635,
+                                                101
+                                            ],
+                                            "expected": "{输入词缀}"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "识别参数_宽松模式": {
+                    "recognition": {
+                        "type": "Or",
+                        "param": {
+                            "any_of": [
+                                {
+                                    "recognition": {
+                                        "type": "OCR",
+                                        "param": {
+                                            "roi": [
+                                                647,
+                                                412,
+                                                595,
+                                                113
+                                            ],
+                                            "expected": "{输入词缀}"
+                                        }
+                                    }
+                                },
+                                {
+                                    "recognition": {
+                                        "type": "OCR",
+                                        "param": {
+                                            "roi": [
+                                                630,
+                                                507,
+                                                635,
+                                                101
+                                            ],
+                                            "expected": "{输入词缀}"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
         "月卡领取": {
             "type": "switch",
             "cases": [
