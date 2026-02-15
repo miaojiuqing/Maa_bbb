@@ -5534,6 +5534,7 @@
         "克莱茵打灰浅层序列-乐土币刷满后停止任务": {
             "default_case": "No",
             "label": "乐土币刷上限后停止",
+            "icon": "./resource/base/image/任务图标/克莱茵打灰/锈蚀之徽.png",
             "description": "不与重复执行冲突",
             "type": "switch",
             "cases": [
@@ -5574,6 +5575,7 @@
         "克莱茵打灰浅层序列-升满级后停止任务": {
             "default_case": "No",
             "label": "当前装甲满级后停止任务",
+            "icon": "./resource/base/image/任务图标/克莱茵打灰/女武神记忆碎片.png",
             "description": "不与重复执行冲突",
             "type": "switch",
             "cases": [
