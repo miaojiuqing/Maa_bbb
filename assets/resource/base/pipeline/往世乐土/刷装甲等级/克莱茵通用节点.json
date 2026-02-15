@@ -14,8 +14,12 @@
                 ]
             }
         },
+        "focus": {
+            "Node.Recognition.Node.Recognition.Succeeded": "这周的乐土币(锈蚀之徽)掉落已达上限" //识别成功
+        },
         "action": {
             "type": "Click",
+            // "type": "StopTask",
             "param": {
                 "target": [
                     575,

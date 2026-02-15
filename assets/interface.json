@@ -5531,10 +5531,50 @@
                 }
             ]
         },
+        "克莱茵打灰浅层序列-乐土币刷满后停止任务": {
+            "default_case": "No",
+            "label": "乐土币刷上限后停止",
+            "description": "不与重复执行冲突",
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "乐土刷级-浅层序列-当前女武神装甲已是满级": {
+                            "action": {
+                                // "type": "Click",
+                                "type": "StopTask",
+                                "param": {
+                                    "target": []
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "克莱茵打灰-通用-乐土币刷满了": {
+                            "action": {
+                                "type": "Click",
+                                "param": {
+                                    "target": [
+                                        575,
+                                        407,
+                                        142,
+                                        32
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
         "克莱茵打灰浅层序列-升满级后停止任务": {
             "default_case": "No",
             "label": "当前装甲满级后停止任务",
-            "description": "与重复执行冲突",
+            "description": "不与重复执行冲突",
             "type": "switch",
             "cases": [
                 {
