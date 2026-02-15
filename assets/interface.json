@@ -339,6 +339,7 @@
         },
         {
             "name": "新春聊天室每日签到",
+            "default_check": true,
             "entry": "新春聊天室每日签到-开始任务层",
             "description": "新年快乐哦~"
         },
