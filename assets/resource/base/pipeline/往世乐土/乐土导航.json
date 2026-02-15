@@ -111,5 +111,48 @@
         "template": [
             "周常/往世乐土/导航/已进入乐土深层序列.png"
         ]
+    },
+    "往事乐土_识别门": {
+        "doc": "识别门",
+        "recognition": {
+            "type": "NeuralNetworkDetect",
+            "param": {
+                "model": "gate.onnx",
+                "labels": [
+                    "jiu-shi",
+                    "tian-hui",
+                    "fu-sheng",
+                    "cha-na",
+                    "wu-xian",
+                    "jie-lv",
+                    "xu-guang",
+                    "kong-meng",
+                    "huang-jin",
+                    "ao-mie",
+                    "luo-xuan",
+                    "fan-xing",
+                    "zhen-wo",
+                    "yin-bi",
+                    "boss"
+                ],
+                "expected": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14
+                ] // 0-14分别对应上面labels里的门
+            }
+        }
     }
 }
