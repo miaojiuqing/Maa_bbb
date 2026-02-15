@@ -1,4 +1,34 @@
 {
+    "乐土刷级-通用-当前女武神记忆碎片掉落已达上限": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    131,
+                    217,
+                    1002,
+                    168
+                ],
+                "expected": [
+                    "记忆碎片.*掉落已达上限"
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Node.Recognition.Succeeded": "当前装甲记忆碎片掉落已达上限"
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    582,
+                    400,
+                    120,
+                    41
+                ]
+            }
+        }
+    },
     "克莱茵打灰-通用-乐土币刷满了": {
         "recognition": {
             "type": "OCR",
