@@ -1,4 +1,14 @@
 {
+    "准备退出": {
+        "action": "Custom",
+        "custom_action": "Notice",
+        "custom_action_param": {
+            "action": "set_crystal"
+        },
+        "next": [
+            "关闭游戏"
+        ]
+    },
     "关闭游戏": {
         "action": "StopApp",
         "package": "com.miHoYo.enterprise.NGHSoD"
