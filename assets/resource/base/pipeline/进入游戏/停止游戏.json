@@ -3,7 +3,7 @@
         "action": "Custom",
         "custom_action": "Notice",
         "custom_action_param": {
-            "action": "set_crystal"
+            "action": "show_crystal"
         },
         "next": [
             "关闭游戏"
