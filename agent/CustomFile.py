@@ -3,6 +3,7 @@ from agent.custom.action.Count import Count
 from agent.custom.action.OverridePipe import OverridePipe
 from agent.custom.action.IDFRole import RecognitionRole
 
+from agent.custom.action.Notice import Notice
 
 from agent.custom.action.Role.FieryWishingStar import FieryWishingStar
 from agent.custom.action.Role.SpinaAstera import SpinaAstera
@@ -13,6 +14,13 @@ from agent.custom.action.Role.GeneralFight import GeneralFight
 
 
 from agent.custom.recongition.CheckResolution import CheckResolution
+
+
+@AgentServer.custom_action("Notice")
+class Notice_Cls(Notice):
+    def __init__(self):
+        super().__init__()
+        print(f"{self.__class__.__name__} 初始化")
 
 
 @AgentServer.custom_action("GeneralFight")

@@ -374,7 +374,12 @@
         "recognition": "TemplateMatch",
         "template": [
             "主页UI/休伯利安主界面.png"
-        ]
+        ],
+        "action": "Custom",
+        "custom_action": "Notice",
+        "custom_action_param": {
+            "action": "set_crystal"
+        }
     },
     "点击确定月卡奖励": {
         "recognition": "OCR",
