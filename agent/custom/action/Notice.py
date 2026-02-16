@@ -52,14 +52,7 @@ class Notice(CustomAction):
             # 收益
             if start_crystal.isdigit() and end_crystal.isdigit():
                 profit = int(end_crystal) - int(start_crystal)
-
-                self.custom_notify(context, "初始水晶:")
-                self.custom_notify(context, start_crystal)
-                self.custom_notify(context, "当前水晶:")
-                self.custom_notify(context, end_crystal)
-                self.custom_notify(context, "收益:")
-                self.custom_notify(context, str(profit))
-
+                self.custom_notify(context, f"初始水晶: {start_crystal}, 结束水晶: {end_crystal}, 收益: {profit}")
         return CustomAction.RunResult(success=True)
 
     def custom_notify(self, context: Context, msg: str):
