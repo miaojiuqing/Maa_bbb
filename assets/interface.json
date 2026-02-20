@@ -27,7 +27,7 @@
             "permission_required": true,
             "win32": {
                 "class_regex": "UnityWndClass",
-                "window_regex": "崩坏3|崩坏3 Steam版|Honkai Impact 3",
+                "window_regex": "崩坏3|崩坏3 Steam版|Honkai Impact 3|崩壞3rd",
                 // "screencap": "PrintWindow", //截图方式不设置默认
                 "mouse": "PostMessageWithCursorPos",
                 "keyboard": "Seize"
