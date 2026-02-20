@@ -1,0 +1,36 @@
+{
+    "新春聊天室捉迷藏-没有其他锚点-朝左走": {
+        "action": {
+            "type": "LongPressKey",
+            "param": {
+                "duration": 500,
+                "key": [
+                    65 //A
+                ]
+            }
+        }
+    },
+    "新春聊天室捉迷藏-吼姆新年-按R交互": {
+        "repeat_delay": 1000,
+        "action": {
+            "type": "ClickKey",
+            "param": {
+                "key": [
+                    82, //R
+                    70 //F
+                ]
+            }
+        }
+    },
+    "新春聊天室捉迷藏-是薇塔-往下走": {
+        "action": {
+            "type": "LongPressKey",
+            "param": {
+                "duration": 250,
+                "key": [
+                    83 //S
+                ]
+            }
+        }
+    }
+}

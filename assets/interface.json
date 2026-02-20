@@ -344,6 +344,12 @@
             "description": "新年快乐哦~"
         },
         {
+            "name": "新春聊天室每日捉迷藏",
+            "default_check": false,
+            "entry": "新春聊天室捉迷藏-开始任务层",
+            "description": "给监管者送分来的，不会自行领取奖励，想起来再弄"
+        },
+        {
             "name": "冒险委托-减负",
             "default_check": true,
             "entry": "冒险委托任务-选择层",
