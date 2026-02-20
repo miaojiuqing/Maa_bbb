@@ -435,7 +435,7 @@
         {
             "name": "退出/关闭游戏",
             "default_check": false,
-            "entry": "关闭游戏",
+            "entry": "准备退出",
             "description": "仅关闭游戏，运行结束关闭游戏和软件可在软件内设置"
         },
         {

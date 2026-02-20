@@ -1,0 +1,19 @@
+{
+    "识别水晶": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1100,
+                    21,
+                    119,
+                    31
+                ],
+                "only_rec": true,
+                "expected": [
+                    "\\d+"
+                ]
+            }
+        }
+    }
+}
