@@ -46,7 +46,7 @@ class Notice(CustomAction):
 
             resource = context.get_node_object("资源变量")
             if resource is None:
-                return CustomAction.RunResult(success=False)
+                return CustomAction.RunResult(success=True)
             start_crystal = resource.focus.get("start_crystal")
 
             # 收益
