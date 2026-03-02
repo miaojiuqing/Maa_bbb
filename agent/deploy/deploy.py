@@ -3,11 +3,18 @@
 在运行main之前检查并安装必要的Python库
 """
 
+import io
 import json
 import logging
 import subprocess
 import sys
 from pathlib import Path
+
+# 强制 stdout/stderr 使用 UTF-8，避免 Windows cp1252 下中文日志/print 报 UnicodeEncodeError
+if hasattr(sys.stdout, "buffer") and getattr(sys.stdout, "encoding", "").lower() not in ("utf-8", "utf8"):
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "buffer") and getattr(sys.stderr, "encoding", "").lower() not in ("utf-8", "utf8"):
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")
 
 # 尝试导入 jsonc，优先使用 jsonc
 try:

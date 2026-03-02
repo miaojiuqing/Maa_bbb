@@ -1,9 +1,14 @@
-import sys
+import io
 import os
+import sys
+
+# 强制 stdout/stderr 使用 UTF-8 编码，避免非 UTF-8 系统环境下中文输出报错
+if sys.stdout.encoding != "utf-8":
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+if sys.stderr.encoding != "utf-8":
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
-
-import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
