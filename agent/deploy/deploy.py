@@ -11,9 +11,13 @@ import sys
 from pathlib import Path
 
 # 强制 stdout/stderr 使用 UTF-8，避免 Windows cp1252 下中文日志/print 报 UnicodeEncodeError
-if hasattr(sys.stdout, "buffer") and getattr(sys.stdout, "encoding", "").lower() not in ("utf-8", "utf8"):
+if hasattr(sys.stdout, "buffer") and getattr(
+    sys.stdout, "encoding", ""
+).lower() not in ("utf-8", "utf8"):
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
-if hasattr(sys.stderr, "buffer") and getattr(sys.stderr, "encoding", "").lower() not in ("utf-8", "utf8"):
+if hasattr(sys.stderr, "buffer") and getattr(
+    sys.stderr, "encoding", ""
+).lower() not in ("utf-8", "utf8"):
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")
 
 # 尝试导入 jsonc，优先使用 jsonc
@@ -177,8 +181,8 @@ def install_package_with_fallback(package_spec):
     3. PyPI 官方源
     """
     sources = [
-        ("清华源", "https://pypi.tuna.tsinghua.edu.cn/simple"),
         ("阿里源", "https://mirrors.aliyun.com/pypi/simple/"),
+        ("清华源", "https://pypi.tuna.tsinghua.edu.cn/simple"),
         ("PyPI官方源", "https://pypi.org/simple"),
     ]
 
