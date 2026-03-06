@@ -112,28 +112,37 @@
             "周常/往世乐土/导航/已进入乐土深层序列.png"
         ]
     },
-    "往事乐土_识别门": {
+    "往世乐土_识别门": {
         "doc": "识别门",
         "recognition": {
             "type": "NeuralNetworkDetect",
             "param": {
-                "model": "gate.onnx",
+                "model": "best.onnx",
                 "labels": [
-                    "jiu-shi",
-                    "tian-hui",
-                    "fu-sheng",
-                    "cha-na",
-                    "wu-xian",
-                    "jie-lv",
-                    "xu-guang",
-                    "kong-meng",
-                    "huang-jin",
-                    "ao-mie",
-                    "luo-xuan",
-                    "fan-xing",
-                    "zhen-wo",
-                    "yin-bi",
-                    "boss"
+                    "elysia_star", // 爱愿妖精
+                    "aomie", //鏖灭
+                    "zhenwo", //真我
+                    "kongmeng", //空梦
+                    "shanbiyvjing", //闪避预警 （不可用）
+                    "xuanze_R", //选择R （不可用）
+                    "guaiwu_xueliang_UI", //怪物血量UI
+                    "xuanze_r", //选择r （不可用）
+                    "keyin", //刻印门
+                    "keyin_open", //刻印门开启
+                    "shangdian", //商店
+                    "jielv", //戒律
+                    "luoxuan", //螺旋
+                    "shangdian_open", //商店开启
+                    "tianhui", //天慧
+                    "fanxing", //繁星
+                    "lock_on", // 锁定（不可用）
+                    "wuxian", //无限
+                    "chana", //刹那
+                    "huangjin", //黄金
+                    "jiushi", //救世
+                    "xvguang", //曙光
+                    "fusheng", //浮生
+                    "BOSS" //BOSS入口
                 ],
                 "expected": [
                     0,
@@ -150,8 +159,17 @@
                     11,
                     12,
                     13,
-                    14
-                ] // 0-14分别对应上面labels里的门
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23
+                ] // 0-23分别对应上面labels里的门
             }
         }
     }

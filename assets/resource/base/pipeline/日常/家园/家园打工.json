@@ -261,10 +261,9 @@
             199,
             75
         ],
-        "threshold": 0.9,
         "recognition": "OCR",
         "expected": [
-            ".*键打工"
+            ".*打工"
         ],
         "action": "Click"
     },
