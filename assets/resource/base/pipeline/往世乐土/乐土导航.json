@@ -120,29 +120,29 @@
                 "model": "best.onnx",
                 "labels": [
                     "elysia_star",
-                    "aomie",
-                    "zhenwo",
-                    "kongmeng",
-                    "shanbiyvjing",
-                    "xuanze_R",
-                    "guaiwu_xueliang_UI",
-                    "xuanze_r",
-                    "keyin",
-                    "keyin_open",
-                    "shangdian",
-                    "jielv",
-                    "luoxuan",
-                    "shangdian_open",
-                    "tianhui",
-                    "fanxing",
-                    "lock_on",
-                    "wuxian",
-                    "chana",
-                    "huangjin",
-                    "jiushi",
-                    "xvguang",
-                    "fusheng",
-                    "BOSS"
+                    "aomie", //鏖灭
+                    "zhenwo", //真我
+                    "kongmeng", //空梦
+                    "shanbiyvjing", //闪避预警
+                    "xuanze_R", //选择R
+                    "guaiwu_xueliang_UI", //怪物血量UI
+                    "xuanze_r", //选择r
+                    "keyin", //键盘输入
+                    "keyin_open", //键盘输入开启
+                    "shangdian", //商店
+                    "jielv", //戒律
+                    "luoxuan", //螺旋
+                    "shangdian_open", //商店开启
+                    "tianhui", //天慧
+                    "fanxing", //繁星
+                    "lock_on", //
+                    "wuxian", //无限
+                    "chana", //刹那
+                    "huangjin", //黄金
+                    "jiushi", //救世
+                    "xvguang", //曙光
+                    "fusheng", //浮生
+                    "BOSS" //BOSS入口
                 ],
                 "expected": [
                     0,
