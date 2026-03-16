@@ -1,0 +1,151 @@
+{
+    "自动战斗-乐土-只按武器技战斗循环": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
+        "roi": [
+            0,
+            0,
+            143,
+            145
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "战斗相关/战中检查/战斗中.png"
+        ],
+        "next": [
+            "非战斗状态-乐土只按武器技",
+            "[JumpBack]自动战斗-乐土-只按武器技-武器技点击"
+        ]
+    },
+    "非战斗状态-乐土只按武器技": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
+        "roi": [
+            0,
+            0,
+            143,
+            145
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "战斗相关/战中检查/战斗中.png"
+        ],
+        "inverse": true,
+        "next": [
+            "自动战斗-乐土-只按武器技战斗循环",
+            "[JumpBack]空任务"
+        ]
+    },
+    "自动战斗-乐土-只按武器技-武器技点击": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
+        "action": "MultiSwipe",
+        "swipes": [
+            {
+                //武器技
+                "begin": [
+                    1019,
+                    490,
+                    52,
+                    38
+                ],
+                "end": [
+                    1019,
+                    490,
+                    52,
+                    38
+                ],
+                "starting": 0,
+                "duration": 50
+            },
+            {
+                //支援位1
+                "begin": [
+                    1176,
+                    133,
+                    48,
+                    28
+                ],
+                "end": [
+                    1176,
+                    133,
+                    48,
+                    28
+                ],
+                "starting": 0,
+                "duration": 50
+            },
+            {
+                //支援位2
+                "begin": [
+                    1175,
+                    275,
+                    47,
+                    42
+                ],
+                "end": [
+                    1175,
+                    275,
+                    47,
+                    42
+                ],
+                "starting": 0,
+                "duration": 50
+            },
+            {
+                //人偶
+                "begin": [
+                    879,
+                    542,
+                    65,
+                    34
+                ],
+                "end": [
+                    879,
+                    542,
+                    65,
+                    34
+                ],
+                "starting": 0,
+                "duration": 50
+            },
+            {
+                //英桀道具
+                "begin": [
+                    895,
+                    379,
+                    85,
+                    90
+                ],
+                "end": [
+                    895,
+                    379,
+                    85,
+                    90
+                ],
+                "starting": 0,
+                "duration": 50
+            },
+            {
+                //大招
+                "begin": [
+                    1041,
+                    357,
+                    50,
+                    42
+                ],
+                "end": [
+                    1041,
+                    357,
+                    50,
+                    42
+                ],
+                "starting": 0,
+                "duration": 50
+            }
+        ]
+    }
+}

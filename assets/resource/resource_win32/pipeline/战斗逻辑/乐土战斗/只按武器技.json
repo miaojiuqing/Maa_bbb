@@ -1,0 +1,60 @@
+{
+    "自动战斗-乐土-只按武器技战斗循环": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
+        "roi": [
+            0,
+            0,
+            143,
+            145
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "战斗相关/战中检查/战斗中.png"
+        ],
+        "next": [
+            "非战斗状态-乐土只按武器技",
+            "[JumpBack]自动战斗-乐土-只按武器技-武器技点击"
+        ]
+    },
+    "非战斗状态-乐土只按武器技": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
+        "roi": [
+            0,
+            0,
+            143,
+            145
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "战斗相关/战中检查/战斗中.png"
+        ],
+        "inverse": true,
+        "next": [
+            "自动战斗-乐土-只按武器技战斗循环",
+            "[JumpBack]空任务"
+        ]
+    },
+    "自动战斗-乐土-只按武器技-武器技点击": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
+        "action": {
+            "type": "ClickKey",
+            "param": {
+                "key": [
+                    49, //支援位1
+                    50, //支援位2
+                    84, //英桀助战T
+                    81, //大招Q
+                    69, //武器技E
+                    70 //星之环F
+                    // 74 //普攻
+                ]
+            }
+        }
+    }
+}
