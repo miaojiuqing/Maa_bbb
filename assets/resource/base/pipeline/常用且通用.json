@@ -18,6 +18,26 @@
         "green_mask": true,
         "action": "StopTask"
     },
+    "特殊返回返回识别集": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    0,
+                    0,
+                    185,
+                    131
+                ],
+                "template": [
+                    "版本活动/当期活动/圣芙蕾雅毕业指南/返回.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 500
+    },
     "特殊-双核协战返回": {
         "roi": [
             66,
