@@ -39,9 +39,13 @@
 # # 输出最终的列表结果：[1, 6, 8]
 # print(lis)
 
-def f(n):
-    if n == 1:
-        return 1
-    else:
-        return n*f(n-1)
-print(f(4))
+# def f(n):
+#     if n == 1:
+#         return 1
+#     else:
+#         return n*f(n-1)
+# print(f(4))
+x=3
+x*=6
+print(x)
+                
