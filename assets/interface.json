@@ -2359,7 +2359,7 @@
         },
         "记忆战场-尝试打最后一层": {
             "label": "出击模式",
-            "description": "开启后将在减负完成后尝试讨伐积分怪",
+            "description": "开启后将在减负完成后尝试讨伐积分怪，目前只打积分怪",
             "default_case": "No",
             "type": "switch",
             "cases": [
