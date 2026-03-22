@@ -131,6 +131,16 @@
                 "./resource/base",
                 "./resource/resource_jiuyou"
             ]
+        },
+        {
+            "name": "小米服",
+            "controller": [
+                "安卓端"
+            ],
+            "path": [
+                "./resource/base",
+                "./resource/resource_xiaomi"
+            ]
         }
     ],
     "task": [

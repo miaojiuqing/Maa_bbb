@@ -45,7 +45,16 @@
 #     else:
 #         return n*f(n-1)
 # print(f(4))
-x=3
-x*=6
-print(x)
+# x=3
+# x*=6
+# print(x)
+# a = 3
+# b = 4
+# a,b = b,a
+# print(a**2+b//2)
+for i in range(1, 6):
+    if i%4 == 0:
+        continue
+    else:
+        print(i,end=",")
                 
