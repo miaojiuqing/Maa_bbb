@@ -14,22 +14,8 @@
             "拓境战幕-已进入拓境战幕",
             "[JumpBack]拓境战幕-点击进入拓境战幕",
             "[JumpBack]拓境战幕-点击出击页面的出击",
-            "[JumpBack]拓境战幕-点击主菜单处的出击"
+            "[JumpBack]点击主菜单处的出击"
         ]
-    },
-    "拓境战幕-点击主菜单处的出击": {
-        "roi": [
-            1085,
-            287,
-            131,
-            153
-        ],
-        "recognition": "OCR",
-        "expected": [
-            "出击"
-        ],
-        "action": "Click",
-        "post_delay": 500
     },
     "拓境战幕-点击出击页面的出击": {
         "roi": [
@@ -40,7 +26,8 @@
         ],
         "recognition": "OCR",
         "expected": [
-            "出击"
+            "出击",
+            "出主"
         ],
         "action": "Click"
     },

@@ -23,7 +23,7 @@
             "[JumpBack]相关资源下载-取消",
             "[JumpBack]点击进入材料远征",
             "[JumpBack]材料远征-点完出击后的点击出击",
-            "[JumpBack]材料远征-主菜单的点击出击",
+            "[JumpBack]点击主菜单处的出击",
             "[JumpBack]拓境战幕-返回",
             "[JumpBack]请舰长注意休息",
             "[JumpBack]材料远征-误触-记忆战场",
@@ -78,20 +78,6 @@
             62,
             23
         ],
-        "post_delay": 1500
-    },
-    "材料远征-主菜单的点击出击": {
-        "roi": [
-            1089,
-            257,
-            174,
-            200
-        ],
-        "recognition": "OCR",
-        "expected": [
-            "出击"
-        ],
-        "action": "Click",
         "post_delay": 1500
     },
     "材料远征-点完出击后的点击出击": {
