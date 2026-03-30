@@ -51,6 +51,7 @@
             "[JumpBack]误触进入手机界面",
             "[JumpBack]误触进入聊天频道界面",
             "[JumpBack]网络连接失败-重试",
+            "[JumpBack]预告网页处理-点击关闭",
             "[JumpBack]预告网页处理-点击复制确认",
             "[JumpBack]预告网页处理-点击复制",
             "[JumpBack]预告网页处理-点击复制点击叉叉",
@@ -229,6 +230,26 @@
         "action": {
             "type": "Click"
         }
+    },
+    "预告网页处理-点击关闭": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    498,
+                    412,
+                    308,
+                    129
+                ],
+                "expected": [
+                    "关闭"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 500
     },
     "离开火星": {
         "roi": [
