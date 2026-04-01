@@ -83,7 +83,7 @@ class CombatActions:
                     except Exception as e:
                         self.logger.error(f"处理文件 {file} 时出错: {e}")
 
-    def attack(self):
+    def attack(self):# 普攻
         """
         攻击
         执行一次攻击操作。
@@ -93,19 +93,20 @@ class CombatActions:
             return self.context.run_action("攻击_action")
         return False
 
-    def long_press_attack(self, duration: int = 1000):
+    def long_press_attack(self, duration: int = 500):# 分支攻击（长按普攻）
         """
         长按攻击
         按住攻击键一段时间。
-        :param duration: 长按时间（毫秒），默认1000
+        :param duration: 长按时间（毫秒），默认500
+        原本为1000太长了有点
         """
-        if duration != 1000:
+        if duration != 500:
             self.context.override_pipeline(
                 {"长按攻击_action": {"action": {"param": {"duration": duration}}}}
             )
         return self.context.run_action("长按攻击_action")
 
-    def dodge(self):
+    def dodge(self):# 闪避
         """
         闪避
         执行一次闪避操作。
@@ -115,19 +116,20 @@ class CombatActions:
             return self.context.run_action("闪避_action")
         return False
 
-    def long_press_dodge(self, duration: int = 1000):
+    def long_press_dodge(self, duration: int = 1000):# 特殊闪避（长按闪避），eg:终焉的时停
         """
         长按闪避
         按住闪避键一段时间。
-        :param duration: 长按时间（毫秒），默认1000
+        :param duration: 长按时间（毫秒），默认500
+        原本为1000太长了有点
         """
-        if duration != 1000:
+        if duration != 500:
             self.context.override_pipeline(
                 {"长按闪避_action": {"action": {"param": {"duration": duration}}}}
             )
         return self.context.run_action("长按闪避_action")
 
-    def use_skill(self, duration: int = 0):
+    def use_skill(self, duration: int = 0):#武器技
         """
         使用技能
         执行一次技能释放操作。
@@ -140,15 +142,29 @@ class CombatActions:
             return True
         return False
 
-    def use_ultimate_skill(self, duration: int = 0):
-        """使用必杀技能"""
+    def use_ultimate_skill(self, duration: int = 0):#点按必杀
+        """
+        使用必杀技能
+        点击一次必杀
+        """
         image = self.context.tasker.controller.post_screencap().wait().get()
         if self.context.run_recognition("战斗中", image):
             self.context.run_action("必杀_action")
-            time.sleep(duration / 1000)
+            time.sleep(duration / 150)
             return True
         return False
-
+    def long_press_dodge(self, duration: int = 500):# 特殊必杀（长按必杀），eg:终焉大招
+        """
+        长按必杀
+        按住必杀键一段时间。
+        :param duration: 长按时间(毫秒),默认500
+        原本为1000太长了有点
+        """
+        if duration != 500:
+            self.context.override_pipeline(
+                {"长按必杀_action": {"action": {"param": {"duration": duration}}}}
+            )
+        return self.context.run_action("长按必杀_action")
     def down_attack(self, contact: int = 0):
         """
         按下攻击
@@ -192,7 +208,7 @@ class CombatActions:
         """
         return self.context.run_action("锁定视角_action")
 
-    def co_operation(self):
+    def co_operation(self):#同时可用于触发星之环，还有个T技能乐土,乐土用来触发英桀支援()
         """
         协同者
         协同者操作。
