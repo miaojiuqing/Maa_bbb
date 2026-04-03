@@ -90,16 +90,20 @@
             "type": "OCR",
             "param": {
                 "roi": [
-                    582,
-                    403,
-                    768,
-                    204
+                    600,
+                    211,
+                    690,
+                    459
                 ],
                 "expected": [
                     "挑战次数不足.*",
-                    ".*请明日再战"
+                    ".*请明日再战",
+                    "提示"
                 ]
             }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "<font color=\"red\">挑战次数不足，正在返回菜单</font>"
         },
         "action": {
             "type": "Click",
