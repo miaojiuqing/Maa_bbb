@@ -1,0 +1,21 @@
+{
+    "版本活动-论文危机-返回": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1,
+                    0,
+                    110,
+                    102
+                ],
+                "template": [
+                    "版本活动/当期活动/书海计划_论文危机/返回.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        }
+    }
+}
