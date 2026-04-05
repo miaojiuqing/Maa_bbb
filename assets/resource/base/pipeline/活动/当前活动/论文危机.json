@@ -10,12 +10,253 @@
                     102
                 ],
                 "template": [
-                    "版本活动/当期活动/书海计划_论文危机/返回.png"
+                    "版本活动/当期活动/书海计划_论文危机/返回.png",
+                    "版本活动/当期活动/书海计划_论文危机/关机键.png"
                 ]
             }
         },
         "action": {
             "type": "Click"
         }
+    },
+    "版本活动-论文危机-任务开始层": {
+        "next": [
+            "版本活动-论文危机-总任务层",
+            "[JumpBack]启动并进入游戏"
+        ]
+    },
+    "版本活动-论文危机-总任务层": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    932,
+                    316,
+                    189,
+                    209
+                ],
+                "template": [
+                    "主页UI/休伯利安主界面.png"
+                ]
+            }
+        },
+        "next": [
+            "版本活动-论文危机-已进入活动界面",
+            "[JumpBack]版本活动-论文危机-点击进入活动界面-首页处",
+            "[JumpBack]点击主菜单处的出击",
+            "[JumpBack]点击出击的活动",
+            "[JumpBack]版本活动-论文危机-点击进入活动界面-活动处",
+            "版本活动-论文危机-已进入工厂界面"
+        ]
+    },
+    "版本活动-论文危机-点击进入活动界面-活动处": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "版本活动/当期活动/书海计划_论文危机/点击进入活动1.png"
+                ]
+            }
+        },
+        "action": "Click",
+        "post_delay": 500
+    },
+    "版本活动-论文危机-点击进入活动界面-首页处": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    991,
+                    94,
+                    156,
+                    144
+                ],
+                "template": [
+                    "版本活动/当期活动/书海计划_论文危机/点击进入活动2.png"
+                ]
+            }
+        },
+        "action": "Click",
+        "post_delay": 500
+    },
+    "版本活动-论文危机-已进入活动界面": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    12,
+                    51,
+                    396,
+                    106
+                ],
+                "template": [
+                    "版本活动/当期活动/书海计划_论文危机/已进入活动界面.png"
+                ]
+            }
+        },
+        "next": [
+            "版本活动-论文危机-已进入工厂界面",
+            "[JumpBack]版本活动-论文危机-点击进入工厂"
+        ]
+    },
+    "版本活动-论文危机-已进入工厂界面": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    21,
+                    7,
+                    52,
+                    51
+                ],
+                "template": [
+                    "版本活动/当期活动/书海计划_论文危机/关机键.png"
+                ]
+            }
+        },
+        "next": [
+            "版本活动-论文危机-无可收获资源",
+            "[JumpBack]版本活动-论文危机-可收获-石",
+            "[JumpBack]版本活动-论文危机-可收获-红石"
+        ]
+    },
+    "版本活动-论文危机-无可收获资源": {
+        "inverse": true,
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "threshold": 0.65,
+                "roi": [
+                    3,
+                    84,
+                    919,
+                    605
+                ],
+                "template": [
+                    "版本活动/当期活动/书海计划_论文危机/红石2.png",
+                    "版本活动/当期活动/书海计划_论文危机/石2.png",
+                    "版本活动/当期活动/书海计划_论文危机/红石.png",
+                    "版本活动/当期活动/书海计划_论文危机/石.png"
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "收菜结束！"
+        },
+        "post_delay": 250,
+        "next": [
+            "成功进入游戏主菜单",
+            "[JumpBack]版本活动-论文危机-返回"
+        ]
+    },
+    "版本活动-论文危机-可收获-红石": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    3,
+                    84,
+                    919,
+                    605
+                ],
+                "template": [
+                    "版本活动/当期活动/书海计划_论文危机/红石.png",
+                    "版本活动/当期活动/书海计划_论文危机/红石2.png"
+                ]
+            }
+        },
+        "post_delay": 250,
+        "action": "Click"
+    },
+    "版本活动-论文危机-可收获-石": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    3,
+                    84,
+                    919,
+                    605
+                ],
+                "template": [
+                    "版本活动/当期活动/书海计划_论文危机/石.png",
+                    "版本活动/当期活动/书海计划_论文危机/石2.png"
+                ]
+            }
+        },
+        "post_delay": 250,
+        "action": "Click"
+    },
+    "版本活动-论文危机-已进入挖矿界面": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    444,
+                    263,
+                    423,
+                    191
+                ],
+                "expected": [
+                    "开始挖掘"
+                ]
+            }
+        },
+        "next": [
+            "[JumpBack]版本活动-论文危机-点击开始挖矿",
+            "[JumpBack]空任务"
+        ]
+    },
+    "版本活动-论文危机-挖掘失败": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    517,
+                    110,
+                    269,
+                    133
+                ],
+                "expected": [
+                    "挖掘失败"
+                ]
+            }
+        }
+    },
+    "版本活动-论文危机-点击开始挖矿": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    444,
+                    263,
+                    423,
+                    191
+                ],
+                "expected": [
+                    "开始挖掘"
+                ]
+            }
+        },
+        "action": "Click",
+        "post_delay": 300
+    },
+    "版本活动-论文危机-点击进入工厂": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1005,
+                    432,
+                    275,
+                    288
+                ],
+                "template": [
+                    "版本活动/当期活动/书海计划_论文危机/点击进入工厂.png"
+                ]
+            }
+        },
+        "post_delay": 500,
+        "action": "Click"
     }
 }
