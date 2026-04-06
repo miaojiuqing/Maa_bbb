@@ -4292,7 +4292,7 @@
             "type": "select",
             "description": "将浅层序列的所有女武神列出来了，自己找自己选吧",
             "label": "女武神装甲名",
-            "cases": [
+            "cases": [ //AI补全
                 {
                     "name": "浅层序列自选角色_镇x偃月叩晓",
                     "label": "镇x偃月叩晓",
