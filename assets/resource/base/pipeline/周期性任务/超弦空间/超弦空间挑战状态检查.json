@@ -1,0 +1,79 @@
+{
+	"超弦空间-第一层检查-未挑战状态": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"threshold": [
+					0.9
+				],
+				"roi": [
+					88,
+					416,
+					68,
+					50
+				],
+				"template": [
+					"周期性任务/超弦空间/层数判断/分数为0未挑战.png"
+				]
+			}
+		}
+	},
+	"超弦空间-第二层检查-未挑战状态": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"threshold": [
+					0.9
+				],
+				"roi": [
+					212,
+					291,
+					73,
+					46
+				],
+				"template": [
+					"周期性任务/超弦空间/层数判断/分数为0未挑战.png"
+				]
+			}
+		}
+	},
+	"超弦空间-第三层检查-未挑战状态": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"threshold": [
+					0.9
+				],
+				"roi": [
+					215,
+					546,
+					67,
+					42
+				],
+				"template": [
+					"周期性任务/超弦空间/层数判断/分数为0未挑战.png"
+				]
+			}
+		}
+	},
+	"超弦空间-第四层检查-未挑战状态": {
+		"inverse": true,
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"threshold": [
+					0.9
+				],
+				"roi": [
+					88,
+					416,
+					68,
+					50
+				],
+				"template": [
+					"周期性任务/超弦空间/层数判断/分数为0未挑战.png"
+				]
+			}
+		}
+	}
+}
