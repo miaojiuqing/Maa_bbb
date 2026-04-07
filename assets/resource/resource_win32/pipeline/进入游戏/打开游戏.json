@@ -2,11 +2,10 @@
     "启动并进入游戏": {
         "action": "DoNothing"
     },
-    "模拟器包名游戏启动": {
-        "enabled": false
-        // "action": "ClickKey",
-        // "key": 27,
-        // "post_delay": "1500"
+    "模拟器包名游戏启动": { //在win32时改为输入ESC
+        "enabled": false,
+        "action": "ClickKey",
+        "key": 27
     },
     "关闭游戏": {
         "action": "DoNothing",
