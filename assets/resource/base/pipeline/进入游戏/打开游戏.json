@@ -105,7 +105,7 @@
         },
         "focus": {
             "Node.Action.Succeeded": "崩坏三需前往客户端进行更新或是停服维护中",
-            "Node.Recognition.Succeeded": "所有任务都已完成" //骗MAS用的
+            "Node.Recognition.Succeeded": "停服维护中" //确实不该输出这个，我改一下通知和MAS那边的模版吧
         }
     },
     "网络连接失败-重试": {
