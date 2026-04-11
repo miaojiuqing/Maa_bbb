@@ -268,7 +268,8 @@
         ],
         "recognition": "OCR",
         "expected": [
-            "周结算奖励"
+            "周结算奖励",
+            "轮次结算奖励"
         ],
         "action": "Click",
         "target": [
