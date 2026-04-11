@@ -162,6 +162,53 @@
         ],
         "action": "Click"
     },
+    "叉叉": {
+        "desc": "点击叉叉同时生效图片和文字",
+        "recognition": {
+            "type": "Or",
+            "param": {
+                "any_of": [
+                    {
+                        "recognition": {
+                            "type": "OCR",
+                            "param": {
+                                "roi": [
+                                    837,
+                                    0,
+                                    442,
+                                    264
+                                ],
+                                "expected": [
+                                    "x",
+                                    "X",
+                                    ""
+                                ]
+                            }
+                        },
+                        "action": "Click"
+                    },
+                    {
+                        "roi": [
+                            837,
+                            0,
+                            442,
+                            264
+                        ],
+                        "threshold": 0.85,
+                        "recognition": "TemplateMatch",
+                        "template": [
+                            "通用/叉叉.png"
+                        ],
+                        "action": "Click"
+                    }
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 500
+    },
     "点击叉叉-延迟一秒版": {
         "roi": [
             837,
