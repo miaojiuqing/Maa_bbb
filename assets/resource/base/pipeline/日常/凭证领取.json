@@ -67,6 +67,7 @@
             "Node.Recognition.Succeeded": "已处于凭证奖励领取界面，开始检查先锋凭证奖励状态"
         },
         "next": [
+            "凭证奖励领取-进入后先小小的滑一下",
             "[JumpBack]凭证奖励领取-每周历练箱",
             "[JumpBack]点击叉叉",
             "[JumpBack]点击空白位置关闭",
@@ -75,6 +76,38 @@
             "[JumpBack]凭证奖励领取-氪金历练箱",
             "[JumpBack]凭证奖励领取-正处于物品详细界面-误触版"
         ]
+    },
+    "凭证奖励领取-进入后先小小的滑一下": {
+        "roi": [
+            206,
+            212,
+            170,
+            163
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "日常/任务奖励领取/先锋凭证.png"
+        ],
+        "max_hit": 1,
+        "action": {
+            "type": "Swipe",
+            "param": {
+                "begin": [
+                    378,
+                    355,
+                    1,
+                    1
+                ],
+                "end": [
+                    450,
+                    355,
+                    1,
+                    1
+                ],
+                "duration": 500,
+                "end_hold": 150
+            }
+        }
     },
     "凭证奖励领取-先锋凭证检查-有可领取奖励": {
         "recognition": {
@@ -242,6 +275,7 @@
                 ]
             }
         },
+        "pre_delay": 300,
         "action": {
             "type": "Click",
             "param": {
@@ -253,7 +287,7 @@
                 ]
             }
         },
-        "post_delay": 1000
+        "post_delay": 1500
     },
     "凭证奖励领取-正处于物品详细界面-目的版-用于先锋凭证": {
         "recognition": {
