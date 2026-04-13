@@ -494,7 +494,8 @@
             "name": "只是测试",
             "entry": "测试任务接口",
             "option": [
-                "测试类型"
+                "测试类型",
+                "渠道服包名测试"
             ],
             "repeatable": true,
             "repeat_count": 1,
@@ -6438,6 +6439,89 @@
                 }
             ],
             "default_case": "通知发送测试"
+        },
+        "渠道服包名测试": {
+            "type": "select",
+            "cases": [
+                {
+                    "name": "官服",
+                    "pipeline_override": {
+                        "测试任务接口": {
+                            "recognition": {},
+                            "next": [],
+                            "action": "StartApp",
+                            "package": "com.miHoYo.enterprise.NGHSoD"
+                        }
+                    }
+                },
+                {
+                    "name": "B服",
+                    "pipeline_override": {
+                        "测试任务接口": {
+                            "recognition": {},
+                            "next": [],
+                            "action": "StartApp",
+                            "package": "com.miHoYo.bh3.bilibili"
+                        }
+                    }
+                },
+                {
+                    "name": "小米服",
+                    "pipeline_override": {
+                        "测试任务接口": {
+                            "recognition": {},
+                            "next": [],
+                            "action": "StartApp",
+                            "package": "com.miHoYo.bh3.mi"
+                        }
+                    }
+                },
+                {
+                    "name": "VIVO服",
+                    "pipeline_override": {
+                        "测试任务接口": {
+                            "recognition": {},
+                            "next": [],
+                            "action": "StartApp",
+                            "package": "com.miHoYo.bh3.vivo"
+                        }
+                    }
+                },
+                {
+                    "name": "OPPO服",
+                    "pipeline_override": {
+                        "测试任务接口": {
+                            "recognition": {},
+                            "next": [],
+                            "action": "StartApp",
+                            "package": "com.miHoYo.bh3.nearme.gamecenter"
+                        }
+                    }
+                },
+                {
+                    "name": "华为服",
+                    "pipeline_override": {
+                        "测试任务接口": {
+                            "recognition": {},
+                            "next": [],
+                            "action": "StartApp",
+                            "package": "com.miHoYo.bh3.huawei"
+                        }
+                    }
+                },
+                {
+                    "name": "九游服",
+                    "pipeline_override": {
+                        "测试任务接口": {
+                            "recognition": {},
+                            "next": [],
+                            "action": "StartApp",
+                            "package": "com.miHoYo.bh3.uc"
+                        }
+                    }
+                }
+            ],
+            "default_case": "官服"
         }
     },
     "advanced": {

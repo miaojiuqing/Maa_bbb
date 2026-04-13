@@ -138,32 +138,6 @@
                 ]
             }
         }
-        // "recognition": "And",
-        // "all_of": [
-        //     {
-        //         // "sub_name": "icon",
-        //         "recognition": "OCR",
-        //         "roi": [
-        //             361,
-        //             435,
-        //             217,
-        //             152
-        //         ],
-        //         "expected": "重试",
-        //         "action": "Click"
-        //     },
-        //     {
-        //         "recognition": "OCR",
-        //         "roi": [
-        //             498,
-        //             143,
-        //             278,
-        //             100
-        //         ],
-        //         "expected": "网络连接失败"
-        //     }
-        // ],
-        // "box_index": 0
     },
     "预告网页处理-点击复制确认": {
         "recognition": {
