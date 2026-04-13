@@ -6444,6 +6444,10 @@
             "type": "select",
             "cases": [
                 {
+                    "name": "不测",
+                    "pipeline_override": {}
+                },
+                {
                     "name": "官服",
                     "pipeline_override": {
                         "测试任务接口": {
@@ -6521,7 +6525,7 @@
                     }
                 }
             ],
-            "default_case": "官服"
+            "default_case": "不测"
         }
     },
     "advanced": {
