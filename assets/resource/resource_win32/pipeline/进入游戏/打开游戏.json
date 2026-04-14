@@ -44,5 +44,8 @@
         ],
         "action": "ClickKey",
         "key": 27
+    },
+    "渠道服专用广告处理集合": {
+        "enabled": false
     }
 }

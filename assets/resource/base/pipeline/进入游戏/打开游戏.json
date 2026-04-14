@@ -15,6 +15,7 @@
             "[JumpBack]舰长~真的要退出游戏吗-否",
             "[JumpBack]出现了！邪恶包菜头！",
             "[JumpBack]请舰长注意休息",
+            "[JumpBack]渠道服专用广告处理集合",
             "[JumpBack]进入游戏-超弦空间结算",
             "成功进入游戏主菜单",
             "[JumpBack]所有资源已下载完成",
@@ -354,6 +355,25 @@
         "focus": {
             "Node.Action.Failed": "舰长！请检查左上角资源是否配置错误！"
         }
+    },
+    "渠道服专用广告处理集合": {
+        "enabled": false, //默认为开，然后官服和俩PC端为关
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    553,
+                    0,
+                    602,
+                    318
+                ],
+                "template": [
+                    "渠道服广告处理/小米升级提醒.png",
+                    "渠道服广告处理/小米广告.png"
+                ]
+            }
+        },
+        "action": "Click"
     },
     "成功进入游戏主菜单": {
         "roi": [
