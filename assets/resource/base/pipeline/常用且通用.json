@@ -273,18 +273,20 @@
         "post_delay": 5000
     },
     "点击主菜单处的出击": {
-        "roi": [
-            1089,
-            257,
-            174,
-            200
-        ],
-        "recognition": "OCR",
-        "expected": [
-            "出击",
-            "出主"
-        ],
-        "action": "Click",
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1051,
+                    243,
+                    229,
+                    229
+                ],
+                "template": [
+                    "通用/主页的出击.png"
+                ]
+            }
+        },
         "post_delay": 1500
     },
     "点击出击的挑战": {
