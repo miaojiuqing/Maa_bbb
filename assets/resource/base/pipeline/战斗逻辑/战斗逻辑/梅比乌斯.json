@@ -1,0 +1,19 @@
+{
+    "战斗逻辑-梅比乌斯-大招状态检查": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    368,
+                    579,
+                    477,
+                    48
+                ],
+                "green_mask": true,
+                "template": [
+                    "自动战斗索引/梅比乌斯/大招状态ing.png"
+                ]
+            }
+        }
+    }
+}

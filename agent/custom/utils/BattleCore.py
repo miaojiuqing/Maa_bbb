@@ -93,11 +93,11 @@ class CombatActions:
             return self.context.run_action("攻击_action")
         return False
 
-    def long_press_attack(self, duration: int = 500):# 分支攻击（长按普攻）
+    def long_press_attack(self, duration: int = 500):# 分支攻击(长按普攻)
         """
         长按攻击
         按住攻击键一段时间。
-        :param duration: 长按时间（毫秒），默认500
+        :param duration: 长按时间(毫秒),默认500
         原本为1000太长了有点
         """
         if duration != 500:
@@ -116,11 +116,11 @@ class CombatActions:
             return self.context.run_action("闪避_action")
         return False
 
-    def long_press_dodge(self, duration: int = 1000):# 特殊闪避（长按闪避），eg:终焉的时停
+    def long_press_dodge(self, duration: int = 1000):# 特殊闪避(长按闪避),eg:终焉的时停
         """
         长按闪避
         按住闪避键一段时间。
-        :param duration: 长按时间（毫秒），默认500
+        :param duration: 长按时间(毫秒),默认500
         原本为1000太长了有点
         """
         if duration != 500:
@@ -133,7 +133,7 @@ class CombatActions:
         """
         使用技能
         执行一次技能释放操作。
-        :param duration: 技能释放后等待时间（毫秒），默认0
+        :param duration: 技能释放后等待时间(毫秒),默认0
         """
         image = self.context.tasker.controller.post_screencap().wait().get()
         if self.context.run_recognition("战斗中", image):
@@ -153,7 +153,7 @@ class CombatActions:
             time.sleep(duration / 150)
             return True
         return False
-    def long_press_dodge(self, duration: int = 500):# 特殊必杀（长按必杀），eg:终焉大招
+    def long_press_dodge(self, duration: int = 500):# 特殊必杀(长按必杀),eg:终焉大招
         """
         长按必杀
         按住必杀键一段时间。
@@ -191,7 +191,7 @@ class CombatActions:
         """
         触发QTE/换人
         执行QTE或换人操作。
-        :param target: QTE位置（1或2），默认1
+        :param target: QTE位置(1或2),默认1
         :return: 点击操作结果
         """
         image = self.context.tasker.controller.post_screencap().wait().get()
@@ -208,7 +208,7 @@ class CombatActions:
         """
         return self.context.run_action("锁定视角_action")
 
-    def co_operation(self):#同时可用于触发星之环，还有个T技能乐土,乐土用来触发英桀支援()
+    def co_operation(self):#同时可用于触发星之环,还有个T技能乐土,乐土用来触发英桀支援()
         """
         协同者
         协同者操作。
@@ -218,7 +218,7 @@ class CombatActions:
     def check_status(self, node: str, pipeline_override: dict = {}):
         """
         检查状态
-        检查指定Pipeline节点状态，返回识别结果。
+        检查指定Pipeline节点状态,返回识别结果。
         :param node: Pipeline节点名
         :param pipeline_override: 节点覆盖参数
         :return: 识别结果或False
@@ -239,7 +239,7 @@ class CombatActions:
     def check_ultimate_energy_bar(self) -> bool:
         """
         检查必杀技能能量条
-        检查必杀技能能量是否足够，足够时返回True。
+        检查必杀技能能量是否足够,足够时返回True。
         :return: bool
         """
         try:
@@ -282,7 +282,7 @@ class CombatActions:
         """
         获取当前血量百分比
         识别当前角色血量百分比。
-        :return: int，血量百分比（0~100）
+        :return: int,血量百分比(0~100)
         """
         image = self.context.tasker.controller.post_screencap().wait().get()
         result = self.context.run_recognition("检查血量百分比", image)
@@ -328,12 +328,12 @@ class CombatActions:
             elif self.check_status("本关卡无法复活"):  # 弹窗无法复活
                 self.context.tasker.controller.post_click(642, 420)  # 点击确认
                 if target == 1:
-                    print("切换失败，切换到角色2")
+                    print("切换失败,切换到角色2")
                     target = 2
                     self.context.override_pipeline({"准备切换角色": {"post_delay": 2}})
                 else:
                     self.context.override_pipeline({"准备切换角色": {"post_delay": 3}})
-                    print("切换失败，无法切换到角色")
+                    print("切换失败,无法切换到角色")
                     return
             self.trigger_qte(target)  # 尝试重新点击
             self.attack()  # 防止发呆

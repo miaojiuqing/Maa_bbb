@@ -78,4 +78,19 @@ ROLE_CONFIG = {
         # 角色攻击按键模板,用来在战斗内识别角色
         "attack_template": "自动战斗索引/炽愿吉星.png",
     },
+    "梅比乌斯": {
+        # 自动战斗的动作名
+        "cls_name": "Meibiwusi",
+        "metadata": {
+            "DMG": "lightning",  # 角色输出类型 fire|ice|lightning|physical
+            "type": "mecha",  # 角色的属性 mech|psy|bio|qua|img|sd
+            "weight": 2,  # 角色权重,数字越大,选人程序更容易选中
+        },
+        # 角色头像模板
+        "template": [
+            "自动战斗索引/梅比乌斯/普攻.png",
+        ],
+        # 角色攻击按键模板,用来在战斗内识别角色
+        "attack_template": "自动战斗索引/梅比乌斯/普攻.png",
+    }
 }

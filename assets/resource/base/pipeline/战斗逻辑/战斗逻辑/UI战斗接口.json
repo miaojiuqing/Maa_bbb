@@ -11,11 +11,37 @@
     },
     "战斗总接口-战斗中": { //战斗逻辑接入位置
         //识别是识别角色攻击按钮
-        "recognition": {},
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    0,
+                    0,
+                    143,
+                    145
+                ],
+                "template": [
+                    "战斗相关/战中检查/战斗中.png"
+                ]
+            }
+        },
         //动作用E佬框架编写的的战斗逻辑
         "action": {
-            // "type": "Custom",
-            // "param":{
+            "type": "Custom",
+            "param": {
+                "custom_action": "IDFRole"
+            }
+            // "type": "ClickKey",
+            // "param": {
+            //     "key": [
+            //         49, //支援位1
+            //         50, //支援位2
+            //         70, //英桀助战F
+            //         73, //大招I
+            //         85, //武器技U
+            //         76, //星之环L
+            //         74 //普攻
+            //     ]
             // }
         },
         "next": [
@@ -26,10 +52,37 @@
     "战斗总接口-非战斗": {
         "next": [
             "[JumpBack]战斗总接口-剧情中",
-            "[JumpBack]战斗总接口-特殊大招",
+            // "[JumpBack]战斗总接口-特殊大招",
             "战斗总接口"
         ]
     },
-    "战斗总接口-剧情中": {},
-    "战斗总接口-特殊大招": {}
+    "战斗总接口-剧情中": {
+        //option设置过剧情模式，默认正常过对话
+        "roi": [
+            1144,
+            0,
+            123,
+            83
+        ],
+        "recognition": "TemplateMatch",
+        "template": [
+            "进入游戏/剧情跳过.png"
+        ],
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    342,
+                    319,
+                    554,
+                    156
+                ]
+            }
+        }
+    },
+    "战斗总接口-特殊大招": {
+        "recognition": {
+            "type": "DirectHit"
+        }
+    }
 }
