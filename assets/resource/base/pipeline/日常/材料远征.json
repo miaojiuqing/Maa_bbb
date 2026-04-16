@@ -28,7 +28,8 @@
             "[JumpBack]拓境战幕-返回",
             "[JumpBack]请舰长注意休息",
             "[JumpBack]材料远征-误触-记忆战场",
-            "[JumpBack]材料远征-误触-主线章节"
+            "[JumpBack]材料远征-误触-主线章节",
+            "[JumpBack]特殊返回返回识别集"
         ],
         "on_error": [
             "材料远征-开始任务层"
