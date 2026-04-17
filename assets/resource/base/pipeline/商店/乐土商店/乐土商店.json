@@ -352,6 +352,7 @@
             162
         ],
         "threshold": 0.85,
+        "max_hit": 10,
         "inverse": true,
         "recognition": "TemplateMatch",
         "template": [
