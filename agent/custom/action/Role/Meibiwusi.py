@@ -21,14 +21,14 @@ class Meibiwusi(CustomAction):
         # ===== 战斗流程开始 =====
         # 先放一个武器技
         工具箱.use_skill()
-        time.sleep(0.2)  # 等待0.2s
+        time.sleep(0.5)  # 等待0.2s
 
         # 普攻4下，攒出一个特殊能量条
         for _ in range(4):
             if context.tasker.stopping:  # 检查用户是否点了"停止"按钮
                 return CustomAction.RunResult(success=True)
             工具箱.attack()
-            time.sleep(0.05)
+            time.sleep(0.02)
 
         # 点按大招消耗特殊能量条,以进行一次分支攻击，然后再接一个平A触发特殊攻击
         for _ in range(1):
