@@ -39,8 +39,8 @@ class RecognitionRole(CustomAction):
             if result and result.hit:
                 context.override_pipeline(
                     {
-                        "识别人物": {"enabled": False},
-                        "战斗程序": {
+                        "战斗逻辑-识别人物": {"enabled": False},
+                        "战斗逻辑-战斗中": {
                             "action": "Custom",
                             "custom_action": role_info["cls_name"],
                         },
@@ -50,13 +50,14 @@ class RecognitionRole(CustomAction):
                 return CustomAction.RunResult(success=True)
         context.override_pipeline(
             {
-                "识别人物": {"enabled": False},
-                "战斗程序": {
+                "战斗逻辑-识别人物": {"enabled": False},
+                "战斗逻辑-战斗中": {
                     "action": "Custom",
                     "custom_action": "GeneralFight",
                 },
             }
         )
         print(f"识别角色 失败,使用通用逻辑")
+        #通用逻辑我注释掉了()
 
         return CustomAction.RunResult(success=True)
