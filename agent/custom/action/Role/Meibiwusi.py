@@ -42,7 +42,7 @@ class Meibiwusi(CustomAction):
         # 如果大招能量够了就放大招
         # 大招释放后会直接获得3点特殊能量，并且在大招期间血条上有梅比乌斯头像的时候，每次点按大招都会获得一个特殊能量
         if 工具箱.check_ultimate_energy_bar():
-            工具箱.long_press_dodge()#长按大招变身等待5秒
+            工具箱.long_ultimate_skill()#长按大招变身等待5秒
             time.sleep(5)
         #动画播放完毕后，检查血条上有没有梅比乌斯的头像，有的话就“点按大招”和“点按普攻”循环
         if 工具箱.check_status("战斗逻辑-梅比乌斯-大招状态检查"):
