@@ -131,9 +131,9 @@ class CombatActions:
 
     def use_skill(self, duration: int = 0):#武器技
         """
-        使用技能
-        执行一次技能释放操作。
-        :param duration: 技能释放后等待时间(毫秒),默认0
+        使用武器技
+        执行一次武器技释放操作。
+        :param duration: 武器技释放后等待时间(毫秒),默认0
         """
         image = self.context.tasker.controller.post_screencap().wait().get()
         if self.context.run_recognition("战斗逻辑-战斗中", image):
