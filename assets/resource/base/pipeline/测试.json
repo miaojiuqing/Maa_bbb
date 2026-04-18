@@ -140,33 +140,6 @@
             17
         ]
     },
-    "点击测试2": {
-        "action": "Click",
-        "target": [
-            198,
-            394,
-            20,
-            19
-        ]
-    },
-    "点击测试3": {
-        "action": "Click",
-        "target": [
-            236,
-            429,
-            16,
-            14
-        ]
-    },
-    "点击测试4": {
-        "action": "Click",
-        "target": [
-            438,
-            156,
-            29,
-            16
-        ]
-    },
     "滑动测试": {
         "action": "Swipe",
         "begin": [
@@ -203,16 +176,15 @@
         "action": "Click"
     },
     "图片识别测试": {
-        "roi": [
-            19,
-            111,
-            239,
-            387
-        ],
-        "recognition": "TemplateMatch",
-        "template": [
-            "周常/万象虚境/战斗/女武神未选择.png"
-        ]
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "green_mask": true,
+                "template": [
+                    "自动战斗索引/梅比乌斯/普攻.png"
+                ]
+            }
+        }
     },
     "色块识别测试": {
         "action": {

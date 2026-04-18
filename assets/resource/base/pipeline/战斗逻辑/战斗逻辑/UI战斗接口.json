@@ -40,7 +40,13 @@
     "战斗逻辑-识别人物": {
         "recognition": {
             "param": {
-                "green_mask": true
+                "green_mask": true,
+                "roi": [
+                    1122,
+                    577,
+                    158,
+                    143
+                ] //这个范围是PC端的，模拟器的先等PC正常了再说
             }
         },
         "action": {
