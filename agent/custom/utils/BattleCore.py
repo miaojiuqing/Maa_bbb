@@ -89,7 +89,7 @@ class CombatActions:
         执行一次攻击操作。
         """
         image = self.context.tasker.controller.post_screencap().wait().get()
-        if self.context.run_recognition("战斗中", image):
+        if self.context.run_recognition("战斗逻辑-战斗中", image):
             return self.context.run_action("攻击_action")
         return False
 
@@ -112,7 +112,7 @@ class CombatActions:
         执行一次闪避操作。
         """
         image = self.context.tasker.controller.post_screencap().wait().get()
-        if self.context.run_recognition("战斗中", image):
+        if self.context.run_recognition("战斗逻辑-战斗中", image):
             return self.context.run_action("闪避_action")
         return False
 
@@ -136,7 +136,7 @@ class CombatActions:
         :param duration: 技能释放后等待时间(毫秒),默认0
         """
         image = self.context.tasker.controller.post_screencap().wait().get()
-        if self.context.run_recognition("战斗中", image):
+        if self.context.run_recognition("战斗逻辑-战斗中", image):
             self.context.run_action("技能_action")
             time.sleep(duration / 1000)
             return True
@@ -148,12 +148,12 @@ class CombatActions:
         点击一次必杀
         """
         image = self.context.tasker.controller.post_screencap().wait().get()
-        if self.context.run_recognition("战斗中", image):
+        if self.context.run_recognition("战斗逻辑-战斗中", image):
             self.context.run_action("必杀_action")
             time.sleep(duration / 150)
             return True
         return False
-    def long_press_dodge(self, duration: int = 500):# 特殊必杀(长按必杀),eg:终焉大招
+    def long_ultimate_skill(self, duration: int = 500):# 特殊必杀(长按必杀),eg:终焉大招
         """
         长按必杀
         按住必杀键一段时间。
@@ -195,7 +195,7 @@ class CombatActions:
         :return: 点击操作结果
         """
         image = self.context.tasker.controller.post_screencap().wait().get()
-        if not self.context.run_recognition("战斗中", image):
+        if not self.context.run_recognition("战斗逻辑-战斗中", image):
             return False
         if target not in (1, 2):
             raise ValueError("target 参数必须为 1 或 2")
@@ -305,7 +305,7 @@ class CombatActions:
     def switch(self):
         """
         切换角色
-        切换当前战斗中的角色。
+        切换当前-战斗中的角色。
         """
         # 记录目前角色生命值
         current_hp = self.get_hp_percent(False)
@@ -337,4 +337,4 @@ class CombatActions:
                     return
             self.trigger_qte(target)  # 尝试重新点击
             self.attack()  # 防止发呆
-        self.context.override_pipeline({"识别人物": {"enabled": True}})
+        self.context.override_pipeline({"战斗逻辑-识别人物": {"enabled": True}})

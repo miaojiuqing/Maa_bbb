@@ -30,7 +30,7 @@ class GeneralFight_Cls(GeneralFight):
         super().__init__()
         print(f"{self.__class__.__name__} 初始化")
 
-@AgentServer.custom_action("Meibiwusi")
+@AgentServer.custom_action("Meibiwusi")#梅比乌斯
 class Meibiwusi_Cls(Meibiwusi):
     def __init__(self):
         super().__init__()

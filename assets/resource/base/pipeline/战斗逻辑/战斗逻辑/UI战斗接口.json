@@ -18,6 +18,7 @@
         "recognition": {
             "type": "TemplateMatch",
             "param": {
+                "green_mask": true,
                 "roi": [
                     0,
                     0,
@@ -37,6 +38,11 @@
         ]
     },
     "战斗逻辑-识别人物": {
+        "recognition": {
+            "param": {
+                "green_mask": true
+            }
+        },
         "action": {
             "type": "Custom",
             "param": {
