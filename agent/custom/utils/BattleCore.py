@@ -137,7 +137,7 @@ class CombatActions:
         """
         image = self.context.tasker.controller.post_screencap().wait().get()
         if self.context.run_recognition("战斗逻辑-战斗中", image):
-            self.context.run_action("技能_action")
+            self.context.run_action("武器技_action")
             time.sleep(duration / 1000)
             return True
         return False

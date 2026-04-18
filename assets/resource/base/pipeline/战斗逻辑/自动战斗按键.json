@@ -89,7 +89,7 @@
             "param": {}
         }
     },
-    "技能_action": {
+    "武器技_action": {
         "action": {
             "type": "Click",
             "param": {
@@ -103,6 +103,19 @@
         }
     },
     "必杀_action": {
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1183,
+                    467,
+                    1,
+                    1
+                ]
+            }
+        }
+    },
+    "长按必杀_action": {
         "action": {
             "type": "Click",
             "param": {
