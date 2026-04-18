@@ -75,6 +75,15 @@
             }
         }
     },
+    "长按必杀_action": {
+        "action": {
+            "type": "LongPressKey",
+            "param": {
+                "duration": 300,
+                "key": 81
+            }
+        }
+    },
     "协同者_action": {
         "action": {
             "type": "ClickKey",

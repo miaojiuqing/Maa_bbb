@@ -117,8 +117,9 @@
     },
     "长按必杀_action": {
         "action": {
-            "type": "Click",
+            "type": "LongPress",
             "param": {
+                "duration": 300,
                 "target": [
                     1183,
                     467,
