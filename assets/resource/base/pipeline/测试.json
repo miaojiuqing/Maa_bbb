@@ -180,6 +180,12 @@
             "type": "TemplateMatch",
             "param": {
                 "green_mask": true,
+                "roi": [
+                    1122,
+                    577,
+                    158,
+                    143
+                ],
                 "template": [
                     "自动战斗索引/梅比乌斯/普攻.png"
                 ]
