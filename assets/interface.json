@@ -366,7 +366,10 @@
             "name": "论文危机收菜",
             "default_check": true,
             "entry": "版本活动-论文危机-任务开始层",
-            "description": "只能收菜，黄金矿工小游戏不会做"
+            "description": "只能收菜和处理勘探事件，黄金矿工小游戏不会做",
+            "option": [
+                "论文危机勘探处理"
+            ]
         },
         {
             "name": "冒险委托-减负",
@@ -6432,42 +6435,37 @@
                 }
             ],
             "default_case": "不测"
-        }
-    },
-    "advanced": {
-        "高级设置A": {
-            "field": "ce",
-            "type": "string",
-            "default": "cs.png",
-            "pipeline_override": {
-                "纯测试": {
-                    "template": "logo.ico"
-                }
-            }
         },
-        "高级设置B": {
-            "field": [
-                "x",
-                "y"
-            ],
-            "type": [
-                "int",
-                "int"
-            ],
-            "default": [
-                "1",
-                "1"
-            ],
-            "pipeline_override": {
-                "纯测试": {
-                    "roi": [
-                        "{x}",
-                        "{y}",
-                        3,
-                        4
-                    ]
+        "论文危机勘探处理": {
+            "type": "switch",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "版本活动-论文危机-无可收获资源": {
+                            "next": [
+                                "版本活动-论文危机-区域勘探-已进入勘探界面",
+                                "[JumpBack]版本活动-论文危机-区域勘探-点击进入勘探界面",
+                                "[JumpBack]点击空白位置关闭"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "版本活动-论文危机-无可收获资源": {
+                            "next": [
+                                "成功进入游戏主菜单",
+                                "[JumpBack]版本活动-论文危机-返回",
+                                "[JumpBack]点击返回主菜单",
+                                "[JumpBack]点击空白位置关闭"
+                            ]
+                        }
+                    }
                 }
-            }
+            ]
         }
     }
 }
