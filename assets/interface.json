@@ -812,6 +812,8 @@
         },
         "特殊叉叉处理": {
             "type": "switch",
+            "label": "渠道服叉叉处理",
+            "description": "目前仅收录小米的俩",
             "default_case": "Yes",
             "resource": [
                 "B服",
