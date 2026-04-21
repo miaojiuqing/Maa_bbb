@@ -79,7 +79,9 @@
                     138,
                     142
                 ],
-                "template": [],
+                "template": [
+                    "自动战斗索引/真理之律者.png"
+                ],
                 "green_mask": true
             }
         }
