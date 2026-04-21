@@ -158,7 +158,8 @@
                 "若误触进了剧情",
                 "是否启动维护/升级检查",
                 "不自行启动游戏",
-                "启动游戏时不断尝试输入ESC"
+                "启动游戏时不断尝试输入ESC",
+                "特殊叉叉处理"
             ],
             "description": "左上角可选模拟器或者桌面端<br/>PC端需提前在 :设置 -辅助中，关闭显示菜单提示，且控制方式依照个人喜好自行想选择，请保证资源选择类型与游戏设置一致<br/>PC端用户请注意：自动战斗功能运行战斗时，请一定不要点击键盘上的特殊键(如win、ctrl、alt等),否则可能会导致整个电脑界面被各种各样快捷键唤出的窗口占满导致无法操作！！！<br/><b><font color=\"red\">桌面端运行必须管理员启动该软件且分辨率为16:9</font></b><br/>会自行确认/领取所有奖励<br/>截图参数请自行在PrintWindow、FramePool和GDI中选择，优先PrintWindow<br/>![bydjl](resource/image/logo.ico)",
             "pipeline_override": {
@@ -803,6 +804,37 @@
                     "name": "No",
                     "pipeline_override": {
                         "模拟器包名游戏启动": { //在win32时改为输入ESC
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "特殊叉叉处理": {
+            "type": "switch",
+            "default_case": "Yes",
+            "resource": [
+                "B服",
+                "OPPO渠道服",
+                "VIVO服",
+                "九游服",
+                "华为渠道服",
+                "小米服",
+                "应用宝渠道服"
+            ],
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "渠道服专用广告处理集合": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "渠道服专用广告处理集合": {
                             "enabled": false
                         }
                     }

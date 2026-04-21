@@ -357,7 +357,7 @@
         }
     },
     "渠道服专用广告处理集合": {
-        "enabled": false, //默认为开，然后官服和俩PC端为关
+        "enabled": true, //默认为开，然后官服和俩PC端为关
         "max_hit": 10,
         "recognition": {
             "type": "TemplateMatch",
