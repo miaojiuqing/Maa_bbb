@@ -1,9 +1,9 @@
 name: install
 
 # 依赖版本号：留空使用最新版，或指定如 "v4.6.0" / "v0.6.0"
-# env:
-  # MAAFRAMEWORK_VERSION: "v5.5.0"   # MaaXYZ/MaaFramework 版本
-  # MFAAVALONIA_VERSION: "v2.6.0"   # SweetSmellFox/MFAAvalonia 版本
+env:
+  MAAFRAMEWORK_VERSION: ""   # MaaXYZ/MaaFramework 版本
+  MFAAVALONIA_VERSION: ""   # SweetSmellFox/MFAAvalonia 版本
 
 on:
   push:
@@ -124,7 +124,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [win, macos, linux, android]
+        os: [win, macos, linux]
         arch: [aarch64, x86_64]
       fail-fast: false
 
@@ -144,7 +144,6 @@ jobs:
           extract: true
 
       - name: Download MFAAvalonia
-        if: matrix.os != 'android'
         id: download_mfa
         uses: robinraju/release-downloader@v1
         with:
@@ -156,7 +155,6 @@ jobs:
           extract: true
 
       - name: Clean up MFAAvalonia archive
-        if: matrix.os != 'android'
         shell: bash
         run: |
           ARCHIVE_FILE_PATH="${{ fromJson(steps.download_mfa.outputs.downloaded_files)[0] }}"
@@ -193,26 +191,19 @@ jobs:
 
       - name: Install
         shell: bash
-        env:
-          TARGET_OS: ${{ matrix.os }}
         run: |
           python -m pip install json-with-comments
-          python ./tools/install.py ${{ needs.meta.outputs.tag }}
+          python ./tools/install.py ${{ needs.meta.outputs.tag }} ${{ matrix.os }} ${{ matrix.arch }}
 
-          if [[ "${{ matrix.os }}" != "android" ]]; then
-            if [ -d "MFA" ]; then
-              echo "Copying MFA files to install directory..."
-              mkdir -p install
-              rsync -av --ignore-existing MFA/ install/
-            else
-              echo "MFA directory not found, skipping copy."
-            fi
+          if [ -d "MFA" ]; then
+            echo "Copying MFA files to install directory..."
+            mkdir -p install
+            rsync -av --ignore-existing MFA/ install/
           else
-            echo "Skipping copy MFA for Android."
+            echo "MFA directory not found, skipping copy."
           fi
 
       - uses: actions/download-artifact@v4
-        if: matrix.os != 'android'
         with:
           name: python-embed-${{ matrix.os }}-${{ matrix.arch }}
           path: ./install/python
