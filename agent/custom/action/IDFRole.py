@@ -47,6 +47,7 @@ class RecognitionRole(CustomAction):
                     }
                 )
                 print(f"识别角色 {role_name} 成功")
+                print(f"识别角色 {role_info} 成功")
                 return CustomAction.RunResult(success=True)
         context.override_pipeline(
             {
