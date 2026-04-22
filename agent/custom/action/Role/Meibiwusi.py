@@ -33,12 +33,11 @@ class Meibiwusi(CustomAction):
         #动画播放完毕后，检查血条上有没有梅比乌斯的头像，有的话就“点按大招”和“点按普攻”循环
             if 工具箱.check_status("战斗逻辑-梅比乌斯-大招状态检查"):
                 print("梅比乌斯大招状态检查成功,开始大招普攻循环")
-                range(10)
-                # 大招普攻循环10次
-                for _ in range(10):
+                for _ in range(10):# 大招普攻循环10次
                     工具箱.use_ultimate_skill()
+                    time.sleep(0.25)
                     工具箱.attack()
-                    time.sleep(0.5)
+                    time.sleep(0.25)
                     print("梅比乌斯点大招时间结束") 
 
         # 若能量不足
@@ -46,33 +45,15 @@ class Meibiwusi(CustomAction):
         else:
             print("梅比乌斯大招能量不足,普工打一套")
         # 普攻4下，攒出一个特殊能量条
-            if context.tasker.stopping:  # 检查用户是否点了"停止"按钮
-                return CustomAction.RunResult(success=True)
-            else:
-                # 工具箱.attack()
-                # time.sleep(0)#经掐表，A四下要大约2秒,时间除以2然后循环次数翻倍尝试连贯普工
-                # 工具箱.attack()
-                # print("第一次平A")
-                # 工具箱.attack()
-                # time.sleep(0)#经掐表，A四下要大约2秒,时间除以2然后循环次数翻倍尝试连贯普工
-                # 工具箱.attack()
-                # print("第二次平A")
-                # 工具箱.attack()
-                # time.sleep(0)#经掐表，A四下要大约2秒,时间除以2然后循环次数翻倍尝试连贯普工
-                # 工具箱.attack()
-                # print("第三次平A")
-                # 工具箱.attack()
-                # time.sleep(0)#经掐表，A四下要大约2秒,时间除以2然后循环次数翻倍尝试连贯普工
-                # 工具箱.attack()
-                # print("第四次平A")
-                for _ in range(4):
+            for _ in range(4):
                     工具箱.attack()
-                # 点按大招消耗特殊能量条,以进行一次分支攻击，然后再接一个平A触发特殊攻击
-                工具箱.use_ultimate_skill()   #进行一个点按大招的动作，消耗特殊能量强化一次普攻
-                time.sleep(0.5/2)            #等一会，点按之后有个小动画
-                工具箱.attack()             #进行一个平A的动作
-                time.sleep(0.5/2)     
-                print("梅比乌斯点按了一下大招进行分支攻击") 
+            # 点按大招消耗特殊能量条,以进行一次分支攻击，然后再接一个平A触发特殊攻击
+            工具箱.use_ultimate_skill()   #进行一个点按大招的动作，消耗特殊能量强化一次普攻
+            print("梅比乌斯点按了一下大招进行分支攻击") 
+            time.sleep(0.25)            #等一会，点按之后有个小动画
+            工具箱.attack()             #进行一个平A的动作     
+            print("梅比乌斯点按了一下普攻进行强化平A")
+            time.sleep(0.25)
 
         # 切换到下一个角色（这步很重要！不写的话不会自动换人）
         工具箱.switch()
