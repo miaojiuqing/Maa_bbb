@@ -3,6 +3,9 @@
         //在乐土中，非战斗处应该添加刻印的选择
         //战斗失败除非处于需要战斗的模块（如深渊、记忆战场）否则也视为非战斗状态并空循环
         "recognition": {},
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "next": [
             "[JumpBack]战斗逻辑-识别人物",
             "[JumpBack]战斗逻辑-战斗中",
@@ -15,6 +18,9 @@
     "战斗逻辑-战斗中": { //战斗逻辑接入位置
         //识别到战斗逻辑的同时打一套
         //识别是识别角色攻击按钮
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -34,17 +40,9 @@
         //动作IDFRole.py会识别后自己加进来
     },
     "战斗逻辑-识别人物": {
-        "recognition": {
-            "param": {
-                "green_mask": true,
-                "roi": [
-                    1122,
-                    577,
-                    158,
-                    143
-                ] //这个范围是PC端的，模拟器的先等PC正常了再说
-            }
-        },
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "action": {
             "type": "Custom",
             "param": {
