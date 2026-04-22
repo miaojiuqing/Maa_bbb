@@ -1,5 +1,8 @@
 {
     "攻击_action": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "action": {
             "type": "Click",
             "param": {
@@ -13,6 +16,9 @@
         }
     },
     "长按攻击_action": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "action": {
             "type": "LongPress",
             "param": {
@@ -26,6 +32,9 @@
         }
     },
     "按下攻击_action": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "action": {
             "type": "TouchDown",
             "param": {
@@ -39,12 +48,18 @@
         }
     },
     "松开攻击_action": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "action": {
             "type": "TouchUp",
             "param": {}
         }
     },
     "闪避_action": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "action": {
             "type": "Click",
             "param": {
@@ -58,6 +73,9 @@
         }
     },
     "长按闪避_action": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "action": {
             "type": "LongPress",
             "param": {
@@ -71,6 +89,9 @@
         }
     },
     "按下闪避_action": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "action": {
             "type": "TouchDown",
             "param": {
@@ -84,12 +105,18 @@
         }
     },
     "松开闪避_action": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "action": {
             "type": "TouchUp",
             "param": {}
         }
     },
     "武器技_action": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "action": {
             "type": "Click",
             "param": {
@@ -103,6 +130,9 @@
         }
     },
     "必杀_action": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "action": {
             "type": "Click",
             "param": {
@@ -116,6 +146,9 @@
         }
     },
     "长按必杀_action": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "action": {
             "type": "LongPress",
             "param": {
@@ -130,6 +163,9 @@
         }
     },
     "协同者_action": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "action": {
             "type": "Click",
             "param": {
@@ -143,6 +179,9 @@
         }
     },
     "锁定视角_action": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
         "action": {
             "type": "Click",
             "param": {

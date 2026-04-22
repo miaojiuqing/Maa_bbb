@@ -1,4 +1,21 @@
 {
+    "111测试": {
+        "next": [
+            "超弦空间-暂停力",
+            "[JumpBack]键位测试"
+        ]
+    },
+    "键位测试": {
+        "action": {
+            "type": "ClickKey",
+            "param": {
+                "key": [
+                    81
+                ]
+            }
+        },
+        "post_delay": 1000
+    },
     "死循环-1": {
         "post_delay": 5000,
         "next": [
