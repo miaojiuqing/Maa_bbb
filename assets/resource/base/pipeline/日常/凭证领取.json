@@ -67,7 +67,7 @@
             "Node.Recognition.Succeeded": "已处于凭证奖励领取界面，开始检查先锋凭证奖励状态"
         },
         "next": [
-            "凭证奖励领取-进入后先小小的滑一下",
+            "[JumpBack]凭证奖励领取-进入后先小小的滑一下",
             "[JumpBack]凭证奖励领取-每周历练箱",
             "[JumpBack]点击叉叉",
             "[JumpBack]点击空白位置关闭",
