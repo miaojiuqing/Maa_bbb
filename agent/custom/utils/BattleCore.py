@@ -186,18 +186,29 @@ class CombatActions:
         )
         return self.context.run_action("松开攻击_action")
 
-    def trigger_qte(self, target: int = 1):
+    def trigger_qte(self, target: int = 1, elysian_realm: bool = False):
         """
         触发QTE/换人
         执行QTE或换人操作。
         :param target: QTE位置(1或2),默认1
+        :param elysian_realm: 是否为乐土(英桀支援)QTE。为 True 时会跳过“战斗中”检测，直接点击。
         :return: 点击操作结果
         """
-        image = self.context.tasker.controller.post_screencap().wait().get()
-        if not self.context.run_recognition("战斗逻辑-战斗中", image):
-            return False
         if target not in (1, 2):
             raise ValueError("target 参数必须为 1 或 2")
+
+        # 模式：
+        # - 普通模式：只响应 trigger_qte(x)
+        # - 乐土模式：只响应 trigger_qte(x, True)
+        elysian_mode_node = self.context.get_node_data("乐土模式")
+        in_elysian_mode = bool(elysian_mode_node and elysian_mode_node.get("enabled", False))
+        if in_elysian_mode != bool(elysian_realm):
+            return False
+
+        if not elysian_realm:
+            image = self.context.tasker.controller.post_screencap().wait().get()
+            if not self.context.run_recognition("战斗逻辑-战斗中", image):
+                return False
         return self.context.run_action(f"qte{target}")
 
     def lens_lock(self):
