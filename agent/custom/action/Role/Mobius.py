@@ -17,6 +17,8 @@ class Meibiwusi(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> CustomAction.RunResult:
         # 创建战斗工具箱，role_name 用于日志显示，写角色名方便排查问题
         工具箱 = CombatActions(context=context, role_name="梅比乌斯")
+        工具箱.trigger_qte(1, True)
+        工具箱.trigger_qte(2, True)
 
         # ===== 战斗流程开始 =====
         # 先放一个武器技
