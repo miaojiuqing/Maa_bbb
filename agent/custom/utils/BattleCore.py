@@ -5,13 +5,12 @@ v1.0.0
 """
 
 from maa.context import Context
-from maa.define import ColorMatchResult, TemplateMatchResult, OCRResult
+from maa.define import OCRResult
 import time
 
 import logging
 import os
 from datetime import datetime, timedelta
-
 
 class CombatActions:
     """通用战斗功能"""
@@ -187,18 +186,29 @@ class CombatActions:
         )
         return self.context.run_action("松开攻击_action")
 
-    def trigger_qte(self, target: int = 1):
+    def trigger_qte(self, target: int = 1, elysian_realm: bool = False):
         """
         触发QTE/换人
         执行QTE或换人操作。
         :param target: QTE位置(1或2),默认1
+        :param elysian_realm: 是否为乐土(英桀支援)QTE。为 True 时会跳过“战斗中”检测，直接点击。
         :return: 点击操作结果
         """
-        image = self.context.tasker.controller.post_screencap().wait().get()
-        if not self.context.run_recognition("战斗逻辑-战斗中", image):
-            return False
         if target not in (1, 2):
             raise ValueError("target 参数必须为 1 或 2")
+
+        # 模式：
+        # - 普通模式：只响应 trigger_qte(x)
+        # - 乐土模式：只响应 trigger_qte(x, True)
+        elysian_mode_node = self.context.get_node_data("乐土模式")
+        in_elysian_mode = bool(elysian_mode_node and elysian_mode_node.get("enabled", False))
+        if in_elysian_mode != bool(elysian_realm):
+            return False
+
+        if not elysian_realm:
+            image = self.context.tasker.controller.post_screencap().wait().get()
+            if not self.context.run_recognition("战斗逻辑-战斗中", image):
+                return False
         return self.context.run_action(f"qte{target}")
 
     def lens_lock(self):
@@ -307,6 +317,11 @@ class CombatActions:
         切换角色
         切换当前-战斗中的角色。
         """
+        switch_node = self.context.get_node_data("切换角色开关")
+        if switch_node is None or not switch_node.get("enabled", False):
+            print("切人逻辑开关未开启,跳过")
+            return
+
         # 记录目前角色生命值
         current_hp = self.get_hp_percent(False)
         target_node = self.context.get_node_data("准备切换角色")

@@ -15,6 +15,8 @@ class HerrscherOfTruth(CustomAction):
         self, context: Context, argv: CustomAction.RunArg
     ) -> CustomAction.RunResult:
         ATC = CombatActions(context=context, role_name="真理之律者")
+        ATC.trigger_qte(1, True)
+        ATC.trigger_qte(2, True)
 
         if ATC.check_status("检查常规状态_真理之律者"):
             print("检查常规状态_真理之律者 成功")
