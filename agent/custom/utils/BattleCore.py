@@ -5,13 +5,12 @@ v1.0.0
 """
 
 from maa.context import Context
-from maa.define import ColorMatchResult, TemplateMatchResult, OCRResult
+from maa.define import OCRResult
 import time
 
 import logging
 import os
 from datetime import datetime, timedelta
-
 
 class CombatActions:
     """通用战斗功能"""
@@ -307,6 +306,11 @@ class CombatActions:
         切换角色
         切换当前-战斗中的角色。
         """
+        switch_node = self.context.get_node_data("切换角色开关")
+        if switch_node is None or not switch_node.get("enabled", False):
+            print("切人逻辑开关未开启,跳过")
+            return
+
         # 记录目前角色生命值
         current_hp = self.get_hp_percent(False)
         target_node = self.context.get_node_data("准备切换角色")

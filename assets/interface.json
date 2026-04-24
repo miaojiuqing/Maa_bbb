@@ -453,7 +453,9 @@
         {
             "name": "自动战斗pro",
             "entry": "战斗逻辑",
-            "option": [],
+            "option": [
+                "自动切换角色"
+            ],
             "description": "新版自动战斗,采用由E佬提供的更好的战斗框架所编写,选项等优化,会自动识别角色，目前支持的只有理律和蛇蛇，是针对单个女武神编写的战斗框架，正常使用请用自动战斗"
         },
         {
@@ -518,6 +520,29 @@
         }
     ],
     "option": {
+        "自动切换角色": {
+            "type": "switch",
+            "description": "是否开启在战斗中切换角色功能",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "切换角色开关": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "切换角色开关": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
         "严格模式": {
             "type": "switch",
             "description": "开启为两个条件符合才通过，不开启则一个条件通过即可",
