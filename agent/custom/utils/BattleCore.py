@@ -337,4 +337,9 @@ class CombatActions:
                     return
             self.trigger_qte(target)  # 尝试重新点击
             self.attack()  # 防止发呆
+            self.attack()  # 防止发呆
+            self.attack()  # 防止发呆
+            self.attack()  # 防止发呆
+            self.attack()  # 防止发呆
+            # 打一套普攻
         self.context.override_pipeline({"战斗逻辑-识别人物": {"enabled": True}})

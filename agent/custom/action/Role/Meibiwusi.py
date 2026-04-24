@@ -26,34 +26,32 @@ class Meibiwusi(CustomAction):
 
         # 如果大招能量够了就放大招
         # 大招释放后会直接获得3点特殊能量，并且在大招期间血条上有梅比乌斯头像的时候，每次点按大招都会获得一个特殊能量
-        if 工具箱.check_ultimate_energy_bar():
+        if 工具箱.check_status("战斗逻辑-梅比乌斯-能量够开大"):
             print("梅比乌斯大招能量充足，放大招")
             工具箱.long_ultimate_skill()#长按大招变身等待5秒
-            time.sleep(5)
-        #动画播放完毕后，检查血条上有没有梅比乌斯的头像，有的话就“点按大招”和“点按普攻”循环
-            if 工具箱.check_status("战斗逻辑-梅比乌斯-大招状态检查"):
-                print("梅比乌斯大招状态检查成功,开始大招普攻循环")
-                for _ in range(10):# 大招普攻循环10次
-                    工具箱.use_ultimate_skill()
-                    time.sleep(0.25)
-                    工具箱.attack()
-                    time.sleep(0.25)
-                    print("梅比乌斯点大招时间结束") 
+            # time.sleep(3)#如果是乐土的话整条注释
+            if 工具箱.check_status("战斗逻辑-梅比乌斯-特殊能量"):#有特殊能量
+                # for _ in range(20):# 大招普攻循环10次,其中十次用于放完大招后的动画时间,有时候大招能量够但是CD没好
+                工具箱.use_ultimate_skill()
+                time.sleep(0.08)
+                工具箱.attack()#有能量会自己消耗，没能量就没正常普攻按了不会有反应
+                time.sleep(0.08)
+            print("梅比乌斯点大招时间结束") 
 
         # 若能量不足
         #进行A四下分支一下的循环
         else:
             print("梅比乌斯大招能量不足,普工打一套")
         # 普攻4下，攒出一个特殊能量条
-            for _ in range(4):
+            for _ in range(6):
                     工具箱.attack()
-            # 点按大招消耗特殊能量条,以进行一次分支攻击，然后再接一个平A触发特殊攻击
-            工具箱.use_ultimate_skill()   #进行一个点按大招的动作，消耗特殊能量强化一次普攻
-            print("梅比乌斯点按了一下大招进行分支攻击") 
-            time.sleep(0.25)            #等一会，点按之后有个小动画
-            工具箱.attack()             #进行一个平A的动作     
-            print("梅比乌斯点按了一下普攻进行强化平A")
-            time.sleep(0.25)
+                    工具箱.use_ultimate_skill()   #进二合一，有能量会自己消耗，没能量就没正常普攻按了不会有反应
+                    time.sleep(0.08)
+            if 工具箱.check_status("战斗逻辑-梅比乌斯-特殊能量"):#有特殊能量
+                for _ in range(6):
+                    工具箱.attack()
+                    工具箱.use_ultimate_skill() 
+            print("梅比乌斯打了一下普攻")
 
         # 切换到下一个角色（这步很重要！不写的话不会自动换人）
         工具箱.switch()

@@ -1,18 +1,43 @@
 {
-    "战斗逻辑-梅比乌斯-大招状态检查": {
+    "战斗逻辑-梅比乌斯-特殊能量": {
         "recognition": {
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    368,
-                    579,
-                    477,
-                    48
+                    554,
+                    622,
+                    39,
+                    41
                 ],
                 "green_mask": true,
                 "template": [
-                    "自动战斗索引/梅比乌斯/大招状态ing.png"
+                    "自动战斗索引/梅比乌斯/特殊能量.png"
                 ]
+            }
+        }
+    },
+    "战斗逻辑-梅比乌斯-能量够开大": {
+        "recognition": {
+            "type": "ColorMatch",
+            "param": {
+                "roi": [
+                    339,
+                    670,
+                    543,
+                    44
+                ],
+                "upper": [
+                    255,
+                    186,
+                    65
+                ],
+                "lower": [
+                    248,
+                    132,
+                    47
+                ],
+                "connected": true,
+                "count": 1000
             }
         }
     }
