@@ -11,7 +11,7 @@ from agent.custom.action.Role.HerrscherOfTruth import HerrscherOfTruth
 from agent.custom.action.Role.LoveElf import LoveElf
 from agent.custom.action.Role.FengHuangOfVicissitude import FengHuangOfVicissitude
 from agent.custom.action.Role.GeneralFight import GeneralFight                      #真理之律者
-from agent.custom.action.Role.Meibiwusi import Meibiwusi                            #梅比乌斯
+from agent.custom.action.Role.Mobius import Mobius                            #梅比乌斯
 
 
 from agent.custom.recongition.CheckResolution import CheckResolution
@@ -30,8 +30,8 @@ class GeneralFight_Cls(GeneralFight):
         super().__init__()
         print(f"{self.__class__.__name__} 初始化")
 
-@AgentServer.custom_action("Meibiwusi")#梅比乌斯
-class Meibiwusi_Cls(Meibiwusi):
+@AgentServer.custom_action("Mobius")#梅比乌斯
+class Mobius_Cls(Mobius):
     def __init__(self):
         super().__init__()
         print(f"{self.__class__.__name__} 初始化")

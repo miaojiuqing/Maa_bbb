@@ -20,7 +20,7 @@ ROLE_CONFIG = {
     },
     "梅比乌斯": {
         # 自动战斗的动作名
-        "cls_name": "Meibiwusi",
+        "cls_name": "Mobius",
         "metadata": {
             "DMG": "lightning",  # 角色输出类型 fire|ice|lightning|physical
             "type": "mecha",  # 角色的属性 mech|psy|bio|qua|img|sd

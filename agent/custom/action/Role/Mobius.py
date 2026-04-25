@@ -11,7 +11,7 @@ from maa.custom_action import CustomAction
 from ...utils.BattleCore import CombatActions
 
 
-class Meibiwusi(CustomAction):
+class Mobius(CustomAction):
     """梅比乌斯 战斗逻辑"""
 
     def run(self, context: Context, argv: CustomAction.RunArg) -> CustomAction.RunResult:
