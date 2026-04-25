@@ -229,7 +229,8 @@
             "repeat_count": 1,
             "default_check": true,
             "option": [
-                "委托材料不足时自动补货"
+                "委托材料不足时自动补货",
+                "舰团委托-只留家园票"
             ],
             "description": "要提交的材料自己先提前准备好<br/>只会提交一次的自己先设置一下运行8次，因为暂时看不出啥问题"
         },
@@ -1280,6 +1281,37 @@
                                 "返回主页后强制结束任务",
                                 "[JumpBack]点击叉叉",
                                 "[JumpBack]点击返回主菜单"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "舰团委托-只留家园票": {
+            "type": "switch",
+            "label": "选择奖励只留家园票",
+            "description": "其实选了也选不到",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "舰团每日委托-领取奖励层-不可领取": {
+                            "next": [
+                                "舰团每日委托-奖励选取层"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "舰团每日委托-领取奖励层-不可领取": {
+                            "next": [
+                                "返回主页后强制结束任务",
+                                "[JumpBack]点击返回主菜单",
+                                "[JumpBack]点击左上角返回",
+                                "[JumpBack]点击叉叉"
                             ]
                         }
                     }
