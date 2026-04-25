@@ -67,7 +67,7 @@ class Mobius(CustomAction):
         # 若还在冷却时间内
         else:
             # 直接开始QJQJ
-            print(f"梅比乌斯大招冷却中，跳过本次循环 (剩余冷却: {20 - (current_time - self.last_ult_time):.1f}s)")
+            print(f"梅比乌斯大招冷却中，跳过本次循环 (剩余冷却: {25 - (current_time - self.last_ult_time):.1f}s)")
             # 如果希望冷却期间也普攻，可以保留下面的代码，否则可以注释掉以节省性能
             for _ in range(6):
                 工具箱.attack()
