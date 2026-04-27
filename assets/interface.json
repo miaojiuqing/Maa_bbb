@@ -1303,7 +1303,7 @@
         "舰团委托-只留家园票": {
             "type": "switch",
             "label": "选择奖励只留家园票",
-            "description": "其实选了也选不到",
+            "description": "其实选了大概率也抽不到,不怪识宝",
             "default_case": "No",
             "cases": [
                 {
