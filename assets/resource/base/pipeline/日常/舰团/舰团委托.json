@@ -7,6 +7,12 @@
         ]
     },
     "舰团每日委托-总任务层": {
+        "roi": [
+            903,
+            298,
+            266,
+            251
+        ],
         "recognition": "TemplateMatch",
         "template": [
             "主页UI/休伯利安主界面.png"
