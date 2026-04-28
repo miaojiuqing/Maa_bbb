@@ -376,6 +376,12 @@
             ]
         },
         {
+            "name": "繁星旅航每日挑战",
+            "default_check": true,
+            "entry": "版本活动-繁星旅航-任务开始层",
+            "description": "自己记得解锁先"
+        },
+        {
             "name": "冒险委托-减负",
             "default_check": true,
             "entry": "冒险委托任务-选择层",

@@ -16,6 +16,373 @@
         },
         "action": {
             "type": "Click"
+        },
+        "post_delay": 500
+    },
+    "版本活动-繁星旅航-任务开始层": {
+        "next": [
+            "版本活动-繁星旅航-总任务层",
+            "[JumpBack]启动并进入游戏"
+        ]
+    },
+    "版本活动-繁星旅航-总任务层": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    932,
+                    316,
+                    189,
+                    209
+                ],
+                "template": [
+                    "主页UI/休伯利安主界面.png"
+                ]
+            }
+        },
+        "next": [
+            "版本活动-繁星旅航-已进入活动界面",
+            "[JumpBack]版本活动-繁星旅航-点击进入活动-首页处",
+            "[JumpBack]点击主菜单处的出击",
+            "[JumpBack]版本活动-繁星旅航-点击进入活动-出击处",
+            "[JumpBack]点击出击的活动"
+        ]
+    },
+    "版本活动-繁星旅航-点击进入活动-首页处": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    960,
+                    64,
+                    196,
+                    189
+                ],
+                "template": [
+                    "版本活动/当期活动/繁星旅航反击战/首页入口.png"
+                ]
+            }
+        },
+        "post_delay": 1000,
+        "action": "Click"
+    },
+    "版本活动-繁星旅航-点击进入活动-出击处": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "template": [
+                    "版本活动/当期活动/繁星旅航反击战/活动处入口.png"
+                ]
+            }
+        },
+        "post_delay": 1000,
+        "action": "Click"
+    },
+    "版本活动-繁星旅航-已进入活动界面": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    462,
+                    0,
+                    369,
+                    104
+                ],
+                "template": [
+                    "版本活动/当期活动/繁星旅航反击战/已进入活动页.png"
+                ]
+            }
+        },
+        "next": [
+            "版本活动-繁星旅航-今日奖励已满",
+            "版本活动-繁星旅航-今日奖励未满"
+        ]
+    },
+    "版本活动-繁星旅航-已进入每日挑战准备挑战界面": { //准备点什么什么星域但是还没点
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    21,
+                    0,
+                    208,
+                    100
+                ],
+                "expected": [
+                    "每日挑战"
+                ]
+            }
+        },
+        "next": [
+            "版本活动-繁星旅航-每日挑战-准备出战",
+            "[JumpBack]版本活动-繁星旅航-点击星域进入挑战"
+        ]
+    },
+    "版本活动-繁星旅航-点击星域进入挑战": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    178,
+                    123,
+                    945,
+                    97
+                ],
+                "expected": [
+                    "赤红星域"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    0,
+                    -50,
+                    0,
+                    0
+                ]
+            }
         }
+    },
+    "版本活动-繁星旅航-今日奖励未满": {
+        "inverse": true,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1112,
+                    544,
+                    147,
+                    48
+                ],
+                "expected": [
+                    "^100/100"
+                ]
+            }
+        },
+        "next": [
+            "版本活动-繁星旅航-已进入每日挑战准备挑战界面",
+            "[JumpBack]版本活动-繁星旅航-点击进入每日挑战"
+        ]
+    },
+    "版本活动-繁星旅航-今日奖励已满": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    1112,
+                    544,
+                    147,
+                    48
+                ],
+                "expected": [
+                    "^100/100"
+                ]
+            }
+        },
+        "next": [
+            "[JumpBack]版本活动-繁星旅航-有奖励可领取",
+            "[JumpBack]点击叉叉",
+            "成功进入游戏主菜单",
+            "[JumpBack]版本活动-繁星旅航-返回",
+            "[JumpBack]点击返回主菜单",
+            "[JumpBack]点击空白位置关闭"
+        ]
+    },
+    "版本活动-繁星旅航-点击进入每日挑战": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1087,
+                    363,
+                    193,
+                    232
+                ],
+                "template": [
+                    "版本活动/当期活动/繁星旅航反击战/每日挑战入口.png"
+                ]
+            }
+        },
+        "post_delay": 1000,
+        "action": "Click"
+    },
+    "版本活动-繁星旅航-每日挑战-准备出战": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1024,
+                    607,
+                    145,
+                    88
+                ],
+                "template": [
+                    "版本活动/当期活动/繁星旅航反击战/出战.png"
+                ]
+            }
+        },
+        "action": "Click",
+        "next": [
+            "版本活动-繁星旅航-每日挑战-已进入战斗界面",
+            "版本活动-繁星旅航-每日挑战-准备出战",
+            "[JumpBack]乐土刷级-减负模式-加载中",
+            "[JumpBack]黑屏计数"
+        ]
+    },
+    "版本活动-繁星旅航-每日挑战-已进入战斗界面": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    687,
+                    0,
+                    78,
+                    82
+                ],
+                "template": [
+                    "版本活动/当期活动/繁星旅航反击战/已进入战斗界面.png"
+                ]
+            }
+        },
+        "next": [
+            "版本活动-繁星旅航-每日挑战-挑战成功",
+            "版本活动-繁星旅航-每日挑战-挑战失败",
+            "[JumpBack]版本活动-繁星旅航-每日挑战-拖拽卡牌上场",
+            "[JumpBack]乐土刷级-减负模式-加载中",
+            "[JumpBack]黑屏计数",
+            "版本活动-繁星旅航-每日挑战-已进入战斗界面"
+        ]
+    },
+    "版本活动-繁星旅航-每日挑战-拖拽卡牌上场": {
+        "recognition": {
+            "type": "ColorMatch",
+            "param": {
+                "count": 150,
+                "roi": [
+                    368,
+                    545,
+                    150,
+                    52
+                ],
+                "upper": [
+                    255,
+                    236,
+                    217
+                ],
+                "lower": [
+                    255,
+                    236,
+                    217
+                ]
+            }
+        },
+        "action": {
+            "type": "Swipe",
+            "param": {
+                "begin": [
+                    422,
+                    609,
+                    57,
+                    54
+                ],
+                "end": [
+                    469,
+                    253,
+                    75,
+                    97
+                ]
+            }
+        }
+    },
+    "版本活动-繁星旅航-每日挑战-挑战成功": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    541,
+                    35,
+                    195,
+                    91
+                ],
+                "template": [
+                    "版本活动/当期活动/繁星旅航反击战/挑战成功.png"
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "赢喽"
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    558,
+                    644,
+                    178,
+                    30
+                ]
+            }
+        },
+        "next": [
+            "版本活动-繁星旅航-已进入活动界面",
+            "[JumpBack]版本活动-繁星旅航-返回",
+            "[JumpBack]乐土刷级-减负模式-加载中",
+            "[JumpBack]黑屏计数"
+        ]
+    },
+    "版本活动-繁星旅航-每日挑战-挑战失败": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    610,
+                    6,
+                    132,
+                    89
+                ],
+                "template": [
+                    "版本活动/当期活动/繁星旅航反击战/挑战失败.png"
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "输掉力"
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    592,
+                    644,
+                    93,
+                    31
+                ]
+            }
+        },
+        "next": [
+            "版本活动-繁星旅航-已进入活动界面",
+            "[JumpBack]版本活动-繁星旅航-返回",
+            "[JumpBack]乐土刷级-减负模式-加载中",
+            "[JumpBack]黑屏计数"
+        ]
+    },
+    "版本活动-繁星旅航-有奖励可领取": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    238,
+                    204,
+                    106,
+                    77
+                ],
+                "template": [
+                    "版本活动/当期活动/繁星旅航反击战/领取.png"
+                ]
+            }
+        },
+        "action": "Click"
     }
 }
