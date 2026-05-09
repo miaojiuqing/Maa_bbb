@@ -7,7 +7,6 @@ import jsonc
 import platform
 from configure import configure_ocr_model
 
-
 working_dir = Path(__file__).parent.parent
 install_path = working_dir / Path("install")
 version = len(sys.argv) > 1 and sys.argv[1] or "v0.0.1"
@@ -74,7 +73,10 @@ def install_deps():
     )
     shutil.copytree(
         working_dir / "deps" / "share" / "MaaAgentBinary",
-        install_path / "runtimes" / f"{current_system}-{current_architecture}" / "MaaAgentBinary",
+        install_path
+        / "runtimes"
+        / f"{current_system}-{current_architecture}"
+        / "MaaAgentBinary",
         dirs_exist_ok=True,
     )
 
@@ -94,12 +96,21 @@ def install_resource():
         install_path,
     )
 
+    # 新增：复制 tasks 文件夹
+    shutil.copytree(
+        working_dir / "assets" / "tasks",
+        install_path / "tasks",
+        dirs_exist_ok=True,
+    )
+
     with open(install_path / "interface.json", "r", encoding="utf-8") as f:
         interface = jsonc.load(f)
 
     interface["version"] = version
-    interface["title"] = f"识宝小助手 Oᴗoಣ | 版本号:{version} | 自动战斗框架超级更新,用不了请上传日志,自动乐土激情开发中"
-    #标题行往这里塞
+    interface["title"] = (
+        f"识宝小助手 Oᴗoಣ | 版本号:{version} | 自动战斗框架超级更新,用不了请上传日志,自动乐土激情开发中"
+    )
+    # 标题行往这里塞
 
     with open(install_path / "interface.json", "w", encoding="utf-8") as f:
         jsonc.dump(interface, f, ensure_ascii=False, indent=4)
