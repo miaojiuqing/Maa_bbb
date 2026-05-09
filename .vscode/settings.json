@@ -1,11 +1,15 @@
 {
+    "files.insertFinalNewline": true,
+    "files.eol": "\n",
     "json.schemas": [
         {
             "fileMatch": [
                 "/assets/resource/**/*.json",
                 "/install/resource/**/*.json",
-                "/assets/resource/**/*.jsonc",
-                "/install/resource/**/*.jsonc"
+                "!/assets/resource/data/**/**.json",
+                "!/install/resource/data/**/**.json",
+                "!/assets/resource/tasks/**/**.json",
+                "!/install/resource/tasks/**/**.json"
             ],
             "url": "/deps/tools/pipeline.schema.json"
         },
@@ -18,25 +22,46 @@
         },
         {
             "fileMatch": [
+                //掌管tasks文件内容在哪里可以补全
+                "/assets/tasks/**/*.json",
+                "/install/tasks/**/*.json"
+            ],
+            "url": "/deps/tools/interface_import.schema.json"
+        },
+        {
+            "fileMatch": [
                 "/install/config/maa_pi_config.json"
             ],
             "url": "/deps/tools/interface_config.schema.json"
         }
     ],
+    "files.exclude": {
+        "__pycache__": true
+    },
     "files.associations": {
         "**/assets/**/*.json": "jsonc"
     },
     "[json][jsonc]": {
+        // "editor.formatOnSave": true,
+        // "editor.defaultFormatter": "esbenp.prettier-vscode"
         "editor.formatOnSave": true,
         "editor.insertSpaces": true,
         "editor.tabSize": 4,
         "editor.indentSize": "tabSize"
     },
     "[python]": {
+        "editor.formatOnSave": true,
         "editor.defaultFormatter": "ms-python.black-formatter"
     },
     "[markdown]": {
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+    },
+    "markdownlint.config": {
+        "MD028": false
+    },
+    "editor.formatOnSave": true,
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
     }
 }

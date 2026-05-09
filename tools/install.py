@@ -96,13 +96,6 @@ def install_resource():
         install_path,
     )
 
-    # 新增：复制 tasks 文件夹
-    shutil.copytree(
-        working_dir / "assets" / "tasks",
-        install_path / "tasks",
-        dirs_exist_ok=True,
-    )
-
     with open(install_path / "interface.json", "r", encoding="utf-8") as f:
         interface = jsonc.load(f)
 
