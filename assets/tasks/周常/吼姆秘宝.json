@@ -1,0 +1,9 @@
+{
+    "task": [
+        {
+            "name": "每周吼姆秘宝",
+            "default_check": true,
+            "entry": "每周吼姆秘宝-开始任务层"
+        }
+    ]
+}

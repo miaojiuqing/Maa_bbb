@@ -1,0 +1,9 @@
+{
+    "task": [
+        {
+            "name": "拓境战幕-减负",
+            "default_check": true,
+            "entry": "拓境战幕-开始任务层"
+        }
+    ]
+}

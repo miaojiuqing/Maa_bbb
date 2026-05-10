@@ -1,0 +1,54 @@
+{
+    "task": [
+        {
+            "name": "家园远征派遣",
+            "entry": "家园远征-开始任务层",
+            "default_check": true,
+            "option": [
+                "派遣时体力不足吃药吗",
+                "家园派遣-物品选择策略"
+            ]
+        }
+    ],
+    "option": {
+        "派遣时体力不足吃药吗": {
+            "label": "体力不足时吃药吗",
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "家园远征-体力不足提示": {
+                            "next": [
+                                "启动并进入游戏"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "家园远征-体力不足提示": {
+                            "next": [
+                                "家园远征-远征派遣结束",
+                                "[JumpBack]家园远征-体力药已食用确认",
+                                "[JumpBack]家园远征-体力不足处理-一次一药动作"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "家园派遣-物品选择策略": {
+            "type": "select",
+            "label": "物品选择策略",
+            "default_case": "上次选择",
+            "cases": [
+                {
+                    "name": "上次选择",
+                    "pipeline_override": {}
+                }
+            ]
+        }
+    }
+}

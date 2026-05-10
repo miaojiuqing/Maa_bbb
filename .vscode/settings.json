@@ -4,14 +4,14 @@
     "json.schemas": [
         {
             "fileMatch": [
-                "/assets/resource/**/*.json",
-                "/install/resource/**/*.json",
+                "./assets/resource/**/*.json",
+                "./install/resource/**/*.json",
                 "!/assets/resource/data/**/**.json",
                 "!/install/resource/data/**/**.json",
                 "!/assets/resource/tasks/**/**.json",
                 "!/install/resource/tasks/**/**.json"
             ],
-            "url": "/deps/tools/pipeline.schema.json"
+            "url": "./deps/tools/pipeline.schema.json"
         },
         {
             "fileMatch": [

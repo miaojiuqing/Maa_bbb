@@ -1,0 +1,208 @@
+{
+    "task": [
+        {
+            "name": "乐土每周商店购买",
+            "default_check": false,
+            "entry": "乐土每周商店-开始任务层",
+            "option": [
+                "锚点识别契合阈值",
+                "是否启用色块识别乐土币不足",
+                "乐土商店检查锚点",
+                "聚能·空间透镜",
+                "相转移镜面",
+                "吼吼休假卷",
+                "时序通行证"
+            ],
+            "description": "经常卡住请取消该任务<br/>由于作者技术力不足，此功能建议打完乐土再用，买一半然后再去打完乐土再买的话容易出问题(不买东西)，不过大概率会自己超时结束<br/>检查锚点是啥？就是用来判断当前乐土商店内是否包含所有商品用的，大概<br/>此功能不稳定，若追求流畅性不建议开启 <br/>若启用了相转移镜面，使用尽量自行买完该版本商店内的所有女武神碎片"
+        }
+    ],
+    "option": {
+        "锚点识别契合阈值": {
+            "type": "select",
+            "description": "请根据自身情况设置",
+            "cases": [
+                {
+                    "name": "70%",
+                    "pipeline_override": {
+                        "乐土每周商店-挑选商品界面": {
+                            "threshold": 0.7
+                        }
+                    }
+                },
+                {
+                    "name": "75%",
+                    "pipeline_override": {
+                        "乐土每周商店-挑选商品界面": {
+                            "threshold": 0.75
+                        }
+                    }
+                },
+                {
+                    "name": "80%",
+                    "pipeline_override": {
+                        "乐土每周商店-挑选商品界面": {
+                            "threshold": 0.8
+                        }
+                    }
+                }
+            ],
+            "default_case": "80%"
+        },
+        "是否启用色块识别乐土币不足": {
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "乐土每周商店-购买界面-乐土币不足-色块检测": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "乐土每周商店-购买界面-乐土币不足-色块检测": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "乐土商店检查锚点": {
+            "label": "滑动停止锚点",
+            "type": "select",
+            "cases": [
+                {
+                    "name": "空间透镜(这周没动过)",
+                    "pipeline_override": {
+                        "乐土每周商店-已滑动至将商品尽收入眼底": {
+                            "template": [
+                                "商店/每周/乐土/购买已呈现.png"
+                            ]
+                        },
+                        "乐土每周商店-尝试滑动直到将将商品尽收入眼底": {
+                            "template": [
+                                "商店/每周/乐土/购买已呈现.png"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "吼吼休假卷(这周打乐土前动了)",
+                    "pipeline_override": {
+                        "乐土每周商店-已滑动至将商品尽收入眼底": {
+                            "template": [
+                                "商店/每周/乐土/购买已呈现-2.png"
+                            ]
+                        },
+                        "乐土每周商店-尝试滑动直到将将商品尽收入眼底": {
+                            "template": [
+                                "商店/每周/乐土/购买已呈现-2.png"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "都行(大概是都行？)",
+                    "pipeline_override": {
+                        "乐土每周商店-已滑动至将商品尽收入眼底": {
+                            "template": [
+                                "商店/每周/乐土/购买已呈现-2.png",
+                                "商店/每周/乐土/购买已呈现.png"
+                            ]
+                        },
+                        "乐土每周商店-尝试滑动直到将将商品尽收入眼底": {
+                            "template": [
+                                "商店/每周/乐土/购买已呈现.png",
+                                "商店/每周/乐土/购买已呈现-2.png"
+                            ]
+                        }
+                    }
+                }
+            ],
+            "default_case": "都行(大概是都行？)"
+        },
+        "聚能·空间透镜": {
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {}
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "乐土商店-聚能空间透镜-可购买": {
+                            "enabled": false
+                        },
+                        "乐土商店-聚能空间透镜-不可购买": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "相转移镜面": {
+            "description": "开启后可能会会去点击同价格的女武神碎片",
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {}
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "乐土商店-相转移镜面-可购买": {
+                            "enabled": false
+                        },
+                        "乐土商店-相转移镜面-不可购买": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "吼吼休假卷": {
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {}
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "乐土商店-吼吼休假卷-可购买": {
+                            "enabled": false
+                        },
+                        "乐土商店-吼吼休假卷-不可购买": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "时序通行证": {
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {}
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "乐土商店-时序通行证-可购买": {
+                            "enabled": false
+                        },
+                        "乐土商店-时序通行证-不可购买": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

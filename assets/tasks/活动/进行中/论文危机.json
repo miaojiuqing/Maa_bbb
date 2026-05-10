@@ -1,0 +1,50 @@
+{
+    "task": [
+        {
+            "name": "论文危机收菜",
+            "default_check": true,
+            "entry": "版本活动-论文危机-任务开始层",
+            "description": "只能收菜和处理勘探事件，黄金矿工小游戏不会做",
+            "option": [
+                "论文危机勘探处理"
+            ]
+        }
+    ],
+    "option": {
+        "论文危机勘探处理": {
+            "type": "switch",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "版本活动-论文危机-无可收获资源": {
+                            "next": [
+                                "版本活动-论文危机-区域勘探-已进入勘探界面",
+                                "[JumpBack]版本活动-论文危机-区域勘探-点击进入勘探界面",
+                                "[JumpBack]点击空白位置关闭"
+                            ]
+                        },
+                        "空任务": {
+                            "max_hit": 7
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "版本活动-论文危机-无可收获资源": {
+                            "next": [
+                                "[JumpBack]版本活动-论文危机-有可调控单元",
+                                "成功进入游戏主菜单",
+                                "[JumpBack]版本活动-论文危机-返回",
+                                "[JumpBack]点击返回主菜单",
+                                "[JumpBack]点击空白位置关闭"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

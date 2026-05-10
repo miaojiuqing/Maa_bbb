@@ -1,0 +1,46 @@
+{
+    "task": [
+        {
+            "name": "材料远征",
+            "entry": "材料远征-开始任务层",
+            "default_check": true,
+            "option": [
+                "材料远征体力不足时吃药吗"
+            ]
+        }
+    ],
+    "option": {
+        "材料远征体力不足时吃药吗": {
+            "label": "体力不足时吃药吗",
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "材料远征-体力不足处理": {
+                            "next": [
+                                "返回主页后强制结束任务",
+                                "[JumpBack]相关资源下载-取消",
+                                "[JumpBack]点击返回主菜单",
+                                "[JumpBack]点击叉叉"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "材料远征-体力不足处理": {
+                            "next": [
+                                "材料远征-未远征",
+                                "材料远征-已远征",
+                                "[JumpBack]材料远征-体力药已食用确认",
+                                "[JumpBack]材料远征-体力不足处理-一次一药动作"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,42 @@
+{
+    "task": [
+        {
+            "name": "繁星旅航每日挑战",
+            "default_check": true,
+            "entry": "版本活动-繁星旅航-任务开始层",
+            "option": [
+                "版本活动-繁星旅航-日常关选择"
+            ],
+            "description": "自己记得解锁先"
+        }
+    ],
+    "option": {
+        "版本活动-繁星旅航-日常关选择": {
+            "type": "select",
+            "label": "每日挑战星域选择",
+            "default_case": "赤红星域",
+            "cases": [
+                {
+                    "name": "赤红星域",
+                    "pipeline_override": {
+                        "版本活动-繁星旅航-点击星域进入挑战": {
+                            "expected": [
+                                "赤红星域"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "极寒星域",
+                    "pipeline_override": {
+                        "版本活动-繁星旅航-点击星域进入挑战": {
+                            "expected": [
+                                "极寒星域"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

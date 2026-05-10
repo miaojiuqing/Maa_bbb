@@ -1,3 +1,316 @@
 {
-    "task": "启动游戏"
+    "task": [
+        {
+            "name": "崩坏三 启动！",
+            "entry": "登录方式选择接口",
+            "default_check": true,
+            "repeatable": true,
+            "repeat_count": 2,
+            "option": [
+                "登录打开二维码",
+                "每次执行该启动任务间隔",
+                "月卡领取",
+                "防误触模式",
+                "若误触进了剧情",
+                "是否启动维护/升级检查",
+                "不自行启动游戏",
+                "启动游戏时不断尝试输入ESC",
+                "特殊叉叉处理"
+            ],
+            "description": "左上角可选模拟器或者桌面端<br/>PC端需提前在 :设置 -辅助中，关闭显示菜单提示，且控制方式依照个人喜好自行想选择，请保证资源选择类型与游戏设置一致<br/>PC端用户请注意：自动战斗功能运行战斗时，请一定不要点击键盘上的特殊键(如win、ctrl、alt等),否则可能会导致整个电脑界面被各种各样快捷键唤出的窗口占满导致无法操作！！！<br/><b><font color=\"red\">桌面端运行必须管理员启动该软件且分辨率为16:9</font></b><br/>会自行确认/领取所有奖励<br/>截图参数请自行在PrintWindow、FramePool和GDI中选择，优先PrintWindow<br/>![bydjl](resource/image/logo.ico)",
+            "pipeline_override": {
+                "进入游戏-超弦空间结算": {
+                    "expected": [
+                        "你成功晋级了.*",
+                        "段位提升",
+                        "关卡积分",
+                        "组内排名",
+                        "超弦空间结算",
+                        "你在深渊表现不错",
+                        "更强的深渊",
+                        "结算奖励" //这玩意在记忆战场的时候会触发
+                    ]
+                }
+            }
+        },
+        {
+            "name": "退出/关闭游戏",
+            "default_check": false,
+            "entry": "准备退出",
+            "description": "仅关闭游戏，运行结束关闭游戏和软件可在软件内设置"
+        }
+    ],
+    "option": {
+        "登录打开二维码": {
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "登录方式选择接口": {
+                            "next": [
+                                "启动并进入游戏"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "登录方式选择接口": {
+                            "next": [
+                                "扫码登录-接口层"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "每次执行该启动任务间隔": {
+            "type": "select",
+            "cases": [
+                {
+                    "name": "无延迟(不推荐)",
+                    "pipeline_override": {
+                        "任务奖励领取-任务开始层": {
+                            "post_delay": 0
+                        }
+                    }
+                },
+                {
+                    "name": "延迟三秒",
+                    "pipeline_override": {
+                        "任务奖励领取-任务开始层": {
+                            "post_delay": 3000
+                        }
+                    }
+                },
+                {
+                    "name": "延迟五秒",
+                    "pipeline_override": {
+                        "任务奖励领取-任务开始层": {
+                            "post_delay": 5000
+                        }
+                    }
+                },
+                {
+                    "name": "延迟十秒(这么卡？)",
+                    "pipeline_override": {
+                        "任务奖励领取-任务开始层": {
+                            "post_delay": 10000
+                        }
+                    }
+                }
+            ],
+            "default_case": "延迟五秒"
+        },
+        "月卡领取": {
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "月份每日登录奖励": {
+                            "enabled": true
+                        },
+                        "进入游戏-月卡领取-15天奖励": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "月份每日登录奖励": {
+                            "enabled": false
+                        },
+                        "进入游戏-月卡领取-15天奖励": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "防误触模式": {
+            "type": "switch",
+            "description": "开启后将不再尝试点击\"点击空白位置关闭\"<br/>防止点进奇怪的界面难以退出<br/>PC端可以不用开，因为检查到\"点击空白位置关闭\"时会直接按下ESC",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "点击空白位置关闭-启动游戏特别处理版": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "点击空白位置关闭-启动游戏特别处理版": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ],
+            "default_case": "No"
+        },
+        "若误触进了剧情": { //未测试
+            "type": "select",
+            "cases": [
+                {
+                    "name": "直接跳过",
+                    "pipeline_override": {
+                        "剧情跳过辅助点击-文字": {
+                            "enabled": true
+                        },
+                        "剧情跳过辅助点击-图片": {
+                            "enabled": true
+                        },
+                        "剧情辅助点击-点击空白处跳过剧情": {
+                            "enabled": false,
+                            "next": []
+                        }
+                    }
+                },
+                {
+                    "name": "慢慢过剧情",
+                    "pipeline_override": {
+                        "剧情跳过辅助点击-文字": {
+                            "enabled": false
+                        },
+                        "剧情跳过辅助点击-图片": {
+                            "enabled": false
+                        },
+                        "剧情辅助点击-点击空白处跳过剧情": {
+                            "enabled": true,
+                            "next": []
+                        }
+                    }
+                }
+            ],
+            "default_case": "慢慢过剧情"
+        },
+        "是否启动维护/升级检查": {
+            "description": "崩坏三维护时会发送任务完成通知避免MAS的队列中卡住",
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "游戏需在客户端进行更新": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "游戏需在客户端进行更新": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "不自行启动游戏": {
+            "resource": [
+                "B服",
+                "OPPO渠道服",
+                "VIVO服",
+                "九游服",
+                "华为渠道服",
+                "官服",
+                "小米服",
+                "应用宝渠道服"
+            ],
+            "controller": [
+                "安卓端"
+            ],
+            "label": "极速启动游戏模式",
+            "description": "执行后会直接发送报名启动游戏,若频繁卡在某界面更新多次无果请关闭此功能<br/>PC端禁用此功能",
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "启动并进入游戏": {
+                            "action": "StartApp"
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "启动并进入游戏": {
+                            "action": "DoNothing"
+                        }
+                    }
+                }
+            ],
+            "default_case": "No"
+        },
+        "启动游戏时不断尝试输入ESC": {
+            "type": "switch",
+            "resource": [
+                "纯键盘操作",
+                "键鼠操作"
+            ],
+            "description": "启动游戏的时候啥也没检查到的话就一直ESC防止误触进奇怪地方卡死",
+            "controller": [
+                "桌面端"
+            ],
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "模拟器包名游戏启动": { //在win32时改为输入ESC
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "模拟器包名游戏启动": { //在win32时改为输入ESC
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "特殊叉叉处理": {
+            "type": "switch",
+            "label": "渠道服叉叉处理",
+            "description": "目前仅收录小米的俩",
+            "default_case": "Yes",
+            "resource": [
+                "B服",
+                "OPPO渠道服",
+                "VIVO服",
+                "九游服",
+                "华为渠道服",
+                "小米服",
+                "应用宝渠道服"
+            ],
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "渠道服专用广告处理集合": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "渠道服专用广告处理集合": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        }
+    }
 }

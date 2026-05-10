@@ -1,0 +1,9 @@
+{
+    "task": [
+        {
+            "name": "模拟作战室-减负",
+            "default_check": true,
+            "entry": "模拟作战室-任务开始层"
+        }
+    ]
+}

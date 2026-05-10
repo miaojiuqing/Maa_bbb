@@ -1,0 +1,148 @@
+{
+    "task": [
+        {
+            "name": "只是测试",
+            "entry": "测试任务接口",
+            "option": [
+                "测试类型",
+                "渠道服包名测试"
+            ],
+            "description": "作者弄来测试玩的，舰长也要玩吗<br/>[color:red]红[/color]<br/> size:20下划线<br/>[b]:粗体<br/>[i]:斜体<br/>[u]:下划线<br/>[s]:删除线"
+        }
+    ],
+    "option": {
+        "测试类型": {
+            "type": "select",
+            "cases": [
+                {
+                    "name": "通知发送测试",
+                    "pipeline_override": {
+                        "测试任务接口": {
+                            "next": [
+                                "通知发送测试"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "点击测试",
+                    "pipeline_override": {
+                        "测试任务接口": {
+                            "next": [
+                                "测试-点一下左上角"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "键码输入测试-ESC",
+                    "pipeline_override": {
+                        "测试任务接口": {
+                            "next": [
+                                "输入键码-ESC"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "单独运行某节点",
+                    "pipeline_override": {
+                        "测试任务接口": {
+                            "next": [
+                                "空任务"
+                            ]
+                        }
+                    }
+                }
+            ],
+            "default_case": "通知发送测试"
+        },
+        "渠道服包名测试": {
+            "type": "select",
+            "cases": [
+                {
+                    "name": "不测",
+                    "pipeline_override": {}
+                },
+                {
+                    "name": "官服",
+                    "pipeline_override": {
+                        "测试任务接口": {
+                            "recognition": {},
+                            "next": [],
+                            "action": "StartApp",
+                            "package": "com.miHoYo.enterprise.NGHSoD"
+                        }
+                    }
+                },
+                {
+                    "name": "B服",
+                    "pipeline_override": {
+                        "测试任务接口": {
+                            "recognition": {},
+                            "next": [],
+                            "action": "StartApp",
+                            "package": "com.miHoYo.bh3.bilibili"
+                        }
+                    }
+                },
+                {
+                    "name": "小米服",
+                    "pipeline_override": {
+                        "测试任务接口": {
+                            "recognition": {},
+                            "next": [],
+                            "action": "StartApp",
+                            "package": "com.miHoYo.bh3.mi"
+                        }
+                    }
+                },
+                {
+                    "name": "VIVO服",
+                    "pipeline_override": {
+                        "测试任务接口": {
+                            "recognition": {},
+                            "next": [],
+                            "action": "StartApp",
+                            "package": "com.miHoYo.bh3.vivo"
+                        }
+                    }
+                },
+                {
+                    "name": "OPPO服",
+                    "pipeline_override": {
+                        "测试任务接口": {
+                            "recognition": {},
+                            "next": [],
+                            "action": "StartApp",
+                            "package": "com.miHoYo.bh3.nearme.gamecenter"
+                        }
+                    }
+                },
+                {
+                    "name": "华为服",
+                    "pipeline_override": {
+                        "测试任务接口": {
+                            "recognition": {},
+                            "next": [],
+                            "action": "StartApp",
+                            "package": "com.miHoYo.bh3.huawei"
+                        }
+                    }
+                },
+                {
+                    "name": "九游服",
+                    "pipeline_override": {
+                        "测试任务接口": {
+                            "recognition": {},
+                            "next": [],
+                            "action": "StartApp",
+                            "package": "com.miHoYo.bh3.uc"
+                        }
+                    }
+                }
+            ],
+            "default_case": "不测"
+        }
+    }
+}
