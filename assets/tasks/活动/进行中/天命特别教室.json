@@ -1,0 +1,12 @@
+{
+    "task": [
+        {
+            "name": "天命特别教室",
+            "default_check": true,
+            "entry": "天命特别教室-希儿-任务开始层",
+            "description": "ohhh直接套上次的模版",
+            "option": []
+        }
+    ],
+    "option": {}
+}
