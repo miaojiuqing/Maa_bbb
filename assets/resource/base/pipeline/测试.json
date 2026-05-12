@@ -5,6 +5,7 @@
             "[JumpBack]键位测试"
         ]
     },
+    "转视角": {},
     "键位测试": {
         "action": {
             "type": "ClickKey",
