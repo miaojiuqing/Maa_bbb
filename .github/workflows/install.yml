@@ -3,6 +3,7 @@ name: install
 # 依赖版本号：留空使用最新版，或指定如 "v4.6.0"
 env:
   MFWCFA_VERSION: ""   # overflow65537/MFW-PyQt6 版本
+  MAAFRAMEWORK_VERSION: ""   # MaaXYZ/MaaFramework 版本（install.py 需要 bin + share/MaaAgentBinary）
 
 on:
   push:
@@ -131,6 +132,44 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: true
+
+      # install.py 从 deps / MFWCFA / 根目录查找 MaaFramework（bin + share/MaaAgentBinary）；MFWCFA 包体不含该布局，需单独拉取运行时。
+      - name: Download MaaFramework
+        id: download_maafw
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: MaaXYZ/MaaFramework
+          fileName: "MAA-${{ matrix.os }}-${{ matrix.arch }}*"
+          tag: ${{ env.MAAFRAMEWORK_VERSION }}
+          latest: ${{ env.MAAFRAMEWORK_VERSION == '' }}
+          out-file-path: "deps"
+          extract: true
+
+      - name: Clean up MaaFramework archive
+        shell: bash
+        run: |
+          ARCHIVE_FILE_PATH="${{ fromJson(steps.download_maafw.outputs.downloaded_files)[0] }}"
+          rm -f "${ARCHIVE_FILE_PATH}"
+          echo "Archive cleanup command executed for MaaFramework."
+
+      - name: Normalize MaaFramework layout under deps
+        shell: bash
+        run: |
+          if [[ -d deps/bin && -d deps/share/MaaAgentBinary ]]; then
+            echo "MaaFramework already at deps root."
+            exit 0
+          fi
+          for d in deps/*/; do
+            [[ -d "${d}bin" && -d "${d}share/MaaAgentBinary" ]] || continue
+            echo "Lifting MaaFramework from $d to deps/"
+            mv "${d}bin" deps/
+            mv "${d}share" deps/
+            rm -rf "$d"
+            exit 0
+          done
+          echo "❌ Could not find bin + share/MaaAgentBinary under deps/"
+          find deps -maxdepth 4 -type d 2>/dev/null || true
+          exit 1
 
       - name: Download MFWCFA
         id: download_mfwcfa
