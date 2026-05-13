@@ -183,8 +183,12 @@
         "tasks/周常/分享.json",
         "tasks/周常/吼姆秘宝.json",
         "tasks/周常/拓境战幕.json",
+        "tasks/周常/记忆战场.json",
         "tasks/周常/万象虚境.json",
-        "tasks/周常/往世乐土.json"
+        "tasks/周常/往世乐土.json",
+        //周期性
+        "tasks/周期性/超弦空间.json",
+        "tasks/周期性/冒险委托.json"
     ],
     "task": [],
     "option": {}
