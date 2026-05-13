@@ -140,11 +140,11 @@ def install_chores():
             install_path / file,
         )
 
-        # 复制logo图片
-        shutil.copy2(
-            install_path / "logo.png",
-            install_path / "dashboard.png",
-        )
+    # 与 logo 相同，供 MFW 等使用（须在上述 logo.png 复制完成之后）
+    shutil.copy2(
+        install_path / "logo.png",
+        install_path / "dashboard.png",
+    )
 
 
 def install_agent():
