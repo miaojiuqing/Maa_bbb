@@ -1,9 +1,8 @@
 name: install
 
-# 依赖版本号：留空使用最新版，或指定如 "v4.6.0" / "v0.6.0"
+# 依赖版本号：留空使用最新版，或指定如 "v4.6.0"
 env:
-  MAAFRAMEWORK_VERSION: ""   # MaaXYZ/MaaFramework 版本
-  MFAAVALONIA_VERSION: ""   # SweetSmellFox/MFAAvalonia 版本
+  MFWCFA_VERSION: ""   # overflow65537/MFW-PyQt6 版本
 
 on:
   push:
@@ -133,35 +132,25 @@ jobs:
         with:
           submodules: true
 
-      - name: Download MaaFramework
+      - name: Download MFWCFA
+        id: download_mfwcfa
         uses: robinraju/release-downloader@v1
         with:
-          repository: MaaXYZ/MaaFramework
-          fileName: "MAA-${{ matrix.os }}-${{ matrix.arch }}*"
-          tag: ${{ env.MAAFRAMEWORK_VERSION }}
-          latest: ${{ env.MAAFRAMEWORK_VERSION == '' }}
-          out-file-path: "deps"
+          repository: overflow65537/MFW-PyQt6
+          fileName: "MFW*-${{ matrix.os }}-${{ matrix.arch }}*"
+          tag: ${{ env.MFWCFA_VERSION }}
+          latest: ${{ env.MFWCFA_VERSION == '' }}
+          out-file-path: "MFWCFA"
           extract: true
 
-      - name: Download MFAAvalonia
-        id: download_mfa
-        uses: robinraju/release-downloader@v1
-        with:
-          repository: SweetSmellFox/MFAAvalonia
-          fileName: "MFAAvalonia-*-${{ (matrix.os == 'win' && 'win') || (matrix.os == 'macos' && 'osx') || (matrix.os == 'linux' && 'linux') }}-${{ (matrix.arch == 'x86_64' && 'x64') || (matrix.arch == 'aarch64' && 'arm64') }}*"
-          tag: ${{ env.MFAAVALONIA_VERSION }}
-          latest: ${{ env.MFAAVALONIA_VERSION == '' }}
-          out-file-path: "MFA"
-          extract: true
-
-      - name: Clean up MFAAvalonia archive
+      - name: Clean up MFWCFA archive
         shell: bash
         run: |
-          ARCHIVE_FILE_PATH="${{ fromJson(steps.download_mfa.outputs.downloaded_files)[0] }}"
+          ARCHIVE_FILE_PATH="${{ fromJson(steps.download_mfwcfa.outputs.downloaded_files)[0] }}"
           rm -f "${ARCHIVE_FILE_PATH}"
-          echo "Archive cleanup command executed for MFAAvalonia."
+          echo "Archive cleanup command executed for MFWCFA."
 
-      - name: Apply custom icon to MFAAvalonia.exe on Windows
+      - name: Apply custom icon to MFW.exe on Windows
         if: matrix.os == 'win'
         shell: bash
         run: |
@@ -171,7 +160,13 @@ jobs:
             exit 1
           fi
 
-          echo "✅ Applying icon from $ICON_PATH to MFA/MFAAvalonia.exe..."
+          MFW_EXE="$(find MFWCFA -maxdepth 2 -type f -name 'MFW.exe' | head -n 1)"
+          if [ -z "$MFW_EXE" ]; then
+            echo "❌ ERROR: MFW.exe not found under MFWCFA"
+            exit 1
+          fi
+
+          echo "✅ Applying icon from $ICON_PATH to $MFW_EXE..."
 
           # Download rcedit.exe (Windows tool)
           curl -L https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
@@ -185,7 +180,7 @@ jobs:
 
           # Make it executable and run via wine
           chmod +x rcedit.exe
-          wine ./rcedit.exe "MFA/MFAAvalonia.exe" --set-icon "$ICON_PATH"
+          wine ./rcedit.exe "$MFW_EXE" --set-icon "$ICON_PATH"
 
           echo "✅ Icon successfully applied."
 
@@ -195,12 +190,12 @@ jobs:
           python -m pip install json-with-comments
           python ./tools/install.py ${{ needs.meta.outputs.tag }} ${{ matrix.os }} ${{ matrix.arch }}
 
-          if [ -d "MFA" ]; then
-            echo "Copying MFA files to install directory..."
+          if [ -d "MFWCFA" ]; then
+            echo "Copying MFWCFA files to install directory..."
             mkdir -p install
-            rsync -av --ignore-existing MFA/ install/
+            rsync -av --ignore-existing MFWCFA/ install/
           else
-            echo "MFA directory not found, skipping copy."
+            echo "MFWCFA directory not found, skipping copy."
           fi
 
       - uses: actions/download-artifact@v4
