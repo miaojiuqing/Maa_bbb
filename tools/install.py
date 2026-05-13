@@ -123,6 +123,12 @@ def install_chores():
             install_path / file,
         )
 
+        # 复制logo图片
+        shutil.copy2(
+            install_path / "logo.png",
+            install_path / "dashboard.png",
+        )
+
 
 def install_agent():
     shutil.copytree(
