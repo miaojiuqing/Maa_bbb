@@ -3,8 +3,9 @@
         {
             "name": "万象虚境",
             "entry": "万象虚境-任务开始层",
-            "repeatable": true,
-            "repeat_count": 1,
+            // "repeatable": true,
+            // "repeat_count": 1,
+            //咕咕
             "default_check": true,
             "option": [
                 "万象虚境-挑战模式选择",
@@ -29,14 +30,35 @@
                     "pipeline_override": {
                         "空任务": {
                             "green_mask": false
+                        },
+                        "万象虚境-确认虚空秘藏奖励": {
+                            "next": [
+                                "万象虚境-任务开始层",
+                                "成功进入游戏主菜单",
+                                "[JumpBack]点击返回主菜单",
+                                "[JumpBack]点击左上角返回",
+                                "[JumpBack]点击叉叉"
+                            ]
                         }
-                    }
+                    },
+                    "option": [
+                        "万象虚境-出击模式循环次数"
+                    ]
                 },
                 {
                     "name": "减负模式(推荐)",
                     "pipeline_override": {
                         "万象虚境-一到五层战斗流程": {
                             "enabled": false
+                        },
+                        "万象虚境-确认虚空秘藏奖励": {
+                            "next": [
+                                "万象虚境-任务开始层",
+                                "成功进入游戏主菜单",
+                                "[JumpBack]点击返回主菜单",
+                                "[JumpBack]点击左上角返回",
+                                "[JumpBack]点击叉叉"
+                            ]
                         }
                     }
                 },
@@ -49,11 +71,40 @@
                                 "万象虚境-首通检查",
                                 "万象虚境-一到五层战斗流程" //无识别条件-100%执行成功成功
                             ]
+                        },
+                        "万象虚境-确认虚空秘藏奖励": {
+                            "next": [
+                                "万象虚境-任务开始层",
+                                "成功进入游戏主菜单",
+                                "[JumpBack]点击返回主菜单",
+                                "[JumpBack]点击左上角返回",
+                                "[JumpBack]点击叉叉"
+                            ]
                         }
-                    }
+                    },
+                    "option": [
+                        "万象虚境-出击模式循环次数"
+                    ]
                 }
             ],
             "default_case": "1-5战斗6-7减负"
+        },
+        "万象虚境-出击模式循环次数": {
+            "label": "出击循环次数",
+            "type": "input",
+            "inputs": [
+                {
+                    "name": "万象虚境-领完奖励回到任务开始层次数",
+                    "label": "次数填写",
+                    "pipeline_type": "string",
+                    "default": "1"
+                }
+            ],
+            "pipeline_override": {
+                "万象虚境-任务开始层": {
+                    "max_hit": "万象虚境-领完奖励回到任务开始层次数"
+                }
+            }
         },
         "万象虚境-层数选择": {
             "label": "层数选择",
