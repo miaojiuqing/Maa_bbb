@@ -189,39 +189,39 @@ jobs:
           rm -f "${ARCHIVE_FILE_PATH}"
           echo "Archive cleanup command executed for MFWCFA."
 
-      - name: Apply custom icon to MFW.exe on Windows
-        if: matrix.os == 'win'
-        shell: bash
-        run: |
-          ICON_PATH="./assets/resource/base/image/logo.ico"
-          if [ ! -f "$ICON_PATH" ]; then
-            echo "❌ ERROR: Icon file not found at $ICON_PATH"
-            exit 1
-          fi
-
-          MFW_EXE="$(find MFWCFA -maxdepth 2 -type f -name 'MFW.exe' | head -n 1)"
-          if [ -z "$MFW_EXE" ]; then
-            echo "❌ ERROR: MFW.exe not found under MFWCFA"
-            exit 1
-          fi
-
-          echo "✅ Applying icon from $ICON_PATH to $MFW_EXE..."
-
-          # Download rcedit.exe (Windows tool)
-          curl -L https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
-
-          # Install wine if not present
-          if ! command -v wine &> /dev/null; then
-            echo "📦 Installing wine..."
-            sudo apt-get update
-            sudo apt-get install -y wine
-          fi
-
-          # Make it executable and run via wine
-          chmod +x rcedit.exe
-          wine ./rcedit.exe "$MFW_EXE" --set-icon "$ICON_PATH"
-
-          echo "✅ Icon successfully applied."
+#      - name: Apply custom icon to MFW.exe on Windows
+#        if: matrix.os == 'win'
+#        shell: bash
+#        run: |
+#          ICON_PATH="./assets/resource/base/image/logo.ico"
+#          if [ ! -f "$ICON_PATH" ]; then
+#            echo "❌ ERROR: Icon file not found at $ICON_PATH"
+#            exit 1
+#          fi
+#
+#          MFW_EXE="$(find MFWCFA -maxdepth 2 -type f -name 'MFW.exe' | head -n 1)"
+#          if [ -z "$MFW_EXE" ]; then
+#            echo "❌ ERROR: MFW.exe not found under MFWCFA"
+#            exit 1
+#          fi
+#
+#          echo "✅ Applying icon from $ICON_PATH to $MFW_EXE..."
+#
+#          # Download rcedit.exe (Windows tool)
+#          curl -L https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
+#
+#          # Install wine if not present
+#          if ! command -v wine &> /dev/null; then
+#            echo "📦 Installing wine..."
+#            sudo apt-get update
+#            sudo apt-get install -y wine
+#          fi
+#
+#          # Make it executable and run via wine
+#          chmod +x rcedit.exe
+#          wine ./rcedit.exe "$MFW_EXE" --set-icon "$ICON_PATH"
+#
+#          echo "✅ Icon successfully applied."
 
       - name: Install
         shell: bash
