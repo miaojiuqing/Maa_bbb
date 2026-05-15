@@ -286,12 +286,29 @@ jobs:
             echo "⚠️ No MFW.exe under install/; icon step had nothing to patch."
           fi
 
-#      - uses: actions/download-artifact@v4
-#        with:
-#          name: python-embed-${{ matrix.os }}-${{ matrix.arch }}
-#          path: ./install/python
+      - name: Install 7-Zip (SFX 模块)
+        if: matrix.os == 'win' && matrix.arch == 'x86_64'
+        shell: pwsh
+        run: choco install 7zip.install -y
+
+      - name: Build Windows self-extracting installer (7-Zip SFX)
+        if: matrix.os == 'win' && matrix.arch == 'x86_64'
+        shell: pwsh
+        run: |
+          $out = Join-Path $env:GITHUB_WORKSPACE ("Maa_bbb-win-x86_64-${{ needs.meta.outputs.tag }}.exe")
+          & "$env:GITHUB_WORKSPACE/tools/windows_sfx/build_sfx.ps1" `
+            -SourceDir "$env:GITHUB_WORKSPACE/install" `
+            -OutputExe $out `
+            -DisplayName "识宝小助手"
 
       - uses: actions/upload-artifact@v4
+        if: matrix.os == 'win' && matrix.arch == 'x86_64'
+        with:
+          name: Maa_bbb-${{ matrix.os }}-${{ matrix.arch }}
+          path: Maa_bbb-win-x86_64-${{ needs.meta.outputs.tag }}.exe
+
+      - uses: actions/upload-artifact@v4
+        if: matrix.os != 'win' || matrix.arch != 'x86_64'
         with:
           name: Maa_bbb-${{ matrix.os }}-${{ matrix.arch }}
           path: "install"
@@ -334,9 +351,22 @@ jobs:
 
       - run: |
           cd assets
+          # Windows x64：仅分发 7-Zip SFX（自解压 exe），不再打 zip
+          if [[ -d Maa_bbb-win-x86_64 ]]; then
+            shopt -s nullglob
+            for exe in Maa_bbb-win-x86_64/*.exe; do
+              echo "Release: Windows SFX -> $(basename "$exe")"
+              mv -f "$exe" .
+            done
+            rm -rf Maa_bbb-win-x86_64
+          fi
+          find . -type d -empty -delete 2>/dev/null || true
           for f in *; do
             if [[ "$f" == *"python-embed"* ]]; then
               echo "Skipping $f (python-embed)."
+              continue
+            fi
+            if [[ ! -d "$f" ]]; then
               continue
             fi
             (cd $f && zip -r ../$f-${{ needs.meta.outputs.tag }}.zip .)
