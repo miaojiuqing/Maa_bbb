@@ -54,31 +54,14 @@ current_system = normalize_os(_raw_os)
 current_architecture = normalize_arch(_raw_arch)
 
 
-def _framework_root_candidates() -> list[Path]:
-    return [
-        working_dir / "deps",
-        working_dir / "MFWCFA",
-        working_dir,
-    ]
-
-
-def _find_framework_root() -> Path:
-    for candidate in _framework_root_candidates():
-        if (candidate / "bin").exists() and (
-            candidate / "share" / "MaaAgentBinary"
-        ).exists():
-            return candidate
-
-    print('Please prepare MaaFramework files under "deps", "MFWCFA", or project root.')
-    print('请先将 MaaFramework 文件放到 "deps"、"MFWCFA" 或项目根目录。')
-    sys.exit(1)
-
-
 def install_deps():
-    framework_root = _find_framework_root()
+    if not (working_dir / "deps" / "bin").exists():
+        print('Please download the MaaFramework to "deps" first.')
+        print('请先下载 MaaFramework 到 "deps"。')
+        sys.exit(1)
 
     shutil.copytree(
-        framework_root / "bin",
+        working_dir / "deps" / "bin",
         install_path / "runtimes" / f"{current_system}-{current_architecture}",
         ignore=shutil.ignore_patterns(
             "*MaaDbgControlUnit*",
@@ -89,7 +72,7 @@ def install_deps():
         dirs_exist_ok=True,
     )
     shutil.copytree(
-        framework_root / "share" / "MaaAgentBinary",
+        working_dir / "deps" / "share" / "MaaAgentBinary",
         install_path
         / "runtimes"
         / f"{current_system}-{current_architecture}"
@@ -140,7 +123,7 @@ def install_chores():
             install_path / file,
         )
 
- # 与 logo 相同，供 MFW 等使用（须在上述 logo.png 复制完成之后）
+        # 复制logo图片
     shutil.copy2(
         install_path / "logo.png",
         install_path / "dashboard.png",
