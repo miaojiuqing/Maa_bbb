@@ -121,12 +121,29 @@ jobs:
     needs:
       - meta
 #      - download-python-embed
-    runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [win, macos, linux]
-        arch: [aarch64, x86_64]
+        include:
+          - os: win
+            arch: x86_64
+            runs-on: windows-latest
+          - os: win
+            arch: aarch64
+            runs-on: windows-11-arm
+          - os: macos
+            arch: x86_64
+            runs-on: macos-15-intel
+          - os: macos
+            arch: aarch64
+            runs-on: macos-latest
+          - os: linux
+            arch: x86_64
+            runs-on: ubuntu-latest
+          - os: linux
+            arch: aarch64
+            runs-on: ubuntu-24.04-arm
       fail-fast: false
+    runs-on: ${{ matrix.runs-on }}
 
     steps:
       - uses: actions/checkout@v4
@@ -189,61 +206,52 @@ jobs:
           rm -f "${ARCHIVE_FILE_PATH}"
           echo "Archive cleanup command executed for MFWCFA."
 
-      - name: Apply custom icon to MFW.exe on Windows
-        if: matrix.os == 'win'
+      - name: Convert PNG to ICO
+        if: matrix.os == 'win' && matrix.arch == 'x86_64'
         shell: bash
         run: |
-          ICON_PATH="./assets/resource/base/image/logo.ico"
-          if [ ! -f "$ICON_PATH" ]; then
-            echo "❌ ERROR: Icon file not found at $ICON_PATH"
+          set -euo pipefail
+          PNG_PATH="./logo.png"
+          if [ ! -f "$PNG_PATH" ]; then
+            echo "❌ ERROR: $PNG_PATH not found"
             exit 1
           fi
-
-          MFW_EXE="$(find MFWCFA -maxdepth 2 -type f -name 'MFW.exe' | head -n 1)"
-          if [ -z "$MFW_EXE" ]; then
-            echo "❌ ERROR: MFW.exe not found under MFWCFA"
+          choco install imagemagick -y
+          export PATH="$PATH:/c/ProgramData/chocolatey/bin"
+          for d in "/c/Program Files/ImageMagick-"*; do
+            if [ -x "$d/magick.exe" ]; then
+              export PATH="$d:$PATH"
+              break
+            fi
+          done
+          if ! command -v magick >/dev/null 2>&1; then
+            echo "❌ ERROR: magick not on PATH after ImageMagick install"
             exit 1
           fi
+          magick convert "$PNG_PATH" -define icon:auto-resize=256,128,64,48,32,24,16 ./m9a.ico
+          echo "✅ ICO written to ./m9a.ico"
 
-          echo "✅ Applying icon from $ICON_PATH to $MFW_EXE..."
-
-          # Download rcedit.exe (Windows x64 tool; run under Wine on Linux CI)
+      - name: Modify Windows exe icons
+        if: matrix.os == 'win' && matrix.arch == 'x86_64'
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -f "./m9a.ico" ]; then
+            echo "❌ ERROR: ./m9a.ico missing (run Convert PNG to ICO first)"
+            exit 1
+          fi
           curl -fsSL https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
 
-          # Headless Ubuntu has no X11; Wine still needs a virtual framebuffer for rcedit.
-          # Use a fresh win64 WINEPREFIX; pick a 64-bit Wine binary (PATH varies by Ubuntu package layout).
-          echo "📦 Installing Wine and xvfb..."
-          sudo apt-get update
-          sudo apt-get install -y wine xvfb
+          ICO_W="$(cygpath -w "$(pwd)/m9a.ico")"
 
-          if command -v wine64 >/dev/null 2>&1; then
-            WINE_BIN="$(command -v wine64)"
-          elif [[ -x /usr/lib/wine/wine64 ]]; then
-            WINE_BIN="/usr/lib/wine/wine64"
-          elif command -v wine >/dev/null 2>&1; then
-            WINE_BIN="$(command -v wine)"
+          MFW_EXE="$(find MFWCFA -maxdepth 4 -type f -name 'MFW.exe' 2>/dev/null | head -n 1)"
+          if [ -n "$MFW_EXE" ]; then
+            _mfw_abs="$(cd "$(dirname "$MFW_EXE")" && pwd)/$(basename "$MFW_EXE")"
+            ./rcedit.exe "$(cygpath -w "$_mfw_abs")" --set-icon "$ICO_W"
+            echo "MFW.exe icon updated: $MFW_EXE"
           else
-            echo "❌ ERROR: No wine/wine64 executable found after apt install"
-            exit 1
+            echo "MFW.exe not found under MFWCFA, skipping icon update."
           fi
-          echo "Using Wine binary: $WINE_BIN"
-
-          export WINEPREFIX="${RUNNER_TEMP}/wine-rcedit"
-          export WINEARCH=win64
-          export WINEDLLOVERRIDES="mscoree,mshtml="
-          export WINEDEBUG=-all
-          rm -rf "$WINEPREFIX"
-
-          chmod +x rcedit.exe
-
-          echo "🍷 Initializing Wine prefix (64-bit) under Xvfb..."
-          xvfb-run -a "$WINE_BIN" wineboot --init
-          sleep 3
-
-          echo "🍷 Running rcedit under Xvfb..."
-          xvfb-run -a "$WINE_BIN" ./rcedit.exe "$MFW_EXE" --set-icon "$ICON_PATH"
-
-          echo "✅ Icon successfully applied."
 
       - name: Install
         shell: bash
@@ -254,7 +262,24 @@ jobs:
           if [ -d "MFWCFA" ]; then
             echo "Copying MFWCFA files to install directory..."
             mkdir -p install
-            rsync -av --ignore-existing MFWCFA/ install/
+            python <<'PY'
+          import shutil
+          from pathlib import Path
+
+          src, dst = Path("MFWCFA"), Path("install")
+          if not src.is_dir():
+              raise SystemExit(0)
+          dst.mkdir(parents=True, exist_ok=True)
+          for p in src.rglob("*"):
+              if not p.is_file():
+                  continue
+              rel = p.relative_to(src)
+              t = dst / rel
+              if t.exists():
+                  continue
+              t.parent.mkdir(parents=True, exist_ok=True)
+              shutil.copy2(p, t)
+          PY
           else
             echo "MFWCFA directory not found, skipping copy."
           fi
