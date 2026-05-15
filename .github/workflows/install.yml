@@ -1,9 +1,9 @@
 name: install
 
-# 依赖版本号：留空使用最新版，或指定如 "v4.6.0" / "v0.6.0"
+# 依赖版本号：留空使用最新版，或指定如 "v4.6.0"
 env:
-  MAAFRAMEWORK_VERSION: ""   # MaaXYZ/MaaFramework 版本
-  MFAAVALONIA_VERSION: ""   # SweetSmellFox/MFAAvalonia 版本
+  MFWCFA_VERSION: ""   # overflow65537/MFW-PyQt6 版本
+  MAAFRAMEWORK_VERSION: ""   # MaaXYZ/MaaFramework 版本（install.py 需要 bin + share/MaaAgentBinary）
 
 on:
   push:
@@ -133,7 +133,9 @@ jobs:
         with:
           submodules: true
 
+      # install.py 从 deps / MFWCFA / 根目录查找 MaaFramework（bin + share/MaaAgentBinary）；MFWCFA 包体不含该布局，需单独拉取运行时。
       - name: Download MaaFramework
+        id: download_maafw
         uses: robinraju/release-downloader@v1
         with:
           repository: MaaXYZ/MaaFramework
@@ -143,51 +145,83 @@ jobs:
           out-file-path: "deps"
           extract: true
 
-      - name: Download MFAAvalonia
-        id: download_mfa
+      - name: Clean up MaaFramework archive
+        shell: bash
+        run: |
+          ARCHIVE_FILE_PATH="${{ fromJson(steps.download_maafw.outputs.downloaded_files)[0] }}"
+          rm -f "${ARCHIVE_FILE_PATH}"
+          echo "Archive cleanup command executed for MaaFramework."
+
+      - name: Normalize MaaFramework layout under deps
+        shell: bash
+        run: |
+          if [[ -d deps/bin && -d deps/share/MaaAgentBinary ]]; then
+            echo "MaaFramework already at deps root."
+            exit 0
+          fi
+          for d in deps/*/; do
+            [[ -d "${d}bin" && -d "${d}share/MaaAgentBinary" ]] || continue
+            echo "Lifting MaaFramework from $d to deps/"
+            mv "${d}bin" deps/
+            mv "${d}share" deps/
+            rm -rf "$d"
+            exit 0
+          done
+          echo "❌ Could not find bin + share/MaaAgentBinary under deps/"
+          find deps -maxdepth 4 -type d 2>/dev/null || true
+          exit 1
+
+      - name: Download MFWCFA
+        id: download_mfwcfa
         uses: robinraju/release-downloader@v1
         with:
-          repository: SweetSmellFox/MFAAvalonia
-          fileName: "MFAAvalonia-*-${{ (matrix.os == 'win' && 'win') || (matrix.os == 'macos' && 'osx') || (matrix.os == 'linux' && 'linux') }}-${{ (matrix.arch == 'x86_64' && 'x64') || (matrix.arch == 'aarch64' && 'arm64') }}*"
-          tag: ${{ env.MFAAVALONIA_VERSION }}
-          latest: ${{ env.MFAAVALONIA_VERSION == '' }}
-          out-file-path: "MFA"
+          repository: overflow65537/MFW-PyQt6
+          fileName: "MFW*-${{ matrix.os }}-${{ matrix.arch }}*"
+          tag: ${{ env.MFWCFA_VERSION }}
+          latest: ${{ env.MFWCFA_VERSION == '' }}
+          out-file-path: "MFWCFA"
           extract: true
 
-      - name: Clean up MFAAvalonia archive
+      - name: Clean up MFWCFA archive
         shell: bash
         run: |
-          ARCHIVE_FILE_PATH="${{ fromJson(steps.download_mfa.outputs.downloaded_files)[0] }}"
+          ARCHIVE_FILE_PATH="${{ fromJson(steps.download_mfwcfa.outputs.downloaded_files)[0] }}"
           rm -f "${ARCHIVE_FILE_PATH}"
-          echo "Archive cleanup command executed for MFAAvalonia."
+          echo "Archive cleanup command executed for MFWCFA."
 
-      - name: Apply custom icon to MFAAvalonia.exe on Windows
-        if: matrix.os == 'win'
-        shell: bash
-        run: |
-          ICON_PATH="./assets/resource/base/image/logo.ico"
-          if [ ! -f "$ICON_PATH" ]; then
-            echo "❌ ERROR: Icon file not found at $ICON_PATH"
-            exit 1
-          fi
-
-          echo "✅ Applying icon from $ICON_PATH to MFA/MFAAvalonia.exe..."
-
-          # Download rcedit.exe (Windows tool)
-          curl -L https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
-
-          # Install wine if not present
-          if ! command -v wine &> /dev/null; then
-            echo "📦 Installing wine..."
-            sudo apt-get update
-            sudo apt-get install -y wine
-          fi
-
-          # Make it executable and run via wine
-          chmod +x rcedit.exe
-          wine ./rcedit.exe "MFA/MFAAvalonia.exe" --set-icon "$ICON_PATH"
-
-          echo "✅ Icon successfully applied."
+#      - name: Apply custom icon to MFW.exe on Windows
+#        if: matrix.os == 'win'
+#        shell: bash
+#        run: |
+#          ICON_PATH="./assets/resource/base/image/logo.ico"
+#          if [ ! -f "$ICON_PATH" ]; then
+#            echo "❌ ERROR: Icon file not found at $ICON_PATH"
+#            exit 1
+#          fi
+#
+#          MFW_EXE="$(find MFWCFA -maxdepth 2 -type f -name 'MFW.exe' | head -n 1)"
+#          if [ -z "$MFW_EXE" ]; then
+#            echo "❌ ERROR: MFW.exe not found under MFWCFA"
+#            exit 1
+#          fi
+#
+#          echo "✅ Applying icon from $ICON_PATH to $MFW_EXE..."
+#
+#          # Download rcedit.exe (Windows tool)
+#          curl -L https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
+#
+#          # Install wine if not present
+#          if ! command -v wine &> /dev/null; then
+#            echo "📦 Installing wine..."
+#            sudo apt-get update
+#            sudo apt-get install -y wine
+#          fi
+#
+#          # Make it executable and run via wine
+#          chmod +x rcedit.exe
+#          wine ./rcedit.exe "$MFW_EXE" --set-icon "$ICON_PATH"
+#
+#          echo "✅ Icon successfully applied."
 
       - name: Install
         shell: bash
@@ -195,12 +229,12 @@ jobs:
           python -m pip install json-with-comments
           python ./tools/install.py ${{ needs.meta.outputs.tag }} ${{ matrix.os }} ${{ matrix.arch }}
 
-          if [ -d "MFA" ]; then
-            echo "Copying MFA files to install directory..."
+          if [ -d "MFWCFA" ]; then
+            echo "Copying MFWCFA files to install directory..."
             mkdir -p install
-            rsync -av --ignore-existing MFA/ install/
+            rsync -av --ignore-existing MFWCFA/ install/
           else
-            echo "MFA directory not found, skipping copy."
+            echo "MFWCFA directory not found, skipping copy."
           fi
 
       - uses: actions/download-artifact@v4
