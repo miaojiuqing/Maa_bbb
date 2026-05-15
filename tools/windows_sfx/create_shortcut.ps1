@@ -1,9 +1,17 @@
-# 解压完成后由 7-Zip SFX 的 RunProgram 调用；工作目录为解压目标目录。
-# 在桌面创建指向 MFW.exe 的快捷方式（若存在多个则取第一个）。
+# 解压完成后由 7-Zip SFX 的 RunProgram 调用；当前目录与脚本均在官方 7zSD 的「临时解压目录」内。
+# 官方安装型 SFX 在退出后会删除该临时目录，因此必须先把文件复制到本机持久路径，再创建桌面快捷方式。
 
 $ErrorActionPreference = "Stop"
-$root = $PSScriptRoot
-$mfw = Get-ChildItem -Path $root -Recurse -File -Filter "MFW.exe" -ErrorAction SilentlyContinue |
+$src = $PSScriptRoot
+$installRoot = Join-Path ([Environment]::GetFolderPath("LocalApplicationData")) "Programs\Maa_bbb"
+New-Item -ItemType Directory -Path $installRoot -Force | Out-Null
+& robocopy.exe "$src" "$installRoot" /E /NFL /NDL /NJH /NJS /nc /ns /np | Out-Null
+$robocode = $LASTEXITCODE
+if ($robocode -ge 8) {
+    throw "复制安装文件失败，robocopy 退出码: $robocode"
+}
+
+$mfw = Get-ChildItem -Path $installRoot -Recurse -File -Filter "MFW.exe" -ErrorAction SilentlyContinue |
     Select-Object -First 1
 
 if (-not $mfw) {
@@ -11,7 +19,7 @@ if (-not $mfw) {
     exit 0
 }
 
-$nameFile = Join-Path $root "sfx_shortcut_name.txt"
+$nameFile = Join-Path $installRoot "sfx_shortcut_name.txt"
 if (Test-Path -LiteralPath $nameFile) {
     $linkName = (Get-Content -LiteralPath $nameFile -Raw -Encoding UTF8).Trim()
 }
