@@ -212,8 +212,8 @@ try {
     $configPath = Join-Path ([System.IO.Path]::GetTempPath()) ("sfx_config_" + [Guid]::NewGuid().ToString("N") + ".txt")
     # 官方 7zSD.sfx 仅识别手册中的配置项；默认 Directory 为 .\ 会导致执行 .\powershell.exe（临时目录内不存在）而报「找不到文件」。
     # hidcon: 等为第三方修改版 SFX 前缀，原版不支持。解压始终在临时目录，退出后临时目录会被删除，故需由脚本复制到持久路径。
-    # -STA：FolderBrowserDialog 需要 STA；勿用 -WindowStyle Hidden，否则用户看不到选路径对话框。
-    $run = 'powershell.exe -STA -NoProfile -ExecutionPolicy Bypass -File .\create_shortcut.ps1'
+    # -STA：WinForms 需要；-WindowStyle Hidden：隐藏蓝色控制台（错误由脚本内 MessageBox 展示）。
+    $run = 'powershell.exe -STA -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File .\create_shortcut.ps1'
     $configBody = @"
 ;!@Install@!UTF-8!
 Title="$DisplayName"
