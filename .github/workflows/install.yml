@@ -207,19 +207,29 @@ jobs:
 
           echo "✅ Applying icon from $ICON_PATH to $MFW_EXE..."
 
-          # Download rcedit.exe (Windows tool)
-          curl -L https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
+          # Download rcedit.exe (Windows x64 tool; run under Wine on Linux CI)
+          curl -fsSL https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
 
-          # Install wine if not present
-          if ! command -v wine &> /dev/null; then
-            echo "📦 Installing wine..."
-            sudo apt-get update
-            sudo apt-get install -y wine
-          fi
+          # Headless Ubuntu has no X11; Wine still needs a virtual framebuffer for rcedit.
+          # Use wine64 + win64 prefix to avoid WoW64/rundll32 issues with rcedit-x64.exe.
+          echo "📦 Installing wine64 and xvfb..."
+          sudo apt-get update
+          sudo apt-get install -y wine64 xvfb
 
-          # Make it executable and run via wine
+          export WINEPREFIX="${RUNNER_TEMP}/wine-rcedit"
+          export WINEARCH=win64
+          export WINEDLLOVERRIDES="mscoree,mshtml="
+          export WINEDEBUG=-all
+          rm -rf "$WINEPREFIX"
+
           chmod +x rcedit.exe
-          wine ./rcedit.exe "$MFW_EXE" --set-icon "$ICON_PATH"
+
+          echo "🍷 Initializing Wine prefix (64-bit) under Xvfb..."
+          xvfb-run -a wine64 wineboot --init
+          sleep 3
+
+          echo "🍷 Running rcedit under Xvfb..."
+          xvfb-run -a wine64 ./rcedit.exe "$MFW_EXE" --set-icon "$ICON_PATH"
 
           echo "✅ Icon successfully applied."
 
