@@ -93,17 +93,21 @@ function Ensure-SevenZipSfx {
     New-Item -ItemType Directory -Path $tmp -Force | Out-Null
     try {
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+        # 新版 7-Zip 的 Extra 包在 GitHub（ip7z/7zip）；www.7-zip.org/a/ 部分版本会 404
         $urls = @(
+            "https://github.com/ip7z/7zip/releases/download/26.01/7z2601-extra.7z",
+            "https://github.com/ip7z/7zip/releases/download/23.01/7z2301-extra.7z",
             "https://www.7-zip.org/a/7z2301-extra.7z",
-            "https://www.7-zip.org/a/7z2408-extra.7z",
-            "https://www.7-zip.org/a/7z2409-extra.7z",
-            "https://www.7-zip.org/a/7z2500-extra.7z"
+            "https://www.7-zip.org/a/7z1900-extra.7z"
         )
         $lastErr = $null
         foreach ($url in $urls) {
             $dl = Join-Path $tmp ([System.IO.Path]::GetFileName($url))
             try {
-                Invoke-WebRequest -Uri $url -OutFile $dl -UseBasicParsing
+                # GitHub 对无 User-Agent 的请求可能返回 403
+                Invoke-WebRequest -Uri $url -OutFile $dl -UseBasicParsing -Headers @{
+                    "User-Agent" = "build_sfx/1.0 (Windows; PowerShell)"
+                }
             }
             catch {
                 $lastErr = $_
@@ -120,7 +124,7 @@ function Ensure-SevenZipSfx {
                 return @{ Sfx = $hit.FullName; Cleanup = $tmp }
             }
         }
-        throw "无法从 7-zip.org 获取 7zSD.sfx（Chocolatey 版通常不含 SFX）。最后错误: $lastErr"
+        throw "无法下载并解压 7-Zip Extra 以获取 7zSD.sfx（已尝试 GitHub ip7z/7zip 与 7-zip.org）。最后错误: $lastErr"
     }
     catch {
         Remove-Item -LiteralPath $tmp -Recurse -Force -ErrorAction SilentlyContinue
