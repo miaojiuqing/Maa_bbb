@@ -97,6 +97,7 @@ commit_parsers = [
     { message = "^ci", group = "<!-- 7 -->⚙️ 持续集成" },
     { body = ".*security", group = "<!-- 9 -->🔒 安全" },
     { message = "^revert", group = "<!-- 10 -->◀️ 撤销" },
+    { message = "^pie", group = "<!-- 11 -->🍪饼" },
 ]
 
 # 忽略这些提交
