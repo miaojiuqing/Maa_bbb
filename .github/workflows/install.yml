@@ -211,10 +211,22 @@ jobs:
           curl -fsSL https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
 
           # Headless Ubuntu has no X11; Wine still needs a virtual framebuffer for rcedit.
-          # Use wine64 + win64 prefix to avoid WoW64/rundll32 issues with rcedit-x64.exe.
-          echo "📦 Installing wine64 and xvfb..."
+          # Use a fresh win64 WINEPREFIX; pick a 64-bit Wine binary (PATH varies by Ubuntu package layout).
+          echo "📦 Installing Wine and xvfb..."
           sudo apt-get update
-          sudo apt-get install -y wine64 xvfb
+          sudo apt-get install -y wine xvfb
+
+          if command -v wine64 >/dev/null 2>&1; then
+            WINE_BIN="$(command -v wine64)"
+          elif [[ -x /usr/lib/wine/wine64 ]]; then
+            WINE_BIN="/usr/lib/wine/wine64"
+          elif command -v wine >/dev/null 2>&1; then
+            WINE_BIN="$(command -v wine)"
+          else
+            echo "❌ ERROR: No wine/wine64 executable found after apt install"
+            exit 1
+          fi
+          echo "Using Wine binary: $WINE_BIN"
 
           export WINEPREFIX="${RUNNER_TEMP}/wine-rcedit"
           export WINEARCH=win64
@@ -225,11 +237,11 @@ jobs:
           chmod +x rcedit.exe
 
           echo "🍷 Initializing Wine prefix (64-bit) under Xvfb..."
-          xvfb-run -a wine64 wineboot --init
+          xvfb-run -a "$WINE_BIN" wineboot --init
           sleep 3
 
           echo "🍷 Running rcedit under Xvfb..."
-          xvfb-run -a wine64 ./rcedit.exe "$MFW_EXE" --set-icon "$ICON_PATH"
+          xvfb-run -a "$WINE_BIN" ./rcedit.exe "$MFW_EXE" --set-icon "$ICON_PATH"
 
           echo "✅ Icon successfully applied."
 
