@@ -89,6 +89,12 @@ function Ensure-SevenZipSfx {
         return @{ Sfx = $existing; Cleanup = $null }
     }
 
+    # 若 CI 无法下载 Extra，可把从官方包解压出的 7zSD.sfx 放在与本脚本同目录并提交仓库
+    $bundled = Join-Path $PSScriptRoot "7zSD.sfx"
+    if (Test-Path -LiteralPath $bundled) {
+        return @{ Sfx = (Resolve-Path -LiteralPath $bundled).Path; Cleanup = $null }
+    }
+
     $tmp = Join-Path ([System.IO.Path]::GetTempPath()) ("7z_extra_" + [Guid]::NewGuid().ToString("N"))
     New-Item -ItemType Directory -Path $tmp -Force | Out-Null
     try {
@@ -100,31 +106,62 @@ function Ensure-SevenZipSfx {
             "https://www.7-zip.org/a/7z2301-extra.7z",
             "https://www.7-zip.org/a/7z1900-extra.7z"
         )
+        # 优先 GUI 安装器模块；新版 Extra 里也可能只有 7zS2.sfx 等
+        $sfxPreferredOrder = @("7zSD.sfx", "7zS2.sfx", "7z.sfx")
         $lastErr = $null
         foreach ($url in $urls) {
-            $dl = Join-Path $tmp ([System.IO.Path]::GetFileName($url))
+            $attemptRoot = Join-Path $tmp ("try_" + [Guid]::NewGuid().ToString("N"))
+            New-Item -ItemType Directory -Path $attemptRoot -Force | Out-Null
+            $dl = Join-Path $attemptRoot ([System.IO.Path]::GetFileName($url))
             try {
-                # GitHub 对无 User-Agent 的请求可能返回 403
                 Invoke-WebRequest -Uri $url -OutFile $dl -UseBasicParsing -Headers @{
                     "User-Agent" = "build_sfx/1.0 (Windows; PowerShell)"
                 }
             }
             catch {
-                $lastErr = $_
+                $lastErr = $_.Exception.Message
+                Remove-Item -LiteralPath $attemptRoot -Recurse -Force -ErrorAction SilentlyContinue
                 continue
             }
-            & $SevenZipExe x "$dl" "-o$tmp" -y | Out-Null
+            if (-not (Test-Path -LiteralPath $dl) -or ((Get-Item -LiteralPath $dl).Length -lt 1024)) {
+                $lastErr = "下载文件过小或不存在（可能被 CDN 返回 HTML）: $url"
+                Remove-Item -LiteralPath $attemptRoot -Recurse -Force -ErrorAction SilentlyContinue
+                continue
+            }
+            # 7-Zip 26+ 默认可能把内容解到「输出目录\压缩包名\」；用 -spod 直接解到 attemptRoot（旧版 7z 会忽略未知参数则再试一次）
+            $extractArgs = @("x", "$dl", "-o$attemptRoot", "-y", "-spod")
+            & $SevenZipExe @extractArgs | Out-Null
+            if ($LASTEXITCODE -ne 0) {
+                & $SevenZipExe x "$dl" "-o$attemptRoot" -y | Out-Null
+            }
             if ($LASTEXITCODE -ne 0) {
                 $lastErr = "7z x 退出码 $($LASTEXITCODE): $url"
+                Remove-Item -LiteralPath $attemptRoot -Recurse -Force -ErrorAction SilentlyContinue
                 continue
             }
-            $hit = Get-ChildItem -Path $tmp -Recurse -Filter "7zSD.sfx" -File -ErrorAction SilentlyContinue |
-                Select-Object -First 1
-            if ($hit) {
-                return @{ Sfx = $hit.FullName; Cleanup = $tmp }
+            $hit = $null
+            foreach ($sfxName in $sfxPreferredOrder) {
+                $found = Get-ChildItem -LiteralPath $attemptRoot -Recurse -Filter $sfxName -File -ErrorAction SilentlyContinue |
+                    Select-Object -First 1
+                if ($found) {
+                    $hit = $found
+                    break
+                }
             }
+            if (-not $hit) {
+                $hit = Get-ChildItem -LiteralPath $attemptRoot -Recurse -Filter "*.sfx" -File -ErrorAction SilentlyContinue |
+                    Select-Object -First 1
+            }
+            if (-not $hit) {
+                $sample = (Get-ChildItem -LiteralPath $attemptRoot -Recurse -File -ErrorAction SilentlyContinue |
+                        Select-Object -First 15 -ExpandProperty FullName) -join "`n"
+                $lastErr = "解压成功但未找到 $($sfxPreferredOrder -join ' / ') 或任意 .sfx：$url`n示例文件：`n$sample"
+                Remove-Item -LiteralPath $attemptRoot -Recurse -Force -ErrorAction SilentlyContinue
+                continue
+            }
+            return @{ Sfx = $hit.FullName; Cleanup = $tmp }
         }
-        throw "无法下载并解压 7-Zip Extra 以获取 7zSD.sfx（已尝试 GitHub ip7z/7zip 与 7-zip.org）。最后错误: $lastErr"
+        throw "无法下载并解压 7-Zip Extra 以获取 SFX 模块（已尝试 GitHub ip7z/7zip 与 7-zip.org）。最后错误: $lastErr"
     }
     catch {
         Remove-Item -LiteralPath $tmp -Recurse -Force -ErrorAction SilentlyContinue
