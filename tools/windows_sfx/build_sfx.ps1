@@ -4,8 +4,8 @@
 
 .DESCRIPTION
   将 SourceDir 打包后与 7zSD.sfx、配置文本二进制拼接。
-  官方 7zSD 仅将文件解压到临时目录并在退出时删除；RunProgram 会调用 create_shortcut.ps1，将文件复制到
-  %LocalAppData%\Programs\Maa_bbb 后在桌面生成快捷方式。
+  官方 7zSD 仅将文件解压到临时目录并在退出时删除；RunProgram 会调用 create_shortcut.ps1，
+  由用户选择安装目录后复制文件并在桌面生成快捷方式。
   自 7-Zip 26 起，官方 Extra 包（如 7z2601-extra）不再含 .sfx；可用仓库内 third_party/7-zip/7zSD.sfx、
   本机「完整安装」目录下的 7zSD.sfx，或脚本自动下载的旧版 extra（如 7z920_extra.7z）。
 
@@ -212,11 +212,12 @@ try {
     $configPath = Join-Path ([System.IO.Path]::GetTempPath()) ("sfx_config_" + [Guid]::NewGuid().ToString("N") + ".txt")
     # 官方 7zSD.sfx 仅识别手册中的配置项；默认 Directory 为 .\ 会导致执行 .\powershell.exe（临时目录内不存在）而报「找不到文件」。
     # hidcon: 等为第三方修改版 SFX 前缀，原版不支持。解压始终在临时目录，退出后临时目录会被删除，故需由脚本复制到持久路径。
-    $run = 'powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File .\create_shortcut.ps1'
+    # -STA：FolderBrowserDialog 需要 STA；勿用 -WindowStyle Hidden，否则用户看不到选路径对话框。
+    $run = 'powershell.exe -STA -NoProfile -ExecutionPolicy Bypass -File .\create_shortcut.ps1'
     $configBody = @"
 ;!@Install@!UTF-8!
 Title="$DisplayName"
-BeginPrompt="将把程序安装到当前用户的 LocalAppData\Programs\Maa_bbb（若已存在则覆盖更新），并在桌面创建快捷方式。`n`n是否继续？"
+BeginPrompt="解压完成后将弹出文件夹选择框，请指定安装位置；随后会在桌面创建快捷方式（若找到 MFW.exe）。`n`n是否继续？"
 Directory=""
 Progress="yes"
 RunProgram="$run"
