@@ -111,7 +111,7 @@ function Ensure-SevenZipSfx {
             }
             & $SevenZipExe x "$dl" "-o$tmp" -y | Out-Null
             if ($LASTEXITCODE -ne 0) {
-                $lastErr = "7z x 退出码 $LASTEXITCODE: $url"
+                $lastErr = "7z x 退出码 $($LASTEXITCODE): $url"
                 continue
             }
             $hit = Get-ChildItem -Path $tmp -Recurse -Filter "7zSD.sfx" -File -ErrorAction SilentlyContinue |
