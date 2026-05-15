@@ -231,28 +231,6 @@ jobs:
           magick convert "$PNG_PATH" -define icon:auto-resize=256,128,64,48,32,24,16 ./m9a.ico
           echo "✅ ICO written to ./m9a.ico"
 
-      - name: Modify Windows exe icons
-        if: matrix.os == 'win' && matrix.arch == 'x86_64'
-        shell: bash
-        run: |
-          set -euo pipefail
-          if [ ! -f "./m9a.ico" ]; then
-            echo "❌ ERROR: ./m9a.ico missing (run Convert PNG to ICO first)"
-            exit 1
-          fi
-          curl -fsSL https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
-
-          ICO_W="$(cygpath -w "$(pwd)/m9a.ico")"
-
-          MFW_EXE="$(find MFWCFA -maxdepth 4 -type f -name 'MFW.exe' 2>/dev/null | head -n 1)"
-          if [ -n "$MFW_EXE" ]; then
-            _mfw_abs="$(cd "$(dirname "$MFW_EXE")" && pwd)/$(basename "$MFW_EXE")"
-            ./rcedit.exe "$(cygpath -w "$_mfw_abs")" --set-icon "$ICO_W"
-            echo "MFW.exe icon updated: $MFW_EXE"
-          else
-            echo "MFW.exe not found under MFWCFA, skipping icon update."
-          fi
-
       - name: Install
         shell: bash
         run: |
@@ -275,13 +253,37 @@ jobs:
                   continue
               rel = p.relative_to(src)
               t = dst / rel
-              if t.exists():
-                  continue
               t.parent.mkdir(parents=True, exist_ok=True)
               shutil.copy2(p, t)
           PY
           else
             echo "MFWCFA directory not found, skipping copy."
+          fi
+
+      - name: Modify Windows exe icons
+        if: matrix.os == 'win' && matrix.arch == 'x86_64'
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -f "./m9a.ico" ]; then
+            echo "❌ ERROR: ./m9a.ico missing (run Convert PNG to ICO first)"
+            exit 1
+          fi
+          if [ ! -d "install" ]; then
+            echo "❌ ERROR: install/ missing after Install step"
+            exit 1
+          fi
+          curl -fsSL https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
+          ICO_W="$(cygpath -w "$(pwd)/m9a.ico")"
+          n=0
+          while IFS= read -r -d '' exe; do
+            _abs="$(cd "$(dirname "$exe")" && pwd)/$(basename "$exe")"
+            ./rcedit.exe "$(cygpath -w "$_abs")" --set-icon "$ICO_W"
+            echo "MFW.exe icon updated: $exe"
+            n=$((n + 1))
+          done < <(find install -type f \( -iname 'MFW.exe' \) -print0 2>/dev/null)
+          if [ "$n" -eq 0 ]; then
+            echo "⚠️ No MFW.exe under install/; icon step had nothing to patch."
           fi
 
 #      - uses: actions/download-artifact@v4
