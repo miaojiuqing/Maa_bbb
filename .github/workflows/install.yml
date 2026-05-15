@@ -13,14 +13,24 @@ on:
       - "**"
     paths:
       - ".github/workflows/install.yml"
+      - ".github/RELEASE_7ZIP_NOTICE.md"
+      - "LICENSE_thirdparty.md"
+      - "README.md"
       - "assets/**"
+      - "third_party/**"
+      - "tools/windows_sfx/**"
       - "**.py"
   pull_request:
     branches:
       - "**"
     paths:
       - ".github/workflows/install.yml"
+      - ".github/RELEASE_7ZIP_NOTICE.md"
+      - "LICENSE_thirdparty.md"
+      - "README.md"
       - "assets/**"
+      - "third_party/**"
+      - "tools/windows_sfx/**"
       - "**.py"
   workflow_dispatch:
 
@@ -291,6 +301,15 @@ jobs:
         shell: pwsh
         run: choco install 7zip.install -y
 
+      - name: Include 7-Zip third-party notices in install (bundled in SFX)
+        if: matrix.os == 'win' && matrix.arch == 'x86_64'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p install/third_party/7-zip
+          cp third_party/7-zip/LICENSE_thirdparty.md install/third_party/7-zip/
+          cp third_party/7-zip/7-Zip_License.txt install/third_party/7-zip/
+
       - name: Build Windows self-extracting installer (7-Zip SFX)
         if: matrix.os == 'win' && matrix.arch == 'x86_64'
         shell: pwsh
@@ -345,9 +364,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
       - uses: actions/download-artifact@v4
         with:
           path: assets
+
+      - name: Compose GitHub Release body (changelog + 7-Zip notice)
+        env:
+          CHANGELOG: ${{ needs.changelog.outputs.release_body }}
+        run: |
+          {
+            printf '%s\n\n---\n\n' "${CHANGELOG}"
+            cat .github/RELEASE_7ZIP_NOTICE.md
+          } > "${RUNNER_TEMP}/release_body.md"
 
       - run: |
           cd assets
@@ -376,7 +408,7 @@ jobs:
         with:
           files: assets/*
           tag_name: ${{ needs.meta.outputs.tag }}
-          body: ${{ needs.changelog.outputs.release_body }}
+          body_path: ${{ runner.temp }}/release_body.md
           draft: false
           prerelease: ${{ needs.meta.outputs.is_prerelease == 'true' }}
 

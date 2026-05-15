@@ -5,6 +5,8 @@
 .DESCRIPTION
   将 SourceDir 打包后与 7zSD.sfx、配置文本二进制拼接。
   解压完成后通过 RunProgram 调用 create_shortcut.ps1，可在桌面生成快捷方式。
+  自 7-Zip 26 起，官方 Extra 包（如 7z2601-extra）不再含 .sfx；可用仓库内 third_party/7-zip/7zSD.sfx、
+  本机「完整安装」目录下的 7zSD.sfx，或脚本自动下载的旧版 extra（如 7z920_extra.7z）。
 
 .PARAMETER SourceDir
   待打包目录（通常为 CI 中的 install/）。
@@ -80,7 +82,7 @@ function Find-SevenZipSfx([string] $SevenZipExe) {
     return $null
 }
 
-# Chocolatey 的 7zip.install 常不带 7zSD.sfx；从官网 Extra 包解压获取（需已有 7z.exe）
+# Chocolatey 的 7zip.install 常不带 7zSD.sfx。7z2601-extra 等新版 Extra 包也不再含 .sfx。
 function Ensure-SevenZipSfx {
     param([string] $SevenZipExe)
 
@@ -89,8 +91,19 @@ function Ensure-SevenZipSfx {
         return @{ Sfx = $existing; Cleanup = $null }
     }
 
-    # 若 CI 无法下载 Extra，可把从官方包解压出的 7zSD.sfx 放在与本脚本同目录并提交仓库
-    $bundled = Join-Path $PSScriptRoot "7zSD.sfx"
+    # 与 7z.exe 无关：机器上若装有「完整」7-Zip，其安装目录必有 SFX（含 GitHub 版安装包）
+    foreach ($sfxPf in @(
+            (Join-Path ${env:ProgramFiles} "7-Zip\7zSD.sfx"),
+            (Join-Path ${env:ProgramFiles(x86)} "7-Zip\7zSD.sfx")
+        )) {
+        if (Test-Path -LiteralPath $sfxPf) {
+            return @{ Sfx = (Resolve-Path -LiteralPath $sfxPf).Path; Cleanup = $null }
+        }
+    }
+
+    # 仓库内置：third_party/7-zip/7zSD.sfx（与声明、License 副本同目录）
+    $repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot "..\.."))
+    $bundled = Join-Path $repoRoot "third_party\7-zip\7zSD.sfx"
     if (Test-Path -LiteralPath $bundled) {
         return @{ Sfx = (Resolve-Path -LiteralPath $bundled).Path; Cleanup = $null }
     }
@@ -99,12 +112,11 @@ function Ensure-SevenZipSfx {
     New-Item -ItemType Directory -Path $tmp -Force | Out-Null
     try {
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-        # 新版 7-Zip 的 Extra 包在 GitHub（ip7z/7zip）；www.7-zip.org/a/ 部分版本会 404
+        # 7z2601-extra 等新版 Extra 不含 .sfx；仍含 SFX 的旧包见 https://www.7-zip.org/a/7z920_extra.7z
         $urls = @(
-            "https://github.com/ip7z/7zip/releases/download/26.01/7z2601-extra.7z",
+            "https://www.7-zip.org/a/7z920_extra.7z",
             "https://github.com/ip7z/7zip/releases/download/23.01/7z2301-extra.7z",
-            "https://www.7-zip.org/a/7z2301-extra.7z",
-            "https://www.7-zip.org/a/7z1900-extra.7z"
+            "https://www.7-zip.org/a/7z2301-extra.7z"
         )
         # 优先 GUI 安装器模块；新版 Extra 里也可能只有 7zS2.sfx 等
         $sfxPreferredOrder = @("7zSD.sfx", "7zS2.sfx", "7z.sfx")
@@ -128,12 +140,8 @@ function Ensure-SevenZipSfx {
                 Remove-Item -LiteralPath $attemptRoot -Recurse -Force -ErrorAction SilentlyContinue
                 continue
             }
-            # 7-Zip 26+ 默认可能把内容解到「输出目录\压缩包名\」；用 -spod 直接解到 attemptRoot（旧版 7z 会忽略未知参数则再试一次）
-            $extractArgs = @("x", "$dl", "-o$attemptRoot", "-y", "-spod")
-            & $SevenZipExe @extractArgs | Out-Null
-            if ($LASTEXITCODE -ne 0) {
-                & $SevenZipExe x "$dl" "-o$attemptRoot" -y | Out-Null
-            }
+            # 递归解压到 attemptRoot，再在子目录中查找 .sfx
+            & $SevenZipExe x "$dl" "-o$attemptRoot" -y | Out-Null
             if ($LASTEXITCODE -ne 0) {
                 $lastErr = "7z x 退出码 $($LASTEXITCODE): $url"
                 Remove-Item -LiteralPath $attemptRoot -Recurse -Force -ErrorAction SilentlyContinue
@@ -161,7 +169,7 @@ function Ensure-SevenZipSfx {
             }
             return @{ Sfx = $hit.FullName; Cleanup = $tmp }
         }
-        throw "无法下载并解压 7-Zip Extra 以获取 SFX 模块（已尝试 GitHub ip7z/7zip 与 7-zip.org）。最后错误: $lastErr"
+        throw "无法获取 7zSD.sfx。7-Zip 26 的 Extra 包不再包含 SFX。可选：1) 将 7zSD.sfx 放到 third_party\7-zip\ 并提交；2) 安装完整 7-Zip 使用 Program Files 下模块；3) 依赖脚本自动下载的旧 extra 包。最后错误: $lastErr"
     }
     catch {
         Remove-Item -LiteralPath $tmp -Recurse -Force -ErrorAction SilentlyContinue
