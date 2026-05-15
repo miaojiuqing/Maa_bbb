@@ -8,10 +8,9 @@
             "label": "克莱茵乐土打灰",
             "entry": "乐土刷级-接口层",
             "icon": "./resource/base/image/任务图标/克莱茵.png",
-            "repeatable": true,
-            "repeat_count": 1,
             "default_check": false,
             "option": [
+                "克莱茵打灰-无限刷取",
                 "当进入时有正在进行的关卡",
                 "要用什么刷等级"
             ],
@@ -19,6 +18,55 @@
         }
     ],
     "option": {
+        "克莱茵打灰-无限刷取": {
+            "label": "无限刷取",
+            "type": "switch",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "乐土刷级-接口层": {}
+                    }
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "乐土刷级-接口层": {
+                            "max_hit": 1
+                        }
+                    },
+                    "option": [
+                        "克莱茵打灰-循环次数"
+                    ]
+                }
+            ]
+        },
+        "克莱茵打灰-循环次数": {
+            "label": "重复次数",
+            "type": "input",
+            "description": "用于管理重复次数,想一直刷请设置一个很大的值",
+            "inputs": [
+                {
+                    "name": "克莱茵打灰-次数循环",
+                    "label": "次数",
+                    "default": "1",
+                    "pipeline_type": "string"
+                    // "verify": ""//不是很懂
+                }
+            ],
+            "pipeline_override": {
+                "乐土刷级-减负模式-开始任务层": {
+                    "max_hit": "克莱茵打灰-次数循环"
+                },
+                "乐土刷级-首层复刷-开始任务层": {
+                    "max_hit": "克莱茵打灰-次数循环"
+                },
+                "乐土刷级-浅层序列-开始任务层": {
+                    "max_hit": "克莱茵打灰-次数循环"
+                }
+            }
+        },
         "当进入时有正在进行的关卡": { //未测试
             "type": "select",
             "cases": [
@@ -110,7 +158,7 @@
                     "pipeline_override": {
                         "乐土刷级-接口层": {
                             "next": [
-                                "乐土刷级-减负模式-开始任务层"
+                                "[JumpBack]乐土刷级-减负模式-开始任务层"
                             ]
                         },
                         "乐土刷级-通用-伪寻路-退出重新寻路": {
@@ -143,7 +191,7 @@
                     "pipeline_override": {
                         "乐土刷级-接口层": {
                             "next": [
-                                "乐土刷级-首层复刷-开始任务层"
+                                "[JumpBack]乐土刷级-首层复刷-开始任务层"
                             ]
                         },
                         "乐土刷级-通用-伪寻路-退出重新寻路": {
@@ -189,7 +237,7 @@
                     "pipeline_override": {
                         "乐土刷级-接口层": {
                             "next": [
-                                "乐土刷级-浅层序列-开始任务层"
+                                "[JumpBack]乐土刷级-浅层序列-开始任务层"
                             ]
                         }
                     }

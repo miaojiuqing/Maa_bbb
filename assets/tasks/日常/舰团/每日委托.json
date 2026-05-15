@@ -3,8 +3,6 @@
         {
             "name": "舰团每日委托",
             "entry": "舰团每日委托-开始任务层",
-            "repeatable": true,
-            "repeat_count": 1,
             "default_check": true,
             "option": [
                 "委托材料不足时自动补货",
