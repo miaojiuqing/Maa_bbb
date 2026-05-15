@@ -240,22 +240,7 @@ jobs:
           if [ -d "MFWCFA" ]; then
             echo "Copying MFWCFA files to install directory..."
             mkdir -p install
-            python <<'PY'
-          import shutil
-          from pathlib import Path
-
-          src, dst = Path("MFWCFA"), Path("install")
-          if not src.is_dir():
-              raise SystemExit(0)
-          dst.mkdir(parents=True, exist_ok=True)
-          for p in src.rglob("*"):
-              if not p.is_file():
-                  continue
-              rel = p.relative_to(src)
-              t = dst / rel
-              t.parent.mkdir(parents=True, exist_ok=True)
-              shutil.copy2(p, t)
-          PY
+            python ./tools/copy_mfwcfa_to_install.py
           else
             echo "MFWCFA directory not found, skipping copy."
           fi
