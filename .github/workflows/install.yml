@@ -228,8 +228,8 @@ jobs:
             echo "❌ ERROR: magick not on PATH after ImageMagick install"
             exit 1
           fi
-          magick convert "$PNG_PATH" -define icon:auto-resize=256,128,64,48,32,24,16 ./m9a.ico
-          echo "✅ ICO written to ./m9a.ico"
+          magick convert "$PNG_PATH" -define icon:auto-resize=256,128,64,48,32,24,16 ./logo.ico
+          echo "✅ ICO written to ./logo.ico"
 
       - name: Install
         shell: bash
@@ -265,8 +265,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if [ ! -f "./m9a.ico" ]; then
-            echo "❌ ERROR: ./m9a.ico missing (run Convert PNG to ICO first)"
+          if [ ! -f "./logo.ico" ]; then
+            echo "❌ ERROR: ./logo.ico missing (run Convert PNG to ICO first)"
             exit 1
           fi
           if [ ! -d "install" ]; then
@@ -274,7 +274,7 @@ jobs:
             exit 1
           fi
           curl -fsSL https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
-          ICO_W="$(cygpath -w "$(pwd)/m9a.ico")"
+          ICO_W="$(cygpath -w "$(pwd)/logo.ico")"
           n=0
           while IFS= read -r -d '' exe; do
             _abs="$(cd "$(dirname "$exe")" && pwd)/$(basename "$exe")"
