@@ -64,69 +64,86 @@ jobs:
       is_release: ${{ steps.set_tag.outputs.is_release }}
       is_prerelease: ${{ steps.set_tag.outputs.is_prerelease }}
 
-  download-python-embed:
-    needs: meta
+#  download-python-embed:
+#    needs: meta
+#    strategy:
+#      matrix:
+#        include:
+#          # Windows x86_64
+#          - os: win
+#            arch: x86_64
+#            runs-on: windows-latest
+#          # Windows aarch64
+#          - os: win
+#            arch: aarch64
+#            runs-on: windows-11-arm
+#          # macOS x86_64 (Intel)
+#          - os: macos
+#            arch: x86_64
+#            runs-on: macos-15-intel
+#          # macOS aarch64 (Apple Silicon)
+#          - os: macos
+#            arch: aarch64
+#            runs-on: macos-latest
+#          # Linux x86_64
+#          - os: linux
+#            arch: x86_64
+#            runs-on: ubuntu-latest
+#          # Linux aarch64
+#          - os: linux
+#            arch: aarch64
+#            runs-on: ubuntu-24.04-arm
+#      fail-fast: false
+#    runs-on: ${{ matrix.runs-on }}
+#
+#    steps:
+#      - uses: actions/checkout@v4
+#        with:
+#          submodules: true
+#
+#      - name: Set up Python
+#        uses: actions/setup-python@v4
+#        with:
+#          python-version: '3.12'
+#          architecture: ${{ matrix.arch == 'x86_64' && 'x64' || 'arm64' }}
+#
+#      - name: Download Python embed
+#        shell: bash
+#        run: |
+#          python ./tools/install_python.py ./python
+#
+#      - uses: actions/upload-artifact@v4
+#        with:
+#          name: python-embed-${{ matrix.os }}-${{ matrix.arch }}
+#          path: ./python
+
+  install:
+    needs:
+      - meta
+#      - download-python-embed
     strategy:
       matrix:
         include:
-          # Windows x86_64
           - os: win
             arch: x86_64
             runs-on: windows-latest
-          # Windows aarch64
           - os: win
             arch: aarch64
             runs-on: windows-11-arm
-          # macOS x86_64 (Intel)
           - os: macos
             arch: x86_64
             runs-on: macos-15-intel
-          # macOS aarch64 (Apple Silicon)
           - os: macos
             arch: aarch64
             runs-on: macos-latest
-          # Linux x86_64
           - os: linux
             arch: x86_64
             runs-on: ubuntu-latest
-          # Linux aarch64
           - os: linux
             arch: aarch64
             runs-on: ubuntu-24.04-arm
       fail-fast: false
     runs-on: ${{ matrix.runs-on }}
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: true
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.12'
-          architecture: ${{ matrix.arch == 'x86_64' && 'x64' || 'arm64' }}
-
-      - name: Download Python embed
-        shell: bash
-        run: |
-          python ./tools/install_python.py ./python
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: python-embed-${{ matrix.os }}-${{ matrix.arch }}
-          path: ./python
-
-  install:
-    needs:
-      - meta
-      - download-python-embed
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        os: [win, macos, linux]
-        arch: [aarch64, x86_64]
-      fail-fast: false
 
     steps:
       - uses: actions/checkout@v4
@@ -189,39 +206,30 @@ jobs:
           rm -f "${ARCHIVE_FILE_PATH}"
           echo "Archive cleanup command executed for MFWCFA."
 
-#      - name: Apply custom icon to MFW.exe on Windows
-#        if: matrix.os == 'win'
-#        shell: bash
-#        run: |
-#          ICON_PATH="./assets/resource/base/image/logo.ico"
-#          if [ ! -f "$ICON_PATH" ]; then
-#            echo "❌ ERROR: Icon file not found at $ICON_PATH"
-#            exit 1
-#          fi
-#
-#          MFW_EXE="$(find MFWCFA -maxdepth 2 -type f -name 'MFW.exe' | head -n 1)"
-#          if [ -z "$MFW_EXE" ]; then
-#            echo "❌ ERROR: MFW.exe not found under MFWCFA"
-#            exit 1
-#          fi
-#
-#          echo "✅ Applying icon from $ICON_PATH to $MFW_EXE..."
-#
-#          # Download rcedit.exe (Windows tool)
-#          curl -L https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
-#
-#          # Install wine if not present
-#          if ! command -v wine &> /dev/null; then
-#            echo "📦 Installing wine..."
-#            sudo apt-get update
-#            sudo apt-get install -y wine
-#          fi
-#
-#          # Make it executable and run via wine
-#          chmod +x rcedit.exe
-#          wine ./rcedit.exe "$MFW_EXE" --set-icon "$ICON_PATH"
-#
-#          echo "✅ Icon successfully applied."
+      - name: Convert PNG to ICO
+        if: matrix.os == 'win' && matrix.arch == 'x86_64'
+        shell: bash
+        run: |
+          set -euo pipefail
+          PNG_PATH="./logo.png"
+          if [ ! -f "$PNG_PATH" ]; then
+            echo "❌ ERROR: $PNG_PATH not found"
+            exit 1
+          fi
+          choco install imagemagick -y
+          export PATH="$PATH:/c/ProgramData/chocolatey/bin"
+          for d in "/c/Program Files/ImageMagick-"*; do
+            if [ -x "$d/magick.exe" ]; then
+              export PATH="$d:$PATH"
+              break
+            fi
+          done
+          if ! command -v magick >/dev/null 2>&1; then
+            echo "❌ ERROR: magick not on PATH after ImageMagick install"
+            exit 1
+          fi
+          magick convert "$PNG_PATH" -define icon:auto-resize=256,128,64,48,32,24,16 ./logo.ico
+          echo "✅ ICO written to ./logo.ico"
 
       - name: Install
         shell: bash
@@ -232,15 +240,41 @@ jobs:
           if [ -d "MFWCFA" ]; then
             echo "Copying MFWCFA files to install directory..."
             mkdir -p install
-            rsync -av --ignore-existing MFWCFA/ install/
+            python ./tools/copy_mfwcfa_to_install.py
           else
             echo "MFWCFA directory not found, skipping copy."
           fi
 
-      - uses: actions/download-artifact@v4
-        with:
-          name: python-embed-${{ matrix.os }}-${{ matrix.arch }}
-          path: ./install/python
+      - name: Modify Windows exe icons
+        if: matrix.os == 'win' && matrix.arch == 'x86_64'
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -f "./logo.ico" ]; then
+            echo "❌ ERROR: ./logo.ico missing (run Convert PNG to ICO first)"
+            exit 1
+          fi
+          if [ ! -d "install" ]; then
+            echo "❌ ERROR: install/ missing after Install step"
+            exit 1
+          fi
+          curl -fsSL https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
+          ICO_W="$(cygpath -w "$(pwd)/logo.ico")"
+          n=0
+          while IFS= read -r -d '' exe; do
+            _abs="$(cd "$(dirname "$exe")" && pwd)/$(basename "$exe")"
+            ./rcedit.exe "$(cygpath -w "$_abs")" --set-icon "$ICO_W"
+            echo "MFW.exe icon updated: $exe"
+            n=$((n + 1))
+          done < <(find install -type f \( -iname 'MFW.exe' \) -print0 2>/dev/null)
+          if [ "$n" -eq 0 ]; then
+            echo "⚠️ No MFW.exe under install/; icon step had nothing to patch."
+          fi
+
+#      - uses: actions/download-artifact@v4
+#        with:
+#          name: python-embed-${{ matrix.os }}-${{ matrix.arch }}
+#          path: ./install/python
 
       - uses: actions/upload-artifact@v4
         with:
@@ -275,7 +309,7 @@ jobs:
       - meta
       - install
       - changelog
-      - download-python-embed
+#      - download-python-embed
     runs-on: ubuntu-latest
 
     steps:
