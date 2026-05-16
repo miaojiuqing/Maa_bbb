@@ -1,0 +1,217 @@
+{
+    "往世乐土-打完领奖-按住alt": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1162,
+                    16,
+                    91,
+                    75
+                ],
+                "template": [
+                    "周常/往世乐土/领奖/周常领奖入口.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "KeyDown",
+            "param": {
+                "key": 164
+            }
+        },
+        "post_delay": 500,
+        "next": [
+            "往世乐土-打完领奖-已进入领奖入口",
+            "[JumpBack]往世乐土-打完领奖-按住alt后点击进入"
+        ]
+    },
+    "往世乐土-打完领奖-按住alt后点击进入": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1162,
+                    16,
+                    91,
+                    75
+                ],
+                "template": [
+                    "周常/往世乐土/领奖/周常领奖入口.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1194,
+                    34,
+                    33,
+                    31
+                ]
+            }
+        }
+    },
+    "往世乐土-打完领奖-已进入领奖入口": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    32,
+                    105,
+                    89,
+                    84
+                ],
+                "template": [
+                    "周常/往世乐土/领奖/已进入界面.png"
+                ]
+            }
+        },
+        "next": [
+            "往世乐土-打完领奖-没有可领取奖励",
+            "往世乐土-打完领奖-奖励确认弹窗",
+            "[JumpBack]往世乐土-打完领奖-点击已领取奖励的右边",
+            "[JumpBack]往世乐土-打完领奖-点击尝试领取奖励",
+            "[JumpBack]空任务"
+        ]
+    },
+    "往世乐土-打完领奖-点击已领取奖励的右边": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    87,
+                    632,
+                    975,
+                    88
+                ],
+                "template": [
+                    "周常/往世乐土/领奖/已领取奖励.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target_offset": [
+                    110,
+                    60,
+                    0,
+                    0
+                ]
+            }
+        }
+    },
+    "往世乐土-打完领奖-点击尝试领取奖励": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    87,
+                    632,
+                    975,
+                    88
+                ],
+                "template": [
+                    "周常/往世乐土/领奖/点击领奖.png"
+                ]
+            }
+        },
+        "action": "Click"
+    },
+    "往世乐土-打完领奖-奖励确认弹窗": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    819,
+                    403,
+                    116,
+                    211
+                ],
+                "template": [
+                    "周常/往世乐土/领奖/领奖成功.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    505,
+                    524,
+                    277,
+                    50
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "乐土奖励领取完毕"
+        },
+        "next": [
+            "成功进入游戏主菜单",
+            "[JumpBack]往世乐土-打完领奖-领完奖点返回",
+            "[JumpBack]点击返回主菜单"
+        ]
+    },
+    "往世乐土-打完领奖-没有可领取奖励": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    967,
+                    649,
+                    96,
+                    71
+                ],
+                "template": [
+                    "周常/往世乐土/领奖/已领取奖励.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    26,
+                    8,
+                    32,
+                    42
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "乐土奖励领取完毕"
+        },
+        "next": [
+            "成功进入游戏主菜单",
+            "[JumpBack]往世乐土-打完领奖-领完奖点返回",
+            "[JumpBack]点击返回主菜单"
+        ]
+    },
+    "往世乐土-打完领奖-领完奖点返回": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    5,
+                    0,
+                    72,
+                    92
+                ],
+                "template": [
+                    "周常/往世乐土/双端分处理返回.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "ClickKey",
+            "param": {
+                "key": [
+                    27
+                ]
+            }
+        }
+    }
+}
