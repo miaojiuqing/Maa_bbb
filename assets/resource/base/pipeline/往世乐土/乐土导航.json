@@ -119,30 +119,30 @@
             "param": {
                 "model": "best.onnx",
                 "labels": [
-                    "elysia_star", // 爱愿妖精
-                    "aomie", //鏖灭
-                    "zhenwo", //真我
-                    "kongmeng", //空梦
-                    "shanbiyvjing", //闪避预警 （不可用）
-                    "xuanze_R", //选择R （不可用）
-                    "guaiwu_xueliang_UI", //怪物血量UI
-                    "xuanze_r", //选择r （不可用）
-                    "keyin", //刻印门
-                    "keyin_open", //刻印门开启
-                    "shangdian", //商店
-                    "jielv", //戒律
-                    "luoxuan", //螺旋
-                    "shangdian_open", //商店开启
-                    "tianhui", //天慧
-                    "fanxing", //繁星
-                    "lock_on", // 锁定（不可用）
-                    "wuxian", //无限
-                    "chana", //刹那
-                    "huangjin", //黄金
-                    "jiushi", //救世
-                    "xvguang", //旭光
-                    "fusheng", //浮生
-                    "BOSS" //BOSS入口
+                    "elysia_star", // 爱愿妖精_1
+                    "aomie", // 鏖灭_2
+                    "zhenwo", // 真我_3
+                    "kongmeng", // 空梦_4
+                    "shanbiyvjing", // 闪避预警 （不可用）_5
+                    "xuanze_R", // 选择R （不可用）_6
+                    "guaiwu_xueliang_UI", // 怪物血量UI_7
+                    "xuanze_r", // 选择r （不可用）_8
+                    "keyin", // 刻印门_9
+                    "keyin_open", // 刻印门开启_10
+                    "shangdian", // 商店_11
+                    "jielv", // 戒律_12
+                    "luoxuan", // 螺旋_13
+                    "shangdian_open", // 商店开启_14
+                    "tianhui", // 天慧_15
+                    "fanxing", // 繁星_16
+                    "lock_on", // 锁定（不可用）_17
+                    "wuxian", // 无限_18
+                    "chana", // 刹那_19
+                    "huangjin", // 黄金_20
+                    "jiushi", // 救世_21
+                    "xvguang", // 旭光_22
+                    "fusheng", // 浮生_23
+                    "BOSS" // BOSS入口_24
                 ],
                 "expected": [
                     0,
