@@ -1,0 +1,390 @@
+{
+    "克莱茵打灰-寻路-门在哪": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    957,
+                    568,
+                    148,
+                    145
+                ],
+                "green_mask": true,
+                "template": [
+                    "战斗相关/战中检查/已经不用再战斗了-PC.png"
+                ]
+            }
+        },
+        "next": [
+            "克莱茵打灰-寻路-成功将将视角转向了门",
+            "[JumpBack]克莱茵打灰-寻路-选完刻印转视角找门"
+        ]
+    },
+    "克莱茵打灰-寻路-选完刻印转视角找门": { //键鼠按住ALT后滑动视角，纯键盘按Q转视角不然不确定鼠标初始位置是否在中心
+        "inverse": true,
+        "recognition": {
+            "type": "NeuralNetworkDetect",
+            "param": {
+                "roi": [
+                    413,
+                    0,
+                    421,
+                    676
+                ],
+                "model": "best.onnx",
+                "labels": [
+                    "elysia_star", // 爱愿妖精_1
+                    "aomie", // 鏖灭_2
+                    "zhenwo", // 真我_3
+                    "kongmeng", // 空梦_4
+                    "shanbiyvjing", // 闪避预警 （不可用）_5
+                    "xuanze_R", // 选择R （不可用）_6
+                    "guaiwu_xueliang_UI", // 怪物血量UI_7
+                    "xuanze_r", // 选择r （不可用）_8
+                    "keyin", // 刻印门未展开_9
+                    "keyin_open", // 刻印门开启中_10
+                    "shangdian", // 商店_11
+                    "jielv", // 戒律_12
+                    "luoxuan", // 螺旋_13
+                    "shangdian_open", // 商店开启_14
+                    "tianhui", // 天慧_15
+                    "fanxing", // 繁星_16
+                    "lock_on", // 锁定（不可用）_17
+                    "wuxian", // 无限_18
+                    "chana", // 刹那_19
+                    "huangjin", // 黄金_20
+                    "jiushi", // 救世_21
+                    "xvguang", // 旭光_22
+                    "fusheng", // 浮生_23
+                    "BOSS" // BOSS入口_24
+                ],
+                "expected": [ //13种门和未展开的门
+                    2, //鏖灭
+                    3, //真我
+                    4, //空梦
+                    9, //未展开的门
+                    10, //展开中的门
+                    12, //戒律
+                    13, //螺旋
+                    15, //天慧
+                    16, //繁星
+                    18, //无限
+                    19, //刹那
+                    20, //黄金
+                    21, //救世
+                    22, //旭光
+                    23, //浮生
+                    24 //BOSS房
+                ]
+            }
+        },
+        "post_delay": 1000,
+        "action": {
+            "type": "KeyDown",
+            "param": {
+                "key": 164
+            }
+        },
+        "next": [
+            "克莱茵打灰-寻路-滑动视角找门-滑动动作"
+        ]
+    },
+    "克莱茵打灰-寻路-滑动视角找门-滑动动作": {
+        "inverse": true,
+        "recognition": {
+            "type": "NeuralNetworkDetect",
+            "param": {
+                "roi": [
+                    413,
+                    0,
+                    421,
+                    676
+                ],
+                "model": "best.onnx",
+                "labels": [
+                    "elysia_star", // 爱愿妖精_1
+                    "aomie", // 鏖灭_2
+                    "zhenwo", // 真我_3
+                    "kongmeng", // 空梦_4
+                    "shanbiyvjing", // 闪避预警 （不可用）_5
+                    "xuanze_R", // 选择R （不可用）_6
+                    "guaiwu_xueliang_UI", // 怪物血量UI_7
+                    "xuanze_r", // 选择r （不可用）_8
+                    "keyin", // 刻印门未展开_9
+                    "keyin_open", // 刻印门开启中_10
+                    "shangdian", // 商店_11
+                    "jielv", // 戒律_12
+                    "luoxuan", // 螺旋_13
+                    "shangdian_open", // 商店开启_14
+                    "tianhui", // 天慧_15
+                    "fanxing", // 繁星_16
+                    "lock_on", // 锁定（不可用）_17
+                    "wuxian", // 无限_18
+                    "chana", // 刹那_19
+                    "huangjin", // 黄金_20
+                    "jiushi", // 救世_21
+                    "xvguang", // 旭光_22
+                    "fusheng", // 浮生_23
+                    "BOSS" // BOSS入口_24
+                ],
+                "expected": [ //13种门和未展开的门
+                    2, //鏖灭
+                    3, //真我
+                    4, //空梦
+                    9, //未展开的门
+                    10, //展开中的门
+                    12, //戒律
+                    13, //螺旋
+                    15, //天慧
+                    16, //繁星
+                    18, //无限
+                    19, //刹那
+                    20, //黄金
+                    21, //救世
+                    22, //旭光
+                    23, //浮生
+                    24 //BOSS房
+                ]
+            }
+        },
+        "action": {
+            "type": "Swipe",
+            "param": {
+                "begin": [
+                    640,
+                    360,
+                    1,
+                    1
+                ],
+                "end": [
+                    800,
+                    360,
+                    1,
+                    1
+                ]
+            }
+        },
+        "post_delay": 500,
+        "next": [
+            "克莱茵打灰-寻路-滑动视角找门-重置鼠标位置"
+        ]
+    },
+    "克莱茵打灰-寻路-滑动视角找门-重置鼠标位置": {
+        "action": {
+            "type": "KeyUp",
+            "param": {
+                "key": 164
+            }
+        }
+    },
+    "克莱茵打灰-寻路-成功将将视角转向了门": {
+        "recognition": {
+            "type": "NeuralNetworkDetect",
+            "param": {
+                "roi": [
+                    413,
+                    0,
+                    421,
+                    676
+                ],
+                "index": 1,
+                "model": "best.onnx",
+                "labels": [
+                    "elysia_star", // 爱愿妖精_1
+                    "aomie", // 鏖灭_2
+                    "zhenwo", // 真我_3
+                    "kongmeng", // 空梦_4
+                    "shanbiyvjing", // 闪避预警 （不可用）_5
+                    "xuanze_R", // 选择R （不可用）_6
+                    "guaiwu_xueliang_UI", // 怪物血量UI_7
+                    "xuanze_r", // 选择r （不可用）_8
+                    "keyin", // 刻印门未展开_9
+                    "keyin_open", // 刻印门开启中_10
+                    "shangdian", // 商店_11
+                    "jielv", // 戒律_12
+                    "luoxuan", // 螺旋_13
+                    "shangdian_open", // 商店开启_14
+                    "tianhui", // 天慧_15
+                    "fanxing", // 繁星_16
+                    "lock_on", // 锁定（不可用）_17
+                    "wuxian", // 无限_18
+                    "chana", // 刹那_19
+                    "huangjin", // 黄金_20
+                    "jiushi", // 救世_21
+                    "xvguang", // 旭光_22
+                    "fusheng", // 浮生_23
+                    "BOSS" // BOSS入口_24
+                ],
+                "expected": [ //13种门和未展开的门
+                    2, //鏖灭
+                    3, //真我
+                    4, //空梦
+                    9, //未展开的门
+                    10, //展开中的门
+                    12, //戒律
+                    13, //螺旋
+                    15, //天慧
+                    16, //繁星
+                    18, //无限
+                    19, //刹那
+                    20, //黄金
+                    21, //救世
+                    22, //旭光
+                    23, //浮生
+                    24 //BOSS房
+                ]
+            }
+        },
+        "action": {
+            "type": "LongPressKey",
+            "param": {
+                "key": [
+                    87
+                ],
+                "duration": 500
+            }
+        },
+        "next": [
+            "克莱茵打灰-寻路-找到门了-左边出现提示",
+            "克莱茵打灰-寻路-成功将将视角转向了门", //带动作的要用定向移动
+            "克莱茵打灰-寻路-门在哪"
+        ]
+    },
+    "克莱茵打灰-寻路-找到门了-左边出现提示": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    9,
+                    259,
+                    75,
+                    74
+                ],
+                "template": [
+                    "周常/往世乐土/寻路/已经贴着门了.png"
+                ]
+            }
+        }
+    },
+    "克莱茵打灰-寻路-找门-未展开": { //我将靠近
+        "recognition": {
+            "type": "NeuralNetworkDetect",
+            "param": {
+                "model": "best.onnx",
+                "labels": [
+                    "elysia_star", // 爱愿妖精_1
+                    "aomie", // 鏖灭_2
+                    "zhenwo", // 真我_3
+                    "kongmeng", // 空梦_4
+                    "shanbiyvjing", // 闪避预警 （不可用）_5
+                    "xuanze_R", // 选择R （不可用）_6
+                    "guaiwu_xueliang_UI", // 怪物血量UI_7
+                    "xuanze_r", // 选择r （不可用）_8
+                    "keyin", // 刻印门未展开_9
+                    "keyin_open", // 刻印门开启中_10
+                    "shangdian", // 商店_11
+                    "jielv", // 戒律_12
+                    "luoxuan", // 螺旋_13
+                    "shangdian_open", // 商店开启_14
+                    "tianhui", // 天慧_15
+                    "fanxing", // 繁星_16
+                    "lock_on", // 锁定（不可用）_17
+                    "wuxian", // 无限_18
+                    "chana", // 刹那_19
+                    "huangjin", // 黄金_20
+                    "jiushi", // 救世_21
+                    "xvguang", // 旭光_22
+                    "fusheng", // 浮生_23
+                    "BOSS" // BOSS入口_24
+                ],
+                "expected": [
+                    9
+                ]
+            }
+        },
+        "action": {
+            "type": "LongPressKey",
+            "param": {
+                "key": [
+                    87
+                ],
+                "duration": 1500
+            }
+        }
+    },
+    "克莱茵打灰-寻路-找门-展开中": { //我将等待
+        "recognition": {
+            "type": "NeuralNetworkDetect",
+            "param": {
+                "model": "best.onnx",
+                "labels": [
+                    "elysia_star", // 爱愿妖精_1
+                    "aomie", // 鏖灭_2
+                    "zhenwo", // 真我_3
+                    "kongmeng", // 空梦_4
+                    "shanbiyvjing", // 闪避预警 （不可用）_5
+                    "xuanze_R", // 选择R （不可用）_6
+                    "guaiwu_xueliang_UI", // 怪物血量UI_7
+                    "xuanze_r", // 选择r （不可用）_8
+                    "keyin", // 刻印门未展开_9
+                    "keyin_open", // 刻印门开启中_10
+                    "shangdian", // 商店_11
+                    "jielv", // 戒律_12
+                    "luoxuan", // 螺旋_13
+                    "shangdian_open", // 商店开启_14
+                    "tianhui", // 天慧_15
+                    "fanxing", // 繁星_16
+                    "lock_on", // 锁定（不可用）_17
+                    "wuxian", // 无限_18
+                    "chana", // 刹那_19
+                    "huangjin", // 黄金_20
+                    "jiushi", // 救世_21
+                    "xvguang", // 旭光_22
+                    "fusheng", // 浮生_23
+                    "BOSS" // BOSS入口_24
+                ],
+                "expected": [
+                    10
+                ]
+            }
+        },
+        "post_delay": 500
+    },
+    "克莱茵打灰-寻路-走向第一个门": {
+        "recognition": {
+            "type": "NeuralNetworkDetect",
+            "param": {
+                "model": "best.onnx",
+                "labels": [
+                    "elysia_star", // 爱愿妖精_1
+                    "aomie", // 鏖灭_2
+                    "zhenwo", // 真我_3
+                    "kongmeng", // 空梦_4
+                    "shanbiyvjing", // 闪避预警 （不可用）_5
+                    "xuanze_R", // 选择R （不可用）_6
+                    "guaiwu_xueliang_UI", // 怪物血量UI_7
+                    "xuanze_r", // 选择r （不可用）_8
+                    "keyin", // 刻印门未展开_9
+                    "keyin_open", // 刻印门开启中_10
+                    "shangdian", // 商店_11
+                    "jielv", // 戒律_12
+                    "luoxuan", // 螺旋_13
+                    "shangdian_open", // 商店开启_14
+                    "tianhui", // 天慧_15
+                    "fanxing", // 繁星_16
+                    "lock_on", // 锁定（不可用）_17
+                    "wuxian", // 无限_18
+                    "chana", // 刹那_19
+                    "huangjin", // 黄金_20
+                    "jiushi", // 救世_21
+                    "xvguang", // 旭光_22
+                    "fusheng", // 浮生_23
+                    "BOSS" // BOSS入口_24
+                ],
+                "expected": [
+                    10
+                ]
+            }
+        }
+    }
+}
