@@ -22,7 +22,7 @@
         {
             "name": "桌面端",
             "type": "Win32",
-            "description": "截图方式优先PrintWindow,不行自己改一下",
+            "description": "截图方式优先PrintWindow,截图参数请自行在PrintWindow、FramePool和GDI中选择,用的不行就设置里打开高级设置好后自己改一下",
             "permission_required": true,
             "win32": {
                 "class_regex": "UnityWndClass",
