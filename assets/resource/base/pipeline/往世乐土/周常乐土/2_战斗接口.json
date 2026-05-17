@@ -1,0 +1,184 @@
+{
+    "往世乐土-战斗-已进入战斗": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "repeat_delay": 0,
+        "rate_limit": 0,
+        "recognition": {
+            "type": "NeuralNetworkDetect",
+            "param": {
+                // "roi": [
+                //     338,
+                //     3,
+                //     537,
+                //     92
+                // ],
+                "model": "best.onnx",
+                "labels": [
+                    "elysia_star", // 爱愿妖精_0
+                    "aomie", // 鏖灭_1
+                    "zhenwo", // 真我_2
+                    "kongmeng", // 空梦_3
+                    "shanbiyvjing", // 闪避预警 （不可用）_4
+                    "xuanze_R", // 选择R （不可用）_5
+                    "guaiwu_xueliang_UI", // 怪物血量UI_6
+                    "xuanze_r", // 选择r （不可用）_7
+                    "keyin", // 刻印门未展开_8
+                    "keyin_open", // 刻印门开启ing_9
+                    "shangdian", // 商店_10
+                    "jielv", // 戒律_11
+                    "luoxuan", // 螺旋_12
+                    "shangdian_open", // 商店开启_13
+                    "tianhui", // 天慧_14
+                    "fanxing", // 繁星_15
+                    "lock_on", // 锁定（不可用）_16
+                    "wuxian", // 无限_17
+                    "chana", // 刹那_18
+                    "huangjin", // 黄金_19
+                    "jiushi", // 救世_20
+                    "xvguang", // 旭光_21
+                    "fusheng", // 浮生_22
+                    "BOSS" // BOSS入口_23
+                ],
+                "expected": [
+                    6 // 怪物血量UI
+                ]
+            }
+        },
+        "action": "ClickKey",
+        "key": [
+            49, //支援位1
+            50, //支援位2
+            84, //英桀助战T
+            81, //大招Q
+            69, //武器技E
+            70, //星之环F
+            74 //普攻
+        ],
+        "next": [
+            "往世乐土-战斗-已进入战斗",
+            "[JumpBack]记忆战场-出击模式-暂停中",
+            "往世乐土-战斗-战斗已结束",
+            //应增加特殊大招动画处理，特殊大招处理应该由专门的通用节点管
+            "[JumpBack]往世乐土-战斗-平A尝试触发怪物血条"
+        ]
+    },
+    "往世乐土-战斗-平A尝试触发怪物血条": {
+        "post_delay": 0,
+        "pre_delay": 0,
+        "rate_limit": 0,
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1173,
+                    615,
+                    1,
+                    1
+                ]
+            }
+        }
+    },
+    "往世乐土-战斗-战斗已结束": { //然后选择刻印，选完刻印再去找门
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    957,
+                    568,
+                    148,
+                    145
+                ],
+                "green_mask": true,
+                "template": [
+                    "战斗相关/战中检查/已经不用再战斗了-PC.png"
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "战斗正常结束"
+        },
+        "next": [
+            "往世乐土-选刻印-已进入刻印选择界面",
+            "[JumpBack]往世乐土-战斗-对话ing",
+            "往世乐土-寻路-到最后一层了"
+        ]
+    },
+    "往世乐土-战斗-对话ing": {
+        //PC端两个端用空格过对话
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1055,
+                    0,
+                    100,
+                    97
+                ],
+                "green_mask": true,
+                "template": [
+                    "周常/往世乐土/对话ing.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "ClickKey",
+            "param": {
+                "key": 32
+            }
+        }
+    },
+    "往世乐土-战斗-BOSS关打完了": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    762,
+                    371,
+                    204,
+                    75
+                ],
+                "template": [
+                    "周常/往世乐土/领奖/BOSS打完了.png"
+                ]
+            }
+        },
+        "action": "Click",
+        "next": [
+            "往世乐土-战斗-战绩结算",
+            "往世乐土-战斗-BOSS关打完了",
+            "[JumpBack]黑屏计数"
+        ]
+    },
+    "往世乐土-战斗-战绩结算": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    484,
+                    113,
+                    658,
+                    100
+                ],
+                "template": [
+                    "周常/往世乐土/领奖/挑战结束.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    428,
+                    631,
+                    390,
+                    45
+                ]
+            }
+        },
+        "next": [
+            "往世乐土-战斗-战绩结算",
+            "往世乐土-打完领奖-按住alt"
+        ]
+    }
+}

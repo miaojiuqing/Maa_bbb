@@ -4,10 +4,10 @@
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    957,
-                    568,
-                    148,
-                    145
+                    1084,
+                    633,
+                    69,
+                    63
                 ],
                 "green_mask": true,
                 "template": [
@@ -16,63 +16,14 @@
             }
         },
         "next": [
+            "往世乐土-寻路-选完刻印转视角找门-门未展开-靠近点",
             "往世乐土-寻路-成功将将视角转向了门",
+            "往世乐土-选刻印-已进入刻印选择界面",
+            "[JumpBack]往世乐土-战斗-对话ing",
             "[JumpBack]往世乐土-寻路-选完刻印转视角找门"
         ]
     },
     "往世乐土-寻路-选完刻印转视角找门": { //键鼠按住ALT后滑动视角，纯键盘按Q转视角不然不确定鼠标初始位置是否在中心
-        "inverse": true,
-        "recognition": {
-            "type": "NeuralNetworkDetect",
-            "param": {
-                "model": "best.onnx",
-                "labels": [
-                    "elysia_star", // 爱愿妖精_0
-                    "aomie", // 鏖灭_1
-                    "zhenwo", // 真我_2
-                    "kongmeng", // 空梦_3
-                    "shanbiyvjing", // 闪避预警 （不可用）_4
-                    "xuanze_R", // 选择R （不可用）_5
-                    "guaiwu_xueliang_UI", // 怪物血量UI_6
-                    "xuanze_r", // 选择r （不可用）_7
-                    "keyin", // 刻印门未展开_8
-                    "keyin_open", // 刻印门开启ing_9
-                    "shangdian", // 商店_10
-                    "jielv", // 戒律_11
-                    "luoxuan", // 螺旋_12
-                    "shangdian_open", // 商店开启_13
-                    "tianhui", // 天慧_14
-                    "fanxing", // 繁星_15
-                    "lock_on", // 锁定（不可用）_16
-                    "wuxian", // 无限_17
-                    "chana", // 刹那_18
-                    "huangjin", // 黄金_19
-                    "jiushi", // 救世_20
-                    "xvguang", // 旭光_21
-                    "fusheng", // 浮生_22
-                    "BOSS" // BOSS入口_23
-                ],
-                "expected": [ //13种门和未展开的门
-                    2, //鏖灭
-                    3, //真我
-                    4, //空梦
-                    9, //未展开的门
-                    10, //展开中的门
-                    11, //商店
-                    12, //戒律
-                    13, //螺旋
-                    15, //天慧
-                    16, //繁星
-                    18, //无限
-                    19, //刹那
-                    20, //黄金
-                    21, //救世
-                    22, //旭光
-                    23, //浮生
-                    24 //BOSS房
-                ]
-            }
-        },
         "post_delay": 1000,
         "action": {
             "type": "KeyDown",
@@ -84,8 +35,7 @@
             "往世乐土-寻路-滑动视角找门-滑动动作"
         ]
     },
-    "往世乐土-寻路-滑动视角找门-滑动动作": {
-        "inverse": true,
+    "往世乐土-寻路-选完刻印转视角找门-门未展开-靠近点": {
         "recognition": {
             "type": "NeuralNetworkDetect",
             "param": {
@@ -116,27 +66,117 @@
                     "fusheng", // 浮生_22
                     "BOSS" // BOSS入口_23
                 ],
-                "expected": [ //13种门和未展开的门
-                    2, //鏖灭
-                    3, //真我
-                    4, //空梦
-                    9, //未展开的门
-                    10, //展开中的门
-                    11, //商店
-                    12, //戒律
-                    13, //螺旋
-                    15, //天慧
-                    16, //繁星
-                    18, //无限
-                    19, //刹那
-                    20, //黄金
-                    21, //救世
-                    22, //旭光
-                    23, //浮生
-                    24 //BOSS房
+                "expected": [
+                    8 //未展开的门
                 ]
             }
         },
+        "post_delay": 1000,
+        "action": {
+            "type": "LongPressKey",
+            "param": {
+                "key": 87,
+                "duration": 500
+            }
+        },
+        "next": [
+            "[JumpBack]往世乐土-寻路-选完刻印转视角找门-门正在展开-停留等待",
+            "往世乐土-寻路-成功将将视角转向了门",
+            "往世乐土-寻路-选完刻印转视角找门-门未展开-靠近点",
+            "[JumpBack]往世乐土-寻路-选完刻印转视角找门"
+        ]
+    },
+    "往世乐土-寻路-选完刻印转视角找门-门正在展开-停留等待": {
+        "recognition": {
+            "type": "NeuralNetworkDetect",
+            "param": {
+                "model": "best.onnx",
+                "labels": [
+                    "elysia_star", // 爱愿妖精_0
+                    "aomie", // 鏖灭_1
+                    "zhenwo", // 真我_2
+                    "kongmeng", // 空梦_3
+                    "shanbiyvjing", // 闪避预警 （不可用）_4
+                    "xuanze_R", // 选择R （不可用）_5
+                    "guaiwu_xueliang_UI", // 怪物血量UI_6
+                    "xuanze_r", // 选择r （不可用）_7
+                    "keyin", // 刻印门未展开_8
+                    "keyin_open", // 刻印门开启ing_9
+                    "shangdian", // 商店_10
+                    "jielv", // 戒律_11
+                    "luoxuan", // 螺旋_12
+                    "shangdian_open", // 商店开启_13
+                    "tianhui", // 天慧_14
+                    "fanxing", // 繁星_15
+                    "lock_on", // 锁定（不可用）_16
+                    "wuxian", // 无限_17
+                    "chana", // 刹那_18
+                    "huangjin", // 黄金_19
+                    "jiushi", // 救世_20
+                    "xvguang", // 旭光_21
+                    "fusheng", // 浮生_22
+                    "BOSS" // BOSS入口_23
+                ],
+                "expected": [
+                    9 //展开ing
+                ]
+            }
+        },
+        "post_delay": 1000
+    },
+    "往世乐土-寻路-滑动视角找门-滑动动作": {
+        // "inverse": true,
+        // "recognition": {
+        //     "type": "NeuralNetworkDetect",
+        //     "param": {
+        //         "model": "best.onnx",
+        //         "labels": [
+        //             "elysia_star", // 爱愿妖精_0
+        //             "aomie", // 鏖灭_1
+        //             "zhenwo", // 真我_2
+        //             "kongmeng", // 空梦_3
+        //             "shanbiyvjing", // 闪避预警 （不可用）_4
+        //             "xuanze_R", // 选择R （不可用）_5
+        //             "guaiwu_xueliang_UI", // 怪物血量UI_6
+        //             "xuanze_r", // 选择r （不可用）_7
+        //             "keyin", // 刻印门未展开_8
+        //             "keyin_open", // 刻印门开启ing_9
+        //             "shangdian", // 商店_10
+        //             "jielv", // 戒律_11
+        //             "luoxuan", // 螺旋_12
+        //             "shangdian_open", // 商店开启_13
+        //             "tianhui", // 天慧_14
+        //             "fanxing", // 繁星_15
+        //             "lock_on", // 锁定（不可用）_16
+        //             "wuxian", // 无限_17
+        //             "chana", // 刹那_18
+        //             "huangjin", // 黄金_19
+        //             "jiushi", // 救世_20
+        //             "xvguang", // 旭光_21
+        //             "fusheng", // 浮生_22
+        //             "BOSS" // BOSS入口_23
+        //         ],
+        //         "expected": [ //13种门和未展开的门
+        //             1, //鏖灭
+        //             2, //真我
+        //             3, //空梦
+        //             // 8, //未展开的门
+        //             // 9, //展开中的门
+        //             // 10, //商店
+        //             11, //戒律
+        //             12, //螺旋
+        //             14, //天慧
+        //             15, //繁星
+        //             17, //无限
+        //             // 18, //刹那
+        //             19, //黄金
+        //             20, //救世
+        //             // 21, //旭光
+        //             22, //浮生
+        //             23 //BOSS房
+        //         ]
+        //     }
+        // },
         "action": {
             "type": "Swipe",
             "param": {
@@ -199,32 +239,33 @@
                     "BOSS" // BOSS入口_23
                 ],
                 "expected": [ //13种门和未展开的门
-                    2, //鏖灭
-                    3, //真我
-                    4, //空梦
-                    9, //未展开的门
-                    10, //展开中的门
-                    11, //商店
-                    12, //戒律
-                    13, //螺旋
-                    15, //天慧
-                    16, //繁星
-                    18, //无限
-                    19, //刹那
-                    20, //黄金
-                    21, //救世
-                    22, //旭光
-                    23, //浮生
-                    24 //BOSS房
+                    1, //鏖灭
+                    2, //真我
+                    3, //空梦
+                    // 8, //未展开的门
+                    // 9, //展开中的门
+                    // 10, //商店
+                    11, //戒律
+                    12, //螺旋
+                    14, //天慧
+                    15, //繁星
+                    17, //无限
+                    // 18, //刹那
+                    19, //黄金
+                    20, //救世
+                    // 21, //旭光
+                    22, //浮生
+                    23 //BOSS房
                 ]
             }
         },
         "next": [
             "往世乐土-寻路-找到门了-左边出现提示",
             //option接口
-            "往世乐土-寻路-选择门-优先级_0", //因为是商店，需保证一定进的是商店
+            // "往世乐土-寻路-选择门-优先级_0", //因为是商店，需保证一定进的是商店,后推这个计划
             //不选择=不启用，便是:
             // "enabled": false,
+            "[JumpBack]往世乐土-寻路-选择门-优先级_BOSS房",
             "[JumpBack]往世乐土-寻路-选择门-优先级_1",
             "[JumpBack]往世乐土-寻路-选择门-优先级_2",
             "[JumpBack]往世乐土-寻路-选择门-优先级_3",
@@ -239,7 +280,7 @@
             "往世乐土-寻路-门在哪"
         ]
     },
-    "往世乐土-寻路-找到门了-左边出现提示": {
+    "往世乐土-寻路-找到门了-左边出现提示": { //进入，然后进战斗,是否检查门的正确性以后再说吧
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -253,10 +294,114 @@
                     "周常/往世乐土/寻路/已经贴着门了.png"
                 ]
             }
+        },
+        //与其兼容，不如ALT后点击两边都能用
+        "action": {
+            "type": "KeyDown",
+            "param": {
+                "key": 164
+            }
+        },
+        "pre_delay": 500,
+        "post_delay": 500,
+        "next": [
+            "[JumpBack]通用-加载中",
+            "往世乐土-战斗-已进入战斗",
+            "[JumpBack]黑屏计数",
+            "[JumpBack]往世乐土-寻路-找到门了-左边出现提示-点击",
+            "[JumpBack]往世乐土-战斗-平A尝试触发怪物血条"
+        ]
+    },
+    "往世乐土-寻路-找到门了-左边出现提示-点击": { //进入，然后进战斗,是否检查门的正确性以后再说吧
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    696,
+                    266,
+                    66,
+                    71
+                ],
+                "template": [
+                    "周常/往世乐土/寻路/点击进门.png"
+                ]
+            }
+        },
+        //与其兼容，不如ALT后点击两边都能用
+        "action": {
+            "type": "Click"
         }
+    },
+    //最后一层
+    "往世乐土-寻路-到最后一层了": { //option，让用户选择打不打英桀，不打就退了结算
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    148,
+                    0,
+                    71,
+                    67
+                ],
+                "green_mask": true,
+                "template": [
+                    "周常/往世乐土/寻路/最后一层.png"
+                ]
+            }
+        },
+        "next": [
+            "往世乐土-寻路-门在哪"
+        ]
     },
     //开始排优先级,面向门的同时按W前进直到出现提示
     //用户设置优先级
+    "往世乐土-寻路-选择门-优先级_BOSS房": { //option接口
+        "recognition": {
+            "type": "NeuralNetworkDetect",
+            "param": {
+                "model": "best.onnx",
+                "labels": [
+                    "elysia_star", // 爱愿妖精_0
+                    "aomie", // 鏖灭_1
+                    "zhenwo", // 真我_2
+                    "kongmeng", // 空梦_3
+                    "shanbiyvjing", // 闪避预警 （不可用）_4
+                    "xuanze_R", // 选择R （不可用）_5
+                    "guaiwu_xueliang_UI", // 怪物血量UI_6
+                    "xuanze_r", // 选择r （不可用）_7
+                    "keyin", // 刻印门未展开_8
+                    "keyin_open", // 刻印门开启ing_9
+                    "shangdian", // 商店_10
+                    "jielv", // 戒律_11
+                    "luoxuan", // 螺旋_12
+                    "shangdian_open", // 商店开启_13
+                    "tianhui", // 天慧_14
+                    "fanxing", // 繁星_15
+                    "lock_on", // 锁定（不可用）_16
+                    "wuxian", // 无限_17
+                    "chana", // 刹那_18
+                    "huangjin", // 黄金_19
+                    "jiushi", // 救世_20
+                    "xvguang", // 旭光_21
+                    "fusheng", // 浮生_22
+                    "BOSS" // BOSS入口_23
+                ],
+                "expected": [
+                    23 //BOSS
+                ]
+            }
+        },
+        "action": { //按W前进
+            "type": "LongPressKey",
+            "param": {
+                "key": [
+                    87
+                ],
+                "duration": 500
+            }
+        },
+        "post_delay": 1000
+    },
     "往世乐土-寻路-选择门-优先级_1": { //option接口
         "recognition": {
             "type": "NeuralNetworkDetect",
@@ -301,7 +446,8 @@
                 ],
                 "duration": 500
             }
-        }
+        },
+        "post_delay": 1000
     },
     "往世乐土-寻路-选择门-优先级_2": { //option接口
         "recognition": {
@@ -347,7 +493,8 @@
                 ],
                 "duration": 500
             }
-        }
+        },
+        "post_delay": 1000
     },
     "往世乐土-寻路-选择门-优先级_3": { //option接口
         "recognition": {
@@ -393,7 +540,8 @@
                 ],
                 "duration": 500
             }
-        }
+        },
+        "post_delay": 1000
     },
     "往世乐土-寻路-选择门-优先级_4": { //option接口
         "recognition": {
@@ -439,7 +587,8 @@
                 ],
                 "duration": 500
             }
-        }
+        },
+        "post_delay": 1000
     },
     "往世乐土-寻路-选择门-优先级_5": { //option接口
         "recognition": {
@@ -485,7 +634,8 @@
                 ],
                 "duration": 500
             }
-        }
+        },
+        "post_delay": 1000
     },
     "往世乐土-寻路-选择门-优先级_6": { //option接口
         "recognition": {
@@ -531,7 +681,8 @@
                 ],
                 "duration": 500
             }
-        }
+        },
+        "post_delay": 1000
     },
     "往世乐土-寻路-选择门-优先级_7": { //option接口
         "recognition": {
@@ -577,7 +728,8 @@
                 ],
                 "duration": 500
             }
-        }
+        },
+        "post_delay": 1000
     },
     "往世乐土-寻路-选择门-优先级_8": { //option接口
         "recognition": {
@@ -623,7 +775,8 @@
                 ],
                 "duration": 500
             }
-        }
+        },
+        "post_delay": 1000
     },
     "往世乐土-寻路-选择门-优先级_9": { //option接口
         "recognition": {
@@ -657,7 +810,7 @@
                     "BOSS" // BOSS入口_23
                 ],
                 "expected": [
-                    20 //救世
+                    12 //螺旋
                 ]
             }
         },
@@ -669,7 +822,8 @@
                 ],
                 "duration": 500
             }
-        }
+        },
+        "post_delay": 1000
     },
     "往世乐土-寻路-选择门-优先级_10": { //option接口
         "recognition": {
@@ -715,7 +869,8 @@
                 ],
                 "duration": 500
             }
-        }
+        },
+        "post_delay": 1000
     },
     //以下为战后通用等待
     "往世乐土-寻路-找门-未展开": { //我将靠近
