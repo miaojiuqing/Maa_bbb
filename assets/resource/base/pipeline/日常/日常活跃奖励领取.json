@@ -524,7 +524,10 @@
         "focus": {
             "Node.Recognition.Failed": "活跃奖励领取完毕"
         },
-        "next": []
+        "next": [
+            "成功进入游戏主菜单",
+            "[JumpBack]点击返回主菜单"
+        ]
     },
     "日常活跃-奖励检查-第五段-未领取": { //可以点击领取
         "recognition": {
