@@ -96,13 +96,13 @@
                 {
                     "name": "万象虚境-领完奖励回到任务开始层次数",
                     "label": "次数填写",
-                    "pipeline_type": "string",
+                    "pipeline_type": "int",
                     "default": "1"
                 }
             ],
             "pipeline_override": {
                 "万象虚境-任务开始层": {
-                    "max_hit": "万象虚境-领完奖励回到任务开始层次数"
+                    "max_hit": "{万象虚境-领完奖励回到任务开始层次数}"
                 }
             }
         },
