@@ -3,6 +3,9 @@
         {
             "name": "家园打工",
             "entry": "家园打工-开始任务层",
+            "group": [
+                "日常"
+            ],
             "default_check": true,
             "description": "未收录无法上的班弹窗情况，遇到请F9截屏后提issue<br/>为啥默认是继续派遣？因为出现这个大概率你手动去上也条件不够",
             "option": [

@@ -3,6 +3,9 @@
         {
             "name": "凭证奖励尝试领取",
             "default_check": true,
+            "group": [
+                "日常"
+            ],
             "entry": "凭证奖励领取-任务开始层",
             "option": [
                 "你氪通行证了吗"

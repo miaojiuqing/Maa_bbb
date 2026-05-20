@@ -4,6 +4,9 @@
             "name": "论文危机收菜",
             "default_check": true,
             "entry": "版本活动-论文危机-任务开始层",
+            "group": [
+                "活动"
+            ],
             "description": "只能收菜和处理勘探事件，黄金矿工小游戏不会做",
             "option": [
                 "论文危机勘探处理"

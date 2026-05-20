@@ -4,6 +4,9 @@
             "name": "日常奖励领取-第一次",
             "entry": "任务奖励领取-任务开始层",
             "default_check": true,
+            "group": [
+                "日常"
+            ],
             "option": [
                 "辅助菜单是否关闭检查"
             ],

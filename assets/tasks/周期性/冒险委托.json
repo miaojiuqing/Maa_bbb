@@ -3,6 +3,9 @@
         {
             "name": "冒险委托-减负",
             "default_check": true,
+            "group": [
+                "周期性"
+            ],
             "entry": "冒险委托任务-选择层",
             "description": "[color:tomato]PC端是后崩2默认的话不会自己切其他地图[/color]<br/>资源文件什么的，舰长要自己提前下好哦<br/>优先级最高是水晶，提供的选项是除了氵之外的优先级",
             "option": [

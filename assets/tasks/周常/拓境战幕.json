@@ -3,6 +3,9 @@
         {
             "name": "拓境战幕-减负",
             "default_check": true,
+            "group": [
+                "周常"
+            ],
             "entry": "拓境战幕-开始任务层"
         }
     ]

@@ -145,10 +145,28 @@
     ],
     "group": [
         {
-            "name": "日常"
+            "name": "日常",
+            "default_expand": true
         },
         {
-            "name": "周常"
+            "name": "周常",
+            "default_expand": true
+        },
+        {
+            "name": "周期性",
+            "default_expand": true
+        },
+        {
+            "name": "商店",
+            "default_expand": true
+        },
+        {
+            "name": "活动",
+            "default_expand": true
+        },
+        {
+            "name": "单独运行工具",
+            "default_expand": false
         }
     ],
     "import": [

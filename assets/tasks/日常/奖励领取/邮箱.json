@@ -3,6 +3,9 @@
         {
             "name": "领取邮箱奖励",
             "default_check": true,
+            "group": [
+                "日常"
+            ],
             "entry": "邮箱-任务开始层"
         }
     ]

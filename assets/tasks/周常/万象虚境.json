@@ -3,10 +3,10 @@
         {
             "name": "万象虚境",
             "entry": "万象虚境-任务开始层",
-            // "repeatable": true,
-            // "repeat_count": 1,
-            //咕咕
             "default_check": true,
+            "group": [
+                "周常"
+            ],
             "option": [
                 "万象虚境-挑战模式选择",
                 "万象虚境-层数选择",

@@ -3,6 +3,9 @@
         {
             "name": "每周吼姆秘宝",
             "default_check": true,
+            "group": [
+                "周常"
+            ],
             "entry": "每周吼姆秘宝-开始任务层"
         }
     ]

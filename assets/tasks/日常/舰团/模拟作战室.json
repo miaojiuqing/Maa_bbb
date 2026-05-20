@@ -3,6 +3,9 @@
         {
             "name": "模拟作战室-减负",
             "default_check": true,
+            "group": [
+                "日常"
+            ],
             "entry": "模拟作战室-任务开始层"
         }
     ]

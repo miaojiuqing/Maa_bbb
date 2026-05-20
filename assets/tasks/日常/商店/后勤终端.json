@@ -6,6 +6,9 @@
             "option": [
                 "后勤终端购买物品货币类型"
             ],
+            "group": [
+                "商店"
+            ],
             "default_check": false,
             "description": "萌新别选，还挺贵的<br/>后续有需求的话增加购买数量自选"
         }

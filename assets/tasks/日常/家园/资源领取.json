@@ -3,6 +3,9 @@
         {
             "name": "家园资源领取",
             "default_check": true,
+            "group": [
+                "日常"
+            ],
             "entry": "进入家园领取金币/体力-开始任务层",
             "pipeline_override": {},
             "option": [

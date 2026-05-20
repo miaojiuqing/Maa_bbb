@@ -4,6 +4,9 @@
             "name": "自动点击剧情跳过",
             "default_check": false,
             "entry": "剧情跳过-循环器",
+            "group": [
+                "单独运行工具"
+            ],
             "option": [
                 "选择过剧情模式"
             ],

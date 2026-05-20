@@ -7,6 +7,9 @@
             ],
             "label": "克莱茵乐土打灰",
             "entry": "乐土刷级-接口层",
+            "group": [
+                "单独运行工具"
+            ],
             "icon": "./resource/base/image/任务图标/克莱茵.png",
             "default_check": false,
             "option": [

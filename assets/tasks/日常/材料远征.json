@@ -4,6 +4,9 @@
             "name": "材料远征",
             "entry": "材料远征-开始任务层",
             "default_check": true,
+            "group": [
+                "日常"
+            ],
             "option": [
                 "材料远征体力不足时吃药吗"
             ]

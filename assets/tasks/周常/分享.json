@@ -4,6 +4,9 @@
             "name": "每周分享",
             "entry": "每周分享-开始任务层",
             "default_check": true,
+            "group": [
+                "周常"
+            ],
             "description": "很内向，不会检查是否已分享过，每次运行都会一直点",
             "option": [
                 "每周分享-点击分享"

@@ -6,6 +6,9 @@
                 "桌面端"
             ],
             "default_check": false,
+            "group": [
+                "周期性"
+            ],
             "entry": "超弦空间-开始任务层",
             "option": [
                 "打完自动检查领取奖励",
