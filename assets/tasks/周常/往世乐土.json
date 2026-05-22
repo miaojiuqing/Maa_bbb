@@ -10,6 +10,7 @@
                 "周常"
             ],
             "option": [
+                "往世乐土-战前增益选择",
                 "往世乐土-真我刻印自选",
                 "往世乐土-商店处理策略",
                 "往世乐土-刻印优先级自选",
@@ -17,8 +18,173 @@
             ]
         }
     ],
-    "preset": [],
     "option": {
+        "往世乐土-战前增益选择": {
+            "label": "战前增益选择",
+            "type": "switch",
+            "description": "只有你自己一个buff不选的时候才会触发",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {},
+                    "option": [
+                        "乐土-战前buff-1",
+                        "乐土-战前buff-2",
+                        "乐土-战前buff-3",
+                        "乐土-战前buff-4",
+                        "乐土-战前buff-5",
+                        "乐土-战前buff-6",
+                        "乐土-战前buff-7"
+                    ]
+                },
+                {
+                    "name": "No",
+                    "description": "关闭后就从上到下全部选一遍一般除了最后两个都会选到",
+                    "pipeline_override": {}
+                }
+            ]
+        },
+        "乐土-战前buff-1": {
+            "label": "buff_1(通常是选怪)",
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {}
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "往世乐土-增益选择-上半-换怪-实际选择-已选中": {
+                            "recognition": "DirectHit"
+                        },
+                        "往世乐土-增益选择-上半-换怪": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "乐土-战前buff-2": {
+            "label": "buff_2(通常是能量上限增加)",
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {}
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "往世乐土-增益选择-上半-第二条-实际选择-已选中": {
+                            "recognition": "DirectHit"
+                        },
+                        "往世乐土-增益选择-上半-第二条": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "乐土-战前buff-3": {
+            "label": "buff之3",
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {}
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "往世乐土-增益选择-上半-第三条-实际选择-已选中": {
+                            "recognition": "DirectHit"
+                        }
+                    }
+                }
+            ]
+        },
+        "乐土-战前buff-4": {
+            "label": "buff之4",
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {}
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "往世乐土-增益选择-下半-第四条-实际选择-已选中": {
+                            "recognition": "DirectHit"
+                        },
+                        "往世乐土-增益选择-下半-第四条": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "乐土-战前buff-5": {
+            "label": "buff之5",
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {}
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "往世乐土-增益选择-下半-第五条-实际选择-已选中": {
+                            "recognition": "DirectHit"
+                        },
+                        "往世乐土-增益选择-下半-第五条": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "乐土-战前buff-6": {
+            "label": "buff之6",
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {}
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "往世乐土-增益选择-下半-第六条-实际选择-已选中": {
+                            "recognition": "DirectHit"
+                        },
+                        "往世乐土-增益选择-下半-第六条": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ]
+        },
+        "乐土-战前buff-7": {
+            "label": "buff之7",
+            "type": "switch",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {}
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {
+                        "往世乐土-增益选择-下半-第七条-实际选择-已选中": {
+                            "recognition": "DirectHit"
+                        }
+                    }
+                }
+            ]
+        },
         "往世乐土-真我刻印自选": {
             "label": "真我刻印选择",
             "type": "input",
