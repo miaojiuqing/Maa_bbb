@@ -1,0 +1,143 @@
+{
+    "往世乐土-增益选择-已滑动至最上方": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    48,
+                    124,
+                    55,
+                    62
+                ],
+                "template": [
+                    "周常/往世乐土/增益选择/上半.png"
+                ]
+            }
+        },
+        "next": []
+    },
+    "往世乐土-增益选择-尝试滑动至最上方": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    132,
+                    509,
+                    329,
+                    133
+                ],
+                "template": [
+                    "周常/往世乐土/导航/已进入乐土深层序列.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Swipe",
+            "param": {
+                "begin": [
+                    75,
+                    450,
+                    38,
+                    18
+                ],
+                "end": [
+                    75,
+                    461,
+                    38,
+                    18
+                ],
+                "end_hold": 500
+            }
+        }
+    },
+    "往世乐土-增益选择-上半-换怪": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    72,
+                    133,
+                    88,
+                    399
+                ],
+                "template": [
+                    "周常/往世乐土/增益选择/buff条目/第一条换怪.png"
+                ]
+            }
+        },
+        "next": [
+            "往世乐土-增益选择-上半-换怪-实际选择-已选中",
+            "[JumpBack]往世乐土-增益选择-上半-换怪-实际选择-未选中"
+        ]
+    },
+    "往世乐土-增益选择-上半-换怪-实际选择-已选中": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": "往世乐土-增益选择-上半-换怪",
+                "roi_offset": [
+                    1045,
+                    -10,
+                    65,
+                    30
+                ],
+                "template": [
+                    "周常/往世乐土/增益选择/已选中.png"
+                ]
+            }
+        }
+    },
+    "往世乐土-增益选择-上半-换怪-实际选择-未选中": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": "往世乐土-增益选择-上半-换怪",
+                "roi_offset": [
+                    1045,
+                    -10,
+                    65,
+                    30
+                ],
+                "template": [
+                    "周常/往世乐土/增益选择/未选中.png"
+                ]
+            }
+        },
+        "action": "Click",
+        "post_delay": 500
+    },
+    "往世乐土-增益选择-尝试滑动至最下方": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    132,
+                    509,
+                    329,
+                    133
+                ],
+                "template": [
+                    "周常/往世乐土/导航/已进入乐土深层序列.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Swipe",
+            "param": {
+                "begin": [
+                    75,
+                    461,
+                    38,
+                    18
+                ],
+                "end": [
+                    75,
+                    250,
+                    38,
+                    18
+                ],
+                "end_hold": 500
+            }
+        }
+    }
+}

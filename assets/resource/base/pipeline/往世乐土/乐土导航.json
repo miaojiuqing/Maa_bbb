@@ -103,6 +103,26 @@
             "[JumpBack]往世乐土-点击普通战斗"
         ]
     },
+    "往世乐土-未选择任何增益": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    501,
+                    240,
+                    87,
+                    82
+                ],
+                "template": [
+                    "周常/往世乐土/未选择增益.png"
+                ]
+            }
+        },
+        "next": [
+            "往世乐土-增益选择-已滑动至最上方",
+            "[JumpBack]往世乐土-增益选择-尝试滑动至最上方"
+        ]
+    },
     "往世乐土-已进入三位导航界面": {
         "recognition": {
             "type": "TemplateMatch",
