@@ -3,6 +3,15 @@
         "recognition": {
             "type": "NeuralNetworkDetect",
             "param": {
+                "threshold": [
+                    0.1
+                ],
+                "roi": [
+                    333,
+                    14,
+                    655,
+                    706
+                ],
                 "model": "best.onnx",
                 "labels": [
                     "elysia_star", // 爱愿妖精_0
@@ -31,7 +40,8 @@
                     "BOSS" // BOSS入口_23
                 ],
                 "expected": [
-                    13
+                    8
+                    // 0
                 ]
             }
         }

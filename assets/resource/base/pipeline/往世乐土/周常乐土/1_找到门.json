@@ -40,6 +40,12 @@
             "type": "NeuralNetworkDetect",
             "param": {
                 "model": "best.onnx",
+                "roi": [
+                    333,
+                    14,
+                    655,
+                    706
+                ],
                 "labels": [
                     "elysia_star", // 爱愿妖精_0
                     "aomie", // 鏖灭_1
@@ -212,6 +218,12 @@
             "type": "NeuralNetworkDetect",
             "param": {
                 "model": "best.onnx",
+                "roi": [
+                    333,
+                    14,
+                    655,
+                    706
+                ],
                 "labels": [
                     "elysia_star", // 爱愿妖精_0
                     "aomie", // 鏖灭_1
