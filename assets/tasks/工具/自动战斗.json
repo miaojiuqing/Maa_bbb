@@ -137,38 +137,6 @@
                     }
                 }
             ]
-        },
-        "检查到星之环可开始后延迟时间": {
-            "description": "仅针对薇塔，有点懒得更新",
-            "label": "检测到星之环<br/>后延迟时间",
-            "type": "select",
-            "cases": [
-                {
-                    "name": "3秒",
-                    "pipeline_override": {
-                        "自动战斗-乐土-薇塔-启动机甲-星之环": {
-                            "pre_delay": 3000
-                        }
-                    }
-                },
-                {
-                    "name": "5秒",
-                    "pipeline_override": {
-                        "自动战斗-乐土-薇塔-启动机甲-星之环": {
-                            "pre_delay": 5000
-                        }
-                    }
-                },
-                {
-                    "name": "不延迟",
-                    "pipeline_override": {
-                        "自动战斗-乐土-薇塔-启动机甲-星之环": {
-                            "pre_delay": 0
-                        }
-                    }
-                }
-            ],
-            "default_case": "不延迟"
         }
     }
 }
