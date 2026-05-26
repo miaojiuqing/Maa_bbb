@@ -359,42 +359,48 @@
         "rate_limit": 0,
         "post_delay": 0,
         "pre_delay": 0,
-        "roi": [
-            1058,
-            619,
-            100,
-            100
-        ],
-        "green_mask": true,
-        "recognition": "TemplateMatch",
-        "template": [
-            "战斗相关/战中检查/已经不用再战斗了-PC.png"
-        ],
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1058,
+                    619,
+                    100,
+                    100
+                ],
+                "green_mask": true,
+                "template": [
+                    "战斗相关/战中检查/已经不用再战斗了-PC.png"
+                ]
+            }
+        },
         "next": [
-            "乐土刷级-首层复刷-伪寻路-到达目的",
+            "乐土刷级-首层复刷-寻路-到达目的",
             "乐土刷级-首层复刷-刻印选择",
             "[JumpBack]乐土刷级-首层复刷-普通刻印选取",
             "[JumpBack]乐土刷级-首层复刷-可同意该刻印",
             "[JumpBack]乐土刷级-首层复刷-刻印获取按钮呼出",
-            "[JumpBack]乐土刷级-通用-伪寻路-向前移动",
-            "[JumpBack]乐土刷级-通用-伪寻路-向后移动",
-            "乐土刷级-通用-伪寻路-退出重新寻路"
+            "克莱茵打灰-寻路-门在哪"
         ]
     },
-    "乐土刷级-首层复刷-伪寻路-到达目的": {
+    "乐土刷级-首层复刷-寻路-到达目的": {
         "focus": {
             "Node.Recognition.Succeeded": "识别到交互键,交互并准备战斗"
         },
-        "roi": [
-            46,
-            270,
-            132,
-            49
-        ],
-        "recognition": "OCR",
-        "expected": [
-            "启动传送锚点"
-        ],
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    9,
+                    259,
+                    75,
+                    74
+                ],
+                "template": [
+                    "周常/往世乐土/寻路/已经贴着门了.png"
+                ]
+            }
+        },
         "pre_delay": 500,
         "action": "ClickKey",
         "key": [
@@ -403,7 +409,7 @@
         "post_delay": 2000,
         "next": [
             "乐土刷级-首层复刷-已进入往世乐土箱庭",
-            "乐土刷级-首层复刷-伪寻路-到达目的",
+            "乐土刷级-首层复刷-寻路-到达目的",
             "乐土刷级-首层复刷-已进入战斗",
             "乐土刷级-首层复刷-刻印选完了"
         ]
