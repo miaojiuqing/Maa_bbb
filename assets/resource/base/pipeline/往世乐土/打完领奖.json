@@ -1,5 +1,58 @@
 {
+    "往世乐土-成绩结算": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    734,
+                    447,
+                    132,
+                    71
+                ],
+                "template": [
+                    "周常/往世乐土/领奖/成绩结算.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    340,
+                    625,
+                    595,
+                    74
+                ]
+            }
+        },
+        "next": [
+            "往世乐土-成绩结算",
+            "往世乐土-打完领奖-按住alt"
+        ]
+    },
     "往世乐土-打完领奖-按住alt": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1162,
+                    16,
+                    91,
+                    75
+                ],
+                "template": [
+                    "周常/往世乐土/领奖/周常领奖入口.png"
+                ]
+            }
+        },
+        "post_delay": 500,
+        "next": [
+            "往世乐土-成绩结算",
+            "往世乐土-打完领奖-已进入领奖入口",
+            "[JumpBack]往世乐土-打完领奖-按住alt后点击进入-按住"
+        ]
+    },
+    "往世乐土-打完领奖-按住alt后点击进入-按住": {
         "recognition": {
             "type": "TemplateMatch",
             "param": {
@@ -22,11 +75,10 @@
         },
         "post_delay": 500,
         "next": [
-            "往世乐土-打完领奖-已进入领奖入口",
-            "[JumpBack]往世乐土-打完领奖-按住alt后点击进入"
+            "往世乐土-打完领奖-按住alt后点击进入-点击"
         ]
     },
-    "往世乐土-打完领奖-按住alt后点击进入": {
+    "往世乐土-打完领奖-按住alt后点击进入-点击": {
         "recognition": {
             "type": "TemplateMatch",
             "param": {
