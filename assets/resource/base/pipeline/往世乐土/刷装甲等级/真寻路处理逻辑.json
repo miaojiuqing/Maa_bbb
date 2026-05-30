@@ -4,10 +4,10 @@
             "type": "TemplateMatch",
             "param": {
                 "roi": [
-                    957,
-                    568,
-                    148,
-                    145
+                    1072,
+                    632,
+                    72,
+                    76
                 ],
                 "green_mask": true,
                 "template": [
