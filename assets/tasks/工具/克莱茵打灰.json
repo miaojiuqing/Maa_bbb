@@ -54,19 +54,20 @@
                     "name": "克莱茵打灰-次数循环",
                     "label": "次数",
                     "default": "1",
-                    "pipeline_type": "string"
-                    // "verify": ""//不是很懂
+                    "pipeline_type": "string",
+                    "verify": "^\\d+$",
+                    "pattern_msg": "请输入有效的数字"
                 }
             ],
             "pipeline_override": {
                 "乐土刷级-减负模式-开始任务层": {
-                    "max_hit": "克莱茵打灰-次数循环"
+                    "max_hit": "{克莱茵打灰-次数循环}"
                 },
                 "乐土刷级-首层复刷-开始任务层": {
-                    "max_hit": "克莱茵打灰-次数循环"
+                    "max_hit": "{克莱茵打灰-次数循环}"
                 },
                 "乐土刷级-浅层序列-开始任务层": {
-                    "max_hit": "克莱茵打灰-次数循环"
+                    "max_hit": "{克莱茵打灰-次数循环}"
                 }
             }
         },
