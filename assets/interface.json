@@ -5,7 +5,8 @@
         "child_args": [
             "../agent/main.py",
             "-dev"
-        ]
+        ],
+        "embedded": true
     },
     "name": "MAA_bbb",
     "title": "识宝小助手 Oᴗoಣ | 自动战斗框架超级更新,用不了请上传日志,自动乐土激情开发中",
