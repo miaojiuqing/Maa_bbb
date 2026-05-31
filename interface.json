@@ -1,0 +1,208 @@
+{
+    "interface_version": 2,
+    "agent": {
+        "child_exec": "python",
+        "child_args": [
+            "./agent/main.py",
+            "-dev"
+        ],
+        
+        "embedded": true
+    },
+    "name": "MAA_bbb",
+    "title": "识宝小助手 Oᴗoಣ | 自动战斗框架超级更新,用不了请上传日志,自动乐土激情开发中",
+    "version": "v1.11.5",
+    "github": "https://github.com/miaojiuqing/MAA_bbb",
+    "contact": "<a href=\"https://qm.qq.com/q/XrFQKgGvaI\"><font color=\"#12B7F5\"><b>💬 加入群聊</b></font></a><br/><a href=\"https://www.bilibili.com/video/BV1Ld42z1ERu/?spm_id_from=333.1387.homepage.video_card.click\"><font color=\"#FB7299\"><b>🎥 B站视频链接</b></font></a>",
+    "description": "PC端使用一定要分辨率16:9！",
+    "icon": ".\\resource\\base\\image\\logo.ico",
+    "mirrorchyan_rid": "Maa_bbb",
+    "mirrorchyan_multiplatform": true,
+    "welcome": "欢迎舰长使用识宝小助手Oᴗoಣ",
+    "controller": [
+        {
+            "name": "桌面端",
+            "type": "Win32",
+            "description": "截图方式优先PrintWindow,截图参数请自行在PrintWindow、FramePool和GDI中选择,用的不行就设置里打开高级设置好后自己改一下",
+            "permission_required": true,
+            "win32": {
+                "class_regex": "UnityWndClass",
+                "window_regex": "崩坏3|崩坏3 Steam版|Honkai Impact 3|崩壊3rd",
+                "screencap": "PrintWindow",
+                "mouse": "PostMessageWithCursorPos",
+                "keyboard": "Seize"
+            }
+        },
+        {
+            "name": "安卓端",
+            "type": "Adb"
+        }
+    ],
+    "resource": [
+        {
+            "name": "键鼠操作",
+            "description": "当设置-操作-电脑端操作方式为\"键鼠操作方式\"时选择此项",
+            "controller": [
+                "桌面端"
+            ],
+            "path": [
+                "./resource/base",
+                "./resource/resource_win32"
+            ]
+        },
+        {
+            "name": "纯键盘操作",
+            "description": "当设置-操作-电脑端操作方式为\"键盘操作方式\"时选择此项",
+            "controller": [
+                "桌面端"
+            ],
+            "path": [
+                "./resource/base",
+                "./resource/resource_win32",
+                "./resource/resource_win32_jp"
+            ]
+        },
+        {
+            "name": "官服",
+            "controller": [
+                "安卓端"
+            ],
+            "path": [
+                "./resource/base"
+            ]
+        },
+        {
+            "name": "B服",
+            "controller": [
+                "安卓端"
+            ],
+            "path": [
+                "./resource/base",
+                "./resource/resource_bilibili"
+            ]
+        },
+        {
+            "name": "OPPO渠道服",
+            "controller": [
+                "安卓端"
+            ],
+            "path": [
+                "./resource/base",
+                "./resource/resource_OPPE"
+            ]
+        },
+        {
+            "name": "华为渠道服",
+            "controller": [
+                "安卓端"
+            ],
+            "path": [
+                "./resource/base",
+                "./resource/resource_huawei"
+            ]
+        },
+        {
+            "name": "应用宝渠道服",
+            "controller": [
+                "安卓端"
+            ],
+            "path": [
+                "./resource/base",
+                "./resource/resource_yyb"
+            ]
+        },
+        {
+            "name": "VIVO服",
+            "controller": [
+                "安卓端"
+            ],
+            "path": [
+                "./resource/base",
+                "./resource/resource_vivo"
+            ]
+        },
+        {
+            "name": "九游服",
+            "controller": [
+                "安卓端"
+            ],
+            "path": [
+                "./resource/base",
+                "./resource/resource_jiuyou"
+            ]
+        },
+        {
+            "name": "小米服",
+            "controller": [
+                "安卓端"
+            ],
+            "path": [
+                "./resource/base",
+                "./resource/resource_xiaomi"
+            ]
+        }
+    ],
+    "group": [
+        {
+            "name": "日常",
+            "default_expand": true
+        },
+        {
+            "name": "周常",
+            "default_expand": true
+        },
+        {
+            "name": "周期性",
+            "default_expand": true
+        },
+        {
+            "name": "商店",
+            "default_expand": true
+        },
+        {
+            "name": "活动",
+            "default_expand": true
+        },
+        {
+            "name": "单独运行工具",
+            "default_expand": false
+        }
+    ],
+    "import": [
+        "tasks/游戏启动.json",
+        "tasks/工具/测试.json",
+        "tasks/工具/攻略.json",
+        "tasks/工具/过剧情.json",
+        "tasks/工具/克莱茵打灰.json",
+        "tasks/工具/圣痕洗词缀.json",
+        "tasks/工具/自动战斗.json",
+        "tasks/工具/自动战斗pro.json",
+        "tasks/日常/材料远征.json",
+        "tasks/日常/家园/打工.json",
+        "tasks/日常/家园/远征派遣.json",
+        "tasks/日常/家园/资源领取.json",
+        "tasks/日常/舰团/保税仓库.json",
+        "tasks/日常/舰团/每日委托.json",
+        "tasks/日常/舰团/模拟作战室.json",
+        "tasks/日常/舰团/周活跃领取.json",
+        "tasks/日常/奖励领取/日常活跃.json",
+        "tasks/日常/奖励领取/日常活跃专领.json",
+        "tasks/日常/奖励领取/通行证.json",
+        "tasks/日常/奖励领取/邮箱.json",
+        "tasks/日常/商店/40晶体核心.json",
+        "tasks/日常/商店/后勤终端.json",
+        "tasks/日常/商店/乐土商店.json",
+        "tasks/日常/商店/虚境商店每周特惠.json",
+        "tasks/周常/答题.json",
+        "tasks/周常/分享.json",
+        "tasks/周常/吼姆秘宝.json",
+        "tasks/周常/拓境战幕.json",
+        "tasks/周常/记忆战场.json",
+        "tasks/周常/万象虚境.json",
+        "tasks/周常/往世乐土.json",
+        "tasks/周期性/超弦空间.json",
+        "tasks/周期性/冒险委托.json"
+    ],
+    "task": [],
+    "option": {}
+}
