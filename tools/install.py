@@ -124,9 +124,10 @@ def install_resource():
         interface = jsonc.load(f)
 
     interface["version"] = version
-    interface["title"] = (
-        f"识宝小助手 Oᴗoಣ | 版本号:{version} | 自动战斗框架超级更新,用不了请上传日志,自动乐土激情开发中"
-    )
+    interface["title"] = "识宝小助手 | " + version
+    # (
+    #     f"识宝小助手 Oᴗoಣ | 版本号:{version} | 自动战斗框架超级更新,用不了请上传日志,自动乐土激情开发中"
+    # )
     # 标题行往这里塞
 
     with open(install_path / "interface.json", "w", encoding="utf-8") as f:

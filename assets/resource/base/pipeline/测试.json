@@ -37,10 +37,12 @@
                     "jiushi", // 救世_20
                     "xvguang", // 旭光_21
                     "fusheng", // 浮生_22
-                    "BOSS" // BOSS入口_23
+                    "BOSS", // BOSS入口_23
+                    "ce_door" //门的侧面_24
                 ],
                 "expected": [
-                    8
+                    3,
+                    12
                     // 0
                 ]
             }

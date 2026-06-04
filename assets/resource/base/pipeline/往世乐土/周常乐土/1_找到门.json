@@ -23,6 +23,7 @@
             "往世乐土-寻路-找到门了-左边出现提示",
             "往世乐土-打完了",
             "往世乐土-成绩结算",
+            "[JumpBack]往世乐土-寻路-走到了门的侧面",
             "[JumpBack]往世乐土-寻路-选完刻印转视角找门"
         ]
     },
@@ -53,12 +54,40 @@
         "action": {
             "type": "KeyDown",
             "param": {
-                "key": 164
+                "key": 164 //Alt
             }
         },
         "next": [
             "往世乐土-寻路-滑动视角找门-滑动动作"
         ]
+    },
+    "往世乐土-寻路-走到了门的侧面": {
+        "recognition": {
+            "type": "NeuralNetworkDetect",
+            "param": {
+                "threshold": [
+                    0.1
+                ],
+                "roi": [
+                    333,
+                    14,
+                    655,
+                    706
+                ],
+                "model": "best.onnx",
+                "expected": [
+                    24
+                    // 0
+                ]
+            }
+        },
+        "action": {
+            "type": "LongPressKey",
+            "param": {
+                "key": 87, //W前进
+                "duration": 500
+            }
+        }
     },
     "往世乐土-寻路-选完刻印转视角找门-门未展开-靠近点": {
         "recognition": {
