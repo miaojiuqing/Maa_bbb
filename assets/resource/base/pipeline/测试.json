@@ -6,12 +6,6 @@
                 "threshold": [
                     0.1
                 ],
-                "roi": [
-                    333,
-                    14,
-                    655,
-                    706
-                ],
                 "model": "best.onnx",
                 "labels": [
                     "elysia_star", // 爱愿妖精_0
@@ -40,11 +34,7 @@
                     "BOSS", // BOSS入口_23
                     "ce_door" //门的侧面_24
                 ],
-                "expected": [
-                    3,
-                    12
-                    // 0
-                ]
+                "expected": []
             }
         }
     },

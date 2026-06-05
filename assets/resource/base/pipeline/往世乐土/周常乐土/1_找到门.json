@@ -24,8 +24,56 @@
             "往世乐土-打完了",
             "往世乐土-成绩结算",
             "[JumpBack]往世乐土-寻路-走到了门的侧面",
+            "[JumpBack]往世乐土-寻路-临时-在商店旁边-直接走",
+            "[JumpBack]往世乐土-寻路-临时-看到商店-往右走",
             "[JumpBack]往世乐土-寻路-选完刻印转视角找门"
         ]
+    },
+    "往世乐土-寻路-临时-看到商店-往右走": {
+        "recognition": {
+            "type": "NeuralNetworkDetect",
+            "param": {
+                "model": "best.onnx",
+                "labels": [
+                    "elysia_star", // 爱愿妖精_0
+                    "aomie", // 鏖灭_1
+                    "zhenwo", // 真我_2
+                    "kongmeng", // 空梦_3
+                    "shanbiyvjing", // 闪避预警 （不可用）_4
+                    "xuanze_R", // 选择R （不可用）_5
+                    "guaiwu_xueliang_UI", // 怪物血量UI_6
+                    "xuanze_r", // 选择r （不可用）_7
+                    "keyin", // 刻印门未展开_8
+                    "keyin_open", // 刻印门开启ing_9
+                    "shangdian", // 商店_10
+                    "jielv", // 戒律_11
+                    "luoxuan", // 螺旋_12
+                    "shangdian_open", // 商店开启_13
+                    "tianhui", // 天慧_14
+                    "fanxing", // 繁星_15
+                    "lock_on", // 锁定（不可用）_16
+                    "wuxian", // 无限_17
+                    "chana", // 刹那_18
+                    "huangjin", // 黄金_19
+                    "jiushi", // 救世_20
+                    "xvguang", // 旭光_21
+                    "fusheng", // 浮生_22
+                    "BOSS" // BOSS入口_23
+                ],
+                "expected": [
+                    13 //商店
+                ]
+            }
+        },
+        "action": { //按W前进
+            "type": "LongPressKey",
+            "param": {
+                "key": [
+                    87
+                ],
+                "duration": 500
+            }
+        }
     },
     "往世乐土-打完了": {
         "recognition": {
@@ -184,6 +232,29 @@
         },
         "post_delay": 1000
     },
+    "往世乐土-寻路-临时-在商店旁边-直接走": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    694,
+                    265,
+                    71,
+                    74
+                ],
+                "template": [
+                    "周常/往世乐土/寻路/交互按钮-猫猫商店用.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "LongPressKey",
+            "param": {
+                "key": 87,
+                "duration": 500
+            }
+        }
+    },
     "往世乐土-寻路-滑动视角找门-滑动动作": {
         // "inverse": true,
         // "recognition": {
@@ -247,7 +318,7 @@
                     1
                 ],
                 "end": [
-                    800,
+                    700,
                     360,
                     1,
                     1
@@ -273,10 +344,10 @@
             "param": {
                 "model": "best.onnx",
                 "roi": [
-                    333,
-                    14,
-                    655,
-                    706
+                    453,
+                    0,
+                    352,
+                    720
                 ],
                 "labels": [
                     "elysia_star", // 爱愿妖精_0
@@ -342,6 +413,7 @@
             "[JumpBack]往世乐土-寻路-选择门-优先级_8",
             "[JumpBack]往世乐土-寻路-选择门-优先级_9",
             "[JumpBack]往世乐土-寻路-选择门-优先级_10",
+            "[JumpBack]往世乐土-寻路-走到了门的侧面",
             //走过头了处理，回到寻门任务层
             "往世乐土-寻路-门在哪"
         ]
@@ -375,6 +447,7 @@
             "往世乐土-战斗-已进入战斗",
             "[JumpBack]黑屏计数",
             "[JumpBack]往世乐土-寻路-找到门了-左边出现提示",
+            "往世乐土-战斗-战斗已结束",
             "[JumpBack]往世乐土-战斗-平A尝试触发怪物血条"
         ]
     },
@@ -412,6 +485,12 @@
             "type": "NeuralNetworkDetect",
             "param": {
                 "model": "best.onnx",
+                "roi": [
+                    453,
+                    0,
+                    352,
+                    720
+                ],
                 "labels": [
                     "elysia_star", // 爱愿妖精_0
                     "aomie", // 鏖灭_1
@@ -458,6 +537,12 @@
         "recognition": {
             "type": "NeuralNetworkDetect",
             "param": {
+                "roi": [
+                    453,
+                    0,
+                    352,
+                    720
+                ],
                 "model": "best.onnx",
                 "labels": [
                     "elysia_star", // 爱愿妖精_0
@@ -505,6 +590,12 @@
         "recognition": {
             "type": "NeuralNetworkDetect",
             "param": {
+                "roi": [
+                    453,
+                    0,
+                    352,
+                    720
+                ],
                 "model": "best.onnx",
                 "labels": [
                     "elysia_star", // 爱愿妖精_0
@@ -533,7 +624,24 @@
                     "BOSS" // BOSS入口_23
                 ],
                 "expected": [
-                    1 //鏖灭
+                    //13种门和未展开的门
+                    1, //鏖灭
+                    2, //真我
+                    3, //空梦
+                    // 8, //未展开的门
+                    // 9, //展开中的门
+                    10, //商店      
+                    11, //戒律
+                    12, //螺旋
+                    14, //天慧
+                    15, //繁星
+                    17, //无限
+                    // 18, //刹那
+                    19, //黄金
+                    20, //救世
+                    // 21, //旭光
+                    22, //浮生
+                    23 //BOSS房
                 ]
             }
         },
@@ -552,6 +660,12 @@
         "recognition": {
             "type": "NeuralNetworkDetect",
             "param": {
+                "roi": [
+                    453,
+                    0,
+                    352,
+                    720
+                ],
                 "model": "best.onnx",
                 "labels": [
                     "elysia_star", // 爱愿妖精_0
@@ -600,6 +714,12 @@
             "type": "NeuralNetworkDetect",
             "param": {
                 "model": "best.onnx",
+                "roi": [
+                    453,
+                    0,
+                    352,
+                    720
+                ],
                 "labels": [
                     "elysia_star", // 爱愿妖精_0
                     "aomie", // 鏖灭_1
@@ -647,6 +767,12 @@
             "type": "NeuralNetworkDetect",
             "param": {
                 "model": "best.onnx",
+                "roi": [
+                    453,
+                    0,
+                    352,
+                    720
+                ],
                 "labels": [
                     "elysia_star", // 爱愿妖精_0
                     "aomie", // 鏖灭_1
@@ -694,6 +820,12 @@
             "type": "NeuralNetworkDetect",
             "param": {
                 "model": "best.onnx",
+                "roi": [
+                    453,
+                    0,
+                    352,
+                    720
+                ],
                 "labels": [
                     "elysia_star", // 爱愿妖精_0
                     "aomie", // 鏖灭_1
@@ -741,6 +873,12 @@
             "type": "NeuralNetworkDetect",
             "param": {
                 "model": "best.onnx",
+                "roi": [
+                    453,
+                    0,
+                    352,
+                    720
+                ],
                 "labels": [
                     "elysia_star", // 爱愿妖精_0
                     "aomie", // 鏖灭_1
@@ -788,6 +926,12 @@
             "type": "NeuralNetworkDetect",
             "param": {
                 "model": "best.onnx",
+                "roi": [
+                    453,
+                    0,
+                    352,
+                    720
+                ],
                 "labels": [
                     "elysia_star", // 爱愿妖精_0
                     "aomie", // 鏖灭_1
@@ -835,6 +979,12 @@
             "type": "NeuralNetworkDetect",
             "param": {
                 "model": "best.onnx",
+                "roi": [
+                    453,
+                    0,
+                    352,
+                    720
+                ],
                 "labels": [
                     "elysia_star", // 爱愿妖精_0
                     "aomie", // 鏖灭_1
@@ -882,6 +1032,12 @@
             "type": "NeuralNetworkDetect",
             "param": {
                 "model": "best.onnx",
+                "roi": [
+                    453,
+                    0,
+                    352,
+                    720
+                ],
                 "labels": [
                     "elysia_star", // 爱愿妖精_0
                     "aomie", // 鏖灭_1
