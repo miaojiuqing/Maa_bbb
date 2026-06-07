@@ -217,5 +217,233 @@
         "tasks/周期性/冒险委托.json"
     ],
     "task": [],
-    "option": {}
+    "option": {},
+    "preset": [
+        {
+            "name": "日常-简化版",
+            "label": "日常(每天都能做的任务)",
+            "task": [
+                {
+                    "name": "崩坏三 启动！",
+                    "enabled": true
+                },
+                {
+                    "name": "日常奖励领取-第一次",
+                    "enabled": true
+                },
+                {
+                    "name": "材料远征",
+                    "enabled": true
+                },
+                {
+                    "name": "家园远征派遣",
+                    "enabled": true
+                },
+                {
+                    "name": "家园资源领取",
+                    "enabled": true
+                },
+                {
+                    "name": "家园打工",
+                    "enabled": true
+                },
+                {
+                    "name": "舰团每日委托",
+                    "enabled": true
+                },
+                {
+                    "name": "舰团保税仓库委托申请",
+                    "enabled": false
+                },
+                {
+                    "name": "舰团每周活跃奖励",
+                    "enabled": true
+                },
+                {
+                    "name": "模拟作战室-减负",
+                    "enabled": true
+                },
+                {
+                    "name": "后勤终端物品购买",
+                    "enabled": true
+                },
+                {
+                    "name": "每日40晶体核心",
+                    "enabled": false
+                },
+                {
+                    "name": "日常奖励领取-第二次",
+                    "enabled": true
+                },
+                {
+                    "name": "日常活跃专领",
+                    "enabled": true
+                },
+                {
+                    "name": "凭证奖励尝试领取",
+                    "enabled": true
+                },
+                {
+                    "name": "邮箱",
+                    "enabled": true
+                },
+                {
+                    "name": "退出/关闭游戏",
+                    "enabled": false
+                }
+            ]
+        },
+        {
+            "name": "日常-完整版",
+            "label": "日常(包含周期性任务)",
+            "task": [
+                {
+                    "name": "崩坏三 启动！",
+                    "enabled": true
+                },
+                {
+                    "name": "日常奖励领取-第一次",
+                    "enabled": true
+                },
+                {
+                    "name": "材料远征",
+                    "enabled": true
+                },
+                {
+                    "name": "家园远征派遣",
+                    "enabled": true
+                },
+                {
+                    "name": "家园资源领取",
+                    "enabled": true
+                },
+                {
+                    "name": "家园打工",
+                    "enabled": true
+                },
+                {
+                    "name": "舰团每日委托",
+                    "enabled": true
+                },
+                {
+                    "name": "舰团保税仓库委托申请",
+                    "enabled": false
+                },
+                {
+                    "name": "舰团每周活跃奖励",
+                    "enabled": true
+                },
+                {
+                    "name": "模拟作战室-减负",
+                    "enabled": true
+                },
+                {
+                    "name": "后勤终端物品购买",
+                    "enabled": true
+                },
+                {
+                    "name": "每日40晶体核心",
+                    "enabled": false
+                },
+                {
+                    "name": "冒险委托-减负",
+                    "enabled": true
+                },
+                {
+                    "name": "万象虚境",
+                    "enabled": true
+                },
+                {
+                    "name": "拓境战幕-减负",
+                    "enabled": true
+                },
+                {
+                    "name": "每周分享",
+                    "enabled": true
+                },
+                {
+                    "name": "超弦空间(深渊)",
+                    "enabled": true
+                },
+                {
+                    "name": "乐土每周商店购买",
+                    "enabled": false
+                },
+                {
+                    "name": "每周吼姆秘宝",
+                    "enabled": true
+                },
+                {
+                    "name": "每周答题-减负",
+                    "enabled": true
+                },
+                {
+                    "name": "每周虚境商店1星石的90张虚境挑战卷",
+                    "enabled": true
+                },
+                {
+                    "name": "记忆战场",
+                    "enabled": true
+                },
+                {
+                    "name": "往世乐土",
+                    "enabled": false
+                },
+                {
+                    "name": "日常奖励领取-第二次",
+                    "enabled": true
+                },
+                {
+                    "name": "日常活跃专领",
+                    "enabled": true
+                },
+                {
+                    "name": "凭证奖励尝试领取",
+                    "enabled": true
+                },
+                {
+                    "name": "邮箱",
+                    "enabled": true
+                },
+                {
+                    "name": "退出/关闭游戏",
+                    "enabled": false
+                }
+            ]
+        },
+        {
+            "name": "建议单独运行",
+            "label": "单独运行",
+            "task": [
+                {
+                    "name": "克莱茵在线乐土打灰",
+                    "enabled": true
+                },
+                {
+                    "name": "往世乐土",
+                    "enabled": true
+                },
+                {
+                    "name": "洗词缀",
+                    "enabled": false
+                },
+                {
+                    "name": "自动战斗",
+                    "enabled": false
+                },
+                {
+                    "name": "自动战斗pro",
+                    "enabled": false
+                },
+                {
+                    "name": "自动点击剧情跳过",
+                    "enabled": false
+                },
+                {
+                    "name": "只是测试",
+                    "enabled": false
+                }
+            ]
+        }
+    ]
 }
