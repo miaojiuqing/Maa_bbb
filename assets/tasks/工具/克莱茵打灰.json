@@ -28,9 +28,7 @@
             "cases": [
                 {
                     "name": "Yes",
-                    "pipeline_override": {
-                        "乐土刷级-接口层": {}
-                    }
+                    "pipeline_override": {}
                 },
                 {
                     "name": "No",
