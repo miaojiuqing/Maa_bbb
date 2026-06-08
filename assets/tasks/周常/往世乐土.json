@@ -99,6 +99,7 @@
             "cases": [
                 {
                     "name": "往世乐土-自定义战斗-不启用",
+                    "label": "不启用",
                     "pipeline_override": {
                         "往世乐土-战斗-已进入战斗-第二下": {
                             "enabled": false
@@ -157,6 +158,7 @@
             "cases": [
                 {
                     "name": "往世乐土-自定义战斗-不启用",
+                    "label": "不启用",
                     "pipeline_override": {
                         "往世乐土-战斗-已进入战斗-第三下": {
                             "enabled": false
@@ -215,6 +217,7 @@
             "cases": [
                 {
                     "name": "往世乐土-自定义战斗-不启用",
+                    "label": "不启用",
                     "pipeline_override": {
                         "往世乐土-战斗-已进入战斗-第四下": {
                             "enabled": false
@@ -345,6 +348,7 @@
             "cases": [
                 {
                     "name": "往世乐土-自定义战斗-不启用",
+                    "label": "不启用",
                     "pipeline_override": {
                         "往世乐土-战斗-已进入战斗-第二下": {
                             "enabled": false
@@ -403,6 +407,7 @@
             "cases": [
                 {
                     "name": "往世乐土-自定义战斗-不启用",
+                    "label": "不启用",
                     "pipeline_override": {
                         "往世乐土-战斗-已进入战斗-第三下": {
                             "enabled": false
@@ -461,6 +466,7 @@
             "cases": [
                 {
                     "name": "往世乐土-自定义战斗-不启用",
+                    "label": "不启用",
                     "pipeline_override": {
                         "往世乐土-战斗-已进入战斗-第四下": {
                             "enabled": false
