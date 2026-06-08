@@ -2,6 +2,7 @@
     "task": [
         {
             "name": "每日40晶体核心",
+            "label": "每日30晶体核心",
             "entry": "每日40晶体核心-开始任务层",
             "default_check": false,
             "group": [
