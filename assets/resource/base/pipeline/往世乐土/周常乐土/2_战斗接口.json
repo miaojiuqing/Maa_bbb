@@ -65,6 +65,7 @@
         ]
     },
     "往世乐土-战斗-已进入战斗-第一下": {
+        "recognition": "DirectHit",
         "action": "ClickKey",
         "key": [
             81 //大招Q
@@ -86,6 +87,7 @@
         ]
     },
     "往世乐土-战斗-已进入战斗-第二下": {
+        "recognition": "DirectHit",
         "action": "ClickKey",
         "key": [
             69 //武器技E
@@ -106,6 +108,7 @@
         ]
     },
     "往世乐土-战斗-已进入战斗-第三下": {
+        "recognition": "DirectHit",
         "action": "ClickKey",
         "key": [
             70 //星之环F
@@ -125,6 +128,7 @@
         ]
     },
     "往世乐土-战斗-已进入战斗-第四下": {
+        "recognition": "DirectHit",
         "action": "ClickKey",
         "key": [
             74 //普攻
