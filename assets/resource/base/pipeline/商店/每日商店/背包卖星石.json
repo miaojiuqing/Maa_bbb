@@ -1,0 +1,381 @@
+{
+    "卖星石-任务开始层": {
+        "next": [
+            "卖星石-总任务层",
+            "卖星石-已进入背包",
+            "[JumpBack]启动并进入游戏"
+        ]
+    },
+    "卖星石-总任务层": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    908,
+                    291,
+                    261,
+                    265
+                ],
+                "template": [
+                    "主页UI/休伯利安主界面.png"
+                ]
+            }
+        },
+        "next": [
+            "卖星石-已进入背包",
+            "[JumpBack]卖星石-点击进入背包",
+            "[JumpBack]点击叉叉"
+        ]
+    },
+    "卖星石-点击进入背包": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "green_mask": true,
+                "roi": [
+                    1083,
+                    125,
+                    160,
+                    173
+                ],
+                "template": [
+                    "主页UI/装备.png"
+                ]
+            }
+        },
+        "action": "Click"
+    },
+    "卖星石-已进入背包": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1168,
+                    627,
+                    112,
+                    93
+                ],
+                "template": [
+                    "商店/每日/卖星石/已进入背包.png"
+                ]
+            }
+        },
+        "action": "Click",
+        "next": [
+            "卖星石-准备挑选售卖",
+            "卖星石-已进入背包",
+            "[JumpBack]点击叉叉"
+        ]
+    },
+    "卖星石-准备挑选售卖": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1040,
+                    629,
+                    86,
+                    91
+                ],
+                "template": [
+                    "商店/每日/卖星石/准备挑选售卖.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    14,
+                    181,
+                    141,
+                    49
+                ]
+            }
+        },
+        "next": [
+            "卖星石-已选中星石售卖",
+            "卖星石-准备挑选售卖"
+        ]
+    },
+    "卖星石-已选中星石售卖": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    135,
+                    158,
+                    65,
+                    95
+                ],
+                "template": [
+                    "商店/每日/卖星石/已选中左侧.png"
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "准备兑换星石"
+        },
+        "next": [
+            "卖星石-已选中商品",
+            "[JumpBack]卖星石-点击选择货品"
+        ]
+    },
+    "卖星石-点击选择货品": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    169,
+                    71,
+                    1065,
+                    563
+                ],
+                "template": [
+                    "商店/每日/卖星石/换取物品/流体合金块.png"
+                ]
+            }
+        },
+        "action": "Click",
+        "post_delay": 500
+    },
+    "卖星石-已选中商品": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": "卖星石-点击选择货品",
+                "roi_offset": [
+                    35,
+                    -45,
+                    10,
+                    1
+                ],
+                "template": [
+                    "商店/每日/卖星石/已选中.png"
+                ]
+            }
+        },
+        "next": [
+            "卖星石-准备售卖",
+            "卖星石-已选中星石售卖"
+        ]
+    },
+    "卖星石-准备售卖": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    1015,
+                    630,
+                    86,
+                    90
+                ],
+                "template": [
+                    "商店/每日/卖星石/准备售卖.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1025,
+                    652,
+                    178,
+                    45
+                ]
+            }
+        },
+        "next": [
+            "卖星石-已进入售卖界面",
+            "卖星石-准备售卖"
+        ]
+    },
+    "卖星石-已进入售卖界面": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    917,
+                    249,
+                    120,
+                    107
+                ],
+                "template": [
+                    "商店/每日/卖星石/已进入售卖弹窗.png"
+                ]
+            }
+        },
+        "next": [
+            "卖星石-有加成",
+            "卖星石-无加成"
+        ]
+    },
+    "卖星石-滑动至最大值": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    454,
+                    552,
+                    259,
+                    73
+                ],
+                "template": [
+                    "商店/每日/卖星石/滑动按钮.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Swipe",
+            "param": {
+                "end": [
+                    700,
+                    600,
+                    1,
+                    1
+                ]
+            }
+        }
+    },
+    "卖星石-已滑动至最大值": {
+        "recognition": {
+            "type": "ColorMatch",
+            "param": {
+                "roi": [
+                    703,
+                    551,
+                    62,
+                    69
+                ],
+                "upper": [
+                    109,
+                    120,
+                    128
+                ],
+                "lower": [
+                    105,
+                    119,
+                    122
+                ],
+                "connected": true,
+                "count": 1000
+            }
+        },
+        "next": [
+            "卖星石-已滑动至最大值",
+            "[JumpBack]卖星石-滑动至最大值"
+        ]
+    },
+    "卖星石-无加成": {
+        "recognition": {
+            "type": "ColorMatch",
+            "param": {
+                "roi": [
+                    785,
+                    536,
+                    321,
+                    96
+                ],
+                "upper": [
+                    0,
+                    195,
+                    255
+                ],
+                "lower": [
+                    0,
+                    195,
+                    255
+                ],
+                "connected": true,
+                "count": 10000
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "无加成,放弃售卖"
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    1052,
+                    94,
+                    60,
+                    35
+                ]
+            }
+        },
+        "next": [
+            "成功进入游戏主菜单",
+            "[JumpBack]点击叉叉",
+            "[JumpBack]点击返回主菜单"
+        ]
+    },
+    "卖星石-有加成": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    758,
+                    347,
+                    265,
+                    78
+                ],
+                "template": [
+                    "商店/每日/卖星石/含有加成.png"
+                ]
+            }
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": "有加成,确认售卖"
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    809,
+                    556,
+                    268,
+                    53
+                ]
+            }
+        },
+        "post_delay": 500,
+        "next": [
+            "卖星石-奖励弹窗",
+            "卖星石-有加成"
+        ]
+    },
+    "卖星石-奖励弹窗": {
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    560,
+                    237,
+                    156,
+                    149
+                ],
+                "template": [
+                    "商店/每日/卖星石/奖励弹窗.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [
+                    572,
+                    526,
+                    129,
+                    42
+                ]
+            }
+        },
+        "next": [
+            "成功进入游戏主菜单",
+            "[JumpBack]点击叉叉",
+            "[JumpBack]点击返回主菜单"
+        ]
+    }
+}
