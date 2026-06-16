@@ -840,12 +840,12 @@
         "agentConfig": {
             "type": "object",
             "title": "代理配置",
-            "description": "包含子进程（AgentServer）的信息。💡 v2.5.0：Client 启动该子进程时应向环境注入 PI_INTERFACE_VERSION、PI_CLIENT_*、PI_VERSION、PI_CONTROLLER、PI_RESOURCE 等变量，详见 Project Interface 文档",
+            "description": "Agent 子进程的配置",
             "properties": {
                 "child_exec": {
                     "type": "string",
-                    "title": "子进程路径",
-                    "description": "子进程路径，为系统路径中可执行文件。如在环境变量中存在 Python 路径，可直接写 python。CWD 为 interface.json 所在目录"
+                    "title": "子进程可执行文件",
+                    "description": "子进程的可执行文件路径"
                 },
                 "child_args": {
                     "type": "array",
@@ -854,6 +854,11 @@
                     "items": {
                         "type": "string"
                     }
+                },
+                "embedded": {
+                    "type": "boolean",
+                    "title": "嵌入式模式",
+                    "description": "是否使用嵌入式模式运行 Agent。当为 true 时，Agent 将嵌入到 Client 进程中运行"
                 },
                 "identifier": {
                     "type": "string",
