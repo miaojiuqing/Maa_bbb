@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check Out Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - name: Download JSON schema files from MaaFramework
         run: |

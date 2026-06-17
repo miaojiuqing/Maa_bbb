@@ -28,7 +28,7 @@ jobs:
   meta:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -97,7 +97,7 @@ jobs:
 #    runs-on: ${{ matrix.runs-on }}
 #
 #    steps:
-#      - uses: actions/checkout@v4
+#      - uses: actions/checkout@v6
 #        with:
 #          submodules: true
 #
@@ -112,7 +112,7 @@ jobs:
 #        run: |
 #          python ./tools/install_python.py ./python
 #
-#      - uses: actions/upload-artifact@v4
+#      - uses: actions/upload-artifact@v7
 #        with:
 #          name: python-embed-${{ matrix.os }}-${{ matrix.arch }}
 #          path: ./python
@@ -146,14 +146,14 @@ jobs:
     runs-on: ${{ matrix.runs-on }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: true
 
       # install.py 从 deps / MFWCFA / 根目录查找 MaaFramework（bin + share/MaaAgentBinary）；MFWCFA 包体不含该布局，需单独拉取运行时。
       - name: Download MaaFramework
         id: download_maafw
-        uses: robinraju/release-downloader@v1
+        uses: robinraju/release-downloader@v1.13
         with:
           repository: MaaXYZ/MaaFramework
           fileName: "MAA-${{ matrix.os }}-${{ matrix.arch }}*"
@@ -190,7 +190,7 @@ jobs:
 
       - name: Download MFWCFA
         id: download_mfwcfa
-        uses: robinraju/release-downloader@v1
+        uses: robinraju/release-downloader@v1.13
         with:
           repository: overflow65537/MFW-PyQt6
           fileName: "MFW*-${{ matrix.os }}-${{ matrix.arch }}*"
@@ -271,12 +271,12 @@ jobs:
             echo "⚠️ No MFW.exe under install/; icon step had nothing to patch."
           fi
 
-#      - uses: actions/download-artifact@v4
+#      - uses: actions/download-artifact@v8
 #        with:
 #          name: python-embed-${{ matrix.os }}-${{ matrix.arch }}
 #          path: ./install/python
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: Maa_bbb-${{ matrix.os }}-${{ matrix.arch }}
           path: "install"
@@ -289,12 +289,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       - name: Generate a changelog
-        uses: orhun/git-cliff-action@v4
+        uses: orhun/git-cliff-action@v4.8.0
         id: git-cliff
         with:
           config: .github/cliff.toml
@@ -313,7 +313,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           path: assets
 
@@ -327,7 +327,7 @@ jobs:
             (cd $f && zip -r ../$f-${{ needs.meta.outputs.tag }}.zip .)
           done
 
-      - uses: softprops/action-gh-release@v2
+      - uses: softprops/action-gh-release@v3
         with:
           files: assets/*
           tag_name: ${{ needs.meta.outputs.tag }}
