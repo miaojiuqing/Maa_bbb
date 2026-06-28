@@ -42,6 +42,10 @@
 
 [点击链接加入群聊](<https://qm.qq.com/q/XrFQKgGvaI>)
 
+不出意外的话都是下载倒数第3个包：
+
+- 点击进入下载界面[releases](https://github.com/miaojiuqing/Maa_bbb/releases/) 包
+
 ---
 <details>
 <summary>PC端使用须知</summary>
