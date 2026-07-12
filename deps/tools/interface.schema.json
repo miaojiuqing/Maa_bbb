@@ -571,8 +571,7 @@
                                 "SendMessageWithCursorPos",
                                 "PostMessageWithCursorPos",
                                 "SendMessageWithWindowPos",
-                                "PostMessageWithWindowPos",
-                                "Interception"
+                                "PostMessageWithWindowPos"
                             ]
                         },
                         "keyboard": {
