@@ -341,3 +341,52 @@ jobs:
           gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan_release_note
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  docker:
+    name: Publish Docker image
+    if: ${{ needs.meta.outputs.is_release == 'true' && github.repository_owner == 'miaojiuqing' }}
+    needs:
+      - meta
+      - release
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate Docker metadata
+        id: metadata
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/miaojiuqing/maa_bbb
+          tags: |
+            type=raw,value=${{ needs.meta.outputs.tag }}
+            type=semver,pattern=v{{major}},value=${{ needs.meta.outputs.tag }},enable=${{ needs.meta.outputs.is_prerelease == 'false' }}
+            type=raw,value=latest,enable=${{ needs.meta.outputs.is_prerelease == 'false' }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/Dockerfile
+          platforms: linux/amd64
+          push: true
+          pull: true
+          tags: ${{ steps.metadata.outputs.tags }}
+          labels: ${{ steps.metadata.outputs.labels }}
+          cache-from: type=gha,scope=maa-bbb-docker-amd64
+          cache-to: type=gha,mode=max,scope=maa-bbb-docker-amd64
