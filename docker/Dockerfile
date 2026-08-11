@@ -123,6 +123,7 @@ RUN if [ ! -d /var/log ]; then rm -f /var/log; fi \
     && apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install --yes --no-install-recommends \
         adb \
+        cron \
         libdbus-1-3 \
         libegl1 \
         libgl1 \
@@ -168,8 +169,12 @@ ENV APP_NAME=Maa_bbb \
 
 COPY --from=builder /src/install/ /opt/maa-bbb/
 COPY docker/startapp.sh /startapp.sh
+COPY docker/cron-service.sh /opt/maa-bbb/cron-service.sh
 
 RUN chmod 755 /startapp.sh \
+    && install -D -m 755 /opt/maa-bbb/cron-service.sh /etc/services.d/cron/run \
+    && printf '0\n' > /etc/services.d/cron/uid \
+    && : > /etc/services.d/default/cron.dep \
     && mv /opt/maa-bbb/agent /opt/maa-bbb/agent-template \
     && ln -s /config/mfw/agent /opt/maa-bbb/agent \
     && ln -s /config/mfw /opt/maa-bbb/config \
