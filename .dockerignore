@@ -453,3 +453,8 @@ debug
 # Explicitly track schema directory for auto-sync
 !schema/
 !schema/**
+
+docker/Dockerfile
+docker/build.sh
+
+!docker/rootfs/etc/cont-init.d

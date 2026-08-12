@@ -168,16 +168,15 @@ ENV APP_NAME=Maa_bbb \
     XDG_DATA_HOME=/config/mfw/xdg/data
 
 COPY --from=builder /src/install/ /opt/maa-bbb/
-COPY docker/startapp.sh /startapp.sh
-COPY docker/cron-service.sh /opt/maa-bbb/cron-service.sh
+COPY docker/rootfs/ /
 
-RUN chmod 755 /startapp.sh \
+RUN chmod 755 /startapp.sh /etc/cont-init.d/90-agent-ownership.sh \
     && install -D -m 755 /opt/maa-bbb/cron-service.sh /etc/services.d/cron/run \
     && printf '0\n' > /etc/services.d/cron/uid \
     && : > /etc/services.d/default/cron.dep \
-    && mv /opt/maa-bbb/agent /opt/maa-bbb/agent-template \
-    && ln -s /config/mfw/agent /opt/maa-bbb/agent \
     && ln -s /config/mfw /opt/maa-bbb/config \
+    && mkdir -p /config \
+    && ln -s /config/mfw/android /config/.android \
     && ln -s /config/mfw/debug /opt/maa-bbb/debug \
     && rm -rf /opt/maa-bbb/resource/announcement \
     && ln -s /config/mfw/resource/announcement /opt/maa-bbb/resource/announcement \
