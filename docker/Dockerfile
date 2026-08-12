@@ -185,6 +185,8 @@ RUN chmod 755 /startapp.sh \
     && ln -s /config/mfw/release_notes /opt/maa-bbb/release_notes \
     && ln -s /config/mfw/report /opt/maa-bbb/report \
     && ln -s /config/mfw/bundle /opt/maa-bbb/bundle \
+    && rm -rf /var/spool/cron/crontabs \
+    && ln -s /config/mfw/crontabs /var/spool/cron/crontabs \
     && ! ldd /opt/maa-bbb/MFW | grep -q 'not found' \
     && ! ldd /opt/maa-bbb/libQt6Network.so.6 | grep -q 'not found' \
     && ! ldd /opt/maa-bbb/PySide6/qt-plugins/platforms/libqxcb.so | grep -q 'not found'

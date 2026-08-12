@@ -4,7 +4,6 @@ set -eu
 # Keep all runtime-generated state on the writable config volume.
 umask 027
 mkdir -p \
-    /config/mfw/.android \
     /config/mfw/android \
     /config/mfw/bundle \
     /config/mfw/debug \
@@ -13,7 +12,12 @@ mkdir -p \
     /config/mfw/resource/announcement \
     /config/mfw/xdg/cache \
     /config/mfw/xdg/config \
-    /config/mfw/xdg/data
+    /config/mfw/xdg/data \
+    /config/mfw/crontabs
+
+# MFW-PyQt6 stores Linux schedules in the current user's crontab. Keep the
+# spool directory ready for the optional persistent bind mount.
+chmod 1730 /config/mfw/crontabs
 
 # MFW converts embedded Agent decorators in place. Refresh a writable copy so
 # the image always retains the project's original Agent sources.
