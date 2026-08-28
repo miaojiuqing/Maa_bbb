@@ -176,16 +176,20 @@
         "post_delay": 500
     },
     "舰团每日委托-已进入委托回收界面": {
-        "roi": [
-            27,
-            604,
-            296,
-            79
-        ],
-        "recognition": "OCR",
-        "expected": [
-            "申请新委托"
-        ],
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    22,
+                    87,
+                    79,
+                    77
+                ],
+                "template": [
+                    "日常/舰团/每日舰团委托/已进入每日舰团委托界面.png"
+                ]
+            }
+        },
         "post_delay": 200,
         "next": [
             "舰团每日委托-不可以做委托",
