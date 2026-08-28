@@ -55,7 +55,8 @@
         "recognition": "TemplateMatch",
         "threshold": 0.75,
         "template": [
-            "战斗相关/乐土/崩落华/崩落华-可开大.png"
+            "战斗相关/乐土/崩落华/崩落华-可开大.png",
+            "战斗相关/乐土/崩落华/崩落华-可开大_星之环.png"
         ],
         "next": [
             "支援位12援助加人偶"
