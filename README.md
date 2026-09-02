@@ -41,7 +41,7 @@
 
 [点击链接加入群聊](<https://qm.qq.com/q/XrFQKgGvaI>)
 
-**<span style="color:red;font-size:2.8em">[点我下载！](https://github.com/miaojiuqing/Maa_bbb/releases/)</span>**
+### **别下到纯UI了 [点我下载](https://github.com/miaojiuqing/Maa_bbb/releases/)**
 
 如果你不知道你应该下载什么版本，请认准 x86_64 字样。
 
