@@ -45,6 +45,8 @@
 
 如果你不知道你应该下载什么版本，请认准 x86_64 字样。
 
+[点我下载](https://github.com/miaojiuqing/Maa_bbb/releases/) [点我下载](https://github.com/miaojiuqing/Maa_bbb/releases/) [点我下载](https://github.com/miaojiuqing/Maa_bbb/releases/) [点我下载](https://github.com/miaojiuqing/Maa_bbb/releases/) [点我下载](https://github.com/miaojiuqing/Maa_bbb/releases/) [点我下载](https://github.com/miaojiuqing/Maa_bbb/releases/) [点我下载](https://github.com/miaojiuqing/Maa_bbb/releases/) [点我下载](https://github.com/miaojiuqing/Maa_bbb/releases/) [点我下载](https://github.com/miaojiuqing/Maa_bbb/releases/) [点我下载](https://github.com/miaojiuqing/Maa_bbb/releases/) [点我下载](https://github.com/miaojiuqing/Maa_bbb/releases/) [点我下载](https://github.com/miaojiuqing/Maa_bbb/releases/) [点我下载](https://github.com/miaojiuqing/Maa_bbb/releases/) [点我下载](https://github.com/miaojiuqing/Maa_bbb/releases/)
+
 ---
 
 ## PC端使用须知
