@@ -97,6 +97,10 @@ def main() -> int:
 
     root = (args.root or interface_path.parent).resolve()
     comment = apply_resource_hashes(interface_path, root=root)
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
     print(comment)
     return 0
 

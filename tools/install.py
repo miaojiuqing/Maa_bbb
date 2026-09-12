@@ -206,6 +206,11 @@ if __name__ == "__main__":
 
     interface_path = install_path / "interface.json"
     comment = apply_resource_hashes(interface_path, root=install_path)
+    # Windows CI 默认控制台常为 cp1252，直接 print 中文资源名会炸
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
     print(comment)
 
     print(f"Install to {install_path} successfully.")
