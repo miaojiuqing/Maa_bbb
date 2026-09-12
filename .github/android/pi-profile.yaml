@@ -1,0 +1,42 @@
+# MaaFwApp 的 Project Interface 打包配方。
+# 所有相对路径均以本文件所在目录（.github/android）为基准。
+# assets 指向 CI 中组装好的扁平 PI 目录（interface.json 与 resource/ 同级）。
+assets: ../../build-android/pi-assets
+
+include:
+  - interface.json
+  - tasks/**
+  - resource/**
+  - agent/**
+  - logo.png
+  - LICENSE
+
+# Android 只使用 interface.json 中 type: Adb 的控制器；以下为桌面端专用资源。
+exclude:
+  - resource/resource_win32/**
+  - resource/resource_win32_jp/**
+  - agent/deploy/**
+  - agent/**/__pycache__/**
+  - agent/**/.gitignore
+
+agent:
+  sourceDir: ../../build-android/agent-dist
+  abi:
+    - arm64-v8a
+    - x86_64
+  runtimes:
+    - location: bundle
+      executable: bin/python3
+      args:
+        - -u
+        - agent/main.py
+      env:
+        PYTHONHOME: "{bundle}/prefix"
+        PYTHONPATH: "{bundle}/site-packages/pure.zip:{bundle}/site-packages"
+        LD_LIBRARY_PATH: "{bundle}/prefix/lib:{nativeLibs}"
+        MAAFW_BINARY_PATH: "{nativeLibs}"
+
+app:
+  id: bbb
+  label: 识宝小助手
+  icon: ../../logo.png

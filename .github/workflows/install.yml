@@ -13,15 +13,25 @@ on:
       - "**"
     paths:
       - ".github/workflows/install.yml"
+      - ".github/android/**"
+      - "tools/ci/**"
       - "assets/**"
+      - "agent/**"
       - "**.py"
+      - "requirements.txt"
+      - "logo.png"
   pull_request:
     branches:
       - "**"
     paths:
       - ".github/workflows/install.yml"
+      - ".github/android/**"
+      - "tools/ci/**"
       - "assets/**"
+      - "agent/**"
       - "**.py"
+      - "requirements.txt"
+      - "logo.png"
   workflow_dispatch:
 
 jobs:
@@ -234,6 +244,7 @@ jobs:
       - name: Install
         shell: bash
         run: |
+          python -m pip install -r requirements.txt
           python -m pip install json-with-comments
           python ./tools/install.py ${{ needs.meta.outputs.tag }} ${{ matrix.os }} ${{ matrix.arch }}
 
@@ -281,6 +292,175 @@ jobs:
           name: Maa_bbb-${{ matrix.os }}-${{ matrix.arch }}
           path: "install"
 
+  android:
+    needs: [meta]
+    runs-on: ubuntu-latest
+    name: Build Android APK
+    outputs:
+      variant: ${{ steps.signing.outputs.variant }}
+    env:
+      MAAFWAPP_REF: f20ff4ba0b53e83132da1015c7635ef16e8b5736
+      MAAFRAMEWORK_TAG: v5.12.3
+      PI_PROFILE: ${{ github.workspace }}/.github/android/pi-profile.yaml
+      ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+      ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+      ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+      ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+
+    steps:
+      - name: Checkout Maa_bbb
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          submodules: true
+
+      - name: Checkout MaaFwApp
+        uses: actions/checkout@v6
+        with:
+          repository: Aliothmoon/MaaFwApp
+          ref: ${{ env.MAAFWAPP_REF }}
+          path: build-android/MaaFwApp
+          fetch-depth: 1
+
+      - name: Use Maa_bbb version for the APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          # MaaFwApp 会从当前 Git 仓库生成 versionCode/versionName。移除嵌套 checkout
+          # 的 Git 元数据后，它会向上使用 Maa_bbb 的提交数与标签。
+          rm -rf build-android/MaaFwApp/.git
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Configure Maa_bbb Android package name
+        shell: bash
+        run: python .github/android/patch_maafwapp.py build-android/MaaFwApp
+
+      - name: Prepare Project Interface assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install -r requirements.txt
+          python -m pip install json-with-comments
+          python ./tools/configure.py
+
+          pi_root="$GITHUB_WORKSPACE/build-android/pi-assets"
+          rm -rf "$pi_root"
+          mkdir -p "$pi_root"
+          cp "$GITHUB_WORKSPACE/assets/interface.json" "$pi_root/interface.json"
+          cp -a "$GITHUB_WORKSPACE/assets/resource" "$pi_root/resource"
+          cp -a "$GITHUB_WORKSPACE/assets/tasks" "$pi_root/tasks"
+          cp -a "$GITHUB_WORKSPACE/agent" "$pi_root/agent"
+          cp "$GITHUB_WORKSPACE/logo.png" "$pi_root/logo.png"
+          cp "$GITHUB_WORKSPACE/LICENSE" "$pi_root/LICENSE"
+
+          python - <<'PY'
+          from pathlib import Path
+          import jsonc
+          import os
+
+          pi_root = Path(os.environ["GITHUB_WORKSPACE"]) / "build-android" / "pi-assets"
+          interface_path = pi_root / "interface.json"
+          with open(interface_path, encoding="utf-8") as handle:
+              interface = jsonc.load(handle)
+          tag = """${{ needs.meta.outputs.tag }}"""
+          interface["version"] = tag
+          interface["title"] = f"识宝小助手 Oᴗoಣ | 版本号:{tag} | 自动乐土激情开发中"
+          with open(interface_path, "w", encoding="utf-8") as handle:
+              jsonc.dump(interface, handle, ensure_ascii=False, indent=4)
+              handle.write("\n")
+          PY
+
+          python ./tools/ci/gen_resource_hash.py "$pi_root/interface.json" --root "$pi_root"
+
+      - name: Set up JDK
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: gradle
+
+      - name: Cache Android runtimes
+        uses: actions/cache@v5
+        with:
+          path: |
+            build-android/MaaFwApp/.maa-cache
+            build-android/MaaFwApp/.maafw
+          key: android-runtime-${{ runner.os }}-${{ env.MAAFRAMEWORK_TAG }}-${{ env.MAAFWAPP_REF }}
+
+      - name: Prepare MaaFramework and Python agent
+        working-directory: build-android/MaaFwApp
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/setup_maa_framework.py --tag "$MAAFRAMEWORK_TAG"
+          python scripts/build_agent_bundle.py \
+            --out "$GITHUB_WORKSPACE/build-android/agent-dist" \
+            --abi arm64-v8a \
+            --abi x86_64 \
+            --requirements "$GITHUB_WORKSPACE/requirements.txt"
+
+      - name: Configure Android signing
+        id: signing
+        shell: bash
+        run: |
+          set -euo pipefail
+          values=(
+            "$ANDROID_KEYSTORE_BASE64"
+            "$ANDROID_KEYSTORE_PASSWORD"
+            "$ANDROID_KEY_ALIAS"
+            "$ANDROID_KEY_PASSWORD"
+          )
+          configured=0
+          for value in "${values[@]}"; do
+            [[ -n "$value" ]] && configured=$((configured + 1))
+          done
+
+          if [[ "$configured" -eq 0 ]]; then
+            echo "No release keystore configured; building a debug-signed APK."
+            echo "gradle_task=assembleDebug" >> "$GITHUB_OUTPUT"
+            echo "variant=debug" >> "$GITHUB_OUTPUT"
+            echo "suffix=-debug" >> "$GITHUB_OUTPUT"
+          elif [[ "$configured" -ne 4 ]]; then
+            echo "Android signing secrets are only partially configured." >&2
+            echo "Set ANDROID_KEYSTORE_BASE64, ANDROID_KEYSTORE_PASSWORD, ANDROID_KEY_ALIAS and ANDROID_KEY_PASSWORD together." >&2
+            exit 1
+          else
+            keystore="$RUNNER_TEMP/android-release.jks"
+            printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$keystore"
+            test -s "$keystore"
+            echo "KEYSTORE_PATH=$keystore" >> "$GITHUB_ENV"
+            echo "KEYSTORE_PASSWORD=$ANDROID_KEYSTORE_PASSWORD" >> "$GITHUB_ENV"
+            echo "KEY_ALIAS=$ANDROID_KEY_ALIAS" >> "$GITHUB_ENV"
+            echo "KEY_PASSWORD=$ANDROID_KEY_PASSWORD" >> "$GITHUB_ENV"
+            echo "gradle_task=assembleRelease" >> "$GITHUB_OUTPUT"
+            echo "variant=release" >> "$GITHUB_OUTPUT"
+            echo "suffix=" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build APK
+        working-directory: build-android/MaaFwApp
+        shell: bash
+        run: |
+          set -euo pipefail
+          chmod +x ./gradlew
+          ./gradlew ":app:${{ steps.signing.outputs.gradle_task }}" --stacktrace
+
+          variant="${{ steps.signing.outputs.variant }}"
+          apk="$(find "app/build/outputs/apk/$variant" -maxdepth 1 -type f -name '*.apk' -print -quit)"
+          test -n "$apk"
+          mkdir -p "$GITHUB_WORKSPACE/android-dist"
+          cp "$apk" "$GITHUB_WORKSPACE/android-dist/Maa_bbb-android-${{ needs.meta.outputs.tag }}${{ steps.signing.outputs.suffix }}.apk"
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: Maa_bbb-android
+          path: android-dist/*.apk
+          if-no-files-found: error
+
   changelog:
     name: Generate changelog
     runs-on: ubuntu-latest
@@ -308,6 +488,7 @@ jobs:
     needs:
       - meta
       - install
+      - android
       - changelog
 #      - download-python-embed
     runs-on: ubuntu-latest
@@ -318,18 +499,38 @@ jobs:
           path: assets
 
       - run: |
+          set -euo pipefail
           cd assets
+          tag="${{ needs.meta.outputs.tag }}"
           for f in *; do
+            [[ -d "$f" ]] || continue
             if [[ "$f" == *"python-embed"* ]]; then
               echo "Skipping $f (python-embed)."
               continue
             fi
-            (cd $f && zip -r ../$f-${{ needs.meta.outputs.tag }}.zip .)
+            if [[ "$f" == *-android* ]]; then
+              found=0
+              for apk in "$f"/*.apk; do
+                [[ -f "$apk" ]] || continue
+                mv "$apk" .
+                found=1
+              done
+              if [[ "$found" -eq 0 ]]; then
+                echo "missing APK in $f"
+                ls -la "$f"
+                exit 1
+              fi
+            else
+              (cd "$f" && zip -r "../$f-${tag}.zip" .)
+            fi
           done
+          ls -la
 
       - uses: softprops/action-gh-release@v3
         with:
-          files: assets/*
+          files: |
+            assets/*.zip
+            assets/*.apk
           tag_name: ${{ needs.meta.outputs.tag }}
           body: ${{ needs.changelog.outputs.release_body }}
           draft: false
@@ -341,6 +542,40 @@ jobs:
           gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan_release_note
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  android_mirrorchyan:
+    name: Upload Android APK to MirrorChyan
+    if: ${{ needs.meta.outputs.is_release == 'true' && needs.android.outputs.variant == 'release' }}
+    needs: [meta, android, release]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: Maa_bbb-android
+          path: android-dist
+
+      - name: Locate Android APK
+        id: apk
+        shell: bash
+        run: |
+          set -euo pipefail
+          apk="$(find android-dist -type f -name '*.apk' -print -quit)"
+          test -n "$apk"
+          echo "path=$apk" >> "$GITHUB_OUTPUT"
+
+      - name: Upload Android APK
+        uses: MirrorChyan/uploading-action@v1
+        with:
+          filetype: local
+          filename: ${{ steps.apk.outputs.path }}
+          mirrorchyan_rid: Maa_bbb_MaaFwApp
+          version_name: ${{ needs.meta.outputs.tag }}
+          os: android
+
+          owner: miaojiuqing
+          repo: Maa_bbb
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          upload_token: ${{ secrets.ANDROID_MIRRORCHYANUPLOADTOKEN }}
 
   docker:
     name: Publish Docker image
