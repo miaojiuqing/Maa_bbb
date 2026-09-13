@@ -11,7 +11,7 @@ RELATIVE_TARGET = Path(
     "AndroidApplicationConventionPlugin.kt"
 )
 OLD = 'private const val BASE_APPLICATION_ID = "com.aliothmoon.maafw"'
-NEW = 'private const val BASE_APPLICATION_ID = "com.miaojiuqing.maafw"'
+NEW = 'private const val BASE_APPLICATION_ID = "com.maafw.mq"'
 
 
 def main() -> int:
@@ -38,7 +38,7 @@ def main() -> int:
             "请检查上游构建逻辑是否已经变化。"
         )
 
-    print("Android applicationId base: com.miaojiuqing.maafw")
+    print("Android applicationId base: com.maafw.mq")
     return 0
 
 

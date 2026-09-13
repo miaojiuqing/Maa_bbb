@@ -37,6 +37,6 @@ agent:
         MAAFW_BINARY_PATH: "{nativeLibs}"
 
 app:
-  id: bbb
+  id: senti
   label: 识宝小助手
   icon: ../../logo.png
