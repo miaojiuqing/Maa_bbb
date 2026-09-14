@@ -432,6 +432,16 @@ jobs:
             keystore="$RUNNER_TEMP/android-release.jks"
             printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$keystore"
             test -s "$keystore"
+
+            # 解码后立刻验一次：keystore 读不出来时，失败会晚到 :app:packageRelease 才爆，
+            # 那里只抛 KeytoolException + EOFException，分不清是 base64 截断、二次编码还是密码/别名不对
+            echo "keystore: $(stat -c%s "$keystore") bytes | base64: ${#ANDROID_KEYSTORE_BASE64} chars | sha256: $(sha256sum "$keystore" | cut -d' ' -f1)"
+            if ! keytool -list -keystore "$keystore" -storepass "$ANDROID_KEYSTORE_PASSWORD" -alias "$ANDROID_KEY_ALIAS" >/dev/null 2>&1; then
+              echo "❌ keystore 里读不出该别名：base64 内容不是完整的 keystore 文件，或密码/别名不匹配" >&2
+              echo "   本地用同一条命令自检：keytool -list -keystore <你的.jks> -storepass <密码> -alias <别名>" >&2
+              exit 1
+            fi
+
             echo "KEYSTORE_PATH=$keystore" >> "$GITHUB_ENV"
             echo "KEYSTORE_PASSWORD=$ANDROID_KEYSTORE_PASSWORD" >> "$GITHUB_ENV"
             echo "KEY_ALIAS=$ANDROID_KEY_ALIAS" >> "$GITHUB_ENV"
