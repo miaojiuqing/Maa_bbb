@@ -435,12 +435,21 @@ jobs:
 
             # 解码后立刻验一次：keystore 读不出来时，失败会晚到 :app:packageRelease 才爆，
             # 那里只抛 KeytoolException + EOFException，分不清是 base64 截断、二次编码还是密码/别名不对
+            # secret 的值读不回来，所以只打长度：长度对不上就说明填错/截断了
             echo "keystore: $(stat -c%s "$keystore") bytes | base64: ${#ANDROID_KEYSTORE_BASE64} chars | sha256: $(sha256sum "$keystore" | cut -d' ' -f1)"
-            if ! keytool -list -keystore "$keystore" -storepass "$ANDROID_KEYSTORE_PASSWORD" -alias "$ANDROID_KEY_ALIAS" >/dev/null 2>&1; then
-              echo "❌ keystore 里读不出该别名：base64 内容不是完整的 keystore 文件，或密码/别名不匹配" >&2
-              echo "   本地用同一条命令自检：keytool -list -keystore <你的.jks> -storepass <密码> -alias <别名>" >&2
+            echo "store password: ${#ANDROID_KEYSTORE_PASSWORD} chars | key password: ${#ANDROID_KEY_PASSWORD} chars | same: $([[ "$ANDROID_KEY_PASSWORD" == "$ANDROID_KEYSTORE_PASSWORD" ]] && echo yes || echo no)"
+
+            if ! keytool -list -keystore "$keystore" -storepass "$ANDROID_KEYSTORE_PASSWORD" >/dev/null 2>&1; then
+              echo "❌ 密钥库打不开：ANDROID_KEYSTORE_PASSWORD 与 keystore 不匹配（长度见上一行）" >&2
               exit 1
             fi
+
+            aliases="$(keytool -list -keystore "$keystore" -storepass "$ANDROID_KEYSTORE_PASSWORD" 2>/dev/null | awk -F',' '/PrivateKeyEntry/ {print $1}' | tr '\n' ' ')"
+            if ! keytool -list -keystore "$keystore" -storepass "$ANDROID_KEYSTORE_PASSWORD" -alias "$ANDROID_KEY_ALIAS" >/dev/null 2>&1; then
+              echo "❌ 密钥库能打开，但没有 ANDROID_KEY_ALIAS 指定的那个别名；keystore 里实际是：${aliases:-<无>}" >&2
+              exit 1
+            fi
+            echo "keystore aliases: ${aliases:-<无>}"
 
             echo "KEYSTORE_PATH=$keystore" >> "$GITHUB_ENV"
             echo "KEYSTORE_PASSWORD=$ANDROID_KEYSTORE_PASSWORD" >> "$GITHUB_ENV"
