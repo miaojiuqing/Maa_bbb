@@ -92,6 +92,7 @@ ARG MFW_VERSION=v4.8.23
 # libatomic1/libstdc++6/libgomp1，为一个可选字段不值得把 C++ 运行时拉进构建阶段
 RUN apt-get update \
     && apt-get install --yes --no-install-recommends \
+        libatomic1 \
         python3 \
         python3-pip \
     && rm -rf /var/lib/apt/lists/* \
@@ -131,6 +132,7 @@ RUN if [ ! -d /var/log ]; then rm -f /var/log; fi \
         libegl1 \
         libgl1 \
         libglib2.0-0 \
+        libatomic1 \
         libgomp1 \
         libgssapi-krb5-2 \
         libice6 \
