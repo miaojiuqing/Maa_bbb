@@ -369,6 +369,9 @@ jobs:
           tag = """${{ needs.meta.outputs.tag }}"""
           interface["version"] = tag
           interface["title"] = f"识宝小助手 Oᴗoಣ | 版本号:{tag} | 自动乐土激情开发中"
+          # APK 上传到 MirrorChyan 的 Maa_bbb_exec；而 app 的更新检查读的是 PI 里的 rid，
+          # 不改的话它会去查桌面那个 Maa_bbb，拿不到 android 资源（只影响 Android 包，桌面端 interface.json 不动）
+          interface["mirrorchyan_rid"] = "Maa_bbb_exec"
           with open(interface_path, "w", encoding="utf-8") as handle:
               jsonc.dump(interface, handle, ensure_ascii=False, indent=4)
               handle.write("\n")
@@ -587,7 +590,7 @@ jobs:
         with:
           filetype: local
           filename: ${{ steps.apk.outputs.path }}
-          mirrorchyan_rid: Maa_bbb_MaaFwApp
+          mirrorchyan_rid: Maa_bbb_exec
           version_name: ${{ needs.meta.outputs.tag }}
           os: android
 
