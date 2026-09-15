@@ -91,6 +91,7 @@ ARG MFW_VERSION=v4.8.23
 # 它的 wheel 自带 MaaFramework 库（maa/bin），所以这里不需要 deps/
 RUN apt-get update \
     && apt-get install --yes --no-install-recommends \
+        libatomic1 \
         python3 \
         python3-pip \
     && rm -rf /var/lib/apt/lists/* \
@@ -130,6 +131,7 @@ RUN if [ ! -d /var/log ]; then rm -f /var/log; fi \
         libegl1 \
         libgl1 \
         libglib2.0-0 \
+        libatomic1 \
         libgomp1 \
         libgssapi-krb5-2 \
         libice6 \
