@@ -18,7 +18,6 @@
     "mirrorchyan_multiplatform": true,
     "welcome": "欢迎舰长使用识宝小助手Oᴗoಣ",
     "controller": [
-        //我是分割线
         {
             "name": "桌面端",
             "type": "Win32",
@@ -32,12 +31,10 @@
                 "keyboard": "Seize"
             }
         },
-        //我是分割线,改完记得添加该加的逗号，该删的也要删哦，详见视频
         {
             "name": "安卓端",
             "type": "Adb"
         }
-        //我是分割线
     ],
     "resource": [
         {
