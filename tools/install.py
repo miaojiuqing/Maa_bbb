@@ -215,7 +215,7 @@ if __name__ == "__main__":
 
         comment = apply_resource_hashes(install_path / "interface.json", root=install_path)
     except Exception as error:
-        print(f"⚠️ 跳过 resource.hash 生成（{type(error).__name__}: {error}）")
+        print(f"⚠️ 跳过 resource.hash 生成（{type(error).__name__}: {error}）；本产物不带 hash 校验")
     else:
         print(comment)
 
