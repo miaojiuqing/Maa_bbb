@@ -87,14 +87,15 @@ FROM debian:12 AS builder
 ARG TARGETARCH
 ARG MFW_VERSION=v4.8.23
 
-# MaaFw 提供 tools/install.py 生成 resource.hash 时 import 的 maa 模块；
-# 它的 wheel 自带 MaaFramework 库（maa/bin），所以这里不需要 deps/
+# 只装打包必需的工具，不装 MaaFw：tools/install.py 的 resource.hash 步骤缺 maa 时会自动跳过
+# （见该文件里的 try/except）。maa 的 wheel 自带 native 库，在极简 builder 里 dlopen 还要
+# libatomic1/libstdc++6/libgomp1，为一个可选字段不值得把 C++ 运行时拉进构建阶段
 RUN apt-get update \
     && apt-get install --yes --no-install-recommends \
         python3 \
         python3-pip \
     && rm -rf /var/lib/apt/lists/* \
-    && python3 -m pip install --no-cache-dir --break-system-packages json-with-comments MaaFw
+    && python3 -m pip install --no-cache-dir --break-system-packages json-with-comments
 
 WORKDIR /src
 COPY . /src
