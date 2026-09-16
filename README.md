@@ -226,12 +226,21 @@
 
 提问前请检查
 
-模拟器:
+### 模拟器
 
 - 模拟器的分辨率是否为16:9
 - 任务名中带“减负”字样的任务你是否解锁减负功能
 
-PC端:
+### Android(安卓)
+
+<details>
+<summary>安卓版使用教程参考</summary>
+
+  ![安卓版教程.jpg](https://image.989464244.xyz/file/BQACAgUAAyEGAATrAAHMTwADEGqqVoBHRZQjPMkxxjiIRcf4dCmCAAJ1IAAC_uNQVeJCEKEic1NVPQQ.jpg)
+
+</details>
+
+### PC端
 
 - 左上角的资源选择是否为“桌面端”
 - 游戏分辨率是否为16:9
@@ -240,10 +249,8 @@ PC端:
 - 软件右上角的窗口选择是否为崩坏3
 - 请检查您启动时是否是以管理员方式启动（右键 MFW.exe -> 使用管理员权限运行）
 - 请通过截图测试查看当前截图是否正常，若非正常请自行更换截图方式
-
-反馈问题请附上日志文件 `debug/maafw.log`以及问题界面的截图
-
-提示“应用程序错误”，一般是缺少运行库，请尝试安装 [vc_redist](https://aka.ms/vs/17/release/vc_redist.x64.exe)
+- 反馈问题请附上日志文件 `debug/maafw.log`以及问题界面的截图
+- 提示“应用程序错误”，一般是缺少运行库，请尝试安装 [vc_redist](https://aka.ms/vs/17/release/vc_redist.x64.exe)
 
 ### QA
 
