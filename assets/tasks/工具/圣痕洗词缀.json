@@ -13,6 +13,26 @@
                 "严格模式",
                 "需要词缀"
             ]
+        },
+        {
+            "name": "洗词缀V2",
+            "entry": "洗词缀V2",
+            "label": "圣痕洗词缀（智能版）",
+            "group": [
+                "单独运行工具"
+            ],
+            "description": "启动方式：先在游戏里点一次「词缀重构」，停在重构结果页（能看到「旧词缀技能 / 新词缀技能」和「保留旧词缀 / 写入新词缀」）再开始任务。\n词缀锁模式请先在定向重构页锁好要保留的那条词缀，再点「词缀重构」进结果页。\n\n各选项：\n洗词缀模式：直接洗词缀＝普通重构；词缀锁洗词缀＝定向重构。\n确认使用词缀锁：词缀锁模式必须选「是」才会开始。\n单条高攻：打开后，任意一条词缀达到「单条达标值」也算达标；关闭则只看两条之和。\n角色属性 / 武器类别：选佩戴该圣痕的角色。\n目标总攻击力：两条有效攻击力之和要达到的值。\n重构次数上限：最多重构多少次，防止一直刷下去。",
+            "default_check": false,
+            "option": [
+                "洗词缀模式",
+                "确认使用词缀锁",
+                "单条高攻",
+                "单条达标值",
+                "角色属性",
+                "武器类别",
+                "目标总攻击力",
+                "重构次数上限"
+            ]
         }
     ],
     "option": {
@@ -130,6 +150,271 @@
                             ]
                         }
                     }
+                }
+            }
+        },
+        "洗词缀模式": {
+            "type": "select",
+            "label": "洗词缀模式",
+            "description": "选择用哪种重构：直接洗词缀＝普通重构；词缀锁洗词缀＝定向重构。",
+            "default_case": "直接洗词缀",
+            "cases": [
+                {
+                    "name": "直接洗词缀",
+                    "label": "直接洗词缀（普通重构）",
+                    "pipeline_override": {
+                        "洗词缀V2-参数-模式": {
+                            "custom_action_param": "直接洗词缀"
+                        }
+                    }
+                },
+                {
+                    "name": "词缀锁洗词缀",
+                    "label": "词缀锁洗词缀（定向重构）",
+                    "pipeline_override": {
+                        "洗词缀V2-参数-模式": {
+                            "custom_action_param": "词缀锁洗词缀"
+                        }
+                    }
+                }
+            ]
+        },
+        "确认使用词缀锁": {
+            "type": "switch",
+            "label": "确认使用词缀锁",
+            "description": "防误触：只有词缀锁模式需要选「是」，选了才会开始，其余模式不看这一项。",
+            "default_case": "No",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是",
+                    "pipeline_override": {
+                        "洗词缀V2-参数-确认词缀锁": {
+                            "custom_action_param": "Yes"
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "否（默认）",
+                    "pipeline_override": {
+                        "洗词缀V2-参数-确认词缀锁": {
+                            "custom_action_param": "No"
+                        }
+                    }
+                }
+            ]
+        },
+        "单条高攻": {
+            "type": "switch",
+            "label": "单条高攻",
+            "description": "打开后，在「两条之和」之外再加一条判据：任意一条词缀达到「单条达标值」也算达标。词缀锁模式会忽略这一项。",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "label": "是（默认）",
+                    "pipeline_override": {
+                        "洗词缀V2-参数-单条高攻": {
+                            "custom_action_param": "Yes"
+                        }
+                    }
+                },
+                {
+                    "name": "No",
+                    "label": "否（只看两条之和）",
+                    "pipeline_override": {
+                        "洗词缀V2-参数-单条高攻": {
+                            "custom_action_param": "No"
+                        }
+                    }
+                }
+            ]
+        },
+        "单条达标值": {
+            "type": "input",
+            "label": "单条达标值",
+            "description": "单条高攻打开时生效：任意一条词缀的有效攻击力达到这个值即达标。",
+            "inputs": [
+                {
+                    "name": "单条达标值",
+                    "label": "单条达标攻击力",
+                    "description": "任意一条词缀达到这个值即达标。",
+                    "default": "22.9",
+                    "pipeline_type": "string",
+                    "verify": "^\\d+(\\.\\d+)?$",
+                    "pattern_msg": "请填数字，例如 22.9"
+                }
+            ],
+            "pipeline_override": {
+                "洗词缀V2-参数-单条达标值": {
+                    "custom_action_param": "{单条达标值}"
+                }
+            }
+        },
+        "角色属性": {
+            "type": "select",
+            "label": "角色属性",
+            "description": "选佩戴该圣痕的角色属性，用来判断属性词条算不算有效。",
+            "default_case": "异能",
+            "cases": [
+                {
+                    "name": "生物",
+                    "label": "生物",
+                    "pipeline_override": {
+                        "洗词缀V2-参数-角色属性": {
+                            "custom_action_param": "生物"
+                        }
+                    }
+                },
+                {
+                    "name": "机械",
+                    "label": "机械",
+                    "pipeline_override": {
+                        "洗词缀V2-参数-角色属性": {
+                            "custom_action_param": "机械"
+                        }
+                    }
+                },
+                {
+                    "name": "异能",
+                    "label": "异能",
+                    "pipeline_override": {
+                        "洗词缀V2-参数-角色属性": {
+                            "custom_action_param": "异能"
+                        }
+                    }
+                },
+                {
+                    "name": "量子",
+                    "label": "量子",
+                    "pipeline_override": {
+                        "洗词缀V2-参数-角色属性": {
+                            "custom_action_param": "量子"
+                        }
+                    }
+                },
+                {
+                    "name": "虚数",
+                    "label": "虚数",
+                    "pipeline_override": {
+                        "洗词缀V2-参数-角色属性": {
+                            "custom_action_param": "虚数"
+                        }
+                    }
+                },
+                {
+                    "name": "星尘",
+                    "label": "星尘",
+                    "pipeline_override": {
+                        "洗词缀V2-参数-角色属性": {
+                            "custom_action_param": "星尘"
+                        }
+                    }
+                }
+            ]
+        },
+        "武器类别": {
+            "type": "select",
+            "label": "武器类别",
+            "description": "选该角色的武器类别，一组即可，程序会自动匹配这一组里的所有武器。",
+            "default_case": "弓箭、环刃",
+            "cases": [
+                {
+                    "name": "大剑、拳套",
+                    "label": "大剑、拳套",
+                    "pipeline_override": {
+                        "洗词缀V2-参数-武器类别": {
+                            "custom_action_param": "大剑、拳套"
+                        }
+                    }
+                },
+                {
+                    "name": "太刀、十字架、链刃",
+                    "label": "太刀、十字架、链刃",
+                    "pipeline_override": {
+                        "洗词缀V2-参数-武器类别": {
+                            "custom_action_param": "太刀、十字架、链刃"
+                        }
+                    }
+                },
+                {
+                    "name": "弓箭、环刃",
+                    "label": "弓箭、环刃",
+                    "pipeline_override": {
+                        "洗词缀V2-参数-武器类别": {
+                            "custom_action_param": "弓箭、环刃"
+                        }
+                    }
+                },
+                {
+                    "name": "重炮、镰刀、火箭锤",
+                    "label": "重炮、镰刀、火箭锤",
+                    "pipeline_override": {
+                        "洗词缀V2-参数-武器类别": {
+                            "custom_action_param": "重炮、镰刀、火箭锤"
+                        }
+                    }
+                },
+                {
+                    "name": "梭镖、驱动核心、机关杖",
+                    "label": "梭镖、驱动核心、机关杖",
+                    "pipeline_override": {
+                        "洗词缀V2-参数-武器类别": {
+                            "custom_action_param": "梭镖、驱动核心、机关杖"
+                        }
+                    }
+                },
+                {
+                    "name": "双枪、骑枪、速射弩",
+                    "label": "双枪、骑枪、速射弩",
+                    "pipeline_override": {
+                        "洗词缀V2-参数-武器类别": {
+                            "custom_action_param": "双枪、骑枪、速射弩"
+                        }
+                    }
+                }
+            ]
+        },
+        "目标总攻击力": {
+            "type": "input",
+            "label": "目标总攻击力",
+            "description": "两条有效攻击力之和要达到的值，达到就结束。",
+            "inputs": [
+                {
+                    "name": "目标攻击力",
+                    "label": "目标总攻击力",
+                    "description": "两条有效攻击力之和的目标值。",
+                    "default": "42",
+                    "pipeline_type": "string",
+                    "verify": "^\\d+(\\.\\d+)?$",
+                    "pattern_msg": "请填数字，例如 42"
+                }
+            ],
+            "pipeline_override": {
+                "洗词缀V2-参数-目标总攻击力": {
+                    "custom_action_param": "{目标攻击力}"
+                }
+            }
+        },
+        "重构次数上限": {
+            "type": "input",
+            "label": "重构次数上限",
+            "description": "最多重构多少次，防止一直刷下去。",
+            "inputs": [
+                {
+                    "name": "重构上限",
+                    "label": "重构次数上限",
+                    "description": "最多重构次数。",
+                    "default": "500",
+                    "pipeline_type": "string",
+                    "verify": "^\\d+$",
+                    "pattern_msg": "请填正整数，例如 500"
+                }
+            ],
+            "pipeline_override": {
+                "洗词缀V2-参数-重构次数上限": {
+                    "custom_action_param": "{重构上限}"
                 }
             }
         }
