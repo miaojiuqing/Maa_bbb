@@ -5,6 +5,9 @@ from agent.custom.action.IDFRole import RecognitionRole
 
 from agent.custom.action.Notice import Notice
 
+# 圣痕洗词缀 V2（智能版：下拉框选属性/武器类别 + 目标总攻击力）
+from agent.custom.action.AffixRerollV2 import AffixRerollV2, AffixRerollV2ParamHolder
+
 from agent.custom.action.Role.FieryWishingStar import FieryWishingStar
 from agent.custom.action.Role.SpinaAstera import SpinaAstera
 from agent.custom.action.Role.HerrscherOfTruth import HerrscherOfTruth
@@ -99,6 +102,22 @@ class LoveElf_Cls(LoveElf):
 
 @AgentServer.custom_action("FengHuangOfVicissitude")
 class FengHuangOfVicissitude_Cls(FengHuangOfVicissitude):
+    def __init__(self):
+        super().__init__()
+        print(f"{self.__class__.__name__} 初始化")
+
+
+@AgentServer.custom_action("AffixRerollV2")
+# 圣痕洗词缀 V2（智能版）
+class AffixRerollV2_Cls(AffixRerollV2):
+    def __init__(self):
+        super().__init__()
+        print(f"{self.__class__.__name__} 初始化")
+
+
+@AgentServer.custom_action("AffixRerollV2ParamHolder")
+# 界面参数的载体节点（空动作）
+class AffixRerollV2ParamHolder_Cls(AffixRerollV2ParamHolder):
     def __init__(self):
         super().__init__()
         print(f"{self.__class__.__name__} 初始化")
