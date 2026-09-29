@@ -105,6 +105,18 @@
         "action": {
             "type": "Click" //这个点击动作单纯为了多发条通知（
         },
+        // AUTO-MAS 按识别到的文字区分停服维护 / 需更新，请勿删除
+        // 这里的两段文字要和上面 expected 里的对得上
+        "attach": {
+            "auto_mas": {
+                "server_maintenance": [
+                    "停服维护中"
+                ],
+                "client_update_required": [
+                    "发现新版本"
+                ]
+            }
+        },
         "focus": {
             "Node.Action.Succeeded": "崩坏三需前往客户端进行更新或是停服维护中",
             "Node.Recognition.Succeeded": "停服维护中" //确实不该输出这个，我改一下通知和MAS那边的模版吧
