@@ -1,10 +1,12 @@
 from pathlib import Path
 
-import shutil
-import sys
 import json
 import jsonc
+import os
 import platform
+import shutil
+import sys
+
 from configure import configure_ocr_model
 
 working_dir = Path(__file__).parent.parent
@@ -130,6 +132,23 @@ def install_resource():
     with open(install_path / "interface.json", "w", encoding="utf-8") as f:
         jsonc.dump(interface, f, ensure_ascii=False, indent=4)
 
+    # 对齐 MAA_Punish tools/ci/install.py：资源就位后立刻生成 hash，再叠 MFW
+    # （跨平台字节/换行差异会导致不一致，须在当前构建平台上计算）
+    if os.environ.get("SKIP_RESOURCE_HASH", "").strip().lower() in (
+        "1",
+        "true",
+        "yes",
+    ):
+        print("SKIP_RESOURCE_HASH set; skip resource.hash generation")
+    else:
+        sys.path.insert(0, str(Path(__file__).resolve().parent / "ci"))
+        from gen_resource_hash import apply_resource_hashes
+
+        comment = apply_resource_hashes(
+            install_path / "interface.json", root=install_path
+        )
+        print(comment)
+
 
 def install_chores():
     for file in ["README.md", "LICENSE", "logo.png", "CFA_setting.json"]:
@@ -194,29 +213,16 @@ def install_agent():
 
 
 if __name__ == "__main__":
-    install_deps()
-    install_resource()
-    install_chores()
-    install_agent()
-    # install_open_bat()  # ✅ 新增这一行
-
-    # 在当前构建平台上生成 hash（跨平台字节/换行差异会导致不一致）
-    # hash 是 interface.json 的可选字段，不是打包的必需品：算不出来（例如容器里没有 maa
-    # 或它的 native 依赖）就警告跳过，不该让整个打包失败
-    # Windows CI 默认控制台常为 cp1252，先切 UTF-8，否则下面任何一行中文都会炸
+    # Windows CI 默认控制台常为 cp1252，先切 UTF-8，否则中文输出会炸
     try:
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     except Exception:
         pass
 
-    try:
-        sys.path.insert(0, str(Path(__file__).resolve().parent / "ci"))
-        from gen_resource_hash import apply_resource_hashes
-
-        comment = apply_resource_hashes(install_path / "interface.json", root=install_path)
-    except Exception as error:
-        print(f"⚠️ 跳过 resource.hash 生成（{type(error).__name__}: {error}）；本产物不带 hash 校验")
-    else:
-        print(comment)
+    install_deps()
+    install_resource()
+    install_chores()
+    install_agent()
+    # install_open_bat()  # ✅ 新增这一行
 
     print(f"Install to {install_path} successfully.")

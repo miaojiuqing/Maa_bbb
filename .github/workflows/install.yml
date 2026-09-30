@@ -244,10 +244,17 @@ jobs:
       - name: Install
         shell: bash
         run: |
+          set -euo pipefail
           python -m pip install -r requirements.txt
           python -m pip install json-with-comments
+          # 对齐 MAA_Punish：install 内先复制资源并生成 resource.hash
           python ./tools/install.py ${{ needs.meta.outputs.tag }} ${{ matrix.os }} ${{ matrix.arch }}
 
+      # 对齐 MAA_Punish：资源 hash 完成后再叠 MFW（不得覆盖 resource/interface）
+      - name: Install MFW
+        shell: bash
+        run: |
+          set -euo pipefail
           if [ -d "MFWCFA" ]; then
             echo "Copying MFWCFA files to install directory..."
             mkdir -p install
