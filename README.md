@@ -312,7 +312,7 @@
 2. [M9A](https://github.com/MAA1999/M9A)借鉴学习了不少思路，不愧是最佳实践.jpg
 3. [HonkaiHelper](https://github.com/Aues6uen11Z/HonkaiHelper)我觉得这个项目很棒，学习了前置准备和一些日常任务完成方式
 4. [MAA_Punish](https://github.com/overflow65537/MAA_Punish)同款自动战斗，原汁原味（因为是E佬写的战斗框架所以包原汁原味的）
-5. [MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia/) — 社区 SweetSmellFox 编写的基于Avalonia的GUI，内置MaaFramework直接控制任务流程
+5. ~~[MFAAvalonia](https://github.com/SweetSmellFox/MFAAvalonia/) — 社区 SweetSmellFox 编写的基于Avalonia的GUI，内置MaaFramework直接控制任务流程~~
 6. [MFW-PyQt6](https://github.com/overflow65537/MFW-PyQt6) — 社区 overflow65537 编写的PyQt6 GUI，功能丰富，支持自定义任务流程
 7. [AUTO-MAS](https://github.com/AUTO-MAS-Project/AUTO-MAS) — 多脚本统一管理平台，始于MAA但不止MAA，支持集中管理多个游戏自动化脚本
 
