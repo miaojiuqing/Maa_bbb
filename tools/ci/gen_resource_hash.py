@@ -116,7 +116,14 @@ def apply_resource_hashes(
     *,
     root: Path = REPO_ROOT,
     stabilize: bool = True,
+    write_hash: bool = False,
 ) -> str:
+    """计算 resource hash。
+
+    默认只打印、不写入 interface.json：maafw 的 hash 依赖 directory 枚举顺序，
+    CI 构建机与用户解压后的顺序无法可靠对齐，写入反而会误报。
+    需要写入时传 write_hash=True（或 CLI --write-hash）。
+    """
     with open(interface_path, encoding="utf-8") as handle:
         interface = jsonc.load(handle)
 
@@ -137,7 +144,11 @@ def apply_resource_hashes(
 
         paths = [str(path) for path in raw_paths]
         hash_value = compute_resource_hash(paths, root)
-        entry["hash"] = hash_value
+
+        if write_hash:
+            entry["hash"] = hash_value
+        else:
+            entry.pop("hash", None)
 
         name = entry.get("name")
         comment_lines.append((str(name) if name else "resource", hash_value))
@@ -169,6 +180,11 @@ def main() -> int:
         action="store_true",
         help="跳过资源目录稳定化（仅调试用）",
     )
+    parser.add_argument(
+        "--write-hash",
+        action="store_true",
+        help="将 hash 写入 interface.json（默认只打印不写入，避免跨机器误报）",
+    )
     args = parser.parse_args()
 
     interface_path = args.interface.resolve()
@@ -181,6 +197,7 @@ def main() -> int:
         interface_path,
         root=root,
         stabilize=not args.no_stabilize,
+        write_hash=args.write_hash,
     )
     try:
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
