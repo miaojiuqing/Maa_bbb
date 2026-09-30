@@ -328,6 +328,8 @@
 
 ## Star数量历史趋势
 
-[![Star History Chart](https://api.star-history.com/svg?repos=miaojiuqing/Maa_bbb&type=date&legend=top-left)](https://www.star-history.com/#miaojiuqing/Maa_bbb&type=date&legend=top-left)
+<a href="https://github.com/miaojiuqing/MAA_bbb/stargazers">
+  <img alt="miaojiuqing/MAA_bbb Star History" src="https://raw.githubusercontent.com/miaojiuqing/MAA_bbb/star-history/star-history.svg" width="700" />
+</a>
 
-> 📈 星标增长趋势由 [star-history.com](https://star-history.com) 提供
+> 📈 这张图由仓库里的 [Star History](https://github.com/miaojiuqing/MAA_bbb/blob/main/.github/workflows/star-history.yml) 工作流每天用 GitHub 官方接口自动生成，数据和图片保存在 [`star-history`](https://github.com/miaojiuqing/MAA_bbb/tree/star-history) 分支，不依赖第三方在线图表服务

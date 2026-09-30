@@ -1,0 +1,76 @@
+name: Star History
+
+# 自托管的 star 图：用仓库自带的 GITHUB_TOKEN 调 GitHub 的隐私安全接口
+# GET /repos/{owner}/{repo}/stargazers/history，生成静态 SVG 提交到 star-history 分支。
+# README 引用该分支的 raw 文件，因此不再依赖 api.star-history.com 这类在线服务
+# （2026-06-30 GitHub 收紧 stargazers 接口后，在线图表服务曾集体挂掉两个月）。
+#
+# 不需要额外仓库，也不需要配置 PAT：只读自己仓库的公开 star 数量。
+
+on:
+  schedule:
+    # 每天 03:23 UTC 跑一次，避开整点（Actions 高峰期整点任务容易延迟）
+    - cron: '23 3 * * *'
+  watch:
+    types: [started]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: star-history
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check Out Repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+
+      - name: Prepare star-history branch
+        run: |
+          set -euo pipefail
+          branch="star-history"
+          dir="$RUNNER_TEMP/$branch"
+
+          if git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
+            echo "分支 $branch 已存在，基于最新提交更新"
+            git fetch --depth=1 origin "$branch"
+            git worktree add --detach "$dir" FETCH_HEAD
+            git -C "$dir" checkout -B "$branch"
+          else
+            echo "分支 $branch 不存在，创建 orphan 分支"
+            git worktree add --detach "$dir" HEAD
+            git -C "$dir" checkout --orphan "$branch"
+            git -C "$dir" rm -rf . >/dev/null 2>&1 || true
+          fi
+
+          echo "STAR_HISTORY_DIR=$dir" >> "$GITHUB_ENV"
+
+      - name: Generate star history chart
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          STAR_HISTORY_REPO: ${{ github.repository }}
+        run: node .github/scripts/star-history.mjs "$STAR_HISTORY_DIR"
+
+      - name: Commit and push to star-history branch
+        run: |
+          set -euo pipefail
+          cd "$STAR_HISTORY_DIR"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Star history is already up to date."
+            exit 0
+          fi
+          git commit -m "chore: refresh star history [skip ci]"
+          git push origin "HEAD:star-history"
