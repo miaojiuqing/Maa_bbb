@@ -550,7 +550,12 @@ jobs:
                 exit 1
               fi
             else
-              (cd "$f" && zip -r "../$f-${tag}.zip" .)
+              # 与 gen_resource_hash 的稳定化一致：按路径排序写入 zip
+              rm -f "${f}-${tag}.zip"
+              (
+                cd "$f"
+                find . -type f | LC_ALL=C sort | zip -r "../${f}-${tag}.zip" -@
+              )
             fi
           done
           ls -la
