@@ -87,9 +87,8 @@ FROM debian:12 AS builder
 ARG TARGETARCH
 ARG MFW_VERSION=v4.8.23
 
-# 只装打包必需的工具，不装 MaaFw：tools/install.py 的 resource.hash 步骤缺 maa 时会自动跳过
-# （见该文件里的 try/except）。maa 的 wheel 自带 native 库，在极简 builder 里 dlopen 还要
-# libatomic1/libstdc++6/libgomp1，为一个可选字段不值得把 C++ 运行时拉进构建阶段
+# 只装打包必需的工具，不装 MaaFw：用 SKIP_RESOURCE_HASH 跳过 resource.hash（对齐
+# MAA_Punish 的硬失败语义；镜像构建不需要该可选字段）
 RUN apt-get update \
     && apt-get install --yes --no-install-recommends \
         libatomic1 \
@@ -112,7 +111,7 @@ RUN set -eux; \
     rm -rf deps MFWCFA install; \
     cp -a /opt/maa-cache/deps deps; \
     cp -a /opt/maa-cache/MFWCFA MFWCFA; \
-    python3 tools/install.py "${MFW_VERSION}" linux "${maa_arch}"; \
+    SKIP_RESOURCE_HASH=1 python3 tools/install.py "${MFW_VERSION}" linux "${maa_arch}"; \
     python3 tools/copy_mfwcfa_to_install.py; \
     chmod 755 install/MFW; \
     test -x install/MFW
