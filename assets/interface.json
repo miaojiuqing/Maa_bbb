@@ -38,26 +38,13 @@
     ],
     "resource": [
         {
-            "name": "键鼠操作",
+            "name": "桌面端",
             "description": "当设置-操作-电脑端操作方式为\"键鼠操作方式\"时选择此项",
             "controller": [
                 "桌面端"
             ],
             "path": [
-                "./resource/base",
-                "./resource/resource_win32"
-            ]
-        },
-        {
-            "name": "纯键盘操作",
-            "description": "当设置-操作-电脑端操作方式为\"键盘操作方式\"时选择此项",
-            "controller": [
-                "桌面端"
-            ],
-            "path": [
-                "./resource/base",
-                "./resource/resource_win32",
-                "./resource/resource_win32_jp"
+                "./resource/base"
             ]
         },
         {
@@ -66,79 +53,90 @@
                 "安卓端"
             ],
             "path": [
-                "./resource/base"
-            ]
-        },
-        {
-            "name": "B服",
-            "controller": [
-                "安卓端"
-            ],
-            "path": [
                 "./resource/base",
-                "./resource/resource_bilibili"
-            ]
-        },
-        {
-            "name": "OPPO渠道服",
-            "controller": [
-                "安卓端"
-            ],
-            "path": [
-                "./resource/base",
-                "./resource/resource_OPPE"
-            ]
-        },
-        {
-            "name": "华为渠道服",
-            "controller": [
-                "安卓端"
-            ],
-            "path": [
-                "./resource/base",
-                "./resource/resource_huawei"
-            ]
-        },
-        {
-            "name": "应用宝渠道服",
-            "controller": [
-                "安卓端"
-            ],
-            "path": [
-                "./resource/base",
-                "./resource/resource_yyb"
-            ]
-        },
-        {
-            "name": "VIVO服",
-            "controller": [
-                "安卓端"
-            ],
-            "path": [
-                "./resource/base",
-                "./resource/resource_vivo"
-            ]
-        },
-        {
-            "name": "九游服",
-            "controller": [
-                "安卓端"
-            ],
-            "path": [
-                "./resource/base",
-                "./resource/resource_jiuyou"
-            ]
-        },
-        {
-            "name": "小米服",
-            "controller": [
-                "安卓端"
-            ],
-            "path": [
-                "./resource/base",
-                "./resource/resource_xiaomi"
+                "./resource/resource_adb"
             ]
         }
+        // ==================== 渠道服资源条目（重构期间暂时注释）====================
+        // 说明：各渠道服目录内容尚未重建，打包/发版时资源校验会失败，重构完成后逐个取消注释加回
+        //{
+        //    "name": "B服",
+        //    "controller": [
+        //        "安卓端"
+        //    ],
+        //    "path": [
+        //        "./resource/base", 
+        //        "./resource/resource_adb", 
+        //        "./resource/resource_bilibili"
+        //    ]
+        //},
+        //{
+        //    "name": "OPPO渠道服",
+        //    "controller": [
+        //        "安卓端"
+        //    ],
+        //    "path": [
+        //        "./resource/base", 
+        //        "./resource/resource_adb",
+        //        "./resource/resource_OPPE"
+        //    ]
+        //},
+        //{
+        //    "name": "华为渠道服",
+        //    "controller": [
+        //        "安卓端"
+        //    ],
+        //    "path": [
+        //        "./resource/base", 
+        //        "./resource/resource_adb",
+        //        "./resource/resource_huawei"
+        //    ]
+        //},
+        //{
+        //    "name": "应用宝渠道服",
+        //    "controller": [
+        //        "安卓端"
+        //    ],
+        //    "path": [
+        //        "./resource/base", 
+        //        "./resource/resource_adb",
+        //        "./resource/resource_yyb"
+        //    ]
+        //},
+        //{
+        //    "name": "VIVO服",
+        //    "controller": [
+        //        "安卓端"
+        //    ],
+        //    "path": [
+        //        "./resource/base", 
+        //        "./resource/resource_adb",
+        //        "./resource/resource_vivo"
+        //    ]
+        //},
+        //{
+        //    "name": "九游服",
+        //    "controller": [
+        //        "安卓端"
+        //    ],
+        //    "path": [
+        //        "./resource/base", 
+        //        "./resource/resource_adb",
+        //        "./resource/resource_jiuyou"
+        //    ]
+        //},
+        //{
+        //    "name": "小米服",
+        //    "controller": [
+        //        "安卓端"
+        //    ],
+        //    "path": [
+        //        "./resource/base", 
+        //        "./resource/resource_adb",
+        //        "./resource/resource_xiaomi"
+        //    ]
+        //}
+        // ==================== 渠道服资源条目 注释结束 ====================
     ],
     "group": [
         {

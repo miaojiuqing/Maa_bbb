@@ -1,0 +1,13 @@
+{
+    // 占位节点：仅用于让 resource_adb 成为一个可加载的资源包。
+    // MaaFramework 的 post_bundle 对一个"没有任何 pipeline json"的目录会返回失败，
+    // 而空目录又不会被 git 跟踪（CI 上 clone 出来会消失），所以放这个占位文件。
+    // 等 adb 端专有节点（游戏启动/停止等）搬进来之后，这个文件可以删掉。
+    "_占位-adb资源包": {
+        "recognition": {
+            "type": "DirectHit"
+        },
+        "action": "DoNothing",
+        "next": []
+    }
+}
