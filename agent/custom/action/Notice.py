@@ -1,6 +1,11 @@
 """
-完成后通知
+完成后通知（内含「今日收益统计」：开局 set_crystal 记初始水晶、结束 show_crystal 算收益并通知）
 作者:overflow65537
+
+【重构待办 · 先保留不动】
+  原调用点挂在 base/pipeline 的「进入游戏/打开游戏.json」与「进入游戏/停止游戏.json」，
+  重构期间这两处 pipeline 还没重建，本模块先原样留着，等资源重建完再接回去。
+  详见 docs/重构笔记.md
 """
 
 from maa.context import Context
