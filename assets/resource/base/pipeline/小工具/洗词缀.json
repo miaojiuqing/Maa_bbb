@@ -1,0 +1,116 @@
+{
+    "洗词缀": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    190,
+                    606,
+                    238,
+                    114
+                ],
+                "expected": [
+                    "再次重构"
+                ]
+            }
+        },
+        "next": [
+            "识别参数_严格模式",
+            "识别参数_宽松模式",
+            "[JumpBack]再次重构"
+        ]
+    },
+    "识别参数_严格模式": {
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": [
+                    {
+                        "recognition": {
+                            "type": "OCR",
+                            "param": {
+                                "roi": [
+                                    647,
+                                    412,
+                                    595,
+                                    113
+                                ],
+                                "expected": []
+                            }
+                        }
+                    },
+                    {
+                        "recognition": {
+                            "type": "OCR",
+                            "param": {
+                                "roi": [
+                                    630,
+                                    507,
+                                    635,
+                                    101
+                                ],
+                                "expected": []
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "识别参数_宽松模式": {
+        "recognition": {
+            "type": "Or",
+            "param": {
+                "any_of": [
+                    {
+                        "recognition": {
+                            "type": "OCR",
+                            "param": {
+                                "roi": [
+                                    647,
+                                    412,
+                                    595,
+                                    113
+                                ],
+                                "expected": []
+                            }
+                        }
+                    },
+                    {
+                        "recognition": {
+                            "type": "OCR",
+                            "param": {
+                                "roi": [
+                                    630,
+                                    507,
+                                    635,
+                                    101
+                                ],
+                                "expected": []
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "再次重构": {
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    190,
+                    606,
+                    238,
+                    114
+                ],
+                "expected": [
+                    "再次重构"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        }
+    }
+}
