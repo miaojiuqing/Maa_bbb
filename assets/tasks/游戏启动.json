@@ -5,6 +5,7 @@
             "entry": "登录方式选择接口",
             "default_check": true,
             "option": [
+                "启动游戏后首页等待弹窗",
                 "登录打开二维码",
                 "每次执行该启动任务间隔",
                 "月卡领取",
@@ -39,6 +40,73 @@
         }
     ],
     "option": {
+        "启动游戏后首页等待弹窗": {
+            "label": "到首页后重复等待处理弹窗",
+            "description": "启动并进入游戏、到首页之后多停留几轮:每轮先等一会儿,再重新进入\"启动并进入游戏\"把它那套弹窗处理再跑一遍<br/>免得弹窗留下来被后面的任务碰上",
+            "type": "switch",
+            "default_case": "Yes",
+            "cases": [
+                {
+                    "name": "Yes",
+                    "pipeline_override": {
+                        "成功进入游戏主菜单": {
+                            "next": [
+                                "[JumpBack]游戏启动-首页等待弹窗",
+                                "空任务"
+                            ]
+                        }
+                    },
+                    "option": [
+                        "游戏启动-首页重复轮数",
+                        "游戏启动-首页每轮等待秒数"
+                    ]
+                },
+                {
+                    "name": "No",
+                    "pipeline_override": {}
+                }
+            ]
+        },
+        "游戏启动-首页重复轮数": {
+            "label": "重复轮数",
+            "description": "到首页之后再重复处理几轮弹窗,填 0 就是不重复",
+            "type": "input",
+            "inputs": [
+                {
+                    "name": "游戏启动-首页轮数",
+                    "label": "轮数",
+                    "default": "3",
+                    "pipeline_type": "int",
+                    "verify": "^\\d+$",
+                    "pattern_msg": "请输入有效的数字"
+                }
+            ],
+            "pipeline_override": {
+                "游戏启动-首页等待弹窗": {
+                    "max_hit": "{游戏启动-首页轮数}"
+                }
+            }
+        },
+        "游戏启动-首页每轮等待秒数": {
+            "label": "每轮等待秒数",
+            "description": "每轮之间等多久,单位是秒",
+            "type": "input",
+            "inputs": [
+                {
+                    "name": "游戏启动-首页秒数",
+                    "label": "秒数",
+                    "default": "5",
+                    "pipeline_type": "int",
+                    "verify": "^[1-9]\\d*$",
+                    "pattern_msg": "请输入大于0的整数"
+                }
+            ],
+            "pipeline_override": {
+                "游戏启动-首页等待弹窗": {
+                    "repeat": "{游戏启动-首页秒数}"
+                }
+            }
+        },
         "登录打开二维码": {
             "type": "switch",
             "cases": [

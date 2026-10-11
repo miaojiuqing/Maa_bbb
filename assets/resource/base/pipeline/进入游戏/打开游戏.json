@@ -64,6 +64,19 @@
             "Node.Action.Failed": "舰长！请检查左上角资源是否配置错误！"
         }
     },
+    "游戏启动-首页等待弹窗": {
+        //进首页后多停留几轮:每轮先等一会儿,再重新进"启动并进入游戏"把它那套弹窗处理再跑一遍
+        //轮数由任务选项覆盖 max_hit;秒数由任务选项覆盖 repeat
+        //等待时长 = repeat 次空动作 × repeat_delay(1000ms) + post_delay(1000ms) = 输入的秒数
+        "action": "DoNothing",
+        "max_hit": 3,
+        "repeat": 5,
+        "repeat_delay": 1000,
+        "post_delay": 1000,
+        "next": [
+            "启动并进入游戏"
+        ]
+    },
     "点击左上角返回": { //计划直接把活动的那些返回箭头也丢进去
         "recognition": {
             "type": "TemplateMatch",
