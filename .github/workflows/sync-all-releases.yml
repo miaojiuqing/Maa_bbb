@@ -1,0 +1,83 @@
+
+name: Sync All Releases to Codeberg
+
+on:
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync all releases
+        env:
+          CODEBERG_TOKEN: ${{ secrets.CODEBERG_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          OWNER="miaojiuqing"
+          REPO="Maa_bbb"
+
+          echo "开始批量同步所有 Release 到 Codeberg..."
+
+          # 获取 GitHub 上所有 release 的 tag 列表
+          TAGS=$(gh release list --limit 1000 --json tagName --jq '.[].tagName')
+          TOTAL=$(echo "$TAGS" | wc -l)
+          echo "共发现 $TOTAL 个 Release"
+
+          COUNT=0
+          for TAG in $TAGS; do
+            COUNT=$((COUNT + 1))
+            echo ""
+            echo "[$COUNT/$TOTAL] 处理: $TAG"
+
+            # 获取 release 名称和说明
+            NAME=$(gh release view "$TAG" --json name --jq '.name')
+            BODY=$(gh release view "$TAG" --json body --jq '.body')
+
+            # 检查 Codeberg 上是否已存在同名 release，存在则跳过
+            EXISTING=$(curl -s -H "Authorization: token ${CODEBERG_TOKEN}" \
+              "https://codeberg.org/api/v1/repos/${OWNER}/${REPO}/releases/tags/${TAG}")
+            if echo "$EXISTING" | jq -e '.id' > /dev/null 2>&1; then
+              echo "  已存在，跳过"
+              continue
+            fi
+
+            # 在 Codeberg 创建 release
+            jq -n --arg tag "$TAG" --arg name "$NAME" --arg body "$BODY" \
+              '{tag_name:$tag, name:$name, body:$body}' > /tmp/release.json
+
+            RELEASE_JSON=$(curl -s -X POST \
+              -H "Authorization: token ${CODEBERG_TOKEN}" \
+              -H "Content-Type: application/json" \
+              -d @/tmp/release.json \
+              "https://codeberg.org/api/v1/repos/${OWNER}/${REPO}/releases")
+
+            RELEASE_ID=$(echo "$RELEASE_JSON" | jq -r '.id')
+            if [ "$RELEASE_ID" = "null" ] || [ -z "$RELEASE_ID" ]; then
+              echo "  创建失败: $RELEASE_JSON"
+              continue
+            fi
+            echo "  Codeberg Release ID: $RELEASE_ID"
+
+            # 下载 GitHub 附件并逐个上传到 Codeberg
+            ASSETS=$(gh release view "$TAG" --json assets --jq '.assets[] | "\(.name)|\(.url)"')
+            if [ -z "$ASSETS" ]; then
+              echo "  无附件"
+              continue
+            fi
+            while IFS='|' read -r ANAME AURL; do
+              echo "  上传: $ANAME"
+              curl -sL -H "Authorization: token ${GH_TOKEN}" "$AURL" -o "/tmp/$ANAME"
+              ENCODED_NAME=$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "$ANAME")
+              curl -s -X POST \
+                -H "Authorization: token ${CODEBERG_TOKEN}" \
+                -H "Content-Type: application/octet-stream" \
+                --data-binary "@/tmp/$ANAME" \
+                "https://codeberg.org/api/v1/repos/${OWNER}/${REPO}/releases/${RELEASE_ID}/assets?name=${ENCODED_NAME}"
+              rm -f "/tmp/$ANAME"
+            done <<< "$ASSETS"
+            echo "  完成"
+          done
+
+          echo ""
+          echo "全部同步完成！"
