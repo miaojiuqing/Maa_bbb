@@ -2,16 +2,68 @@ name: Sync to Codeberg
 
 on:
   push:
+  release:
+    types: [published]
   workflow_dispatch:
 
 jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Mirror GitHub repo to Codeberg
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Mirror git to Codeberg
         run: |
           git clone --mirror "https://github.com/${{ github.repository }}.git" repo
           cd repo
-          # Codeberg 不接受 GitHub 的 PR 引用（refs/pull/*），先删掉再推
           git for-each-ref --format="%(refname)" refs/pull/ | xargs -r -n 1 git update-ref -d
-          git push --mirror "https://miaojiuqing:${{ secrets.CODEBERG_TOKEN }}@codeberg.org/miaojiuqing/Maa_Kes.git"
+          git push --mirror "https://miaojiuqing:${{ secrets.CODEBERG_TOKEN }}@codeberg.org/miaojiuqing/Maa_bbb.git"
+
+      - name: Sync Release to Codeberg
+        if: github.event_name == 'release'
+        env:
+          CODEBERG_TOKEN: ${{ secrets.CODEBERG_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          TAG="${{ github.event.release.tag_name }}"
+          NAME="${{ github.event.release.name }}"
+          BODY="${{ github.event.release.body }}"
+
+          # 用 jq 安全构造请求体（自动处理换行、引号等特殊字符）
+          jq -n --arg tag "$TAG" --arg name "$NAME" --arg body "$BODY" \
+            '{tag_name:$tag, name:$name, body:$body}' > /tmp/release.json
+
+          # 在 Codeberg 创建 Release
+          RELEASE_JSON=$(curl -s -X POST \
+            -H "Authorization: token ${CODEBERG_TOKEN}" \
+            -H "Content-Type: application/json" \
+            -d @/tmp/release.json \
+            "https://codeberg.org/api/v1/repos/miaojiuqing/Maa_bbb/releases")
+
+          RELEASE_ID=$(echo "$RELEASE_JSON" | jq -r '.id')
+          if [ "$RELEASE_ID" = "null" ] || [ -z "$RELEASE_ID" ]; then
+            echo "Release 创建失败，返回: $RELEASE_JSON"
+            exit 1
+          fi
+          echo "Codeberg Release ID: $RELEASE_ID"
+
+          # 下载 GitHub Release 附件并逐个上传到 Codeberg
+          ASSETS=$(gh release view "$TAG" --json assets --jq '.assets[] | "\(.name)|\(.url)"')
+          if [ -z "$ASSETS" ]; then
+            echo "没有附件需要上传"
+            exit 0
+          fi
+          while IFS='|' read -r ANAME AURL; do
+            echo "上传附件: $ANAME"
+            curl -sL -H "Authorization: token ${GH_TOKEN}" "$AURL" -o "/tmp/$ANAME"
+            ENCODED_NAME=$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "$ANAME")
+            curl -s -X POST \
+              -H "Authorization: token ${CODEBERG_TOKEN}" \
+              -H "Content-Type: application/octet-stream" \
+              --data-binary "@/tmp/$ANAME" \
+              "https://codeberg.org/api/v1/repos/miaojiuqing/Maa_bbb/releases/${RELEASE_ID}/assets?name=${ENCODED_NAME}"
+            rm -f "/tmp/$ANAME"
+          done <<< "$ASSETS"
+          echo "Release 同步完成"
