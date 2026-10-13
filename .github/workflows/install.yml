@@ -256,6 +256,11 @@ jobs:
             echo "MFWCFA directory not found, skipping copy."
           fi
 
+          # 把 MFW 主程序改成项目显示名（win: 识宝小助手.exe / linux: 识宝小助手），并同步 file_list.txt。
+          # MFW 主程序用 sys.executable 定位自身，其更新器支持 --startup-executable-name
+          # （更新后恢复原启动名），因此改名是官方支持的用法。
+          python ./tools/rename_main_executable.py ${{ matrix.os }}
+
       - name: Modify Windows exe icons
         if: matrix.os == 'win' && matrix.arch == 'x86_64'
         shell: bash
@@ -271,16 +276,14 @@ jobs:
           fi
           curl -fsSL https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
           ICO_W="$(cygpath -w "$(pwd)/logo.ico")"
-          n=0
-          while IFS= read -r -d '' exe; do
-            _abs="$(cd "$(dirname "$exe")" && pwd)/$(basename "$exe")"
-            ./rcedit.exe "$(cygpath -w "$_abs")" --set-icon "$ICO_W"
-            echo "MFW.exe icon updated: $exe"
-            n=$((n + 1))
-          done < <(find install -type f \( -iname 'MFW.exe' \) -print0 2>/dev/null)
-          if [ "$n" -eq 0 ]; then
-            echo "⚠️ No MFW.exe under install/; icon step had nothing to patch."
+          # 主程序已在 Install 步骤被 tools/rename_main_executable.py 重命名为 识宝小助手.exe
+          MAIN_EXE="install/识宝小助手.exe"
+          if [ ! -f "$MAIN_EXE" ]; then
+            echo "❌ ERROR: $MAIN_EXE missing (rename_main_executable.py 没生效？)"
+            exit 1
           fi
+          ./rcedit.exe "$(cygpath -w "$(pwd)/$MAIN_EXE")" --set-icon "$ICO_W"
+          echo "Main exe icon updated: $MAIN_EXE"
 
 #      - uses: actions/download-artifact@v8
 #        with:
