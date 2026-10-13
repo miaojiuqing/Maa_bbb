@@ -243,6 +243,9 @@ jobs:
 
       - name: Install
         shell: bash
+        env:
+          # Windows runner 的 Python 默认用 cp1252 输出，打印中文会 UnicodeEncodeError
+          PYTHONIOENCODING: utf-8
         run: |
           python -m pip install -r requirements.txt
           python -m pip install json-with-comments
@@ -263,27 +266,28 @@ jobs:
 
       - name: Modify Windows exe icons
         if: matrix.os == 'win' && matrix.arch == 'x86_64'
-        shell: bash
+        shell: pwsh
         run: |
-          set -euo pipefail
-          if [ ! -f "./logo.ico" ]; then
-            echo "❌ ERROR: ./logo.ico missing (run Convert PNG to ICO first)"
+          # 用 pwsh 而不是 bash：PowerShell 字符串是 UTF-16，处理中文文件名不经过代码页转换
+          $ErrorActionPreference = "Stop"
+          if (-not (Test-Path -LiteralPath "./logo.ico")) {
+            Write-Host "ERROR: ./logo.ico missing (run Convert PNG to ICO first)"
             exit 1
-          fi
-          if [ ! -d "install" ]; then
-            echo "❌ ERROR: install/ missing after Install step"
+          }
+          if (-not (Test-Path -LiteralPath "./install")) {
+            Write-Host "ERROR: install/ missing after Install step"
             exit 1
-          fi
-          curl -fsSL https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
-          ICO_W="$(cygpath -w "$(pwd)/logo.ico")"
+          }
           # 主程序已在 Install 步骤被 tools/rename_main_executable.py 重命名为 识宝小助手.exe
-          MAIN_EXE="install/识宝小助手.exe"
-          if [ ! -f "$MAIN_EXE" ]; then
-            echo "❌ ERROR: $MAIN_EXE missing (rename_main_executable.py 没生效？)"
+          $mainExe = Join-Path (Get-Location).Path "install/识宝小助手.exe"
+          if (-not (Test-Path -LiteralPath $mainExe)) {
+            Write-Host "ERROR: $mainExe missing (rename_main_executable.py 没生效？)"
             exit 1
-          fi
-          ./rcedit.exe "$(cygpath -w "$(pwd)/$MAIN_EXE")" --set-icon "$ICO_W"
-          echo "Main exe icon updated: $MAIN_EXE"
+          }
+          Invoke-WebRequest -Uri "https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe" -OutFile "rcedit.exe"
+          $iconPath = (Resolve-Path -LiteralPath "./logo.ico").Path
+          & "./rcedit.exe" $mainExe --set-icon $iconPath
+          Write-Host "Main exe icon updated: $mainExe"
 
 #      - uses: actions/download-artifact@v8
 #        with:

@@ -22,6 +22,12 @@ import platform
 import sys
 from pathlib import Path
 
+# GitHub Actions 的 Windows runner 上 sys.stdout 默认编码是 cp1252，打印中文会抛
+# UnicodeEncodeError 让整个 CI 步骤失败，这里强制用 UTF-8 输出。
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, "reconfigure"):
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+
 working_dir = Path(__file__).resolve().parent.parent
 install_path = working_dir / "install"
 
