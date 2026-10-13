@@ -1,17 +1,17 @@
-# name: Sync to Codeberg
+name: Sync to Codeberg
 
-# on:
-#   push:
-#   workflow_dispatch:
+on:
+  push:
+  workflow_dispatch:
 
-# jobs:
-#   sync:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Mirror GitHub repo to Codeberg
-#         run: |
-#           git clone --mirror "https://github.com/${{ github.repository }}.git" repo
-#           cd repo
-#           # Codeberg 不接受 GitHub 的 PR 引用（refs/pull/*），先删掉再推
-#           git for-each-ref --format="%(refname)" refs/pull/ | xargs -r -n 1 git update-ref -d
-#           git push --mirror "https://miaojiuqing:${{ secrets.CODEBERG_TOKEN }}@codeberg.org/miaojiuqing/Maa_Kes.git"
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mirror GitHub repo to Codeberg
+        run: |
+          git clone --mirror "https://github.com/${{ github.repository }}.git" repo
+          cd repo
+          # Codeberg 不接受 GitHub 的 PR 引用（refs/pull/*），先删掉再推
+          git for-each-ref --format="%(refname)" refs/pull/ | xargs -r -n 1 git update-ref -d
+          git push --mirror "https://miaojiuqing:${{ secrets.CODEBERG_TOKEN }}@codeberg.org/miaojiuqing/Maa_Kes.git"
