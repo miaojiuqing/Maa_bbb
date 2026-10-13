@@ -1,4 +1,3 @@
-
 name: Sync All Releases to Codeberg
 
 on:
@@ -20,7 +19,7 @@ jobs:
           echo "开始批量同步所有 Release 到 Codeberg..."
 
           # 获取 GitHub 上所有 release 的 tag 列表
-          TAGS=$(gh release list --limit 1000 --json tagName --jq '.[].tagName')
+          TAGS=$(gh release list -R ${OWNER}/${REPO} --limit 1000 --json tagName --jq '.[].tagName')
           TOTAL=$(echo "$TAGS" | wc -l)
           echo "共发现 $TOTAL 个 Release"
 
@@ -31,8 +30,8 @@ jobs:
             echo "[$COUNT/$TOTAL] 处理: $TAG"
 
             # 获取 release 名称和说明
-            NAME=$(gh release view "$TAG" --json name --jq '.name')
-            BODY=$(gh release view "$TAG" --json body --jq '.body')
+            NAME=$(gh release view "$TAG" -R ${OWNER}/${REPO} --json name --jq '.name')
+            BODY=$(gh release view "$TAG" -R ${OWNER}/${REPO} --json body --jq '.body')
 
             # 检查 Codeberg 上是否已存在同名 release，存在则跳过
             EXISTING=$(curl -s -H "Authorization: token ${CODEBERG_TOKEN}" \
@@ -60,7 +59,7 @@ jobs:
             echo "  Codeberg Release ID: $RELEASE_ID"
 
             # 下载 GitHub 附件并逐个上传到 Codeberg
-            ASSETS=$(gh release view "$TAG" --json assets --jq '.assets[] | "\(.name)|\(.url)"')
+            ASSETS=$(gh release view "$TAG" -R ${OWNER}/${REPO} --json assets --jq '.assets[] | "\(.name)|\(.url)"')
             if [ -z "$ASSETS" ]; then
               echo "  无附件"
               continue
