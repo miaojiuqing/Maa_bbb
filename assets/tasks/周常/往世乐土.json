@@ -5,22 +5,73 @@
             "default_check": false,
             "label": "往世乐土",
             "entry": "往世乐土-开始任务层",
-            "description": "<font size=\"7\" color=\"red\"><b>暂时不会进帕朵商店❗</b></font><br/><font color=\"#FFD700\">",
+            "description": "MuMu：原流程完成战前准备，进入第一层后自动战斗、选择刻印、移动进门及处理商店。当前适配窈窕谍影·华裳，沿用游戏中的装备、难度和助战。17 层完成后任选英桀门进入并退出结算，继续领取周常奖励。只需勾选本任务，无需另勾自动战斗。桌面端保留原流程。",
             "group": [
                 "周常"
             ],
             "option": [
+                "往世乐土-关内角色",
+                "往世乐土-关内流派",
                 "往世乐土-战斗逻辑-键鼠",
                 "往世乐土-战斗逻辑-纯键盘",
                 "往世乐土-战前增益选择",
                 "往世乐土-真我刻印自选",
                 "往世乐土-商店处理策略",
+                "往世乐土-商店处理策略-安卓",
                 "往世乐土-刻印优先级自选",
-                "往世乐土-门的选择优先级"
+                "往世乐土-门的选择优先级",
+                "往世乐土-禁用刻印"
             ]
         }
     ],
     "option": {
+        "往世乐土-禁用刻印": {
+            "controller": ["安卓端"],
+            "label": "禁用刻印",
+            "type": "select",
+            "default_case": "无",
+            "description": "不进入所选体系的刻印门，不选择或购买其刻印；高于所有优先级。当前支持禁用鏖灭。仅剩禁用刻印时停止并保留现场。已获得的刻印不会被移除。",
+            "cases": [
+                {"name": "无", "pipeline_override": {"乐土关内-禁用刻印配置": {"action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure", "custom_action_param": {"disabled": []}}}}}},
+                {"name": "鏖灭", "pipeline_override": {"乐土关内-禁用刻印配置": {"action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure", "custom_action_param": {"disabled": ["鏖灭"]}}}}}}
+            ]
+        },
+        "往世乐土-关内角色": {
+            "controller": ["安卓端"],
+            "label": "战斗角色",
+            "description": "选择角色出招表。不会替你更换游戏中的角色，战斗前会核对角色。",
+            "type": "select",
+            "default_case": "窈窕谍影",
+            "cases": [{
+                "name": "窈窕谍影",
+                "pipeline_override": {"乐土关内-角色配置": {"enabled": true}}
+            }]
+        },
+        "往世乐土-关内流派": {
+            "controller": ["安卓端"],
+            "label": "角色流派",
+            "description": "华裳：优先取得华裳，以助战和连续武器技作战；普通刻印及选门可用下方原有选项定制。",
+            "type": "select",
+            "default_case": "华裳",
+            "cases": [{
+                "name": "华裳",
+                "pipeline_override": {"乐土关内-角色配置": {"action": {"type": "Custom", "param": {
+                    "custom_action": "ElysianConfigure",
+                    "custom_action_param": {"character": "窈窕谍影", "variant": "elysian_huashang"}
+                }}}}
+            }]
+        },
+        "往世乐土-商店处理策略-安卓": {
+            "controller": ["安卓端"],
+            "label": "商店策略",
+            "type": "select",
+            "default_case": "自动购买",
+            "description": "使用本局银币购买适合当前流派的刻印；绕过时不打开摊位。",
+            "cases": [
+                {"name": "自动购买", "pipeline_override": {"乐土关内-商店配置": {"action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure", "custom_action_param": {"buy": true}}}}}},
+                {"name": "绕过不购买", "pipeline_override": {"乐土关内-商店配置": {"action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure", "custom_action_param": {"buy": false}}}}}}
+            ]
+        },
         "往世乐土-战斗逻辑-键鼠": {
             "controller": [
                 "桌面端"
@@ -610,11 +661,11 @@
         "往世乐土-战前增益选择": {
             "label": "战前增益选择",
             "type": "switch",
-            "description": "只有你自己一个buff不选的时候才会触发",
+            "description": "MuMu 开启后按下方七项同步游戏勾选：取消设为否的旧选择，补选设为是的项目，相同的保持。关闭时沿用原版流程；桌面端保留原版行为。",
             "cases": [
                 {
                     "name": "Yes",
-                    "pipeline_override": {},
+                    "pipeline_override": {"乐土战前-同步配置": {"action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure", "custom_action_param": {"enabled": true}}}}},
                     "option": [
                         "乐土-战前buff-1",
                         "乐土-战前buff-2",
@@ -627,8 +678,8 @@
                 },
                 {
                     "name": "No",
-                    "description": "关闭后就从上到下全部选一遍一般除了最后两个都会选到",
-                    "pipeline_override": {}
+                    "description": "沿用原版：已有增益时保持；全部未选时，从上到下尝试选择。",
+                    "pipeline_override": {"乐土战前-同步配置": {"action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure", "custom_action_param": {"enabled": false}}}}}
                 }
             ]
         },
@@ -776,7 +827,7 @@
         "往世乐土-真我刻印自选": {
             "label": "真我刻印选择",
             "type": "input",
-            "description": "一定要填写，多个刻印中间用\"|\"隔开",
+            "description": "多个刻印用 | 隔开。安卓端留空使用角色推荐；华裳流会优先取得必需的华裳，再参考这里的顺序。桌面端需填写。",
             "inputs": [
                 {
                     "name": "真我刻印自选优先级_1",
@@ -792,6 +843,7 @@
             }
         },
         "往世乐土-商店处理策略": {
+            "controller": ["桌面端"],
             "label": "商店策略",
             "type": "select",
             "cases": [
@@ -811,11 +863,12 @@
         },
         "往世乐土-刻印优先级自选": {
             "label": "刻印优先buff选择",
+            "description": "开启后使用下方优先级；安卓端关闭时使用角色推荐评分。必需专属、指定核心及不适配属性过滤优先于普通增益。",
             "type": "switch",
             "cases": [
                 {
                     "name": "Yes",
-                    "pipeline_override": {},
+                    "pipeline_override": {"乐土关内-刻印配置": {"action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure", "custom_action_param": {"custom": true}}}}},
                     "option": [
                         "乐土-道中刻印优先级_1",
                         "乐土-道中刻印优先级_2",
@@ -831,8 +884,8 @@
                 },
                 {
                     "name": "No",
-                    "description": "有啥选啥",
-                    "pipeline_override": {}
+                    "description": "安卓端使用角色推荐",
+                    "pipeline_override": {"乐土关内-刻印配置": {"action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure", "custom_action_param": {"custom": false}}}}}
                 }
             ]
         },
@@ -1999,12 +2052,12 @@
         "往世乐土-门的选择优先级": {
             "label": "入口优先级",
             "default_case": "No",
-            "description": "优先走向哪个类型的门,内置最高优先级是猫猫商店",
+            "description": "开启后按下方顺序选门；安卓端关闭时按角色推荐及已获刻印调整。",
             "type": "switch",
             "cases": [
                 {
                     "name": "Yes",
-                    "pipeline_override": {},
+                    "pipeline_override": {"乐土关内-选门配置": {"action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure", "custom_action_param": {"custom": true}}}}},
                     "option": [
                         "乐土-选门优先级_1",
                         "乐土-选门优先级_2",
@@ -2021,6 +2074,7 @@
                 {
                     "name": "No",
                     "pipeline_override": {
+                        "乐土关内-选门配置": {"action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure", "custom_action_param": {"custom": false}}}},
                         "往世乐土-寻路-选择门-优先级_1": { //option接口
                             "expected": [
                                 1, //鏖灭

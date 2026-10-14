@@ -293,20 +293,29 @@
                 "安卓端"
             ],
             "label": "极速启动游戏模式",
-            "description": "执行后会直接发送报名启动游戏,若频繁卡在某界面更新多次无果请关闭此功能<br/>PC端禁用此功能",
+            "description": "开启后直接按包名启动游戏；关闭后先识别当前画面，必要时使用普通包名启动<br/>PC端禁用此功能",
             "type": "switch",
             "cases": [
                 {
                     "name": "Yes",
                     "pipeline_override": {
+                        "登录方式选择接口": {
+                            "action": {
+                                "type": "Custom",
+                                "param": {"custom_action": "StartGameByPackage"}
+                            }
+                        },
                         "启动并进入游戏": {
-                            "action": "StartApp"
+                            "action": "DoNothing"
                         }
                     }
                 },
                 {
                     "name": "No",
                     "pipeline_override": {
+                        "登录方式选择接口": {
+                            "action": "DoNothing"
+                        },
                         "启动并进入游戏": {
                             "action": "DoNothing"
                         }
@@ -336,12 +345,8 @@
                     }
                 },
                 {
-                    "name": "No",
-                    "pipeline_override": {
-                        "模拟器包名游戏启动": { //在win32时改为输入ESC
-                            "enabled": false
-                        }
-                    }
+                    // 桌面资源默认已禁用 ESC；不要覆盖安卓共用的包名启动节点。
+                    "name": "No"
                 }
             ]
         },

@@ -4,6 +4,7 @@ from agent.custom.action.OverridePipe import OverridePipe
 from agent.custom.action.IDFRole import RecognitionRole
 
 from agent.custom.action.Notice import Notice
+from agent.custom.action.StartGameByPackage import StartGameByPackage
 
 # 圣痕洗词缀 V2（智能版：下拉框选属性/武器类别 + 目标总攻击力）
 from agent.custom.action.AffixRerollV2 import AffixRerollV2, AffixRerollV2ParamHolder
@@ -15,9 +16,57 @@ from agent.custom.action.Role.LoveElf import LoveElf
 from agent.custom.action.Role.FengHuangOfVicissitude import FengHuangOfVicissitude
 from agent.custom.action.Role.GeneralFight import GeneralFight  # 真理之律者
 from agent.custom.action.Role.Mobius import Mobius  # 梅比乌斯
+from agent.custom.action.Role.CharacterCombat import CharacterCombat
+from agent.custom.action.ElysianRun import AssistantElysianRun, ElysianPause
+from agent.custom.action.ElysianBuffSync import ElysianBuffSync
+from agent.custom.action.ElysianIntegration import (
+    ElysianConfigure,
+    ElysianInStage,
+    ElysianStage,
+)
 
 
 from agent.custom.recongition.CheckResolution import CheckResolution
+
+
+@AgentServer.custom_action("StartGameByPackage")
+class StartGameByPackage_Cls(StartGameByPackage):
+    pass
+
+
+@AgentServer.custom_action("ElysianConfigure")
+class ElysianConfigure_Cls(ElysianConfigure):
+    pass
+
+
+@AgentServer.custom_action("ElysianBuffSync")
+class ElysianBuffSync_Cls(ElysianBuffSync):
+    pass
+
+
+@AgentServer.custom_recognition("ElysianInStage")
+class ElysianInStage_Cls(ElysianInStage):
+    pass
+
+
+@AgentServer.custom_action("ElysianStage")
+class ElysianStage_Cls(ElysianStage):
+    pass
+
+
+@AgentServer.custom_action("ElysianRun")
+class ElysianRun_Cls(AssistantElysianRun):
+    pass
+
+
+@AgentServer.custom_action("ElysianPause")
+class ElysianPause_Cls(ElysianPause):
+    pass
+
+
+@AgentServer.custom_action("CharacterCombat")
+class CharacterCombat_Cls(CharacterCombat):
+    pass
 
 
 @AgentServer.custom_action("Notice")

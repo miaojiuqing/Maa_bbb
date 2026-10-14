@@ -1,0 +1,35 @@
+{
+  "character": "窈窕谍影",
+  "variant": "elysian_huashang",
+  "profile": {
+    "requires_signet": "华裳",
+    "opening": ["support_1", "support_2"],
+    "cycle": ["weapon", "weapon", "weapon", "weapon"],
+    "interval_ms": 120,
+    "support_interval_s": 30,
+    "elysian_support": true,
+    "ultimate": false,
+    "star_ring": false,
+    "dodge": false,
+    "target_lock": false,
+    "movement": false,
+    "branch": false,
+    "signet_plan": {
+      "exclusive": ["华裳", "尽善", "粉黛"],
+      "cores": ["黄金的咏叹", "鏖兵·鏖剪·鏖馘·鏖灭", "空梦、空集、空我、空欢", "颠末的螺旋"],
+      "gates": ["真我", "黄金", "鏖灭", "繁星", "空梦", "螺旋", "戒律", "天慧", "浮生", "无限", "旭光", "刹那", "救世"]
+    },
+    "source": "https://www.miyoushe.com/ys/article/71171372"
+  },
+  "touch_actions": {
+    "attack": [1173, 615],
+    "weapon": [1045, 512],
+    "support_1": [1208, 147],
+    "support_2": [1203, 285],
+    "elysian_support": [938, 424],
+    "ultimate": [1184, 466],
+    "star_ring": [914, 565],
+    "dodge": [1028, 649],
+    "jump": [1069, 373]
+  }
+}

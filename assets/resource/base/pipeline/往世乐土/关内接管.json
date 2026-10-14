@@ -1,0 +1,65 @@
+{
+    "乐土战前-同步配置": {
+        "action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure", "custom_action_param": {"enabled": false}}}
+    },
+    "乐土战前-勾选检测": {
+        "recognition": {"type": "TemplateMatch", "param": {"template": ["周常/往世乐土/增益选择/已选中.png"]}}
+    },
+    "乐土战前-条目检测": {
+        "recognition": {"type": "TemplateMatch", "param": {"template": ["周常/往世乐土/增益选择/buff条目/第一条换怪.png"]}}
+    },
+    "乐土战前-第一条定位": {
+        "recognition": {"type": "TemplateMatch", "param": {
+            "roi": [40,140,145,380],
+            "template": ["周常/往世乐土/增益选择/buff条目/第一条换怪.png"],
+            "threshold": 0.8
+        }}
+    },
+    "乐土战前-同步增益": {
+        "enabled": false,
+        "recognition": {"type": "TemplateMatch", "param": {"roi": [132,509,329,133], "template": ["周常/往世乐土/导航/已进入乐土深层序列.png"]}},
+        "action": {"type": "Custom", "param": {"custom_action": "ElysianBuffSync", "custom_action_param": {"targets": [true,true,true,true,true,true,true]}}},
+        "next": ["往世乐土-已进入深层序列"],
+        "on_error": ["乐土战前-同步失败停止"],
+        "pre_delay": 0,
+        "post_delay": 0
+    },
+    "乐土战前-同步失败停止": {
+        "action": "StopTask",
+        "focus": {"Node.Action.Starting": "战前增益未与配置一致，保留现场并停止本任务"}
+    },
+    "乐土关内-角色配置": {
+        "enabled": false,
+        "action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure", "custom_action_param": {"character": "窈窕谍影", "variant": "elysian_huashang"}}}
+    },
+    "乐土关内-商店配置": {
+        "action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure", "custom_action_param": {"buy": false}}}
+    },
+    "乐土关内-刻印配置": {
+        "action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure", "custom_action_param": {"custom": false}}}
+    },
+    "乐土关内-选门配置": {
+        "action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure", "custom_action_param": {"custom": false}}}
+    },
+    "乐土关内-禁用刻印配置": {
+        "action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure", "custom_action_param": {"disabled": []}}}
+    },
+    "乐土关内-接管": {
+        "enabled": false,
+        "recognition": {"type": "Custom", "param": {"custom_recognition": "ElysianInStage"}},
+        "action": {"type": "Custom", "param": {"custom_action": "ElysianStage"}},
+        "focus": {
+            "Node.Action.Starting": "第一层已进入，关内自动流程接管",
+            "Node.Action.Succeeded": "关内通关结算完成，继续领取周常奖励",
+            "Node.Action.Failed": "关内流程未完成，已保留现场及运行记录"
+        },
+        "next": ["往世乐土-打完领奖-按住alt"],
+        "on_error": ["乐土关内-失败停止"],
+        "pre_delay": 0,
+        "post_delay": 0
+    },
+    "乐土关内-失败停止": {
+        "action": "StopTask",
+        "focus": {"Node.Action.Starting": "乐土关内未完成，停止本任务，不继续领奖"}
+    }
+}

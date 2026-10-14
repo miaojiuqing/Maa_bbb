@@ -149,6 +149,14 @@ def install_agent():
     shutil.copytree(
         working_dir / "agent",
         install_path / "agent",
+        ignore=shutil.ignore_patterns("__pycache__", "*.pyc", "*.pyo"),
+        dirs_exist_ok=True,
+    )
+
+    # 角色出招表是关内执行器的运行资源，必须进入打包产物。
+    shutil.copytree(
+        working_dir / "characters",
+        install_path / "characters",
         dirs_exist_ok=True,
     )
 
