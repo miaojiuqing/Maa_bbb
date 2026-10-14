@@ -259,9 +259,9 @@ jobs:
             echo "MFWCFA directory not found, skipping copy."
           fi
 
-          # 把 MFW 主程序改成项目显示名（win: 识宝小助手.exe / linux: 识宝小助手），并同步 file_list.txt。
-          # MFW 主程序用 sys.executable 定位自身，其更新器支持 --startup-executable-name
-          # （更新后恢复原启动名），因此改名是官方支持的用法。
+          # 把 MFW 主程序改成纯 ASCII 名（win: mab.exe / linux: mab）并同步 file_list.txt。
+          # 不用中文：中文文件名在非中文 locale 的 Windows（cp1252 等代码页）与 Linux 上都会出问题。
+          # MFW 主程序用 sys.executable 定位自身、更新器支持 --startup-executable-name（更新后恢复原名）。
           python ./tools/rename_main_executable.py ${{ matrix.os }}
 
       - name: Modify Windows exe icons
@@ -278,10 +278,10 @@ jobs:
             Write-Host "ERROR: install/ missing after Install step"
             exit 1
           }
-          # 主程序已在 Install 步骤被 tools/rename_main_executable.py 重命名为 识宝小助手.exe
-          $mainExe = Join-Path (Get-Location).Path "install/识宝小助手.exe"
+          # 主程序已在 Install 步骤被 tools/rename_main_executable.py 重命名为 mab.exe
+          $mainExe = Join-Path (Get-Location).Path "install/mab.exe"
           if (-not (Test-Path -LiteralPath $mainExe)) {
-            Write-Host "ERROR: $mainExe missing (rename_main_executable.py 没生效？)"
+            Write-Host "ERROR: $mainExe missing (did tools/rename_main_executable.py run?)"
             exit 1
           }
           Invoke-WebRequest -Uri "https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe" -OutFile "rcedit.exe"

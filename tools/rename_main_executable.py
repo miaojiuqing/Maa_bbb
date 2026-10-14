@@ -1,4 +1,4 @@
-"""把发布包内的 MFW 主程序重命名为本项目显示名（Windows: 识宝小助手.exe）。
+"""把发布包内的 MFW 主程序重命名为纯 ASCII 的文件名（Windows: mab.exe）。
 
 MFW 主程序通过 ``sys.executable`` / ``sys.argv[0]`` 定位自身
 （app/utils/install_paths.py 的 ``resolve_install_anchor``），其外置更新器
@@ -11,7 +11,7 @@ MFW 主程序通过 ``sys.executable`` / ``sys.argv[0]`` 定位自身
     python tools/rename_main_executable.py [os]
 
 ``os`` 取 win / linux / macos，省略时按当前平台推断。
-Windows 得到 `install/识宝小助手.exe`，Linux 得到 `install/识宝小助手`；
+Windows 得到 `install/mab.exe`，Linux 得到 `install/mab`；
 macOS 主程序是 `MFW.app`（改名要同步 Info.plist 的 CFBundleExecutable 与
 ad-hoc 签名），默认保持原样。
 """
@@ -31,8 +31,11 @@ for _stream in (sys.stdout, sys.stderr):
 working_dir = Path(__file__).resolve().parent.parent
 install_path = working_dir / "install"
 
-# 显示名（不含扩展名）
-APP_DISPLAY_NAME = "识宝小助手"
+# 主程序文件名（不含扩展名），必须是纯 ASCII。
+# 原因：中文文件名在非中文 locale 的 Windows（cp1252 等代码页）和 Linux 上都会出问题
+# —— MFW 作者 overflow65537 明确提醒「不要中文，多语言用户会炸」。中文只放显示层：
+# 窗口标题（assets/interface.json 的 title、tools/install.py:127）、快捷方式名、文件属性。
+MAIN_EXECUTABLE_NAME = "mab"
 
 _SYSTEM_ALIASES = {
     "windows": "win",
@@ -58,9 +61,9 @@ def rename_main_executable(os_name: str | None = None) -> tuple[str, str] | None
     """按平台重命名主程序，返回 (原名, 新名)；无需改名时返回 None。"""
     system = (os_name or current_system()).lower()
     if system == "win":
-        old_name, new_name = "MFW.exe", f"{APP_DISPLAY_NAME}.exe"
+        old_name, new_name = "MFW.exe", f"{MAIN_EXECUTABLE_NAME}.exe"
     elif system == "linux":
-        old_name, new_name = "MFW", APP_DISPLAY_NAME
+        old_name, new_name = "MFW", MAIN_EXECUTABLE_NAME
     else:
         print(f"[skip] {system}: 主程序是 MFW.app，改名需同步 Info.plist 与签名，保持原样")
         return None
