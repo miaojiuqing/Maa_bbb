@@ -404,6 +404,10 @@ jobs:
       - name: Prepare MaaFramework and Python agent
         working-directory: build-android/MaaFwApp
         shell: bash
+        env:
+          # 匿名调用 GitHub API 只有 60 次/小时且按 runner 共享出口 IP 计算，会随机 403
+          # （2026-10-14 run 38595091841 就是这样挂的）；带 token 后为 5000 次/小时并按 token 计
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           python scripts/setup_maa_framework.py --tag "$MAAFRAMEWORK_TAG"
