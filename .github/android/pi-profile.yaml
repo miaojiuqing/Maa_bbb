@@ -33,7 +33,9 @@ agent:
       env:
         PYTHONHOME: "{bundle}/prefix"
         PYTHONPATH: "{bundle}/site-packages/pure.zip:{bundle}/site-packages"
-        LD_LIBRARY_PATH: "{bundle}/prefix/lib:{nativeLibs}"
+        # Pillow 的原生库（PIL._imaging 等）没有 RUNPATH，只能靠这里找；
+        # 路径不存在时不影响其它库的加载
+        LD_LIBRARY_PATH: "{bundle}/site-packages/chaquopy/lib:{bundle}/prefix/lib:{nativeLibs}"
         MAAFW_BINARY_PATH: "{nativeLibs}"
 
 app:

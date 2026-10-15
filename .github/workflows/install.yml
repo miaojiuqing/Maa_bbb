@@ -411,11 +411,19 @@ jobs:
         run: |
           set -euo pipefail
           python scripts/setup_maa_framework.py --tag "$MAAFRAMEWORK_TAG"
+          # Pillow 的 Android wheel 只在 Chaquopy 自己的索引里，PyPI 上没有（--extra-index-url）；
+          # json-with-comments 在核心的 CPython 3.13 下没有任何可用版本（它的最新版要求 <3.13），
+          # 而 Android 包已把唯一用到它的 agent/deploy 排除掉（见 .github/android/pi-profile.yaml），
+          # 所以这里直接跳过它。numpy 由核心自带，脚本会自动丢弃。
           python scripts/build_agent_bundle.py \
             --out "$GITHUB_WORKSPACE/build-android/agent-dist" \
             --abi arm64-v8a \
             --abi x86_64 \
-            --requirements "$GITHUB_WORKSPACE/requirements.txt"
+            --requirements "$GITHUB_WORKSPACE/requirements.txt" \
+            --exclude json-with-comments \
+            --exclude pillow \
+            --require pillow==11.0.0 \
+            --extra-index-url https://chaquo.com/pypi-13.1/
 
       - name: Configure Android signing
         id: signing
