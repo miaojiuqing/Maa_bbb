@@ -1,2 +1,4 @@
 json-with-comments
 MaaFw
+numpy
+Pillow

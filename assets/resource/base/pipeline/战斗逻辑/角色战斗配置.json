@@ -1,0 +1,49 @@
+{
+    "角色战斗-英桀助战充能": {
+        "recognition": "OCR", "roi": [897, 359, 83, 26], "only_rec": true,
+        "expected": ["[0-9]+[/7][0-9]+"], "pre_delay": 0, "post_delay": 0
+    },
+    "角色战斗-战后禁用": {
+        "recognition": "TemplateMatch",
+        "roi": [1125, 565, 125, 110],
+        "template": ["自动战斗识别/窈窕谍影/战后禁用普攻.png"],
+        "threshold": 0.78,
+        "pre_delay": 0,
+        "post_delay": 0
+    },
+    "角色战斗-生命HUD": {
+        "recognition": "OCR",
+        "roi": [296, 620, 165, 42],
+        "expected": ["[1-9][0-9]*/[1-9][0-9]*"],
+        "only_rec": true,
+        "pre_delay": 0,
+        "post_delay": 0
+    },
+    "角色战斗-触摸": {
+        "action": {"type": "Click", "param": {"target": [1045, 512, 1, 1]}},
+        "pre_delay": 0,
+        "post_delay": 0
+    },
+    "角色战斗-窈窕谍影-华裳": {
+        "recognition": "OCR",
+        "roi": [296, 620, 165, 42],
+        "expected": ["[1-9][0-9]*/[1-9][0-9]*"],
+        "only_rec": true,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "CharacterCombat",
+                "custom_action_param": {
+                    "character": "窈窕谍影",
+                    "variant": "elysian_huashang",
+                    "confirmed_signet": "华裳"
+                }
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "rate_limit": 100,
+        "timeout": 3000,
+        "next": ["角色战斗-窈窕谍影-华裳"]
+    }
+}

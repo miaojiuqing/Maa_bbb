@@ -1,5 +1,7 @@
 <!-- markdownlint-disable MD033 MD041 -->
 
+> 本 Fork 的乐土开发分支在原项目基础上接入 MuMu 全自动往世乐土，目前适配窈窕谍影·华裳。合并范围见 [往世乐土合并说明](docs/往世乐土合并说明.md)，配置方法见 [往世乐土使用说明](docs/往世乐土使用说明.md)。原项目作者和鸣谢保留，新增流程仍需在新版环境中继续实测。
+
 <p align="center">
   <img alt="LOGO" src="logo.ico" width="256" height="256" />
 </p>

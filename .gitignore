@@ -455,3 +455,8 @@ debug
 !schema/**
 
 !docker/rootfs/etc/cont-init.d
+
+# Local Python environment, generated OCR models and Elysian run records
+/.venv/
+/assets/resource/base/model/ocr/
+development-notes/
