@@ -125,11 +125,7 @@
         "expected": [
             "快速出击"
         ],
-        // "action": "Click"
-        "action": "ClickKey",
-        "key": [
-            70
-        ]
+        "action": "Click"
     },
     "乐土刷级-减负模式-点击选择深层序列": {
         "roi": [
