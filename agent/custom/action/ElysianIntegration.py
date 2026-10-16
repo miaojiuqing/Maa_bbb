@@ -25,6 +25,56 @@ def setting(context, name):
     return json.loads(value) if isinstance(value, str) else value
 
 
+def action_parameters(argv):
+    """读自定义动作本次收到的参数；缺失或非法时返回空字典。"""
+    raw = getattr(argv, "custom_action_param", None)
+    if isinstance(raw, str):
+        try:
+            value = json.loads(raw or "{}")
+        except json.JSONDecodeError:
+            return {}
+    else:
+        value = raw or {}
+    return value if isinstance(value, dict) else {}
+
+
+# 刷级链在“女武神准备出击界面”的 next 里把刻印选择排在接管前面，出击进入第一层后
+# 它会先抢走初始专属刻印，所以交棒与接管都必须把 乐土关内-接管 插到这些列表最前面。
+HANDOVER_NODES = (
+    "乐土刷级-首层复刷-已进入女武神选择界面",
+    "乐土刷级-浅层序列-已进入女武神准备战斗界面",
+    "乐土刷级-减负模式-已进入女武神选择界面",
+)
+
+
+def node_next(context, name):
+    """读取节点当前的 next；节点不存在或没有 next 时返回空列表。"""
+    value = (context.get_node_data(name) or {}).get("next")
+    return list(value) if isinstance(value, list) else []
+
+
+def handover_patch(context, stop):
+    """把 乐土关内-接管 插入出击链路最前。
+
+    识别用的是关内接管自带的 ElysianInStage：准备界面与加载画面不命中，出击进入
+    第一层（楼层 HUD、初始刻印页、对话、暂停页）才命中，因此不会抢走出击本身。
+    stop=True 时命中即结束本任务，把控制权交给紧随其后的往世乐土任务。
+    """
+    patch = {}
+    for name in HANDOVER_NODES:
+        current = node_next(context, name)
+        if current and "乐土关内-接管" not in current:
+            patch[name] = {"next": ["乐土关内-接管"] + current}
+    if stop:
+        patch["乐土关内-接管"] = {
+            "enabled": True,
+            "action": "DoNothing",
+            "focus": {"Node.Recognition.Succeeded": "已进入第一层，交棒给「往世乐土」任务接管"},
+            "next": [],
+        }
+    return patch
+
+
 def read_settings(context):
     role = setting(context, "乐土关内-角色配置")
     character = role.get("character", "窈窕谍影")
@@ -76,6 +126,21 @@ def read_settings(context):
 class ElysianConfigure(CustomAction):
     def run(self, context, argv):
         try:
+            params = action_parameters(argv)
+            # 交棒模式：克莱茵打灰只负责走到准备界面并出击，进入第一层立刻结束本任务，
+            # 由紧随其后的往世乐土任务带着它自己的完整关内配置接管初始专属刻印。
+            # 只能由任务选项显式开启，默认不会走到这里。
+            if params.get("handoff"):
+                patch = handover_patch(context, stop=True)
+                # 接口层同时是每打完一把回跳的中转节点，装好之后不再重复覆盖与刷屏。
+                hooked = [name for name in patch if name != "乐土关内-接管"]
+                if not hooked:
+                    return True
+                ok = context.override_pipeline(patch)
+                if ok:
+                    print(f"乐土交棒配置：已在 {hooked} 最前面插入接棒节点，"
+                          f"出击进入第一层后结束本任务，交给往世乐土任务接管", flush=True)
+                return ok
             enabled = bool((context.get_node_data("乐土关内-角色配置") or {}).get("enabled", False))
             # 所有覆盖仅属于当前任务；桌面端保持原流程。
             if not enabled:
@@ -153,9 +218,14 @@ class ElysianConfigure(CustomAction):
                 "往世乐土-已进入三位导航界面",
                 "[JumpBack]往世乐土-点击普通战斗",
             ]
+            # 往世乐土任务自己走到准备界面时，同样在出击后立刻接管。
+            handover = handover_patch(context, stop=False)
+            patch.update(handover)
             ok = context.override_pipeline(patch)
             if ok:
                 print(f"乐土关内配置：{json.dumps(config, ensure_ascii=False)}", flush=True)
+                if handover:
+                    print(f"乐土出击接管：已在 {list(handover)} 最前面插入 乐土关内-接管", flush=True)
             return ok
         except Exception as exc:
             print(f"乐土配置读取失败：{exc}", flush=True)
