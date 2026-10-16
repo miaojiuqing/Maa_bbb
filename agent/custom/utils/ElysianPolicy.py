@@ -142,6 +142,11 @@ def read_floor(items):
     if match:
         floor, total = map(int, match.groups())
         if 1 <= total <= 22 and 1 <= floor <= total: return floor, total
+    # 减负模式左上角只有「第N层」（没有 n/17 计数），用它兜底；总层数仍是 17。
+    match = re.search(r"第(\d{1,2})层", text)
+    if match:
+        floor = int(match.group(1))
+        if 1 <= floor <= 22: return floor, 17
     return None
 
 
