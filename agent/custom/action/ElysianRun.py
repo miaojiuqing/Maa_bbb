@@ -23,6 +23,10 @@ GATE_CLICK_OFFSETS = (80, 0, 110)
 GATE_CLICK_MAX_ATTEMPTS = 6
 GATE_AFTER_PAUSE_ATTEMPTS = 3
 GATE_PAUSE_WAIT_S = 10
+# 传送锚点面板（减负/挑战奖励层）：三张卡位置固定，门名是卡片顶部文字（1280×720 逻辑坐标）
+GATE_PANEL_BANDS = ((0, 500), (500, 795), (795, 1280))
+GATE_PANEL_POINTS = ((352, 350), (647, 350), (943, 350))
+GATE_PANEL_WAIT_S = 1.2
 
 
 def pipeline():
@@ -262,6 +266,28 @@ class ElysianRun(CustomAction):
         if "华裳" in text: self.state.build_verified = True
         self.pending_signet = None
         self.phase("已获得刻印", normalize(text)[:48])
+
+    def gate_panel(self):
+        """传送锚点面板（减负/挑战奖励层）：按卡分桶读门名，集齐三张或等待超时后点优先级最高那张卡的中心。"""
+        order = gate_order(self.state)
+        cards = {}
+        for item in self.items:
+            x, y, w, h = item["box"]
+            if y > 560: continue
+            name = next((n for n in order if n in normalize(item["text"])), None)
+            if not name: continue
+            for index, (left, right) in enumerate(GATE_PANEL_BANDS):
+                if left <= x + w/2 < right and index not in cards: cards[index] = name
+        now = time.monotonic()
+        if not self.panel_since: self.panel_since = now
+        if len(cards) < 3 and now - self.panel_since < GATE_PANEL_WAIT_S:
+            self.phase("选择下一层", f"等待三张卡识别（已认到 {len(cards)} 张）")
+            return True
+        if not cards: return False
+        index = min(cards, key=lambda i: order.index(cards[i]))
+        self.phase("选择下一层", f"点第 {index+1} 张卡：{cards[index]}")
+        self.click(*GATE_PANEL_POINTS[index], .8)
+        return True
 
     def gate_choice(self):
         self.phase("选择下一层")
@@ -584,6 +610,7 @@ class ElysianRun(CustomAction):
 
     def step(self):
         self.read()
+        if "请选择下一层" not in self.text: self.panel_since = 0
         self.update_floor()
         if self.recover_gate_pause(): return
         if signet_detail_open(self.items):
@@ -649,7 +676,8 @@ class ElysianRun(CustomAction):
         if "选择刻印" in self.text and ("刻印" in self.text or "核心" in self.text):
             self.select_signet(); return
         if "请选择下一层" in self.text and "传送锚点" in self.text:
-            self.gate_choice(); return
+            if not self.gate_panel(): self.gate_choice()
+            return
         if "战况报告" in self.text and "状态列表" in self.text and "往世乐土" in self.text:
             self.sync_pause(); return
         if self.settlement_requested and self.final_clear and '命定的歧路' in self.text and '深层序列' in self.text:
@@ -773,6 +801,7 @@ class ElysianRun(CustomAction):
         self.gate_pause_used = False
         self.gate_recovery_phase = None
         self.gate_recovery_at = 0
+        self.panel_since = 0
         self.nav_steps=self.turns=self.exclusive_refresh=self.build_scrolls=self.lost_frames=self.nav_recoveries=0
         self.combat_args=SimpleNamespace(task_detail=argv.task_detail, custom_action_param=json.dumps({"character":self.state.role,"variant":self.state.variant,"confirmed_signet":"华裳"}))
         try:

@@ -42,7 +42,7 @@ class RunState:
 
 
 def normalize(text):
-    return re.sub(r"\s+", "", text).replace("麈灭", "鏖灭").replace("鏖天", "鏖灭")
+    return re.sub(r"\s+", "", text).replace("麈灭", "鏖灭").replace("鏖天", "鏖灭").replace("塵灭", "鏖灭")
 
 
 def signet_disabled(text, state, family=""):
