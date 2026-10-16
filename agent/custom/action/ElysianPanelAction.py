@@ -4,6 +4,7 @@ import time
 from types import SimpleNamespace
 from maa.custom_action import CustomAction
 from .Role.CharacterCombat import CharacterCombat
+from ..utils.CharacterProfiles import CHARACTER_PROFILES
 
 GATES = {"黄金": 19, "无限": 17, "浮生": 22}
 NAMED = {1, 2, 3, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 21, 22, 23}
@@ -11,11 +12,12 @@ LABELS = {1: "鏖灭", 2: "真我", 3: "空梦", 10: "商店", 11: "戒律", 12:
 
 
 class ElysianPanelAction(CustomAction):
-    def __init__(self, stop_event, report, preview):
+    def __init__(self, stop_event, report, preview, state=None):
         super().__init__()
         self.stop_event, self.report, self.preview = stop_event, report, preview
         self.operation, self.target = "forward", "黄金"
         self.outcome = ""
+        self.state = state
         self.combat_handler = CharacterCombat()
 
     def stopped(self, context):
@@ -106,10 +108,15 @@ class ElysianPanelAction(CustomAction):
 
     def combat(self, context, argv):
         deadline = time.monotonic() + 60
+        role = getattr(self.state, "role", "窈窕谍影")
+        variant = getattr(self.state, "variant", "elysian_huashang")
+        # 面板任务若未接入角色状态，退回当前已实测的丽塔华裳档案。
+        profile = CHARACTER_PROFILES.get(role, {}).get("variants", {}).get(variant) or \
+            CHARACTER_PROFILES["窈窕谍影"]["variants"]["elysian_huashang"]
         # 保持本次面板任务的身份；若每轮新建子任务，助战计时会每轮重置。
         combat_args = SimpleNamespace(task_detail=argv.task_detail, custom_action_param=json.dumps({
-            "character": "窈窕谍影", "variant": "elysian_huashang", "confirmed_signet": "华裳"}))
-        self.report("丽塔华裳战斗中（最多 60 秒），可随时停止")
+            "character": role, "variant": variant, "confirmed_signet": profile["requires_signet"]}))
+        self.report(f"{role}·{profile['requires_signet']}战斗中（最多 60 秒），可随时停止")
         while time.monotonic() < deadline and not self.stopped(context):
             frame = self.capture(context)
             if not self.arena(context, frame):
