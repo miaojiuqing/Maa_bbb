@@ -85,6 +85,28 @@ class CharacterCombat(CustomAction):
             self.holding = True
             if not self._press_attack(context):
                 return False
+            if not actions:
+                # cycle 为空且没有其它待执行动作：保持按住，直到战斗结束或需要停止。
+                print(f"CharacterCombat: {role}/{variant} hold_attack 持续按住，直到战斗结束", flush=True)
+                while True:
+                    if context.tasker.stopping:
+                        return False
+                    image = context.tasker.controller.post_screencap().wait().get()
+                    active = context.run_recognition("战斗逻辑-战斗中", image)
+                    if not active or not active.hit:
+                        return True
+                    hud = context.run_recognition("角色战斗-生命HUD", image)
+                    if not hud or not hud.hit:
+                        return True
+                    disabled = context.run_recognition("角色战斗-战后禁用", image)
+                    if disabled and disabled.hit:
+                        print("CharacterCombat: post-battle HUD, no input", flush=True)
+                        return False
+                    deadline = time.monotonic() + profile["interval_ms"] / 1000
+                    while time.monotonic() < deadline:
+                        if context.tasker.stopping:
+                            return False
+                        time.sleep(0.02)
         for action in actions:
             if context.tasker.stopping:
                 return False
