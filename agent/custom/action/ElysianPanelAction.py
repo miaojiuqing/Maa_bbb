@@ -4,6 +4,7 @@ import time
 from types import SimpleNamespace
 from maa.custom_action import CustomAction
 from .Role.CharacterCombat import CharacterCombat
+from ..utils import DesktopInput
 from ..utils.CharacterProfiles import CHARACTER_PROFILES
 
 GATES = {"黄金": 19, "无限": 17, "浮生": 22}
@@ -47,6 +48,7 @@ class ElysianPanelAction(CustomAction):
         controller = context.tasker.controller
         if self.stopped(context):
             return
+        held = DesktopInput.hold(context)  # 桌面端要先按住 Alt 才能拖视角，安卓端恒为 False
         try:
             if not controller.post_touch_down(153, 571).wait().succeeded:
                 raise RuntimeError("摇杆按下失败")
@@ -58,8 +60,11 @@ class ElysianPanelAction(CustomAction):
             while time.monotonic() < end and not self.stopped(context):
                 self.stop_event.wait(.02)
         finally:
-            if not controller.post_touch_up().wait().succeeded:
-                raise RuntimeError("摇杆松开失败，请在模拟器内检查")
+            try:
+                if not controller.post_touch_up().wait().succeeded:
+                    raise RuntimeError("摇杆松开失败，请在模拟器内检查")
+            finally:
+                DesktopInput.release(context, held)
 
     def confirmed_gate(self, context, frame):
         label = self.hit(context, "面板-门前身份", frame)
@@ -170,8 +175,12 @@ class ElysianPanelAction(CustomAction):
                     self.report(f"搜索「{self.target}」：转动视角 {turns+1}/6")
                     if self.stopped(context):
                         break
-                    if not context.tasker.controller.post_swipe(862, 301, 762, 301, 250).wait().succeeded:
-                        raise RuntimeError("转动视角失败")
+                    held = DesktopInput.hold(context)  # 桌面端靠 Alt+拖动转视角
+                    try:
+                        if not context.tasker.controller.post_swipe(862, 301, 762, 301, 250).wait().succeeded:
+                            raise RuntimeError("转动视角失败")
+                    finally:
+                        DesktopInput.release(context, held)
                     turns += 1
                     self.stop_event.wait(.3)
                     continue

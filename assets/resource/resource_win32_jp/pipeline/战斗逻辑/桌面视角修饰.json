@@ -1,0 +1,10 @@
+{
+    // 纯键盘操作方式下鼠标是解放的，转视角不需要按住 Alt（只有键鼠操作方式才需要）。
+    // 覆盖成 DoNothing 后，DesktopInput.hold/release 不会有任何按键输入。
+    "桌面-按住Alt": {
+        "action": "DoNothing"
+    },
+    "桌面-松开Alt": {
+        "action": "DoNothing"
+    }
+}

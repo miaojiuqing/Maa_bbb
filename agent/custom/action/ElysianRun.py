@@ -12,6 +12,7 @@ from .Role.CharacterCombat import CharacterCombat
 from .ElysianPanelAction import ElysianPanelAction
 from ..utils.ElysianPolicy import RunState, FAMILY_MARKERS, GATE_NAMES, KNOWN_SIGNETS, normalize, score_signet, choose_gate, choice_rows, gate_order, read_floor, shop_rows, signet_detail_open, signet_disabled
 from ..utils.ElysianVision import dormant_anchors, red_portals
+from ..utils import DesktopInput
 from ..utils.CharacterProfiles import CHARACTER_PROFILES
 
 
@@ -103,8 +104,12 @@ class ElysianRun(CustomAction):
 
     def swipe(self, x1, y1, x2, y2, ms=250):
         if self.stopped(): return
-        if not self.context.tasker.controller.post_swipe(x1, y1, x2, y2, ms).wait().succeeded:
-            raise RunHalt("滑动输入失败")
+        held = DesktopInput.hold(self.context)  # 桌面端靠 Alt+拖动转视角，安卓端恒为 False
+        try:
+            if not self.context.tasker.controller.post_swipe(x1, y1, x2, y2, ms).wait().succeeded:
+                raise RunHalt("滑动输入失败")
+        finally:
+            DesktopInput.release(self.context, held)
         self.stop_event.wait(.3)
 
     def save(self, picture=False):

@@ -1,0 +1,27 @@
+{
+    // 纯键盘操作的键码与键鼠操作不同，这里只覆盖有差异的动作
+    "角色战斗-按键-weapon": {
+        "action": "ClickKey",
+        "key": 85, //U
+        "pre_delay": 0,
+        "post_delay": 0
+    },
+    "角色战斗-按键-ultimate": {
+        "action": "ClickKey",
+        "key": 73, //I
+        "pre_delay": 0,
+        "post_delay": 0
+    },
+    "角色战斗-按键-elysian_support": {
+        "action": "ClickKey",
+        "key": 70, //F 英桀助战
+        "pre_delay": 0,
+        "post_delay": 0
+    },
+    "角色战斗-按键-star_ring": {
+        "action": "ClickKey",
+        "key": 76, //L 星之环（与 只按武器技.json 纯键盘版一致）
+        "pre_delay": 0,
+        "post_delay": 0
+    }
+}

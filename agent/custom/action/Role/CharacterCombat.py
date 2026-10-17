@@ -4,12 +4,17 @@ import time
 import re
 
 from maa.custom_action import CustomAction
+from ...utils import DesktopInput
 from ...utils.CharacterProfiles import CHARACTER_PROFILES, MUMU_TOUCH_ACTIONS
+
+# 安卓端（模拟器）只能走触摸坐标；桌面端资源包会提供 角色战斗-按键-<动作> 节点改用键码。
+TOUCH_NODE = "角色战斗-触摸"
 
 
 class CharacterCombat(CustomAction):
     def __init__(self):
         super().__init__()
+        self.input_nodes = {}
         self.support_at = {}
         self.signet_check_at = {}
         self.ultimate_at = {}
@@ -109,11 +114,15 @@ class CharacterCombat(CustomAction):
                     time.sleep(0.02)
                 continue
             # 战后仍有生命条，但武器位已变成刷新门按钮，必须单独拒绝。
-            result = context.run_action("角色战斗-触摸", pipeline_override={
-                "角色战斗-触摸": {"action": {"type": "Click", "param": {
-                    "target": [*MUMU_TOUCH_ACTIONS[action], 1, 1]
-                }}}
-            })
+            node = self._input_node(context, action)
+            if node == TOUCH_NODE:
+                result = context.run_action(node, pipeline_override={
+                    node: {"action": {"type": "Click", "param": {
+                        "target": [*MUMU_TOUCH_ACTIONS[action], 1, 1]
+                    }}}
+                })
+            else:
+                result = context.run_action(node)
             if not result or not result.success:
                 return False
             print(f"CharacterCombat: {role}/{variant} {action}", flush=True)
@@ -134,6 +143,19 @@ class CharacterCombat(CustomAction):
                 time.sleep(0.02)
         return True
 
+    def _input_node(self, context, action):
+        """返回该动作要执行的节点名：桌面端用键码节点，缺失时回退触摸点击。"""
+        cached = self.input_nodes.get(action)
+        if cached:
+            return cached
+        candidate = f"角色战斗-按键-{action}"
+        try:
+            name = candidate if context.get_node_data(candidate) else TOUCH_NODE
+        except Exception:
+            name = TOUCH_NODE
+        self.input_nodes[action] = name
+        return name
+
     def _move_short(self, context, key, profile):
         """相对当前视角短走；不代表已锁定敌人。"""
         controller = context.tasker.controller
@@ -141,6 +163,7 @@ class CharacterCombat(CustomAction):
         index = self.movement_index.get(key, 0)
         dx, dy = vectors[index % len(vectors)]
         self.movement_index[key] = index + 1
+        held = DesktopInput.hold(context)  # 桌面端要先按住 Alt 才能拖视角，安卓端恒为 False
         try:
             if not controller.post_touch_down(153, 571).wait().succeeded:
                 return False
@@ -156,8 +179,15 @@ class CharacterCombat(CustomAction):
             except Exception:
                 pass
             return False
+        finally:
+            DesktopInput.release(context, held)
 
     def _hold_attack(self, context, profile):
+        """长按攻击：桌面端用 LongPressKey 节点，安卓端用触摸按下-抬起。"""
+        node = self._input_node(context, "branch")
+        if node != TOUCH_NODE:
+            result = context.run_action(node)
+            return bool(result and result.success)
         controller = context.tasker.controller
         x, y = MUMU_TOUCH_ACTIONS["attack"]
         try:

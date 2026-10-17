@@ -1,0 +1,49 @@
+{
+    // 桌面端战斗 HUD 的识别区域与安卓端不同，这里只覆盖需要改的三处
+    "角色战斗-战后禁用": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "战斗相关/战中检查/已经不用再战斗了-PC.png"
+        ],
+        "green_mask": true,
+        "roi": [
+            1058,
+            619,
+            100,
+            100 //绿幕小图，位置与 非战斗状态-乐土崩落华 一致
+        ],
+        "threshold": 0.78,
+        "pre_delay": 0,
+        "post_delay": 0
+    },
+    "角色战斗-生命HUD": {
+        "recognition": "OCR",
+        "roi": [
+            345,
+            642,
+            525,
+            55
+        ],
+        "expected": [
+            "[1-9][0-9]*/[1-9][0-9]*"
+        ],
+        "only_rec": true,
+        "pre_delay": 0,
+        "post_delay": 0
+    },
+    "角色战斗-英桀助战充能": {
+        "recognition": "OCR",
+        "roi": [
+            996,
+            466,
+            112,
+            113
+        ],
+        "only_rec": true,
+        "expected": [
+            "[0-9]+[/7][0-9]+"
+        ],
+        "pre_delay": 0,
+        "post_delay": 0
+    }
+}

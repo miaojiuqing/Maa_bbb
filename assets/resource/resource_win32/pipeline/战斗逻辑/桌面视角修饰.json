@@ -1,0 +1,18 @@
+{
+    "桌面-按住Alt": {
+        "action": {
+            "type": "KeyDown",
+            "param": {
+                "key": 164
+            }
+        }
+    },
+    "桌面-松开Alt": {
+        "action": {
+            "type": "KeyUp",
+            "param": {
+                "key": 164
+            }
+        }
+    }
+}

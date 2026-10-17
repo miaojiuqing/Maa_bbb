@@ -1,0 +1,64 @@
+{
+    // 桌面端没有触摸坐标，出招统一走键码；CharacterCombat 优先使用这些节点，缺失时才回退到 角色战斗-触摸
+    "角色战斗-按键-attack": {
+        "action": "ClickKey",
+        "key": 74, //J
+        "pre_delay": 0,
+        "post_delay": 0
+    },
+    "角色战斗-按键-branch": {
+        "action": "LongPressKey",
+        "key": 74, //J 长按 = 分支攻击
+        "duration": 520,
+        "pre_delay": 0,
+        "post_delay": 0
+    },
+    "角色战斗-按键-weapon": {
+        "action": "ClickKey",
+        "key": 69, //E
+        "pre_delay": 0,
+        "post_delay": 0
+    },
+    "角色战斗-按键-support_1": {
+        "action": "ClickKey",
+        "key": 49, //1
+        "pre_delay": 0,
+        "post_delay": 0
+    },
+    "角色战斗-按键-support_2": {
+        "action": "ClickKey",
+        "key": 50, //2
+        "pre_delay": 0,
+        "post_delay": 0
+    },
+    "角色战斗-按键-elysian_support": {
+        "action": "ClickKey",
+        "key": 84, //T 英桀助战
+        "pre_delay": 0,
+        "post_delay": 0
+    },
+    "角色战斗-按键-ultimate": {
+        "action": "ClickKey",
+        "key": 81, //Q
+        "pre_delay": 0,
+        "post_delay": 0
+    },
+    "角色战斗-按键-star_ring": {
+        "action": "ClickKey",
+        "key": 70, //F 星之环
+        "pre_delay": 0,
+        "post_delay": 0
+    },
+    "角色战斗-按键-dodge": {
+        "action": "ClickKey",
+        "key": 160, //shift
+        "pre_delay": 0,
+        "post_delay": 0
+    },
+    "角色战斗-按键-jump": {
+        "action": "ClickKey",
+        "key": 32, //Space
+        "pre_delay": 0,
+        "post_delay": 0
+    }
+}
