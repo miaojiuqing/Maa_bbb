@@ -111,8 +111,12 @@ class ElysianPanelAction(CustomAction):
         role = getattr(self.state, "role", "窈窕谍影")
         variant = getattr(self.state, "variant", "elysian_huashang")
         # 面板任务若未接入角色状态，退回当前已实测的丽塔华裳档案。
-        profile = CHARACTER_PROFILES.get(role, {}).get("variants", {}).get(variant) or \
-            CHARACTER_PROFILES["窈窕谍影"]["variants"]["elysian_huashang"]
+        # 角色与流派必须一起回退：只回退档案会让 CharacterCombat 收到
+        # 未适配的 character/variant 并直接抛异常，盖掉它自己的可读提示。
+        profile = CHARACTER_PROFILES.get(role, {}).get("variants", {}).get(variant)
+        if not profile:
+            role, variant = "窈窕谍影", "elysian_huashang"
+            profile = CHARACTER_PROFILES[role]["variants"][variant]
         # 保持本次面板任务的身份；若每轮新建子任务，助战计时会每轮重置。
         combat_args = SimpleNamespace(task_detail=argv.task_detail, custom_action_param=json.dumps({
             "character": role, "variant": variant, "confirmed_signet": profile["requires_signet"]}))

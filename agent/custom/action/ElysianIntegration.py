@@ -218,14 +218,17 @@ class ElysianConfigure(CustomAction):
                 "往世乐土-已进入三位导航界面",
                 "[JumpBack]往世乐土-点击普通战斗",
             ]
-            # 往世乐土任务自己走到准备界面时，同样在出击后立刻接管。
+            # 预置交棒：HANDOVER_NODES 里的三个准备界面节点属于「克莱茵打灰」的
+            # 刷装甲等级链路，往世乐土任务走的是乐土导航入口链，本任务内不会命中
+            # 它们；这段覆盖当前不产生实际效果，保留为后续让往世乐土直接复用
+            # 刷级链路时的接棒预留。
             handover = handover_patch(context, stop=False)
             patch.update(handover)
             ok = context.override_pipeline(patch)
             if ok:
                 print(f"乐土关内配置：{json.dumps(config, ensure_ascii=False)}", flush=True)
                 if handover:
-                    print(f"乐土出击接管：已在 {list(handover)} 最前面插入 乐土关内-接管", flush=True)
+                    print(f"乐土交棒预置：已为 {list(handover)} 预留接棒插入（本任务不经过刷级链路）", flush=True)
             return ok
         except Exception as exc:
             print(f"乐土配置读取失败：{exc}", flush=True)

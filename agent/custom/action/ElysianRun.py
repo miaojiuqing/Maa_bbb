@@ -10,7 +10,7 @@ from PIL import Image
 from maa.custom_action import CustomAction
 from .Role.CharacterCombat import CharacterCombat
 from .ElysianPanelAction import ElysianPanelAction
-from ..utils.ElysianPolicy import RunState, GATE_NAMES, KNOWN_SIGNETS, normalize, score_signet, choose_gate, choice_rows, gate_order, read_floor, shop_rows, signet_detail_open, signet_disabled
+from ..utils.ElysianPolicy import RunState, FAMILY_MARKERS, GATE_NAMES, KNOWN_SIGNETS, normalize, score_signet, choose_gate, choice_rows, gate_order, read_floor, shop_rows, signet_detail_open, signet_disabled
 from ..utils.ElysianVision import dormant_anchors, red_portals
 from ..utils.CharacterProfiles import CHARACTER_PROFILES
 
@@ -196,8 +196,10 @@ class ElysianRun(CustomAction):
                 self.click_text("^往世乐土$", [0, 90, 210, 120]); return
             plan = self.profile()["signet_plan"]
             required = self.required_signet()
-            # 已获刻印按当前角色方案列举，新增角色不需要改脚本。
-            for name in dict.fromkeys([required] + list(plan.get("exclusive", [])) + list(plan.get("cores", []))):
+            # 已获刻印按当前角色方案列举，新增角色不需要改脚本；
+            # FAMILY_MARKERS 兜住暂停菜单只显示体系标题（没有核心名）的体系。
+            for name in dict.fromkeys([required] + list(FAMILY_MARKERS)
+                                      + list(plan.get("exclusive", [])) + list(plan.get("cores", []))):
                 if name in self.text: self.state.record(name)
             # 接管可能发生在第一层 HUD 出现、初始专属刻印尚未弹出的瞬间。
             # 此时暂停菜单里的增益列表只有追忆之证，不能把“尚未选择”当成
@@ -761,7 +763,6 @@ class ElysianRun(CustomAction):
             self.state.reason = f"角色或流派尚未适配：{self.state.role} / {self.state.variant}"
             self.report(self.state.reason)
             return False
-        self.motion.state = self.state
         self.fresh_run = False
         self.detail_attempts = 0
         self.floor_candidate=None;self.floor_candidate_reads=0;self.active_hud_frames=0
@@ -787,13 +788,16 @@ class ElysianRun(CustomAction):
                 self.state.result='运行中';self.state.reason=''
                 self.final_clear=self.final_exit=self.settlement_requested=True
                 self.settlement_result_seen=checkpoint.get('result_seen',False)
+        # checkpoint 恢复会重建 state 对象，动作层必须跟着指向新对象；
+        # 否则面板战斗仍按本次选项的角色出招，与恢复后的记录不一致。
+        self.motion.state = self.state
         self.choice_signature="";self.choice_at=0;self.enter_at=0;self.build_signature="";self.peace_since=0;self.battle_finished=False;self.nav_started=0
         self.enter_attempts = self.enter_failure_reads = 0
         self.gate_pause_used = False
         self.gate_recovery_phase = None
         self.gate_recovery_at = 0
         self.nav_steps=self.turns=self.exclusive_refresh=self.build_scrolls=self.lost_frames=self.nav_recoveries=0
-        self.combat_args=SimpleNamespace(task_detail=argv.task_detail, custom_action_param=json.dumps({"character":self.state.role,"variant":self.state.variant,"confirmed_signet":profile["requires_signet"]}))
+        self.combat_args=SimpleNamespace(task_detail=argv.task_detail, custom_action_param=json.dumps({"character":self.state.role,"variant":self.state.variant,"confirmed_signet":self.required_signet()}))
         try:
             while not self.stopped():
                 self.step()
