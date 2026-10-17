@@ -14,6 +14,7 @@
     "target_lock": false,
     "movement": false,
     "branch": false,
+    "hold_attack": false,
     "signet_plan": {
       "exclusive": ["遍历", "应时", "谛观"],
       "cores": ["黄金的咏叹", "像是繁星，闪耀着的", "浮生茫茫，百态皆苦", "空梦·空集·空我·空欢"],

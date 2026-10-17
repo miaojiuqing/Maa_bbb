@@ -25,9 +25,12 @@ class CharacterCombat(CustomAction):
         self.movement_index = {}
         self.branch_at = {}
         self.holding = False
+        self.hold_key = None
+        self.hold_release = True
 
     def run(self, context, argv):
         self.holding = False
+        self.hold_release = True
         try:
             return self._run(context, argv)
         except Exception as exc:
@@ -35,9 +38,11 @@ class CharacterCombat(CustomAction):
             print(f"CharacterCombat stopped: {type(exc).__name__}: {exc}", flush=True)
             return False
         finally:
-            # 按住普攻的状态必须在任何退出路径上释放，否则会一直按着。
-            if self.holding:
+            # 只有判定为战斗结束/停止/异常时才松开；动作跑完会保持按住，
+            # 由下一次节点重入接着按住并轮转周期动作。
+            if self.holding and self.hold_release:
                 self.holding = False
+                self.hold_key = None
                 self._release_attack(context)
 
     def _run(self, context, argv):
@@ -82,31 +87,36 @@ class CharacterCombat(CustomAction):
         if profile.get("hold_attack"):
             # 全程按住普攻：按住期间不再点攻击；其他动作走不同按钮，与按住互不冲突。
             actions = [a for a in actions if a != "attack"]
+            if self.hold_key is not None and self.hold_key != key:
+                # 上一场没松开（异常退出等）先补一次松开，避免按键残留。
+                self._release_attack(context)
+                self.hold_key = None
             self.holding = True
-            if not self._press_attack(context):
-                return False
+            self.hold_release = True          # 任何提前返回都松手；正常跑完会改回 False
+            if self.hold_key != key:
+                if not self._press_attack(context):
+                    return False
+                self.hold_key = key
             if not actions:
-                # cycle 为空且没有其它待执行动作：保持按住，直到战斗结束或需要停止。
+                # cycle 为空且没有其它待执行动作：只做一轮 HUD 检查就返回，
+                # 由节点重入去执行到期的周期动作；按住状态通过跨调用保持。
                 print(f"CharacterCombat: {role}/{variant} hold_attack 持续按住，直到战斗结束", flush=True)
-                while True:
-                    if context.tasker.stopping:
-                        return False
-                    image = context.tasker.controller.post_screencap().wait().get()
-                    active = context.run_recognition("战斗逻辑-战斗中", image)
-                    if not active or not active.hit:
-                        return True
-                    hud = context.run_recognition("角色战斗-生命HUD", image)
-                    if not hud or not hud.hit:
-                        return True
-                    disabled = context.run_recognition("角色战斗-战后禁用", image)
-                    if disabled and disabled.hit:
-                        print("CharacterCombat: post-battle HUD, no input", flush=True)
-                        return False
-                    deadline = time.monotonic() + profile["interval_ms"] / 1000
-                    while time.monotonic() < deadline:
-                        if context.tasker.stopping:
-                            return False
-                        time.sleep(0.02)
+                if context.tasker.stopping:
+                    return False
+                image = context.tasker.controller.post_screencap().wait().get()
+                active = context.run_recognition("战斗逻辑-战斗中", image)
+                if not active or not active.hit:
+                    return True
+                hud = context.run_recognition("角色战斗-生命HUD", image)
+                if not hud or not hud.hit:
+                    return True
+                disabled = context.run_recognition("角色战斗-战后禁用", image)
+                if disabled and disabled.hit:
+                    print("CharacterCombat: post-battle HUD, no input", flush=True)
+                    return False
+                time.sleep(profile["interval_ms"] / 1000.0)
+                self.hold_release = False     # 战斗仍在：保持按住
+                return True
         for action in actions:
             if context.tasker.stopping:
                 return False
@@ -176,6 +186,7 @@ class CharacterCombat(CustomAction):
                 if context.tasker.stopping:
                     return False
                 time.sleep(0.02)
+        self.hold_release = False  # 动作跑完、战斗仍在：保持按住
         return True
 
     def _input_node(self, context, action):

@@ -14,6 +14,7 @@
     "target_lock": false,
     "movement": false,
     "branch": false,
+    "hold_attack": false,
     "signet_plan": {
       "exclusive": ["极诣", "玄迹", "观化"],
       "cores": ["鏖斗·鏖战·鏖杀·鏖灭", "浮生茫茫，百态皆苦", "天慧之真言", "空梦·空集·空我·空欢"],
