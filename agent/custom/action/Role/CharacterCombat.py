@@ -24,14 +24,21 @@ class CharacterCombat(CustomAction):
         self.movement_at = {}
         self.movement_index = {}
         self.branch_at = {}
+        self.holding = False
 
     def run(self, context, argv):
+        self.holding = False
         try:
             return self._run(context, argv)
         except Exception as exc:
             # 异常不得越过 ctypes 回调边界，否则框架可能继续高速重试。
             print(f"CharacterCombat stopped: {type(exc).__name__}: {exc}", flush=True)
             return False
+        finally:
+            # 按住普攻的状态必须在任何退出路径上释放，否则会一直按着。
+            if self.holding:
+                self.holding = False
+                self._release_attack(context)
 
     def _run(self, context, argv):
         raw_params = getattr(argv, "custom_action_param", None)
@@ -64,7 +71,7 @@ class CharacterCombat(CustomAction):
         if profile.get("movement") and now - self.movement_at.get(key, -1000) >= profile.get("movement_interval_s", 1.8):
             # 可选的定时移动；华裳配置不启用，不能替代场景中的接敌判断。
             actions.insert(0, "movement")
-        if profile.get("branch") and now - self.branch_at.get(key, -1000) >= profile.get("branch_interval_s", 6.0):
+        if profile.get("branch") and not profile.get("hold_attack") and now - self.branch_at.get(key, -1000) >= profile.get("branch_interval_s", 6.0):
             # 出招表中的“攻击（长按）”是分支·无声的利刃；它不能用一次
             # Click 代替，否则只会继续普通攻击而丢失高倍率分支。
             actions.insert(0, "branch")
@@ -72,6 +79,12 @@ class CharacterCombat(CustomAction):
             actions.insert(0,"elysian_support")
         if time.monotonic() - self.support_at.get(key, -1000) >= profile["support_interval_s"]:
             actions = list(profile["opening"]) + actions
+        if profile.get("hold_attack"):
+            # 全程按住普攻：按住期间不再点攻击；其他动作走不同按钮，与按住互不冲突。
+            actions = [a for a in actions if a != "attack"]
+            self.holding = True
+            if not self._press_attack(context):
+                return False
         for action in actions:
             if context.tasker.stopping:
                 return False
@@ -155,6 +168,17 @@ class CharacterCombat(CustomAction):
             name = TOUCH_NODE
         self.input_nodes[action] = name
         return name
+
+    def _press_attack(self, context):
+        """按下普攻并保持；按下/松开走资源包节点，安卓 TouchDown、桌面 KeyDown 自动分流。"""
+        result = context.run_action("按下攻击_action")
+        return bool(result and result.success)
+
+    def _release_attack(self, context):
+        try:
+            context.run_action("松开攻击_action")
+        except Exception as exc:
+            print(f"CharacterCombat release stopped: {type(exc).__name__}: {exc}", flush=True)
 
     def _move_short(self, context, key, profile):
         """相对当前视角短走；不代表已锁定敌人。"""
