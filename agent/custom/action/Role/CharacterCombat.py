@@ -9,6 +9,8 @@ from ...utils.CharacterProfiles import CHARACTER_PROFILES, MUMU_TOUCH_ACTIONS
 
 # 安卓端（模拟器）只能走触摸坐标；桌面端资源包会提供 角色战斗-按键-<动作> 节点改用键码。
 TOUCH_NODE = "角色战斗-触摸"
+# 长按使用独立触摸点：周期性点按走 contact=0，其 touch_up 会把同一 touch 的按住一起抬起。
+HOLD_CONTACT = 1
 
 
 class CharacterCombat(CustomAction):
@@ -202,14 +204,30 @@ class CharacterCombat(CustomAction):
         self.input_nodes[action] = name
         return name
 
+    def _touch_based(self, context, node):
+        """桌面端按键节点没有接触点概念；只有触摸型节点才需要指定 contact。"""
+        try:
+            data = context.get_node_data(node) or {}
+        except Exception:
+            return True
+        action = data.get("action") if isinstance(data, dict) else None
+        action_type = action.get("type") if isinstance(action, dict) else action
+        return action_type in (None, "TouchDown", "TouchUp")
+
     def _press_attack(self, context):
-        """按下普攻并保持；按下/松开走资源包节点，安卓 TouchDown、桌面 KeyDown 自动分流。"""
-        result = context.run_action("按下攻击_action")
+        """按下普攻并保持；触摸型节点用独立 contact，避免被点按的 touch_up 抬起。"""
+        override = None
+        if self._touch_based(context, "按下攻击_action"):
+            override = {"按下攻击_action": {"action": {"param": {"contact": HOLD_CONTACT}}}}
+        result = context.run_action("按下攻击_action", pipeline_override=override)
         return bool(result and result.success)
 
     def _release_attack(self, context):
         try:
-            context.run_action("松开攻击_action")
+            override = None
+            if self._touch_based(context, "松开攻击_action"):
+                override = {"松开攻击_action": {"action": {"param": {"contact": HOLD_CONTACT}}}}
+            context.run_action("松开攻击_action", pipeline_override=override)
         except Exception as exc:
             print(f"CharacterCombat release stopped: {type(exc).__name__}: {exc}", flush=True)
 
