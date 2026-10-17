@@ -45,6 +45,14 @@
             "cases": [{
                 "name": "窈窕谍影",
                 "pipeline_override": {"乐土关内-角色配置": {"enabled": true}}
+            },
+            {
+                "name": "渡世之羽",
+                "pipeline_override": {"乐土关内-角色配置": {"enabled": true}}
+            },
+            {
+                "name": "时序之律者",
+                "pipeline_override": {"乐土关内-角色配置": {"enabled": true}}
             }]
         },
         "往世乐土-关内流派": {
@@ -58,6 +66,20 @@
                 "pipeline_override": {"乐土关内-角色配置": {"action": {"type": "Custom", "param": {
                     "custom_action": "ElysianConfigure",
                     "custom_action_param": {"character": "窈窕谍影", "variant": "elysian_huashang"}
+                }}}}
+            },
+            {
+                "name": "极诣+玄迹",
+                "pipeline_override": {"乐土关内-角色配置": {"action": {"type": "Custom", "param": {
+                    "custom_action": "ElysianConfigure",
+                    "custom_action_param": {"character": "渡世之羽", "variant": "elysian_jyxj"}
+                }}}}
+            },
+            {
+                "name": "遍历",
+                "pipeline_override": {"乐土关内-角色配置": {"action": {"type": "Custom", "param": {
+                    "custom_action": "ElysianConfigure",
+                    "custom_action_param": {"character": "时序之律者", "variant": "elysian_bianli"}
                 }}}}
             }]
         },

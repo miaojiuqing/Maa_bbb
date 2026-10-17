@@ -5,12 +5,37 @@ from .CharacterProfiles import CHARACTER_PROFILES
 
 GATE_NAMES = {1: "鏖灭", 2: "真我", 3: "空梦", 10: "商店", 11: "戒律", 12: "螺旋", 13: "商店", 14: "天慧", 15: "繁星", 17: "无限", 18: "刹那", 19: "黄金", 20: "救世", 21: "旭光", 22: "浮生", 23: "首领"}
 DISABLABLE_FAMILIES = {"鏖灭"}
+# 暂停菜单“增益列表”里会出现的英桀名；角色专属与核心由 characters 目录汇总。
+FAMILY_MARKERS = ("空梦", "繁星", "戒律", "天慧", "浮生", "无限", "旭光", "刹那", "救世")
 # 商店与混合奖励没有体系标题，按刻印名称和核心效果识别鏖灭。
 # 普通名称不含“鏖灭”，不能只过滤这两个字。
 AOMIE_MARKERS = ("鏖", "赤骨", "剑锋·剑冢", "无妄·无心", "唯神·唯我",
                  "狂信·狂人", "命路·命舛", "无死·无生", "千钧·千转",
                  "非人·非鬼", "一人·一面", "焚身·焚骨", "故土·故国",
                  "燃血解放", "燃血狱衣")
+
+
+def known_signets():
+    """全部角色档案里出现过的刻印名，用于判断第一层是否已经弹出初始专属。"""
+    names = set(FAMILY_MARKERS)
+    for variants in CHARACTER_PROFILES.values():
+        for profile in variants.get("variants", {}).values():
+            plan = profile.get("signet_plan", {})
+            names.add(profile.get("requires_signet", ""))
+            names.update(plan.get("exclusive", []))
+            names.update(plan.get("cores", []))
+    names.discard("")
+    return tuple(sorted(names))
+
+
+KNOWN_SIGNETS = known_signets()
+
+
+def key_exclusives(profile):
+    """关键专属：必需刻印加方案里的下一个；方案抄写有误时也不会漏掉必需项。"""
+    required = profile.get("requires_signet", "")
+    others = [name for name in profile.get("signet_plan", {}).get("exclusive", []) if name != required]
+    return ([required] if required else []) + others[:1]
 
 
 @dataclass
@@ -97,12 +122,18 @@ def score_signet(text, state):
 
 
 def gate_order(state):
-    plan = CHARACTER_PROFILES[state.role]["variants"][state.variant]["signet_plan"]
+    profile = CHARACTER_PROFILES[state.role]["variants"][state.variant]
+    plan = profile["signet_plan"]
     order = list(plan["gates"])
-    if all(state.has(s) for s in plan["exclusive"][:2]):
+    if all(state.has(s) for s in key_exclusives(profile)):
         order.remove("真我"); order.append("真我")
-    for family, core in (("黄金", "黄金的咏叹"), ("鏖灭", "鏖兵·鏖剪·鏖馘·鏖灭")):
-        if state.has(core) and family in order:
+    # 拿到某体系的核心后把该体系降位：体系与核心名都从当前角色档案推导，
+    # 不再写死某一角色的核心名。真我由上面的专属规则单独处理。
+    for family in plan["gates"]:
+        if family == "真我":
+            continue
+        core = next((name for name in plan.get("cores", []) if family in name), "")
+        if core and state.has(core) and family in order:
             order.remove(family); order.insert(min(6, len(order)), family)
     if state.gate_priority:
         order = list(dict.fromkeys(state.gate_priority + order))

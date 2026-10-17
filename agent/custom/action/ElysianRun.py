@@ -10,12 +10,13 @@ from PIL import Image
 from maa.custom_action import CustomAction
 from .Role.CharacterCombat import CharacterCombat
 from .ElysianPanelAction import ElysianPanelAction
-from ..utils.ElysianPolicy import RunState, GATE_NAMES, normalize, score_signet, choose_gate, choice_rows, gate_order, read_floor, shop_rows, signet_detail_open, signet_disabled
+from ..utils.ElysianPolicy import RunState, GATE_NAMES, KNOWN_SIGNETS, normalize, score_signet, choose_gate, choice_rows, gate_order, read_floor, shop_rows, signet_detail_open, signet_disabled
 from ..utils.ElysianVision import dormant_anchors, red_portals
+from ..utils.CharacterProfiles import CHARACTER_PROFILES
 
 
 # 进入第一层后游戏还会播放出生动画并生成初始专属刻印，过早打开暂停菜单
-# 会把“尚未选择”误判为“没有华裳”。
+# 会把“尚未选择”误判为“没有必需专属”。
 INITIAL_SIGNET_GRACE_S = 8
 GATE_CLICK_CHECK_S = 3
 GATE_LOAD_WAIT_S = 30
@@ -49,6 +50,14 @@ class ElysianRun(CustomAction):
         self.output = None
 
     def stopped(self): return self.stop_event.is_set() or self.context.tasker.stopping
+
+    def profile(self):
+        """当前角色档案；run() 已校验角色与流派，流程内只负责取用。"""
+        return CHARACTER_PROFILES[self.state.role]["variants"][self.state.variant]
+
+    def required_signet(self):
+        """本流派的必需专属刻印，替代原先写死的华裳。"""
+        return self.profile()["requires_signet"]
 
     def capture(self):
         image = self.context.tasker.controller.post_screencap().wait().get()
@@ -171,10 +180,11 @@ class ElysianRun(CustomAction):
             return
         self.phase("检查本局", "读取角色与已获刻印")
         if not self.state.role_verified:
-            if self.find("窈窕谍影", [230, 70, 1020, 150]):
+            role = normalize(self.state.role)
+            if self.find(re.escape(role), [230, 70, 1020, 150]):
                 self.state.role_verified = True
-            elif "状态列表" in self.text and "窈窕谍影" not in self.text and self.find("状态列表", [220, 0, 900, 90]):
-                raise RunHalt("状态列表中的角色不是窈窕谍影；请更换为当前适配角色")
+            elif "状态列表" in self.text and role not in self.text and self.find("状态列表", [220, 0, 900, 90]):
+                raise RunHalt(f"状态列表中的角色不是{self.state.role}；请更换为当前适配角色")
             else:
                 self.click_text("^状态列表$", [0, 380, 210, 220]); return
         if not self.state.build_verified:
@@ -184,15 +194,15 @@ class ElysianRun(CustomAction):
                 return
             if "增益列表" not in self.text:
                 self.click_text("^往世乐土$", [0, 90, 210, 120]); return
-            for name in ("华裳", "尽善", "粉黛", "黄金的咏叹", "黄金的余音",
-                         "鏖兵·鏖剪·鏖馘·鏖灭", "颠末的螺旋"):
+            plan = self.profile()["signet_plan"]
+            required = self.required_signet()
+            # 已获刻印按当前角色方案列举，新增角色不需要改脚本。
+            for name in dict.fromkeys([required] + list(plan.get("exclusive", [])) + list(plan.get("cores", []))):
                 if name in self.text: self.state.record(name)
             # 接管可能发生在第一层 HUD 出现、初始专属刻印尚未弹出的瞬间。
             # 此时暂停菜单里的增益列表只有追忆之证，不能把“尚未选择”当成
             # “已经选错”。继续战斗后，下一轮 step 会优先处理刻印选择界面。
-            known_signet = ("华裳", "尽善", "粉黛", "黄金的咏叹", "黄金的余音",
-                            "鏖兵·鏖剪·鏖馘·鏖灭", "颠末的螺旋", "空梦", "繁星",
-                            "戒律", "天慧", "浮生", "无限", "旭光", "刹那", "救世")
+            known_signet = KNOWN_SIGNETS
             if self.state.floor == 1 and not self.state.acquired and not any(
                     marker in self.text for marker in known_signet):
                 self.phase("等待初始刻印", "第一层尚未出现已获刻印，继续战斗等待专属选择")
@@ -207,11 +217,11 @@ class ElysianRun(CustomAction):
             if signature != self.build_signature and self.build_scrolls < 6:
                 self.build_signature = signature
                 self.swipe(1100, 604, 1100, 290, 300); self.build_scrolls += 1; return
-            if self.state.has("华裳"):
+            if self.state.has(required):
                 self.state.build_verified = True
-                self.phase("本局检查通过", "窈窕谍影 / 华裳")
+                self.phase("本局检查通过", f"{self.state.role} / {required}")
             else:
-                raise RunHalt('未在已获刻印中确认华裳，不能执行华裳专属循环')
+                raise RunHalt(f'未在已获刻印中确认{required}，不能执行{required}专属循环')
         if self.click_text("^继续战斗$", [800, 570, 480, 150], .6): return
         self.click_text("^战况报告$", [0, 170, 210, 110])
 
@@ -225,11 +235,12 @@ class ElysianRun(CustomAction):
         signature = "|".join(normalize(r["text"]) for r in rows)
         if signature == self.choice_signature and time.monotonic()-self.choice_at < 2: return
         exclusive = family == "真我" or any("祝福" in r["text"] for r in rows)
-        if exclusive and not self.state.has("华裳") and not any("华裳" in r["text"] for r in rows):
-            if self.exclusive_refresh >= 8: raise RunHalt("初始专属刷新 8 次仍未找到华裳")
+        required = self.required_signet()
+        if exclusive and not self.state.has(required) and not any(required in r["text"] for r in rows):
+            if self.exclusive_refresh >= 8: raise RunHalt(f"初始专属刷新 8 次仍未找到{required}")
             if self.click_text("重置刻印", [600, 630, 420, 90], .8):
                 self.exclusive_refresh += 1
-                self.phase("初始专属", f"寻找华裳，刷新 {self.exclusive_refresh}/8")
+                self.phase("初始专属", f"寻找{required}，刷新 {self.exclusive_refresh}/8")
             return
         allowed_rows = [row for row in rows if not signet_disabled(row["text"], self.state, family)]
         if not allowed_rows:
@@ -259,7 +270,7 @@ class ElysianRun(CustomAction):
         current = "|".join(normalize(r["text"]) for r in choice_rows(self.items))
         if signature == current and "选择刻印" in self.text: return
         self.state.record(text, family)
-        if "华裳" in text: self.state.build_verified = True
+        if self.required_signet() in text: self.state.build_verified = True
         self.pending_signet = None
         self.phase("已获得刻印", normalize(text)[:48])
 
@@ -694,7 +705,7 @@ class ElysianRun(CustomAction):
             if self.final_exit:
                 self.phase('进入英桀房间后退出');self.click(43,36);return
             if not self.state.role_verified or not self.state.build_verified:
-                self.phase("检查本局", "打开暂停菜单核对角色和华裳")
+                self.phase("检查本局", f"打开暂停菜单核对角色与{self.required_signet()}")
                 self.click(43,36); return
             post_battle = self.hit("角色战斗-战后禁用") or self.hit("乐土自动-刷新门")
             self.active_hud_frames=0 if post_battle else self.active_hud_frames+1
@@ -718,7 +729,7 @@ class ElysianRun(CustomAction):
             self.target = None; self.state.target=""; self.turns = self.nav_steps = 0
             if time.monotonic()-self.floor_since > 360:
                 raise RunHalt("本层战斗超过 6 分钟，可能输出不足或未能接敌")
-            self.phase("战斗", "华裳非星环：助战后连续武器技")
+            self.phase("战斗", f"{self.state.role}·{self.required_signet()}：按角色出招表")
             if time.monotonic() - getattr(self, 'combat_capture_at', 0) >= 8:
                 self.save(True)
                 self.combat_capture_at = time.monotonic()
@@ -743,6 +754,14 @@ class ElysianRun(CustomAction):
         allowed = ("role", "variant", "exclusive_priority", "buff_priority", "gate_priority", "disabled_families", "shop_enabled")
         settings = {key: params[key] for key in allowed if key in params}
         self.state = RunState(**settings)
+        profile = CHARACTER_PROFILES.get(self.state.role, {}).get("variants", {}).get(self.state.variant)
+        if not profile:
+            # 角色/流派未适配时给出可读原因，避免后续按索引取档案时抛 KeyError。
+            self.state.result = "需要处理"
+            self.state.reason = f"角色或流派尚未适配：{self.state.role} / {self.state.variant}"
+            self.report(self.state.reason)
+            return False
+        self.motion.state = self.state
         self.fresh_run = False
         self.detail_attempts = 0
         self.floor_candidate=None;self.floor_candidate_reads=0;self.active_hud_frames=0
@@ -774,7 +793,7 @@ class ElysianRun(CustomAction):
         self.gate_recovery_phase = None
         self.gate_recovery_at = 0
         self.nav_steps=self.turns=self.exclusive_refresh=self.build_scrolls=self.lost_frames=self.nav_recoveries=0
-        self.combat_args=SimpleNamespace(task_detail=argv.task_detail, custom_action_param=json.dumps({"character":self.state.role,"variant":self.state.variant,"confirmed_signet":"华裳"}))
+        self.combat_args=SimpleNamespace(task_detail=argv.task_detail, custom_action_param=json.dumps({"character":self.state.role,"variant":self.state.variant,"confirmed_signet":profile["requires_signet"]}))
         try:
             while not self.stopped():
                 self.step()

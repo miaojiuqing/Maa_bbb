@@ -1,0 +1,35 @@
+{
+  "character": "时序之律者",
+  "variant": "elysian_bianli",
+  "profile": {
+    "requires_signet": "遍历",
+    "opening": ["support_1", "support_2"],
+    "cycle": ["weapon", "weapon", "weapon", "weapon"],
+    "interval_ms": 120,
+    "support_interval_s": 30,
+    "elysian_support": true,
+    "ultimate": false,
+    "star_ring": false,
+    "dodge": false,
+    "target_lock": false,
+    "movement": false,
+    "branch": false,
+    "signet_plan": {
+      "exclusive": ["遍历", "应时", "谛观"],
+      "cores": ["黄金的咏叹", "像是繁星，闪耀着的", "浮生茫茫，百态皆苦", "空梦·空集·空我·空欢"],
+      "gates": ["真我", "黄金", "繁星", "浮生", "空梦", "鏖灭", "螺旋", "刹那", "戒律", "天慧", "无限", "旭光", "救世"]
+    },
+    "source": "https://www.miyoushe.com/ys/article/78369456"
+  },
+  "touch_actions": {
+    "attack": [1173, 615],
+    "weapon": [1045, 512],
+    "support_1": [1208, 147],
+    "support_2": [1203, 285],
+    "elysian_support": [938, 424],
+    "ultimate": [1184, 466],
+    "star_ring": [914, 565],
+    "dodge": [1028, 649],
+    "jump": [1069, 373]
+  }
+}
