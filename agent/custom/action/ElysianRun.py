@@ -25,6 +25,13 @@ GATE_CLICK_OFFSETS = (80, 0, 110)
 GATE_CLICK_MAX_ATTEMPTS = 6
 GATE_AFTER_PAUSE_ATTEMPTS = 3
 GATE_PAUSE_WAIT_S = 10
+# 传送锚点面板（减负/挑战奖励层）：三张卡位置固定，门名是卡片顶部文字（1280×720 逻辑坐标）
+GATE_PANEL_BANDS = ((0, 500), (500, 795), (795, 1280))
+GATE_PANEL_POINTS = ((352, 350), (647, 350), (943, 350))
+GATE_PANEL_WAIT_S = 1.2
+# 不同场景背景下「前往」小卡片的 OCR 可能整体读不到；门名已确认时按门前标准位置补点。
+GATE_BLIND_READS = 3
+GATE_BLIND_PROMPT = (728, 285)
 
 
 def pipeline():
@@ -281,6 +288,28 @@ class ElysianRun(CustomAction):
         self.pending_signet = None
         self.phase("已获得刻印", normalize(text)[:48])
 
+    def gate_panel(self):
+        """传送锚点面板（减负/挑战奖励层）：按卡分桶读门名，集齐三张或等待超时后点优先级最高那张卡的中心。"""
+        order = gate_order(self.state)
+        cards = {}
+        for item in self.items:
+            x, y, w, h = item["box"]
+            if y > 560: continue
+            name = next((n for n in order if n in normalize(item["text"])), None)
+            if not name: continue
+            for index, (left, right) in enumerate(GATE_PANEL_BANDS):
+                if left <= x + w/2 < right and index not in cards: cards[index] = name
+        now = time.monotonic()
+        if not self.panel_since: self.panel_since = now
+        if len(cards) < 3 and now - self.panel_since < GATE_PANEL_WAIT_S:
+            self.phase("选择下一层", f"等待三张卡识别（已认到 {len(cards)} 张）")
+            return True
+        if not cards: return False
+        index = min(cards, key=lambda i: order.index(cards[i]))
+        self.phase("选择下一层", f"点第 {index+1} 张卡：{cards[index]}")
+        self.click(*GATE_PANEL_POINTS[index], .8)
+        return True
+
     def gate_choice(self):
         self.phase("选择下一层")
         options = []
@@ -298,16 +327,21 @@ class ElysianRun(CustomAction):
         if not self.nav_started:self.nav_started=time.monotonic()
         # 贴门时模型可能漏检：优先读游戏提供的门名和交互提示。
         prompt, at_name = self.gate_prompt()
+        # 门名由左侧面板确认、但「前往」小卡片 OCR 读不到时（不同场景对比度不同），
+        # 连续几帧都读不到就按门前标准位置补点，避免站在门口干等。
+        missing = bool(at_name) and at_name not in self.state.disabled_families and not prompt
+        self.prompt_missing = self.prompt_missing + 1 if missing else 0
+        blind = self.prompt_missing >= GATE_BLIND_READS
         if self.state.target in self.state.disabled_families:
             self.target = None
             self.state.target = ""
         if time.monotonic()-self.nav_started>100:
-            if self.enter_attempts and prompt and at_name and not self.gate_pause_used:
+            if self.enter_attempts and (prompt or blind) and at_name and not self.gate_pause_used:
                 self.start_gate_pause_recovery()
                 return
             raise RunHalt("本层找门超过 100 秒，现场已保存")
         left = "".join(normalize(i["text"]) for i in self.items if i["box"][0] < 370 and 210 < i["box"][1] < 480)
-        if prompt and at_name not in self.state.disabled_families and (at_name or (self.final_clear and re.search('下一层.*(作战|挑战)',left)) or (self.state.target == "首领" and re.search("首领|挑战|最后", left))):
+        if (prompt or blind) and at_name not in self.state.disabled_families and (at_name or (self.final_clear and re.search('下一层.*(作战|挑战)',left)) or (self.state.target == "首领" and re.search("首领|挑战|最后", left))):
             actual = at_name or "首领"
             if self.state.target and actual != self.state.target:
                 self.phase("门前复核", f"模型预判 {self.state.target}，游戏文字确认 {actual}，采用已确认门")
@@ -318,12 +352,17 @@ class ElysianRun(CustomAction):
                     return
                 raise RunHalt("暂停并继续后又尝试前往 3 次仍未切层，现场已保存")
             self.enter_attempts += 1
-            x, y, w, h = prompt["box"]
             # “前往”文字在长条交互框左侧；优先点框内中部，失败后
             # 再用当前帧的文字位置和另一处框内位置，不能复用旧坐标。
             offset = GATE_CLICK_OFFSETS[(self.enter_attempts - 1) % len(GATE_CLICK_OFFSETS)]
-            point = (min(1040, x + w / 2 + offset), y + h / 2)
-            self.phase("点击前往", f"{actual}，第 {self.enter_attempts} 次，坐标 {int(point[0])},{int(point[1])}")
+            if prompt:
+                x, y, w, h = prompt["box"]
+                point = (min(1040, x + w / 2 + offset), y + h / 2)
+                note = ""
+            else:
+                point = (min(1040, GATE_BLIND_PROMPT[0] + offset), GATE_BLIND_PROMPT[1])
+                note = "（未读到前往提示，按门前位置补点）"
+            self.phase("点击前往", f"{actual}，第 {self.enter_attempts} 次{note}，坐标 {int(point[0])},{int(point[1])}")
             self.save(True)
             self.enter_pending = self.state.floor
             self.state.target = actual
@@ -437,7 +476,8 @@ class ElysianRun(CustomAction):
         observed = read_floor(self.items)
         prompt, family = self.gate_prompt()
         same_gate = (observed and observed[0] == self.enter_pending
-                     and prompt and family == self.state.target)
+                     and family == self.state.target
+                     and (prompt or self.prompt_missing >= GATE_BLIND_READS))
         self.enter_failure_reads = self.enter_failure_reads + 1 if same_gate else 0
         if self.enter_failure_reads >= 2:
             self.enter_pending = None
@@ -602,6 +642,7 @@ class ElysianRun(CustomAction):
 
     def step(self):
         self.read()
+        if "请选择下一层" not in self.text: self.panel_since = 0
         self.update_floor()
         if self.recover_gate_pause(): return
         if signet_detail_open(self.items):
@@ -667,7 +708,8 @@ class ElysianRun(CustomAction):
         if "选择刻印" in self.text and ("刻印" in self.text or "核心" in self.text):
             self.select_signet(); return
         if "请选择下一层" in self.text and "传送锚点" in self.text:
-            self.gate_choice(); return
+            if not self.gate_panel(): self.gate_choice()
+            return
         if "战况报告" in self.text and "状态列表" in self.text and "往世乐土" in self.text:
             self.sync_pause(); return
         if self.settlement_requested and self.final_clear and '命定的歧路' in self.text and '深层序列' in self.text:
@@ -801,6 +843,8 @@ class ElysianRun(CustomAction):
         self.gate_pause_used = False
         self.gate_recovery_phase = None
         self.gate_recovery_at = 0
+        self.panel_since = 0
+        self.prompt_missing = 0
         self.nav_steps=self.turns=self.exclusive_refresh=self.build_scrolls=self.lost_frames=self.nav_recoveries=0
         self.combat_args=SimpleNamespace(task_detail=argv.task_detail, custom_action_param=json.dumps({"character":self.state.role,"variant":self.state.variant,"confirmed_signet":self.required_signet()}))
         try:
