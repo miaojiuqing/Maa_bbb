@@ -26,116 +26,288 @@
     ],
     "option": {
         "往世乐土-禁用刻印": {
-            "controller": ["安卓端"],
+            "controller": [
+                "安卓端"
+            ],
             "label": "禁用刻印",
             "type": "select",
             "default_case": "无",
             "description": "不进入所选体系的刻印门，不选择或购买其刻印；高于所有优先级。当前支持禁用鏖灭。仅剩禁用刻印时停止并保留现场。已获得的刻印不会被移除。",
             "cases": [
-                {"name": "无", "pipeline_override": {"乐土关内-禁用刻印配置": {"action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure", "custom_action_param": {"disabled": []}}}}}},
-                {"name": "鏖灭", "pipeline_override": {"乐土关内-禁用刻印配置": {"action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure", "custom_action_param": {"disabled": ["鏖灭"]}}}}}}
+                {
+                    "name": "无",
+                    "pipeline_override": {
+                        "乐土关内-禁用刻印配置": {
+                            "action": {
+                                "type": "Custom",
+                                "param": {
+                                    "custom_action": "ElysianConfigure",
+                                    "custom_action_param": {
+                                        "disabled": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "鏖灭",
+                    "pipeline_override": {
+                        "乐土关内-禁用刻印配置": {
+                            "action": {
+                                "type": "Custom",
+                                "param": {
+                                    "custom_action": "ElysianConfigure",
+                                    "custom_action_param": {
+                                        "disabled": [
+                                            "鏖灭"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             ]
         },
         "往世乐土-关内角色": {
-            "controller": ["安卓端"],
+            "controller": [
+                "安卓端"
+            ],
             "label": "战斗角色",
             "description": "选择角色出招表。不会替你更换游戏中的角色，战斗前会核对角色。",
             "type": "select",
             "default_case": "窈窕谍影",
-            "cases": [{
-                "name": "窈窕谍影",
-                "pipeline_override": {"乐土关内-角色配置": {"enabled": true}}
-            },
-            {
-                "name": "浮生·渡尘之羽",
-                "pipeline_override": {"乐土关内-角色配置": {"enabled": true}}
-            },
-            {
-                "name": "时序之律者",
-                "pipeline_override": {"乐土关内-角色配置": {"enabled": true}}
-            },
-            {
-                "name": "天命难逃",
-                "pipeline_override": {"乐土关内-角色配置": {"enabled": true}}
-            },
-            {
-                "name": "愈生佑翎",
-                "pipeline_override": {"乐土关内-角色配置": {"enabled": true}}
-            },
-            {
-                "name": "真我·人之律者",
-                "pipeline_override": {"乐土关内-角色配置": {"enabled": true}}
-            },
-            {
-                "name": "女武神·重机",
-                "pipeline_override": {"乐土关内-角色配置": {"enabled": true}}
-            }]
+            "cases": [
+                {
+                    "name": "窈窕谍影",
+                    "pipeline_override": {
+                        "乐土关内-角色配置": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "浮生·渡尘之羽",
+                    "pipeline_override": {
+                        "乐土关内-角色配置": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "时序之律者",
+                    "pipeline_override": {
+                        "乐土关内-角色配置": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "天命难逃",
+                    "pipeline_override": {
+                        "乐土关内-角色配置": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "愈生佑翎",
+                    "pipeline_override": {
+                        "乐土关内-角色配置": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "真我·人之律者",
+                    "pipeline_override": {
+                        "乐土关内-角色配置": {
+                            "enabled": true
+                        }
+                    }
+                },
+                {
+                    "name": "女武神·重机",
+                    "pipeline_override": {
+                        "乐土关内-角色配置": {
+                            "enabled": true
+                        }
+                    }
+                }
+            ]
         },
         "往世乐土-关内流派": {
-            "controller": ["安卓端"],
+            "controller": [
+                "安卓端"
+            ],
             "label": "角色流派",
             "description": "华裳：优先取得华裳，以助战和连续武器技作战；普通刻印及选门可用下方原有选项定制。",
             "type": "select",
             "default_case": "华裳",
-            "cases": [{
-                "name": "华裳",
-                "pipeline_override": {"乐土关内-角色配置": {"action": {"type": "Custom", "param": {
-                    "custom_action": "ElysianConfigure",
-                    "custom_action_param": {"character": "窈窕谍影", "variant": "elysian_huashang"}
-                }}}}
-            },
-            {
-                "name": "极诣+玄迹",
-                "pipeline_override": {"乐土关内-角色配置": {"action": {"type": "Custom", "param": {
-                    "custom_action": "ElysianConfigure",
-                    "custom_action_param": {"character": "浮生·渡尘之羽", "variant": "elysian_jyxj"}
-                }}}}
-            },
-            {
-                "name": "遍历",
-                "pipeline_override": {"乐土关内-角色配置": {"action": {"type": "Custom", "param": {
-                    "custom_action": "ElysianConfigure",
-                    "custom_action_param": {"character": "时序之律者", "variant": "elysian_bianli"}
-                }}}}
-            },
-            {
-                "name": "周六",
-                "pipeline_override": {"乐土关内-角色配置": {"action": {"type": "Custom", "param": {
-                    "custom_action": "ElysianConfigure",
-                    "custom_action_param": {"character": "天命难逃", "variant": "elysian_zhouliu"}
-                }}}}
-            },
-            {
-                "name": "澈愿",
-                "pipeline_override": {"乐土关内-角色配置": {"action": {"type": "Custom", "param": {
-                    "custom_action": "ElysianConfigure",
-                    "custom_action_param": {"character": "愈生佑翎", "variant": "elysian_cheyuan"}
-                }}}}
-            },
-            {
-                "name": "初见+初念",
-                "pipeline_override": {"乐土关内-角色配置": {"action": {"type": "Custom", "param": {
-                    "custom_action": "ElysianConfigure",
-                    "custom_action_param": {"character": "真我·人之律者", "variant": "elysian_cjcn"}
-                }}}}
-            },
-            {
-                "name": "底火",
-                "pipeline_override": {"乐土关内-角色配置": {"action": {"type": "Custom", "param": {
-                    "custom_action": "ElysianConfigure",
-                    "custom_action_param": {"character": "女武神·重机", "variant": "elysian_dihuo"}
-                }}}}
-            }]
+            "cases": [
+                {
+                    "name": "华裳",
+                    "pipeline_override": {
+                        "乐土关内-角色配置": {
+                            "action": {
+                                "type": "Custom",
+                                "param": {
+                                    "custom_action": "ElysianConfigure",
+                                    "custom_action_param": {
+                                        "character": "窈窕谍影",
+                                        "variant": "elysian_huashang"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "极诣+玄迹",
+                    "pipeline_override": {
+                        "乐土关内-角色配置": {
+                            "action": {
+                                "type": "Custom",
+                                "param": {
+                                    "custom_action": "ElysianConfigure",
+                                    "custom_action_param": {
+                                        "character": "浮生·渡尘之羽",
+                                        "variant": "elysian_jyxj"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "遍历",
+                    "pipeline_override": {
+                        "乐土关内-角色配置": {
+                            "action": {
+                                "type": "Custom",
+                                "param": {
+                                    "custom_action": "ElysianConfigure",
+                                    "custom_action_param": {
+                                        "character": "时序之律者",
+                                        "variant": "elysian_bianli"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "周六",
+                    "pipeline_override": {
+                        "乐土关内-角色配置": {
+                            "action": {
+                                "type": "Custom",
+                                "param": {
+                                    "custom_action": "ElysianConfigure",
+                                    "custom_action_param": {
+                                        "character": "天命难逃",
+                                        "variant": "elysian_zhouliu"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "澈愿",
+                    "pipeline_override": {
+                        "乐土关内-角色配置": {
+                            "action": {
+                                "type": "Custom",
+                                "param": {
+                                    "custom_action": "ElysianConfigure",
+                                    "custom_action_param": {
+                                        "character": "愈生佑翎",
+                                        "variant": "elysian_cheyuan"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "初见+初念",
+                    "pipeline_override": {
+                        "乐土关内-角色配置": {
+                            "action": {
+                                "type": "Custom",
+                                "param": {
+                                    "custom_action": "ElysianConfigure",
+                                    "custom_action_param": {
+                                        "character": "真我·人之律者",
+                                        "variant": "elysian_cjcn"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "底火",
+                    "pipeline_override": {
+                        "乐土关内-角色配置": {
+                            "action": {
+                                "type": "Custom",
+                                "param": {
+                                    "custom_action": "ElysianConfigure",
+                                    "custom_action_param": {
+                                        "character": "女武神·重机",
+                                        "variant": "elysian_dihuo"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
         },
         "往世乐土-商店处理策略-安卓": {
-            "controller": ["安卓端"],
+            "controller": [
+                "安卓端"
+            ],
             "label": "商店策略",
             "type": "select",
             "default_case": "自动购买",
             "description": "使用本局银币购买适合当前流派的刻印；绕过时不打开摊位。",
             "cases": [
-                {"name": "自动购买", "pipeline_override": {"乐土关内-商店配置": {"action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure", "custom_action_param": {"buy": true}}}}}},
-                {"name": "绕过不购买", "pipeline_override": {"乐土关内-商店配置": {"action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure", "custom_action_param": {"buy": false}}}}}}
+                {
+                    "name": "自动购买",
+                    "pipeline_override": {
+                        "乐土关内-商店配置": {
+                            "action": {
+                                "type": "Custom",
+                                "param": {
+                                    "custom_action": "ElysianConfigure",
+                                    "custom_action_param": {
+                                        "buy": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "绕过不购买",
+                    "pipeline_override": {
+                        "乐土关内-商店配置": {
+                            "action": {
+                                "type": "Custom",
+                                "param": {
+                                    "custom_action": "ElysianConfigure",
+                                    "custom_action_param": {
+                                        "buy": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             ]
         },
         "往世乐土-战斗逻辑-键鼠": {
@@ -731,7 +903,19 @@
             "cases": [
                 {
                     "name": "Yes",
-                    "pipeline_override": {"乐土战前-同步配置": {"action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure", "custom_action_param": {"enabled": true}}}}},
+                    "pipeline_override": {
+                        "乐土战前-同步配置": {
+                            "action": {
+                                "type": "Custom",
+                                "param": {
+                                    "custom_action": "ElysianConfigure",
+                                    "custom_action_param": {
+                                        "enabled": true
+                                    }
+                                }
+                            }
+                        }
+                    },
                     "option": [
                         "乐土-战前buff-1",
                         "乐土-战前buff-2",
@@ -745,7 +929,19 @@
                 {
                     "name": "No",
                     "description": "沿用原版：已有增益时保持；全部未选时，从上到下尝试选择。",
-                    "pipeline_override": {"乐土战前-同步配置": {"action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure", "custom_action_param": {"enabled": false}}}}}
+                    "pipeline_override": {
+                        "乐土战前-同步配置": {
+                            "action": {
+                                "type": "Custom",
+                                "param": {
+                                    "custom_action": "ElysianConfigure",
+                                    "custom_action_param": {
+                                        "enabled": false
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             ]
         },
@@ -909,7 +1105,9 @@
             }
         },
         "往世乐土-商店处理策略": {
-            "controller": ["桌面端"],
+            "controller": [
+                "桌面端"
+            ],
             "label": "商店策略",
             "type": "select",
             "cases": [
@@ -934,7 +1132,19 @@
             "cases": [
                 {
                     "name": "Yes",
-                    "pipeline_override": {"乐土关内-刻印配置": {"action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure", "custom_action_param": {"custom": true}}}}},
+                    "pipeline_override": {
+                        "乐土关内-刻印配置": {
+                            "action": {
+                                "type": "Custom",
+                                "param": {
+                                    "custom_action": "ElysianConfigure",
+                                    "custom_action_param": {
+                                        "custom": true
+                                    }
+                                }
+                            }
+                        }
+                    },
                     "option": [
                         "乐土-道中刻印优先级_1",
                         "乐土-道中刻印优先级_2",
@@ -951,7 +1161,19 @@
                 {
                     "name": "No",
                     "description": "安卓端使用角色推荐",
-                    "pipeline_override": {"乐土关内-刻印配置": {"action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure", "custom_action_param": {"custom": false}}}}}
+                    "pipeline_override": {
+                        "乐土关内-刻印配置": {
+                            "action": {
+                                "type": "Custom",
+                                "param": {
+                                    "custom_action": "ElysianConfigure",
+                                    "custom_action_param": {
+                                        "custom": false
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             ]
         },
@@ -2123,7 +2345,19 @@
             "cases": [
                 {
                     "name": "Yes",
-                    "pipeline_override": {"乐土关内-选门配置": {"action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure", "custom_action_param": {"custom": true}}}}},
+                    "pipeline_override": {
+                        "乐土关内-选门配置": {
+                            "action": {
+                                "type": "Custom",
+                                "param": {
+                                    "custom_action": "ElysianConfigure",
+                                    "custom_action_param": {
+                                        "custom": true
+                                    }
+                                }
+                            }
+                        }
+                    },
                     "option": [
                         "乐土-选门优先级_1",
                         "乐土-选门优先级_2",
@@ -2140,7 +2374,17 @@
                 {
                     "name": "No",
                     "pipeline_override": {
-                        "乐土关内-选门配置": {"action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure", "custom_action_param": {"custom": false}}}},
+                        "乐土关内-选门配置": {
+                            "action": {
+                                "type": "Custom",
+                                "param": {
+                                    "custom_action": "ElysianConfigure",
+                                    "custom_action_param": {
+                                        "custom": false
+                                    }
+                                }
+                            }
+                        },
                         "往世乐土-寻路-选择门-优先级_1": { //option接口
                             "expected": [
                                 1, //鏖灭
