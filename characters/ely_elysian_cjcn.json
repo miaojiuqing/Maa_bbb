@@ -1,0 +1,36 @@
+{
+  "character": "真我·人之律者",
+  "variant": "elysian_cjcn",
+  "profile": {
+    "requires_signet": "初念",
+    "opening": ["support_1", "support_2"],
+    "cycle": [],
+    "interval_ms": 120,
+    "support_interval_s": 30,
+    "elysian_support": true,
+    "ultimate": false,
+    "star_ring": false,
+    "dodge": false,
+    "target_lock": false,
+    "movement": false,
+    "branch": false,
+    "hold_attack": true,
+    "signet_plan": {
+      "exclusive": ["初念", "初见"],
+      "cores": ["鏖斗·鏖战·鏖杀·鏖灭", "空梦·空集·空我·空欢", "浮生茫茫，百态皆苦", "幕间剧「逆转的螺旋」"],
+      "gates": ["真我", "鏖灭", "空梦", "浮生", "螺旋", "黄金", "戒律", "救世", "繁星", "刹那", "天慧", "无限", "旭光"]
+    },
+    "source": "https://www.miyoushe.com/ys/article/61330788"
+  },
+  "touch_actions": {
+    "attack": [1173, 615],
+    "weapon": [1045, 512],
+    "support_1": [1208, 147],
+    "support_2": [1203, 285],
+    "elysian_support": [938, 424],
+    "ultimate": [1184, 466],
+    "star_ring": [914, 565],
+    "dodge": [1028, 649],
+    "jump": [1069, 373]
+  }
+}

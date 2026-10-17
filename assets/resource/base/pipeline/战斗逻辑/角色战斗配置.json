@@ -68,7 +68,7 @@
         "timeout": 3000,
         "next": ["角色战斗-时序之律者-遍历"]
     },
-    "角色战斗-渡世之羽-极诣+玄迹": {
+    "角色战斗-浮生·渡尘之羽-极诣+玄迹": {
         "recognition": "OCR",
         "roi": [296, 620, 165, 42],
         "expected": ["[1-9][0-9]*/[1-9][0-9]*"],
@@ -78,7 +78,7 @@
             "param": {
                 "custom_action": "CharacterCombat",
                 "custom_action_param": {
-                    "character": "渡世之羽",
+                    "character": "浮生·渡尘之羽",
                     "variant": "elysian_jyxj",
                     "confirmed_signet": "极诣"
                 }
@@ -88,6 +88,94 @@
         "post_delay": 0,
         "rate_limit": 100,
         "timeout": 3000,
-        "next": ["角色战斗-渡世之羽-极诣+玄迹"]
+        "next": ["角色战斗-浮生·渡尘之羽-极诣+玄迹"]
+    },
+    "角色战斗-天命难逃-周六": {
+        "recognition": "OCR",
+        "roi": [296, 620, 165, 42],
+        "expected": ["[1-9][0-9]*/[1-9][0-9]*"],
+        "only_rec": true,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "CharacterCombat",
+                "custom_action_param": {
+                    "character": "天命难逃",
+                    "variant": "elysian_zhouliu",
+                    "confirmed_signet": "周六"
+                }
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "rate_limit": 100,
+        "timeout": 3000,
+        "next": ["角色战斗-天命难逃-周六"]
+    },
+    "角色战斗-愈生佑翎-澈愿": {
+        "recognition": "OCR",
+        "roi": [296, 620, 165, 42],
+        "expected": ["[1-9][0-9]*/[1-9][0-9]*"],
+        "only_rec": true,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "CharacterCombat",
+                "custom_action_param": {
+                    "character": "愈生佑翎",
+                    "variant": "elysian_cheyuan",
+                    "confirmed_signet": "澈愿"
+                }
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "rate_limit": 100,
+        "timeout": 3000,
+        "next": ["角色战斗-愈生佑翎-澈愿"]
+    },
+    "角色战斗-真我·人之律者-初见+初念": {
+        "recognition": "OCR",
+        "roi": [296, 620, 165, 42],
+        "expected": ["[1-9][0-9]*/[1-9][0-9]*"],
+        "only_rec": true,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "CharacterCombat",
+                "custom_action_param": {
+                    "character": "真我·人之律者",
+                    "variant": "elysian_cjcn",
+                    "confirmed_signet": "初念"
+                }
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "rate_limit": 100,
+        "timeout": 3000,
+        "next": ["角色战斗-真我·人之律者-初见+初念"]
+    },
+    "角色战斗-女武神·重机-底火": {
+        "recognition": "OCR",
+        "roi": [296, 620, 165, 42],
+        "expected": ["[1-9][0-9]*/[1-9][0-9]*"],
+        "only_rec": true,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "CharacterCombat",
+                "custom_action_param": {
+                    "character": "女武神·重机",
+                    "variant": "elysian_dihuo",
+                    "confirmed_signet": "底火"
+                }
+            }
+        },
+        "pre_delay": 0,
+        "post_delay": 0,
+        "rate_limit": 100,
+        "timeout": 3000,
+        "next": ["角色战斗-女武神·重机-底火"]
     }
 }

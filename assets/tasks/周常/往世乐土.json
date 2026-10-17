@@ -5,7 +5,7 @@
             "default_check": false,
             "label": "往世乐土",
             "entry": "往世乐土-开始任务层",
-            "description": "MuMu：原流程完成战前准备，进入第一层后自动战斗、选择刻印、移动进门及处理商店。当前适配窈窕谍影·华裳，沿用游戏中的装备、难度和助战。17 层完成后任选英桀门进入并退出结算，继续领取周常奖励。只需勾选本任务，无需另勾自动战斗。桌面端保留原流程。",
+            "description": "MuMu：原流程完成战前准备，进入第一层后自动战斗、选择刻印、移动进门及处理商店。当前适配角色持续扩充中，沿用游戏中的装备、难度和助战。17 层完成后任选英桀门进入并退出结算，继续领取周常奖励。只需勾选本任务，无需另勾自动战斗。桌面端保留原流程。",
             "group": [
                 "周常"
             ],
@@ -47,11 +47,27 @@
                 "pipeline_override": {"乐土关内-角色配置": {"enabled": true}}
             },
             {
-                "name": "渡世之羽",
+                "name": "浮生·渡尘之羽",
                 "pipeline_override": {"乐土关内-角色配置": {"enabled": true}}
             },
             {
                 "name": "时序之律者",
+                "pipeline_override": {"乐土关内-角色配置": {"enabled": true}}
+            },
+            {
+                "name": "天命难逃",
+                "pipeline_override": {"乐土关内-角色配置": {"enabled": true}}
+            },
+            {
+                "name": "愈生佑翎",
+                "pipeline_override": {"乐土关内-角色配置": {"enabled": true}}
+            },
+            {
+                "name": "真我·人之律者",
+                "pipeline_override": {"乐土关内-角色配置": {"enabled": true}}
+            },
+            {
+                "name": "女武神·重机",
                 "pipeline_override": {"乐土关内-角色配置": {"enabled": true}}
             }]
         },
@@ -72,7 +88,7 @@
                 "name": "极诣+玄迹",
                 "pipeline_override": {"乐土关内-角色配置": {"action": {"type": "Custom", "param": {
                     "custom_action": "ElysianConfigure",
-                    "custom_action_param": {"character": "渡世之羽", "variant": "elysian_jyxj"}
+                    "custom_action_param": {"character": "浮生·渡尘之羽", "variant": "elysian_jyxj"}
                 }}}}
             },
             {
@@ -80,6 +96,34 @@
                 "pipeline_override": {"乐土关内-角色配置": {"action": {"type": "Custom", "param": {
                     "custom_action": "ElysianConfigure",
                     "custom_action_param": {"character": "时序之律者", "variant": "elysian_bianli"}
+                }}}}
+            },
+            {
+                "name": "周六",
+                "pipeline_override": {"乐土关内-角色配置": {"action": {"type": "Custom", "param": {
+                    "custom_action": "ElysianConfigure",
+                    "custom_action_param": {"character": "天命难逃", "variant": "elysian_zhouliu"}
+                }}}}
+            },
+            {
+                "name": "澈愿",
+                "pipeline_override": {"乐土关内-角色配置": {"action": {"type": "Custom", "param": {
+                    "custom_action": "ElysianConfigure",
+                    "custom_action_param": {"character": "愈生佑翎", "variant": "elysian_cheyuan"}
+                }}}}
+            },
+            {
+                "name": "初见+初念",
+                "pipeline_override": {"乐土关内-角色配置": {"action": {"type": "Custom", "param": {
+                    "custom_action": "ElysianConfigure",
+                    "custom_action_param": {"character": "真我·人之律者", "variant": "elysian_cjcn"}
+                }}}}
+            },
+            {
+                "name": "底火",
+                "pipeline_override": {"乐土关内-角色配置": {"action": {"type": "Custom", "param": {
+                    "custom_action": "ElysianConfigure",
+                    "custom_action_param": {"character": "女武神·重机", "variant": "elysian_dihuo"}
                 }}}}
             }]
         },

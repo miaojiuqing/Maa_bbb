@@ -14,6 +14,7 @@
     "target_lock": false,
     "movement": false,
     "branch": false,
+    "hold_attack": false,
     "signet_plan": {
       "exclusive": ["华裳", "尽善", "粉黛"],
       "cores": ["黄金的咏叹", "鏖兵·鏖剪·鏖馘·鏖灭", "空梦·空集·空我·空欢", "颠末的螺旋"],
