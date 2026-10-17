@@ -4,8 +4,8 @@
   "profile": {
     "requires_signet": "底火",
     "opening": ["support_1", "support_2"],
-    "cycle": ["jump", "jump", "weapon", "weapon"],
-    "interval_ms": 850,
+    "cycle": ["jump", "jump", "weapon", "weapon", "weapon", "weapon", "weapon", "weapon", "weapon"],
+    "interval_ms": 325,
     "support_interval_s": 30,
     "elysian_support": true,
     "ultimate": false,

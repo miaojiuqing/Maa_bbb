@@ -21,6 +21,10 @@ from ..utils.CharacterProfiles import CHARACTER_PROFILES
 INITIAL_SIGNET_GRACE_S = 8
 GATE_CLICK_CHECK_S = 3
 GATE_LOAD_WAIT_S = 30
+# 点击「前往」后若既没切层也没有加载迹象（常见于擦过传送门：OCR 短暂看到「前往」），
+# 先反向走一小步 + 转视角，再重新靠近最近的门；重试有上限，用尽后回到原有超时逻辑。
+GATE_ENTER_RETRY_S = 5.0
+GATE_ENTER_RECOVERIES = 3
 GATE_CLICK_OFFSETS = (80, 0, 110)
 GATE_CLICK_MAX_ATTEMPTS = 6
 GATE_AFTER_PAUSE_ATTEMPTS = 3
@@ -178,6 +182,7 @@ class ElysianRun(CustomAction):
                     self.gate_pause_used = False
                     self.gate_recovery_phase = None
                     self.enter_attempts = self.enter_failure_reads = 0
+                    self.enter_recovery = 0
                     self.phase("进入楼层")
                 if self.enter_pending is not None and floor != self.enter_pending:
                     self.enter_pending = None
@@ -487,6 +492,22 @@ class ElysianRun(CustomAction):
                 self.phase("调整门前位置", "连续点击未切层，短步后退后重新靠近")
                 self.motion.walk(self.context, 0, .25, dy=76)
             # 调整后必须重新截图，不能在同一帧立即点击。
+            return True
+        # 点击后一直没切层、也没稳定读到门前信息：多半是擦过传送门（OCR 短暂看到「前往」），
+        # 先反向走一小步并转视角，再重新靠近最近的门；次数有上限，用尽后回到原有超时逻辑。
+        if (not same_gate and elapsed >= GATE_ENTER_RETRY_S
+                and self.enter_recovery < GATE_ENTER_RECOVERIES):
+            self.enter_recovery += 1
+            self.enter_pending = None
+            self.enter_failure_reads = 0
+            self.target = None
+            self.state.target = ""
+            self.prompt_missing = 0
+            self.nav_started = 0
+            self.nav_steps = self.turns = 0
+            self.phase("门前重试", f"点击前往未生效，后退并转视角重新靠近（第 {self.enter_recovery}/{GATE_ENTER_RECOVERIES} 次）")
+            self.motion.walk(self.context, 0, .30, dy=96)
+            self.swipe(760, 301, 640, 301, 260)
             return True
         if elapsed < GATE_LOAD_WAIT_S:
             return True
@@ -840,6 +861,7 @@ class ElysianRun(CustomAction):
         self.motion.state = self.state
         self.choice_signature="";self.choice_at=0;self.enter_at=0;self.build_signature="";self.peace_since=0;self.battle_finished=False;self.nav_started=0
         self.enter_attempts = self.enter_failure_reads = 0
+        self.enter_recovery = 0
         self.gate_pause_used = False
         self.gate_recovery_phase = None
         self.gate_recovery_at = 0

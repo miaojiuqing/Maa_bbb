@@ -2,7 +2,7 @@
   "character": "真我·人之律者",
   "variant": "elysian_cjcn",
   "profile": {
-    "requires_signet": "初见",
+    "requires_signet": "初念",
     "opening": ["support_1", "support_2"],
     "cycle": [],
     "interval_ms": 120,
@@ -16,7 +16,7 @@
     "branch": false,
     "hold_attack": true,
     "signet_plan": {
-      "exclusive": ["初见", "初念"],
+      "exclusive": ["初念", "初见"],
       "cores": ["鏖斗·鏖战·鏖杀·鏖灭", "空梦·空集·空我·空欢", "浮生茫茫，百态皆苦", "幕间剧「逆转的螺旋」"],
       "gates": ["真我", "鏖灭", "空梦", "浮生", "螺旋", "黄金", "戒律", "救世", "繁星", "刹那", "天慧", "无限", "旭光"]
     },
