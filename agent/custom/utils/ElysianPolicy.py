@@ -58,7 +58,9 @@ class RunState:
     gate_priority: list = field(default_factory=list)
     disabled_families: list = field(default_factory=list)
     shop_enabled: bool = True
-    def has(self, name): return any(name in s for s in self.acquired)
+    def has(self, name):
+        key = compare_key(name)
+        return bool(key) and any(key in compare_key(s) for s in self.acquired)
     def record(self, text, family=""):
         if text not in self.acquired:
             self.acquired.append(text)
@@ -68,6 +70,12 @@ class RunState:
 
 def normalize(text):
     return re.sub(r"\s+", "", text).replace("麈灭", "鏖灭").replace("鏖天", "鏖灭").replace("塵灭", "鏖灭")
+
+
+def compare_key(text):
+    """比较用的归一化：OCR 会把逗号/间隔号/空格读成不同形状，比对时不依赖这些符号。"""
+    return re.sub(r"[\s,，、·•・.。:：;；!！?？\-—_/／|｜()（）\[\]【】「」『』“”\"'‘’]", "",
+                  normalize(text)).lower()
 
 
 def signet_disabled(text, state, family=""):
