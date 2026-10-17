@@ -156,14 +156,38 @@ def choose_gate(detections, state):
     return min(candidates, key=lambda r: (order.index(GATE_NAMES[r["cls_index"]]), -r["score"]))
 
 
+# 卡片标题：真我/专属写作「XX」的祝福+，普通/增幅带 +等级；核心名可能是独立一行。
+TITLE_MARKERS = ("的祝福", "的刻印")
+TITLE_LEVEL = re.compile(r"\+\s*\d")
+TITLE_LABELS = ("普通", "增幅", "核心", "专属")
+
+
+def _title_line(lines):
+    """挑出本行标题块：含「的祝福/的刻印」或「+数字」的行优先，其次取最上面一行短文本。"""
+    for line in lines:
+        text = normalize(line["text"])
+        if any(marker in text for marker in TITLE_MARKERS) or TITLE_LEVEL.search(text):
+            return line
+    for line in lines:
+        text = normalize(line["text"])
+        if text and text not in TITLE_LABELS and len(text) <= 24 and not text.endswith("。"):
+            return line
+    return lines[0]
+
+
 def choice_rows(items):
+    # 只把「标题块」当作卡片名称参与匹配/评分；描述块常跨行，混进来会让命中的名字属于相邻卡片。
     rows = []
     for top, bottom in ((180, 323), (332, 477), (485, 636)):
         lines = [i for i in items if i["box"][0] >= 510 and top <= i["box"][1] < bottom]
-        if lines:
-            lines.sort(key=lambda r: (r["box"][1], r["box"][0]))
-            # 卡片左侧徽记属于选中区域；正文中蓝色关键词会打开术语说明。
-            rows.append({"text": " ".join(r["text"] for r in lines), "point": (580, (top+bottom)//2)})
+        if not lines: continue
+        lines.sort(key=lambda r: (r["box"][1], r["box"][0]))
+        title = _title_line(lines)
+        rows.append({
+            "text": normalize(title["text"]),
+            "detail": " ".join(r["text"] for r in lines),
+            "point": (580, (top + bottom) // 2),
+        })
     return rows
 
 
