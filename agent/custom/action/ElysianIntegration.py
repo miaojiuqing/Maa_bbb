@@ -216,6 +216,8 @@ class ElysianConfigure(CustomAction):
             patch["往世乐土-已进入深层序列"]["next"] = [
                 "乐土战前-同步增益" if sync_buffs else "往世乐土-未选择任何增益",
                 "往世乐土-已进入三位导航界面",
+                # 减负战斗优先；按钮不可用（模板不匹配）时自动落到下面的普通战斗。
+                "[JumpBack]往世乐土-点击减负战斗",
                 "[JumpBack]往世乐土-点击普通战斗",
             ]
             # 预置交棒：HANDOVER_NODES 里的三个准备界面节点属于「克莱茵打灰」的
