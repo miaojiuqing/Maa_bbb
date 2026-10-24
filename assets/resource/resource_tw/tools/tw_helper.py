@@ -194,7 +194,7 @@ def load_bundle(bundle):
     return nodes
 
 
-def effective_nodes(bundles=("base", "resource_win32")):
+def effective_nodes(bundles=("base", "resource_win32", "resource_win32_jp")):
     """字段级合并，模拟框架 parse_and_override 的继承语义"""
     eff = {}
     for b in bundles:
@@ -553,7 +553,7 @@ def _pythonw():
 
 def ensure_helper_entries(log=print):
     """把「打开助手 / 重建覆盖包」两个任务重新装回软件（幂等）"""
-    tool = os.path.join(APP, "tw_helper.py")
+    tool = os.path.join(HERE, "tw_helper.py")   # 脚本实际所在目录（仓库里是 tools/）
     pyw = _pythonw()
     changed = []
 
@@ -707,10 +707,12 @@ def iface_available_names():
             if "桌面端" in (r.get("controller") or [])]
 
 
-def iface_set_enabled(on, log=print):
+def iface_set_enabled(on, log=print, all_profiles=False):
     names = set(iface_available_names())
     changed = 0
-    for f in _conf_files():
+    # 默认只改当前配置，避免切换资源时把其它已保存配置一起改掉
+    targets = _conf_files() if all_profiles else [x for x in [current_config_path()] if x]
+    for f in targets:
         try:
             d = load_jsonc(f)
         except Exception:
@@ -909,9 +911,10 @@ def classify_runs(log=print):
             continue
         if cur is None or '[msg=Node.' not in line:
             continue
-        tm = re.match(r'^\[\d{4}-\d\d-\d\d (\d\d:\d\d:\d\d)', line)
+        tm = re.match(r'^\[(\d{4}-\d\d-\d\d) (\d\d:\d\d:\d\d)', line)
         if tm:
-            cur['t'] = tm.group(1)
+            cur['t'] = tm.group(2)
+            cur['ts'] = tm.group(1) + ' ' + tm.group(2)
         d = details(line)
         if not d:
             continue
@@ -935,25 +938,33 @@ def classify_runs(log=print):
             mm = re.search(r'任務執行失敗[：:]\s*(\S+)', line)
             if not mm:
                 continue
-            tm = re.search(r'\[(?:\d{4}-\d\d-\d\d )?(\d\d:\d\d:\d\d)', line)
+            tm = re.search(r'\[(\d{4}-\d\d-\d\d )?(\d\d:\d\d:\d\d)', line)
             if tm:
-                fails.append((tm.group(1), mm.group(1)))
+                stamp = ((tm.group(1) or '') + tm.group(2)).strip()
+                fails.append((stamp, mm.group(1)))
 
     # 给每段任务补结束时间（下一段的开始时间）
     for a, b in zip(runs, runs[1:]):
         a['t1'] = b['t']
+        a['ts1'] = b.get('ts') or b['t']
     if runs:
         runs[-1]['t1'] = runs[-1].get('t1') or runs[-1]['t']
+        runs[-1]['ts1'] = runs[-1].get('ts1') or runs[-1].get('ts') or ''
 
     def was_failed(r):
-        t0, t1 = r.get('t') or '', r.get('t1') or ''
+        t0 = r.get('ts') or ''
         if not t0:
             return False
+        t1 = r.get('ts1') or t0
         for ft, fe in fails:
             if fe != r['entry']:
                 continue
-            if t0 <= ft <= (t1 or t0):
-                return True
+            if len(ft) > 8:          # 失败记录带日期：按完整时间戳比较（可跨午夜）
+                if t0 <= ft <= t1:
+                    return True
+            else:                    # 只有时分秒：退回按时间比较
+                if t0[11:] <= ft <= t1[11:]:
+                    return True
         return False
 
     for r in runs[-14:]:
@@ -1052,7 +1063,9 @@ def main():
         try:
             cp = current_config_path()
             if cp:
-                cur_name = str(load_jsonc(cp).get("resource", ""))
+                cfg = load_jsonc(cp)
+            _opt = _res_option(cfg) or {}
+            cur_name = str(_opt.get("resource", "") or "")
         except Exception:
             pass
         lines = []
