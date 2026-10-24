@@ -1,7 +1,7 @@
 {
     // 本文件由「繁中助手」自动生成，请勿手改（改 繁中助手_规则.json 后重新「重建覆盖包」）
-    // 生成时间: 2026-10-24 21:41:27
-    // 节点数: 701
+    // 生成时间: 2026-10-24 21:44:59
+    // 节点数: 702
     // 1) OCR 的 expected 追加繁体候选（追加而非替换，简体环境不受影响）
     // 2) UI 的 Click 改成 LongPress + duration（Click 没有 duration 字段，框架写死按住 50ms）
     // 回滚：删除本目录，并在「繁中助手」里点「停用繁中兼容」
@@ -1151,7 +1151,11 @@
             "post_delay": 700
         },
         "往世乐土-点击进入往世乐土": {
-            "post_delay": 700
+            "post_delay": 700,
+            "max_hit": 5,
+            "focus": {
+                "Node.Recognition.Succeeded": "尝试5次仍未推进就会放弃，避免无限点击"
+            }
         },
         "往世乐土-已进入往世乐土": {
             "expected": [
@@ -1166,7 +1170,11 @@
             "expected": [
                 "快速出击",
                 "快速出[击擊]"
-            ]
+            ],
+            "max_hit": 5,
+            "focus": {
+                "Node.Recognition.Succeeded": "尝试5次仍未推进就会放弃，避免无限点击"
+            }
         },
         "往世乐土-点击选择深层序列": {
             "expected": [
@@ -1180,7 +1188,11 @@
                 40,
                 475,
                 235
-            ]
+            ],
+            "max_hit": 5,
+            "focus": {
+                "Node.Recognition.Succeeded": "尝试5次仍未推进就会放弃，避免无限点击"
+            }
         },
         "往世乐土-已进入三位导航界面": {
             "post_delay": 700,
@@ -4366,9 +4378,9 @@
             ],
             "action": "Click",
             "post_delay": 800,
-            "max_hit": 1,
+            "max_hit": 2,
             "focus": {
-                "Node.Recognition.Succeeded": "选择积分倍率：戒約"
+                "Node.Recognition.Succeeded": "尝试2次仍未推进就会放弃，避免无限点击"
             }
         },
         "乐土-积分倍率-下滑": {
@@ -4518,5 +4530,11 @@
             "threshold": [
                 0.93
             ]
+        },
+        "往世乐土-点击普通战斗": {
+            "max_hit": 3,
+            "focus": {
+                "Node.Recognition.Succeeded": "尝试3次仍未推进就会放弃，避免无限点击"
+            }
         }
 }

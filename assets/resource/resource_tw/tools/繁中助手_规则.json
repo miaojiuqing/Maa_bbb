@@ -700,9 +700,9 @@
       ],
       "action": "Click",
       "post_delay": 800,
-      "max_hit": 1,
+      "max_hit": 2,
       "focus": {
-        "Node.Recognition.Succeeded": "选择积分倍率：戒約"
+        "Node.Recognition.Succeeded": "尝试2次仍未推进就会放弃，避免无限点击"
       }
     },
     "乐土-积分倍率-下滑": {
@@ -780,7 +780,11 @@
       "expected": [
         "深层序列",
         "[深][层層]序列"
-      ]
+      ],
+      "max_hit": 5,
+      "focus": {
+        "Node.Recognition.Succeeded": "尝试5次仍未推进就会放弃，避免无限点击"
+      }
     },
     "往世乐土-总任务层": {
       "next": [
@@ -875,6 +879,24 @@
       "threshold": [
         0.93
       ]
+    },
+    "往世乐土-打开快速出击": {
+      "max_hit": 5,
+      "focus": {
+        "Node.Recognition.Succeeded": "尝试5次仍未推进就会放弃，避免无限点击"
+      }
+    },
+    "往世乐土-点击普通战斗": {
+      "max_hit": 3,
+      "focus": {
+        "Node.Recognition.Succeeded": "尝试3次仍未推进就会放弃，避免无限点击"
+      }
+    },
+    "往世乐土-点击进入往世乐土": {
+      "max_hit": 5,
+      "focus": {
+        "Node.Recognition.Succeeded": "尝试5次仍未推进就会放弃，避免无限点击"
+      }
     }
   },
   "选项": {
