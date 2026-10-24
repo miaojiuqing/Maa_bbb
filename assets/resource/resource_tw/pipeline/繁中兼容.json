@@ -1,7 +1,7 @@
 {
     // 本文件由「繁中助手」自动生成，请勿手改（改 繁中助手_规则.json 后重新「重建覆盖包」）
-    // 生成时间: 2026-10-24 21:31:07
-    // 节点数: 638
+    // 生成时间: 2026-10-24 21:34:34
+    // 节点数: 643
     // 1) OCR 的 expected 追加繁体候选（追加而非替换，简体环境不受影响）
     // 2) UI 的 Click 改成 LongPress + duration（Click 没有 duration 字段，框架写死按住 50ms）
     // 回滚：删除本目录，并在「繁中助手」里点「停用繁中兼容」
@@ -4236,7 +4236,11 @@
             "max_hit": 5,
             "focus": {
                 "Node.Recognition.Succeeded": "剧情对话：点「跳過」"
-            }
+            },
+            "next": [
+                "[JumpBack]乐土-跳过剧情-勾不再显示",
+                "乐土-跳过剧情-确认"
+            ]
         },
         "往世乐土-总任务层": {
             "next": [
@@ -4246,5 +4250,75 @@
                 "[JumpBack]点击主菜单处的出击",
                 "[JumpBack]往世乐土-点击出击的挑战"
             ]
+        },
+        "乐土-跳过剧情-勾不再显示": {
+            "recognition": "OCR",
+            "roi": [
+                500,
+                600,
+                320,
+                55
+            ],
+            "expected": [
+                "不再顯示",
+                "不再显示",
+                "不[再再]顯[示示]"
+            ],
+            "action": "Click",
+            "target": [
+                518,
+                605,
+                52,
+                48
+            ],
+            "post_delay": 400,
+            "max_hit": 1,
+            "next": [
+                "乐土-跳过剧情-确认"
+            ]
+        },
+        "乐土-跳过剧情-确认": {
+            "recognition": "OCR",
+            "roi": [
+                380,
+                300,
+                520,
+                120
+            ],
+            "expected": [
+                "真的要跳過劇情",
+                "真的要跳过剧情",
+                "[真真]的要[跳跳][過过]劇?情"
+            ],
+            "action": "Click",
+            "target": [
+                655,
+                476,
+                315,
+                68
+            ],
+            "post_delay": 900,
+            "max_hit": 2,
+            "focus": {
+                "Node.Recognition.Succeeded": "确认跳过剧情"
+            }
+        },
+        "往世乐土-增益选择-上半-第二条-实际选择-已选中": {
+            "recognition": "DirectHit",
+            "focus": {
+                "Node.Recognition.Succeeded": "不选：500生命收益低，优先给增伤"
+            }
+        },
+        "往世乐土-增益选择-下半-第四条-实际选择-已选中": {
+            "recognition": "DirectHit",
+            "focus": {
+                "Node.Recognition.Succeeded": "不选：需要极限闪避，自动化不会闪避"
+            }
+        },
+        "往世乐土-增益选择-下半-第七条-实际选择-已选中": {
+            "recognition": "DirectHit",
+            "focus": {
+                "Node.Recognition.Succeeded": "不选：限定拳套/镰刀/重炮/太刀，时序之律者用驱动核心"
+            }
         }
 }
