@@ -47,5 +47,11 @@
     },
     "渠道服专用广告处理集合": {
         "enabled": false
+    },
+    "未知界面-等待计数": {
+        "enabled": true
+    },
+    "未知界面-ESC返回": {
+        "enabled": true
     }
 }
