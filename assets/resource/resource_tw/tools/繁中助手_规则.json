@@ -516,9 +516,15 @@
         "[点點][击擊]空白[处處][關关][閉闭]"
       ],
       "action": "Click",
+      "target": [
+        1160,
+        650,
+        100,
+        60
+      ],
       "post_delay": 1500,
       "focus": {
-        "Node.Recognition.Succeeded": "挑战结束界面：点空白处关闭"
+        "Node.Recognition.Succeeded": "挑战结束界面：点右下角空白处关闭"
       }
     }
   },

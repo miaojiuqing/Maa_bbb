@@ -1,6 +1,6 @@
 {
     // 本文件由「繁中助手」自动生成，请勿手改（改 繁中助手_规则.json 后重新「重建覆盖包」）
-    // 生成时间: 2026-10-24 20:48:15
+    // 生成时间: 2026-10-24 20:50:10
     // 节点数: 624
     // 1) OCR 的 expected 追加繁体候选（追加而非替换，简体环境不受影响）
     // 2) UI 的 Click 改成 LongPress + duration（Click 没有 duration 字段，框架写死按住 50ms）
@@ -4000,9 +4000,15 @@
                 "[点點][击擊]空白[处處][關关][閉闭]"
             ],
             "action": "Click",
+            "target": [
+                1160,
+                650,
+                100,
+                60
+            ],
             "post_delay": 1500,
             "focus": {
-                "Node.Recognition.Succeeded": "挑战结束界面：点空白处关闭"
+                "Node.Recognition.Succeeded": "挑战结束界面：点右下角空白处关闭"
             }
         }
 }
