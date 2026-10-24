@@ -231,6 +231,14 @@ def expected_of(v):
 
 
 # ---------------------------------------------------------------- 生成覆盖包
+# OCR 形近字误认：游戏里写的是前者，OCR 常常读成后者
+OCR_CONFUSIONS = {
+    '桀': '傑',   # 英桀 → OCR 读成 英傑
+    '傑': '桀',
+    '贮': '貯',
+}
+
+
 def to_tolerant(s):
     """把简繁有差异的字转成 [简繁] 字符类。
 
@@ -252,7 +260,7 @@ def to_tolerant(s):
             if depth > 0: depth -= 1
             out.append(c); i += 1; continue
         if depth == 0:
-            t = m.get(c)
+            t = m.get(c) or OCR_CONFUSIONS.get(c)
             if t and t != c:
                 out.append('[' + c + t + ']'); changed = True; i += 1; continue
         out.append(c); i += 1
