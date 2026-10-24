@@ -423,41 +423,50 @@
       ]
     },
     "乐土刷级-首层复刷-点击放弃并结算": {
-      "recognition": "DirectHit",
-      "action": "Click",
-      "target": [
+      "recognition": "OCR",
+      "roi": [
         585,
-        508,
-        232,
-        52
+        505,
+        235,
+        58
       ],
-      "post_delay": 1200,
-      "max_hit": 3,
+      "expected": [
+        "直接結算",
+        "直接结算",
+        "[直直]接[结結]算"
+      ],
+      "action": "Click",
+      "post_delay": 1000,
+      "max_hit": 2,
       "next": [
         "乐土-提前结算确认"
       ],
       "focus": {
-        "Node.Recognition.Succeeded": "点「直接結算」（固定坐标）"
+        "Node.Recognition.Succeeded": "点「直接結算」"
       }
     },
     "乐土刷级-减负模式-点击放弃并结算": {
+      "recognition": "OCR",
       "roi": [
-        300,
-        490,
-        530,
-        230
+        585,
+        505,
+        235,
+        58
       ],
       "expected": [
-        "放弃并结算",
-        "[放放][弃棄][并並][结結]算",
         "直接結算",
-        "直接结算"
+        "直接结算",
+        "[直直]接[结結]算"
       ],
       "action": "Click",
-      "post_delay": 1500,
+      "post_delay": 1000,
+      "max_hit": 2,
       "next": [
         "乐土-提前结算确认"
-      ]
+      ],
+      "focus": {
+        "Node.Recognition.Succeeded": "点「直接結算」"
+      }
     },
     "乐土刷级-首层复刷-放弃并结算确认": {
       "expected": [
@@ -474,7 +483,18 @@
       ]
     },
     "乐土-提前结算确认": {
-      "recognition": "DirectHit",
+      "recognition": "OCR",
+      "roi": [
+        150,
+        265,
+        1010,
+        70
+      ],
+      "expected": [
+        "提前結算",
+        "提前结算",
+        "[提提]前[结結]算"
+      ],
       "action": "Click",
       "target": [
         660,
@@ -482,17 +502,28 @@
         232,
         62
       ],
-      "post_delay": 1200,
-      "max_hit": 3,
+      "post_delay": 1000,
+      "max_hit": 2,
       "next": [
         "乐土-挑战结束-关闭"
       ],
       "focus": {
-        "Node.Recognition.Succeeded": "点「確定」确认提前结算（固定坐标）"
+        "Node.Recognition.Succeeded": "点「確定」确认提前结算"
       }
     },
     "乐土-挑战结束-关闭": {
-      "recognition": "DirectHit",
+      "recognition": "OCR",
+      "roi": [
+        380,
+        630,
+        540,
+        70
+      ],
+      "expected": [
+        "點擊空白處關閉",
+        "点击空白处关闭",
+        "[点點][击擊]空白[处處][關关][閉闭]"
+      ],
       "action": "Click",
       "target": [
         1160,
@@ -501,9 +532,9 @@
         60
       ],
       "post_delay": 1200,
-      "max_hit": 3,
+      "max_hit": 2,
       "focus": {
-        "Node.Recognition.Succeeded": "点空白处关闭结算界面（固定坐标）"
+        "Node.Recognition.Succeeded": "点空白处关闭结算界面"
       }
     },
     "乐土刷级-首层复刷-已进入深层序列选buff准备出击界面": {
