@@ -42,6 +42,8 @@
             "[JumpBack]所有资源已下载完毕",
             "[JumpBack]着色器编译中",
             "[JumpBack]点击左上角返回",
+            "[JumpBack]左上角返回-文字",
+            "[JumpBack]主线场景-左上角返回",
             // "[JumpBack]拓境战幕-返回",
             "[JumpBack]资源下载",
             "[JumpBack]今日不再跳过剧情确认",
@@ -58,6 +60,8 @@
             "[JumpBack]预告网页处理-点击复制点击叉叉",
             "[JumpBack]黑屏计数",
             "[JumpBack]模拟器包名游戏启动",
+            "[JumpBack]未知界面-等待计数",
+            "[JumpBack]未知界面-ESC返回",
             "[JumpBack]空任务"
         ],
         "focus": {
@@ -97,6 +101,65 @@
             "type": "Click"
         },
         "post_delay": 500
+    },
+    "左上角返回-文字": { //活动页左上角写着"返回"的按钮，不用每个活动单独截图
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [
+                    0,
+                    0,
+                    200,
+                    110
+                ],
+                "expected": [
+                    "返回"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1000
+    },
+    "主线场景-左上角返回": { //误入主线场景时左上角只有一个箭头，ESC无效只能点它
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    0,
+                    0,
+                    120,
+                    90
+                ],
+                "threshold": 0.8,
+                "green_mask": true,
+                "template": [
+                    "通用/主线左上角返回.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 1000
+    },
+    "未知界面-等待计数": { //PC端专用，在resource_win32里开启。正常加载最多连续空转一百多次，超过300次视为卡在未知界面
+        "enabled": false,
+        "max_hit": 300
+    },
+    "未知界面-ESC返回": { //PC端专用，在resource_win32里开启。等待计数用完后按ESC退出未知界面，最多10次；主菜单上误按会被"舰长~真的要退出游戏吗-否"处理
+        "enabled": false,
+        "max_hit": 10,
+        "action": {
+            "type": "ClickKey",
+            "param": {
+                "key": [
+                    27
+                ]
+            }
+        },
+        "post_delay": 2000
     },
     "游戏需在客户端进行更新": {
         "enabled": false,
