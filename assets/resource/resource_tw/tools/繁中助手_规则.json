@@ -603,16 +603,6 @@
         "当前挑战进度",
         "[当當]前挑[战戰][进進]度"
       ],
-      "action": "DoNothing",
-      "next": [
-        "往世乐土-清理-点直接结算"
-      ],
-      "focus": {
-        "Node.Recognition.Succeeded": "周常：检测到遗留进度，先结算清空"
-      }
-    },
-    "往世乐土-清理-点直接结算": {
-      "recognition": "DirectHit",
       "action": "Click",
       "target": [
         585,
@@ -621,13 +611,24 @@
         52
       ],
       "post_delay": 1200,
-      "max_hit": 2,
-      "next": [
-        "往世乐土-清理-点确定"
-      ]
+      "max_hit": 3,
+      "focus": {
+        "Node.Recognition.Succeeded": "清理遗留进度：点「直接結算」"
+      }
     },
     "往世乐土-清理-点确定": {
-      "recognition": "DirectHit",
+      "recognition": "OCR",
+      "roi": [
+        150,
+        265,
+        1010,
+        70
+      ],
+      "expected": [
+        "提前結算",
+        "提前结算",
+        "[提提]前[结結]算"
+      ],
       "action": "Click",
       "target": [
         660,
@@ -636,13 +637,24 @@
         62
       ],
       "post_delay": 1200,
-      "max_hit": 2,
-      "next": [
-        "往世乐土-清理-点空白"
-      ]
+      "max_hit": 3,
+      "focus": {
+        "Node.Recognition.Succeeded": "清理遗留进度：点「確定」"
+      }
     },
     "往世乐土-清理-点空白": {
-      "recognition": "DirectHit",
+      "recognition": "OCR",
+      "roi": [
+        380,
+        630,
+        540,
+        70
+      ],
+      "expected": [
+        "點擊空白處關閉",
+        "点击空白处关闭",
+        "[点點][击擊]空白[处處][關关][閉闭]"
+      ],
       "action": "Click",
       "target": [
         1160,
@@ -651,10 +663,15 @@
         60
       ],
       "post_delay": 1500,
-      "max_hit": 2
+      "max_hit": 3,
+      "focus": {
+        "Node.Recognition.Succeeded": "清理遗留进度：關閉結算頁"
+      }
     },
     "往世乐土-开始任务层": {
       "next": [
+        "[JumpBack]往世乐土-清理-点确定",
+        "[JumpBack]往世乐土-清理-点空白",
         "[JumpBack]往世乐土-未完成进度检测",
         "往世乐土-总任务层",
         "往世乐土-已进入往世乐土",
@@ -725,6 +742,8 @@
     },
     "往世乐土-已进入深层序列": {
       "next": [
+        "[JumpBack]往世乐土-清理-点确定",
+        "[JumpBack]往世乐土-清理-点空白",
         "[JumpBack]往世乐土-未完成进度检测",
         "往世乐土-未选择任何增益",
         "往世乐土-已进入三位导航界面",
@@ -794,10 +813,17 @@
       "max_hit": 5,
       "focus": {
         "Node.Recognition.Succeeded": "尝试5次仍未推进就会放弃，避免无限点击"
-      }
+      },
+      "next": [
+        "[JumpBack]往世乐土-未完成进度检测",
+        "[JumpBack]往世乐土-清理-点确定",
+        "[JumpBack]往世乐土-清理-点空白"
+      ]
     },
     "往世乐土-总任务层": {
       "next": [
+        "[JumpBack]往世乐土-清理-点确定",
+        "[JumpBack]往世乐土-清理-点空白",
         "[JumpBack]往世乐土-未完成进度检测",
         "往世乐土-已进入往世乐土",
         "[JumpBack]往世乐土-点击进入往世乐土",
