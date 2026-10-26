@@ -5,6 +5,7 @@
             "[JumpBack]点击叉叉",
             "[JumpBack]点击返回主菜单",
             "[JumpBack]点击左上角返回",
+            "[JumpBack]点击左上角返回_文字",
             "[JumpBack]启动并进入游戏"
         ]
     },
@@ -49,7 +50,8 @@
             "[JumpBack]模拟作战室-确认减负奖励",
             "[JumpBack]模拟作战室-领取奖励",
             "[JumpBack]点击返回主菜单",
-            "[JumpBack]点击左上角返回"
+            "[JumpBack]点击左上角返回",
+            "[JumpBack]点击左上角返回_文字"
         ]
     },
     "模拟作战室-点击进入模拟作战室": {
@@ -173,7 +175,8 @@
             "[JumpBack]模拟作战室-确认减负奖励",
             "[JumpBack]模拟作战室-领取奖励",
             "[JumpBack]点击返回主菜单",
-            "[JumpBack]点击左上角返回"
+            "[JumpBack]点击左上角返回",
+            "[JumpBack]点击左上角返回_文字"
         ]
     },
     "模拟作战室-领取奖励": {
