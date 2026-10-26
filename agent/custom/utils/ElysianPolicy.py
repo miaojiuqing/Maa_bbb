@@ -163,30 +163,34 @@ TITLE_LABELS = ("普通", "增幅", "核心", "专属")
 
 
 def _title_line(lines):
-    """挑出本行标题块：含「的祝福/的刻印」或「+数字」的行优先，其次取最上面一行短文本。"""
+    """标题块：含「的祝福/的刻印」、或「+数字」、或「A·B·C·D」式核心名；没有标题就返回 None。"""
     for line in lines:
         text = normalize(line["text"])
         if any(marker in text for marker in TITLE_MARKERS) or TITLE_LEVEL.search(text):
             return line
     for line in lines:
         text = normalize(line["text"])
-        if text and text not in TITLE_LABELS and len(text) <= 24 and not text.endswith("。"):
+        if text.count("·") >= 3 and len(text) <= 20 and text not in TITLE_LABELS:
             return line
-    return lines[0]
+    return None
 
 
 def choice_rows(items):
     # 只把「标题块」当作卡片名称参与匹配/评分；描述块常跨行，混进来会让命中的名字属于相邻卡片。
+    # 点击点取标题块自身的位置：不能再用 y 带中心，卡 2 描述很长时会把带 3 的中心盖住。
     rows = []
     for top, bottom in ((180, 323), (332, 477), (485, 636)):
         lines = [i for i in items if i["box"][0] >= 510 and top <= i["box"][1] < bottom]
         if not lines: continue
         lines.sort(key=lambda r: (r["box"][1], r["box"][0]))
         title = _title_line(lines)
+        if title is None:
+            continue
+        box = title["box"]
         rows.append({
             "text": normalize(title["text"]),
             "detail": " ".join(r["text"] for r in lines),
-            "point": (580, (top + bottom) // 2),
+            "point": (580, box[1] + box[3] // 2),
         })
     return rows
 

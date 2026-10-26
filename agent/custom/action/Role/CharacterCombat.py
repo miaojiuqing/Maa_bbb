@@ -11,6 +11,8 @@ from ...utils.CharacterProfiles import CHARACTER_PROFILES, MUMU_TOUCH_ACTIONS
 TOUCH_NODE = "角色战斗-触摸"
 # 长按使用独立触摸点：周期性点按走 contact=0，其 touch_up 会把同一 touch 的按住一起抬起。
 HOLD_CONTACT = 1
+# 按住期间定期刷新一次（松开→立即重按）：修复误判战斗后"幽灵按住"导致下一层不普攻。
+HOLD_REFRESH_S = 5.0
 
 
 class CharacterCombat(CustomAction):
@@ -29,6 +31,15 @@ class CharacterCombat(CustomAction):
         self.holding = False
         self.hold_key = None
         self.hold_release = True
+        self.hold_at = 0.0
+
+    def _drop_hold(self, context):
+        """画面已不是战斗：立即松开并清掉记账，避免把"幽灵按住"带进下一层。"""
+        if self.hold_key is None:
+            return
+        self.holding = False
+        self.hold_key = None
+        self._release_attack(context)
 
     def run(self, context, argv):
         self.holding = False
@@ -99,6 +110,13 @@ class CharacterCombat(CustomAction):
                 if not self._press_attack(context):
                     return False
                 self.hold_key = key
+                self.hold_at = time.monotonic()
+            elif time.monotonic() - self.hold_at >= HOLD_REFRESH_S:
+                # 两个节点无 pre/post_delay：松开后立刻重按，空档只有一次 adb 往返（约 10~40ms）。
+                self._release_attack(context)
+                self.hold_at = time.monotonic()
+                if not self._press_attack(context):
+                    return False
             if not actions:
                 # cycle 为空且没有其它待执行动作：只做一轮 HUD 检查就返回，
                 # 由节点重入去执行到期的周期动作；按住状态通过跨调用保持。
@@ -108,9 +126,11 @@ class CharacterCombat(CustomAction):
                 image = context.tasker.controller.post_screencap().wait().get()
                 active = context.run_recognition("战斗逻辑-战斗中", image)
                 if not active or not active.hit:
+                    self._drop_hold(context)
                     return True
                 hud = context.run_recognition("角色战斗-生命HUD", image)
                 if not hud or not hud.hit:
+                    self._drop_hold(context)
                     return True
                 disabled = context.run_recognition("角色战斗-战后禁用", image)
                 if disabled and disabled.hit:

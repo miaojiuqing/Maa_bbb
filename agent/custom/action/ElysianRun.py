@@ -183,6 +183,8 @@ class ElysianRun(CustomAction):
                     self.gate_recovery_phase = None
                     self.enter_attempts = self.enter_failure_reads = 0
                     self.enter_recovery = 0
+                    # 每层开场必放一次大招：清掉终结技计时，让本层第一次战斗调用立刻插入 ultimate。
+                    self.combat.ultimate_at.clear()
                     self.phase("进入楼层")
                 if self.enter_pending is not None and floor != self.enter_pending:
                     self.enter_pending = None
