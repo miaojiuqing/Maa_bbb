@@ -250,7 +250,15 @@ class ElysianRun(CustomAction):
         self.battle_finished = True
         self.phase("选择刻印")
         rows = choice_rows(self.items)
-        if not rows: return
+        if not rows:
+            # 一张卡都没识别到：静默返回会让阶段循环原地空转、卡死在刻印页。
+            if self.choice_empty >= 3:
+                raise RunHalt("刻印选择页识别不到任何卡片，已停止并保存现场")
+            self.choice_empty += 1
+            self.phase("刻印页无候选", f"识别不到卡片，重置后重试（{self.choice_empty}/3）")
+            self.click_text("重置刻印", [600, 630, 420, 90], .8)
+            return
+        self.choice_empty = 0
         family_match = re.search(r"[「【\[]?(真我|黄金|鏖灭|空梦|螺旋|天慧|浮生|戒律|无限|旭光|繁星|刹那|救世)[」】\]]?的刻印", self.text)
         family = family_match.group(1) if family_match else ""
         signature = "|".join(normalize(r["text"]) for r in rows)
@@ -861,7 +869,7 @@ class ElysianRun(CustomAction):
         # checkpoint 恢复会重建 state 对象，动作层必须跟着指向新对象；
         # 否则面板战斗仍按本次选项的角色出招，与恢复后的记录不一致。
         self.motion.state = self.state
-        self.choice_signature="";self.choice_at=0;self.enter_at=0;self.build_signature="";self.peace_since=0;self.battle_finished=False;self.nav_started=0
+        self.choice_signature="";self.choice_at=0;self.choice_empty=0;self.enter_at=0;self.build_signature="";self.peace_since=0;self.battle_finished=False;self.nav_started=0
         self.enter_attempts = self.enter_failure_reads = 0
         self.enter_recovery = 0
         self.gate_pause_used = False

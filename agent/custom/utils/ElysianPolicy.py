@@ -163,16 +163,22 @@ TITLE_LABELS = ("普通", "增幅", "核心", "专属")
 
 
 def _title_line(lines):
-    """标题块：含「的祝福/的刻印」、或「+数字」、或「A·B·C·D」式核心名；没有标题就返回 None。"""
-    for line in lines:
-        text = normalize(line["text"])
+    """标题块：优先「的祝福/的刻印」、「+数字」、或「A·B·C·D」式核心名；
+    都没有时用卡片右侧的类型标签（专属/普通/增幅/核心）锚定同一行的文本。"""
+    pairs = [(line, normalize(line["text"])) for line in lines]
+    for line, text in pairs:
         if any(marker in text for marker in TITLE_MARKERS) or TITLE_LEVEL.search(text):
             return line
-    for line in lines:
-        text = normalize(line["text"])
-        if text.count("·") >= 3 and len(text) <= 20 and text not in TITLE_LABELS:
+    for line, text in pairs:
+        if text.count("·") >= 3 and len(text) <= 20:
             return line
-    return None
+    # 黄金的咏叹 / 无限的「M」/ 幕间剧「逆转的螺旋」等核心名不含上述特征，用类型标签定位标题行。
+    labels = [line for line, text in pairs if text in TITLE_LABELS]
+    if not labels:
+        return None
+    anchor = min(line["box"][1] for line in labels)
+    cands = [line for line, text in pairs if text not in TITLE_LABELS]
+    return min(cands, key=lambda line: abs(line["box"][1] - anchor)) if cands else None
 
 
 def choice_rows(items):
