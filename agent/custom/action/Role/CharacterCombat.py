@@ -4,7 +4,7 @@ import time
 import re
 
 from maa.custom_action import CustomAction
-from ...utils import DesktopInput
+from ...utils import DesktopInput, MoveInput
 from ...utils.CharacterProfiles import CHARACTER_PROFILES, MUMU_TOUCH_ACTIONS
 
 # 安卓端（模拟器）只能走触摸坐标；桌面端资源包会提供 角色战斗-按键-<动作> 节点改用键码。
@@ -258,6 +258,8 @@ class CharacterCombat(CustomAction):
         index = self.movement_index.get(key, 0)
         dx, dy = vectors[index % len(vectors)]
         self.movement_index[key] = index + 1
+        if MoveInput.walk(context, dx, float(profile.get("movement_hold_ms", 260)) / 1000.0, dy):
+            return True                                     # 桌面端没有摇杆，改用 WASD
         held = DesktopInput.hold(context)  # 桌面端要先按住 Alt 才能拖视角，安卓端恒为 False
         try:
             if not controller.post_touch_down(153, 571).wait().succeeded:
