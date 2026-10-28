@@ -1,0 +1,68 @@
+{
+    // 桌面端移动键位：安卓端用屏幕摇杆，不需要这些节点；只有 resource_win32 系列加载。
+    // MoveInput.walk 按"节点是否存在"判断平台，用户改键只需改这里的 key。
+    "桌面-按住W": {
+        "action": {
+            "type": "KeyDown",
+            "param": {
+                "key": 87 //W
+            }
+        }
+    },
+    "桌面-松开W": {
+        "action": {
+            "type": "KeyUp",
+            "param": {
+                "key": 87 //W
+            }
+        }
+    },
+    "桌面-按住A": {
+        "action": {
+            "type": "KeyDown",
+            "param": {
+                "key": 65 //A
+            }
+        }
+    },
+    "桌面-松开A": {
+        "action": {
+            "type": "KeyUp",
+            "param": {
+                "key": 65 //A
+            }
+        }
+    },
+    "桌面-按住S": {
+        "action": {
+            "type": "KeyDown",
+            "param": {
+                "key": 83 //S
+            }
+        }
+    },
+    "桌面-松开S": {
+        "action": {
+            "type": "KeyUp",
+            "param": {
+                "key": 83 //S
+            }
+        }
+    },
+    "桌面-按住D": {
+        "action": {
+            "type": "KeyDown",
+            "param": {
+                "key": 68 //D
+            }
+        }
+    },
+    "桌面-松开D": {
+        "action": {
+            "type": "KeyUp",
+            "param": {
+                "key": 68 //D
+            }
+        }
+    }
+}

@@ -26,6 +26,8 @@ GATE_LOAD_WAIT_S = 30
 GATE_ENTER_RETRY_S = 5.0
 GATE_ENTER_RECOVERIES = 3
 GATE_CLICK_OFFSETS = (80, 0, 110)
+# 桌面端「前往」长条更窄且更靠右：偏移与兜底点各用一套，避免第三次点击落到框外。
+GATE_CLICK_OFFSETS_PC = (40, 0, 70)
 GATE_CLICK_MAX_ATTEMPTS = 6
 GATE_AFTER_PAUSE_ATTEMPTS = 3
 GATE_PAUSE_WAIT_S = 10
@@ -36,6 +38,8 @@ GATE_PANEL_WAIT_S = 1.2
 # 不同场景背景下「前往」小卡片的 OCR 可能整体读不到；门名已确认时按门前标准位置补点。
 GATE_BLIND_READS = 3
 GATE_BLIND_PROMPT = (728, 285)
+# 1080p 窗口实测「前往」文字中心（换算到 1280×720）：桌面端比模拟器右移约 50、下移约 15。
+GATE_BLIND_PROMPT_PC = (778, 300)
 
 
 def pipeline():
@@ -90,7 +94,20 @@ class ElysianRun(CustomAction):
         return result if result and result.hit else None
 
     def arena(self):
-        return bool(self.hit("战斗逻辑-战斗中") and self.hit("角色战斗-生命HUD"))
+        """战斗中判定：血量 HUD 存在，且右下角普攻键不是「禁用」态。
+
+        桌面端左上角的「战斗中」模板与模拟器差异大、常不命中，改用右下角按键状态：
+        禁用态模板命中 = 战后/脱战；不命中 = 普攻可用 = 战斗中。
+        减负层选完刻印后直接出传送门、不需要打怪，按导航处理。
+        """
+        if "抵达层数-减负层" in self.text:
+            return False
+        hud = bool(self.find(r"^\d{2,5}/\d{2,5}$", [296, 620, 165, 42]))
+        if not hud and not (self.hit("战斗逻辑-战斗中") and self.hit("角色战斗-生命HUD")):
+            return False
+        if self.hit("角色战斗-战后禁用"):
+            return False
+        return True
 
     def find(self, pattern, roi=None):
         for item in self.items:
@@ -205,7 +222,7 @@ class ElysianRun(CustomAction):
             elif "状态列表" in self.text and role not in self.text and self.find("状态列表", [220, 0, 900, 90]):
                 raise RunHalt(f"状态列表中的角色不是{self.state.role}；请更换为当前适配角色")
             else:
-                self.click_text("^状态列表$", [0, 380, 210, 220]); return
+                self.click_text("^状态列表$", [0, 320, 210, 380]); return
         if not self.state.build_verified:
             if self.state.floor==0:
                 # 出生动画期间还没弹出初始专属；先恢复，等实际楼层/选刻印出现。
@@ -230,7 +247,7 @@ class ElysianRun(CustomAction):
                 # “增益列表”是暂停菜单的子页，先点左上角返回关闭菜单；
                 # 只有在“战况报告”页才存在“继续战斗”按钮。
                 if self.find("^增益列表$", [220, 0, 260, 90]):
-                    self.click_text("^返回$", [0, 0, 210, 90], .6)
+                    self.click_text("返回$", [0, 0, 210, 90], .6)
                 elif not self.click_text("^继续战斗$", [800, 570, 480, 150], .6):
                     self.click_text("^战况报告$", [0, 170, 210, 110])
                 return
@@ -250,7 +267,15 @@ class ElysianRun(CustomAction):
         self.battle_finished = True
         self.phase("选择刻印")
         rows = choice_rows(self.items)
-        if not rows: return
+        if not rows:
+            # 一张卡都没识别到：静默返回会让阶段循环原地空转、卡死在刻印页。
+            if self.choice_empty >= 3:
+                raise RunHalt("刻印选择页识别不到任何卡片，已停止并保存现场")
+            self.choice_empty += 1
+            self.phase("刻印页无候选", f"识别不到卡片，重置后重试（{self.choice_empty}/3）")
+            self.click_text("重置刻印", [600, 630, 420, 90], .8)
+            return
+        self.choice_empty = 0
         family_match = re.search(r"[「【\[]?(真我|黄金|鏖灭|空梦|螺旋|天慧|浮生|戒律|无限|旭光|繁星|刹那|救世)[」】\]]?的刻印", self.text)
         family = family_match.group(1) if family_match else ""
         signature = "|".join(normalize(r["text"]) for r in rows)
@@ -280,7 +305,7 @@ class ElysianRun(CustomAction):
         self.save(True)
         self.click(*chosen["point"], delay=.3)
         self.read()
-        if not self.click_text("^选择刻印$", [995, 630, 285, 90], .6): return
+        if not self.click(1147, 670, .6): return
         self.pending_signet = (chosen["text"], family, signature)
         self.choice_signature, self.choice_at = signature, time.monotonic()
         self.progress_at = time.monotonic()
@@ -288,6 +313,9 @@ class ElysianRun(CustomAction):
     def commit_signet(self):
         if not self.pending_signet: return
         text, family, signature = self.pending_signet
+        # 选择后必须用最新画面判断是否已离开刻印页：这里若沿用点击前的 items，
+        # 会一直认为"页面没变"而永久挂在 pending 上，后续画面切走也没人推进。
+        self.read()
         current = "|".join(normalize(r["text"]) for r in choice_rows(self.items))
         if signature == current and "选择刻印" in self.text: return
         self.state.record(text, family)
@@ -348,8 +376,14 @@ class ElysianRun(CustomAction):
                 return
             raise RunHalt("本层找门超过 100 秒，现场已保存")
         left = "".join(normalize(i["text"]) for i in self.items if i["box"][0] < 370 and 210 < i["box"][1] < 480)
-        if (prompt or blind) and at_name not in self.state.disabled_families and (at_name or (self.final_clear and re.search('下一层.*(作战|挑战)',left)) or (self.state.target == "首领" and re.search("首领|挑战|最后", left))):
-            actual = at_name or "首领"
+        # 只要画面里确实出现「前往」，就立刻交互：此时门一定在交互范围内，
+        # 继续靠近/转视角只会错过窗口（门名读不到时也照点，交互提示本身就是授权）。
+        prompt_only = bool(prompt) and not at_name
+        if (prompt or blind) and at_name not in self.state.disabled_families and (
+                at_name or prompt_only
+                or (self.final_clear and re.search('下一层.*(作战|挑战)', left))
+                or (self.state.target == "首领" and re.search("首领|挑战|最后", left))):
+            actual = at_name or self.state.target or "首领"
             if self.state.target and actual != self.state.target:
                 self.phase("门前复核", f"模型预判 {self.state.target}，游戏文字确认 {actual}，采用已确认门")
             limit = GATE_AFTER_PAUSE_ATTEMPTS if self.gate_pause_used else GATE_CLICK_MAX_ATTEMPTS
@@ -361,13 +395,16 @@ class ElysianRun(CustomAction):
             self.enter_attempts += 1
             # “前往”文字在长条交互框左侧；优先点框内中部，失败后
             # 再用当前帧的文字位置和另一处框内位置，不能复用旧坐标。
-            offset = GATE_CLICK_OFFSETS[(self.enter_attempts - 1) % len(GATE_CLICK_OFFSETS)]
+            desktop = DesktopInput.available(self.context)
+            offsets = GATE_CLICK_OFFSETS_PC if desktop else GATE_CLICK_OFFSETS
+            offset = offsets[(self.enter_attempts - 1) % len(offsets)]
             if prompt:
                 x, y, w, h = prompt["box"]
                 point = (min(1040, x + w / 2 + offset), y + h / 2)
                 note = ""
             else:
-                point = (min(1040, GATE_BLIND_PROMPT[0] + offset), GATE_BLIND_PROMPT[1])
+                blind = GATE_BLIND_PROMPT_PC if desktop else GATE_BLIND_PROMPT
+                point = (min(1040, blind[0] + offset), blind[1])
                 note = "（未读到前往提示，按门前位置补点）"
             self.phase("点击前往", f"{actual}，第 {self.enter_attempts} 次{note}，坐标 {int(point[0])},{int(point[1])}")
             self.save(True)
@@ -457,14 +494,18 @@ class ElysianRun(CustomAction):
                     return
                 self.phase("转动视角找门", f"第 {self.turns+1} 次")
                 self.save(True)
-                self.swipe(862,301,782,301)
+                # 桌面端视角拖动换算比模拟器小，单次多转一点、允许多转几轮，
+                # 否则容易在门刚好卡在视野边缘时一直找不到。
+                self.swipe(900, 301, 700, 301, 320)
                 self.turns += 1
-                if self.turns >= 28:
-                    raise RunHalt("28 次视角搜索及位置恢复后仍未找到可确认的门，现场已保存")
+                if self.turns >= 40:
+                    raise RunHalt("40 次视角搜索及位置恢复后仍未找到可确认的门，现场已保存")
         if self.nav_steps >= 40: raise RunHalt("靠近门 40 步仍未读到交互提示，现场已保存")
 
     def gate_prompt(self):
-        prompt = self.find("前往", [650, 190, 400, 220])
+        # PC 的「前往」在右侧更靠下（实测 x≈1105..1250、y≈428..467），
+        # 模拟器在 x 650..1050、y 190..410；两者都覆盖，避免 PC 永远读不到提示。
+        prompt = self.find("前往", [620, 150, 640, 360])
         left = "".join(normalize(i["text"]) for i in self.items
                        if i["box"][0] < 370 and 210 < i["box"][1] < 480)
         # 禁用的门也要识别出身份，才能拒绝其交互，不能把它当未知门。
@@ -567,7 +608,10 @@ class ElysianRun(CustomAction):
             return self.click_text('^领取$', [600,610,350,110], .8)
         if "跳过剧情" in text and "确认" in text:
             self.phase("跳过对话"); return self.click_text("^确认$", [650,420,380,160])
-        if self.find("跳过", [1000,0,280,100]) and "历史" in text:
+        # 关内 HUD（有血量/层数/得分）不可能是对话：即使模板误命中也不点跳过，
+        # 否则会在跑图或领奖画面里反复敲空格，把画面顶住不动。
+        hud = ("抵达层数" in text or self.find(r"^\d+/\d+$", [0, 600, 400, 120]))
+        if self.find("跳过", [1000,0,280,100]) and "历史" in text and not hud:
             # 全屏 OCR 有时把「自动」和「跳过」合成同一行，不能点合并框中心。
             self.phase("跳过对话"); return self.click(1200,40)
         if "锈蚀之徽" in text and "上限" in text:
@@ -631,7 +675,7 @@ class ElysianRun(CustomAction):
             self.shop_done = True
             self.shop_exit_steps = 2
             self.phase("离开商店", "按任务设置跳过购买")
-            self.click_text('^返回$',[0,0,210,90],.8)
+            self.click_text('返回$',[0,0,210,90],.8)
             return
         self.phase("商店补强", "优先购买元素穿透、全伤、武器相关刻印")
         self.progress_at=time.monotonic()
@@ -661,7 +705,7 @@ class ElysianRun(CustomAction):
         self.shop_done=True;self.shop_exit_steps=2
         self.target=None;self.state.target='';self.turns=self.nav_steps=0;self.nav_started=0
         self.phase("离开商店", "购买结束，绕开摊位前往出口")
-        self.click_text('^返回$',[0,0,210,90],.8)
+        self.click_text('返回$',[0,0,210,90],.8)
 
     def step(self):
         self.read()
@@ -763,6 +807,7 @@ class ElysianRun(CustomAction):
             return
         if self.arena():
             self.progress_at = time.monotonic()
+            self.wait_stuck = 0
             if (self.state.floor == 1 and not self.state.build_verified
                     and not self.state.acquired
                     and time.monotonic() - self.floor_since < INITIAL_SIGNET_GRACE_S
@@ -807,7 +852,26 @@ class ElysianRun(CustomAction):
                 self.combat_capture_at = time.monotonic()
             self.combat.run(self.context, self.combat_args)
             return
+        # 关卡 HUD 存在但不在战斗（减负层待命、刚选完刻印）：
+        # 先做一次角色/刻印校验（暂停菜单），确认无误再去寻路，避免带错配置跑图。
+        if "抵达层数" in self.text:
+            self.progress_at = time.monotonic()
+            if not self.state.role_verified or not self.state.build_verified:
+                self.phase("检查本局", f"选完刻印先核对角色与{self.required_signet()}")
+                self.click(43, 36)
+                return
+            self.navigate()
+            return
         if time.monotonic()-self.progress_at > 35:
+            # 等待画面长时间不动：先按一次 Esc 退出可能存在的残留弹层，再重试；
+            # 连续两次仍无进展才停止，避免减负层/过场被误判为未知画面。
+            if self.wait_stuck < 2:
+                self.wait_stuck += 1
+                self.progress_at = time.monotonic()
+                self.phase("等待画面", f"长时间无变化，按 Esc 尝试推进（{self.wait_stuck}/2）")
+                self.context.tasker.controller.post_click_key(4).wait()
+                self.stop_event.wait(.8)
+                return
             raise RunHalt("当前画面连续 35 秒未能识别，已停止并保存截图")
         self.phase("等待画面", "加载、对话或界面切换")
 
@@ -861,7 +925,7 @@ class ElysianRun(CustomAction):
         # checkpoint 恢复会重建 state 对象，动作层必须跟着指向新对象；
         # 否则面板战斗仍按本次选项的角色出招，与恢复后的记录不一致。
         self.motion.state = self.state
-        self.choice_signature="";self.choice_at=0;self.enter_at=0;self.build_signature="";self.peace_since=0;self.battle_finished=False;self.nav_started=0
+        self.choice_signature="";self.choice_at=0;self.choice_empty=0;self.wait_stuck=0;self.enter_at=0;self.build_signature="";self.peace_since=0;self.battle_finished=False;self.nav_started=0
         self.enter_attempts = self.enter_failure_reads = 0
         self.enter_recovery = 0
         self.gate_pause_used = False
