@@ -42,6 +42,28 @@ jobs:
         with:
           fetch-depth: 0
 
+      # 发版版本线护栏：暂时只允许发布 v1.* 版本，防止手滑打成 v3.x（历史上误发过 v3.13.7 / v3.13.14）。
+      # 这一步失败会让 meta 失败，后面的 install / android / changelog / release 全部跳过，不会产出 Release。
+      # 以后要放开（比如真的升到 v3），把 ALLOWED_MAJOR 改成对应主版本号，或删掉这一步。
+      - name: Enforce allowed release major
+        if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+        shell: bash
+        env:
+          ALLOWED_MAJOR: "1"
+        run: |
+          set -euo pipefail
+          ref="${GITHUB_REF_NAME}"
+          bare="${ref#v}"
+          major="${bare%%.*}"
+          echo "tag=$ref  major=v$major  allowed=v$ALLOWED_MAJOR"
+          if [[ "$major" != "$ALLOWED_MAJOR" ]]; then
+            echo "❌ 当前仓库只允许发布 v$ALLOWED_MAJOR.* 版本，本次打的是 $ref" >&2
+            echo "   误发的 tag 需要先删掉（会真正删除远端 tag）：" >&2
+            echo "   git push --delete origin $ref && git tag -d $ref" >&2
+            exit 1
+          fi
+          echo "✅ 版本线校验通过：$ref"
+
       - id: set_tag
         run: |
           is_release=${{ startsWith(github.ref, 'refs/tags/v') }}
