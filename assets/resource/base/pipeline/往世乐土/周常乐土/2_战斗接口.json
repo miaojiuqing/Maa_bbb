@@ -213,11 +213,14 @@
         "recognition": {
             "type": "TemplateMatch",
             "param": {
+                // 脱战 HUD 右上角也有相似的快进图标，阈值过低会误判成对话；
+                // 收窄到真对话按钮所在的小块，并要求更高相似度。
+                "threshold": 0.9,
                 "roi": [
-                    1055,
+                    1120,
                     0,
-                    100,
-                    97
+                    70,
+                    60
                 ],
                 "green_mask": true,
                 "template": [
