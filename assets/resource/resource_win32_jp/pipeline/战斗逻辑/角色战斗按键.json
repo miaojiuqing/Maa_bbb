@@ -23,5 +23,11 @@
         "key": 76, //L 星之环（与 只按武器技.json 纯键盘版一致）
         "pre_delay": 0,
         "post_delay": 0
+    },
+    "角色战斗-按键-dodge": {
+        "action": "ClickKey",
+        "key": 75, //K 纯键盘闪避（键鼠包为 Shift，纯键盘包不同）
+        "pre_delay": 0,
+        "post_delay": 0
     }
 }

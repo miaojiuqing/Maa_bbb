@@ -94,17 +94,23 @@ class ElysianRun(CustomAction):
         return result if result and result.hit else None
 
     def arena(self):
-        """战斗中判定：血量 HUD 存在，且右下角普攻键不是「禁用」态。
+        """战斗中判定：优先看「战斗中」模板，其次血量 HUD，最后排除普攻键禁用态。
 
-        桌面端左上角的「战斗中」模板与模拟器差异大、常不命中，改用右下角按键状态：
-        禁用态模板命中 = 战后/脱战；不命中 = 普攻可用 = 战斗中。
-        减负层选完刻印后直接出传送门、不需要打怪，按导航处理。
+        「战斗中」模板在桌面端实测可命中（0.94），命中即可确认还在战斗；
+        血量 OCR 在低血量/特效遮挡时会读成没有斜杠的串（如 "1366"），
+        不能单独作为必要判据，否则燃血角色会把战斗画面判成非战斗。
+        禁用态模板命中 = 战后/脱战；减负层选完刻印后直接出传送门，按导航处理。
         """
         if "抵达层数-减负层" in self.text:
             return False
-        hud = bool(self.find(r"^\d{2,5}/\d{2,5}$", [296, 620, 165, 42]))
-        if not hud and not (self.hit("战斗逻辑-战斗中") and self.hit("角色战斗-生命HUD")):
-            return False
+        # 「战斗中」模板在桌面端同样能命中（实测 0.94），命中即可确认还在战斗，
+        # 不必再依赖血量 OCR——血量文本在低血量/特效遮挡时会读成没有斜杠的串。
+        if not self.hit("战斗逻辑-战斗中"):
+            # 血量要允许个位数：浮生·渡尘之羽靠燃血作战，血量常被压到 1/13658，
+            # 旧写法要求两侧至少两位，会把满屏战斗画面判成非战斗而转去找门。
+            hud = bool(self.find(r"^\d{1,5}/\d{1,5}$", [296, 620, 165, 42])) or bool(self.hit("角色战斗-生命HUD"))
+            if not hud:
+                return False
         if self.hit("角色战斗-战后禁用"):
             return False
         return True
@@ -370,11 +376,11 @@ class ElysianRun(CustomAction):
         if self.state.target in self.state.disabled_families:
             self.target = None
             self.state.target = ""
-        if time.monotonic()-self.nav_started>100:
+        if time.monotonic()-self.nav_started>180:
             if self.enter_attempts and (prompt or blind) and at_name and not self.gate_pause_used:
                 self.start_gate_pause_recovery()
                 return
-            raise RunHalt("本层找门超过 100 秒，现场已保存")
+            raise RunHalt("本层找门超过 180 秒，现场已保存")
         left = "".join(normalize(i["text"]) for i in self.items if i["box"][0] < 370 and 210 < i["box"][1] < 480)
         # 只要画面里确实出现「前往」，就立刻交互：此时门一定在交互范围内，
         # 继续靠近/转视角只会错过窗口（门名读不到时也照点，交互提示本身就是授权）。
