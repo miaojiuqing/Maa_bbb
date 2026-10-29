@@ -33,6 +33,30 @@ class CharacterCombat(CustomAction):
         self.hold_release = True
         self.hold_at = 0.0
 
+    @staticmethod
+    def _is_desktop(context):
+        """桌面端判定：沿用 MoveInput/DesktopInput 的节点存在性检测，异常时按安卓端处理。"""
+        try:
+            return DesktopInput.available(context)
+        except Exception:
+            return False
+
+    @staticmethod
+    def _still_fighting(context, image):
+        """仍在战斗：任一判据命中即可，避免单一识别抖动就停手。
+
+        「战斗中」模板与血量 HUD 都可能偶发漏检：血量文本在低血量/特效遮挡时
+        会被读成没有斜杠的串（如 "1366"），只认它会误判战斗结束导致原地站桩。
+        """
+        for node in ("战斗逻辑-战斗中", "角色战斗-生命HUD"):
+            try:
+                result = context.run_recognition(node, image)
+            except Exception:
+                continue
+            if result and result.hit:
+                return True
+        return False
+
     def _drop_hold(self, context):
         """画面已不是战斗：立即松开并清掉记账，避免把"幽灵按住"带进下一层。"""
         if self.hold_key is None:
@@ -124,12 +148,7 @@ class CharacterCombat(CustomAction):
                 if context.tasker.stopping:
                     return False
                 image = context.tasker.controller.post_screencap().wait().get()
-                active = context.run_recognition("战斗逻辑-战斗中", image)
-                if not active or not active.hit:
-                    self._drop_hold(context)
-                    return True
-                hud = context.run_recognition("角色战斗-生命HUD", image)
-                if not hud or not hud.hit:
+                if not self._still_fighting(context, image):
                     self._drop_hold(context)
                     return True
                 disabled = context.run_recognition("角色战斗-战后禁用", image)
@@ -139,23 +158,39 @@ class CharacterCombat(CustomAction):
                 time.sleep(profile["interval_ms"] / 1000.0)
                 self.hold_release = False     # 战斗仍在：保持按住
                 return True
-        for action in actions:
-            if context.tasker.stopping:
-                return False
+        # 桌面端每动作都要截图+识别三次，单次开销 150~300ms，会把配置的 interval_ms
+        # 拉长到 1.6~2.1 倍，连招窗口对不上；这里只在桌面端改成每轮 cycle 检查一次，
+        # 循环内仅做轻量的 stopping 判断（安卓端仍按原逻辑逐动作检查）。
+        desktop = self._is_desktop(context)
+        if desktop:
             image = context.tasker.controller.post_screencap().wait().get()
-            active = context.run_recognition("战斗逻辑-战斗中", image)
-            if not active or not active.hit:
-                return True
-            hud = context.run_recognition("角色战斗-生命HUD", image)
-            if not hud or not hud.hit:
+            # 血量 OCR 在低血量/特效遮挡时会读成没有斜杠的串（如 "1366"）而漏检，
+            # 不能单凭它判定战斗结束；「战斗中」模板命中同样说明还在打。
+            if not self._still_fighting(context, image):
                 return True
             disabled = context.run_recognition("角色战斗-战后禁用", image)
             if disabled and disabled.hit:
                 print("CharacterCombat: post-battle HUD, no input", flush=True)
                 return False
+        for action in actions:
+            if context.tasker.stopping:
+                return False
+            if not desktop:
+                # 安卓端保持原逻辑：每个动作前都确认战斗状态，及时收手。
+                image = context.tasker.controller.post_screencap().wait().get()
+                if not self._still_fighting(context, image):
+                    return True
+                disabled = context.run_recognition("角色战斗-战后禁用", image)
+                if disabled and disabled.hit:
+                    print("CharacterCombat: post-battle HUD, no input", flush=True)
+                    return False
             if action == "elysian_support":
                 self.signet_check_at[key]=time.monotonic()
-                charge=context.run_recognition("角色战斗-英桀助战充能",image)
+                # 安卓端每个动作前都截图，直接用当前帧；桌面端 image 是整轮开始时的帧，
+                # 可能是几秒前的画面，充能条要按当下状态判断，所以单独取一帧。
+                charge=context.run_recognition(
+                    "角色战斗-英桀助战充能",
+                    context.tasker.controller.post_screencap().wait().get() if desktop else image)
                 values=re.findall(r"(\d{2,4})[/7](\d{2,4})", "".join(r.text for r in charge.all_results)) if charge and charge.hit else []
                 if not any(a==b and int(a)>0 for a,b in values):continue
             if action == "movement":
