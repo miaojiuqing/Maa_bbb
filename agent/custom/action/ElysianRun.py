@@ -31,6 +31,8 @@ GATE_CLICK_OFFSETS_PC = (40, 0, 70)
 GATE_CLICK_MAX_ATTEMPTS = 6
 GATE_AFTER_PAUSE_ATTEMPTS = 3
 GATE_PAUSE_WAIT_S = 10
+# 商店层：门藏在商店后面时，向前挪动的最大步数（每步都要本帧仍看到商店才继续）
+SHOP_PASS_STEPS = 8
 # 传送锚点面板（减负/挑战奖励层）：三张卡位置固定，门名是卡片顶部文字（1280×720 逻辑坐标）
 GATE_PANEL_BANDS = ((0, 500), (500, 795), (795, 1280))
 GATE_PANEL_POINTS = ((352, 350), (647, 350), (943, 350))
@@ -198,6 +200,7 @@ class ElysianRun(CustomAction):
                     self.nav_recoveries=self.lost_frames=0;self.nav_started=0
                     self.frame_target=None;self.frame_lost=0
                     self.shop_done=False
+                    self.shop_steps=0
                     self.battle_finished = False
                     self.active_hud_frames=0
                     self.floor_since = time.monotonic()
@@ -461,6 +464,19 @@ class ElysianRun(CustomAction):
             frames = [r for r in gates if r.get("cls_index") in (8,24) and r.get("score",0)>=.3]
             blocked_visible = any(GATE_NAMES.get(g.get('cls_index')) in self.state.disabled_families
                                   and g.get('score', 0) >= .55 for g in detected_gates)
+            # 商店遮挡：门就在商店后面，纯转视角永远看不到门框。
+            # 安卓端用 pipeline 的「看到商店→前进」「在商店旁→直走」两个兜底；
+            # 这里对齐它：只要视野里还有商店就继续往前挪，商店离开视野即停，
+            # 不会像原来固定 2 步那样走不够、也不会按着不动。
+            if self.shop_done and not visible and self.shop_steps < SHOP_PASS_STEPS:
+                shops = [r for r in detected_gates
+                         if r.get("cls_index") in (10, 13) and r.get("score", 0) >= .3]
+                if shops:
+                    self.shop_steps += 1
+                    self.phase("绕开商店", f"商店挡住门框，向前通过（{self.shop_steps}/{SHOP_PASS_STEPS}）")
+                    self.motion.walk(self.context, 0, .5, dy=-76)
+                    self.nav_steps += 1
+                    return
             if not frames and not visible and not blocked_visible:
                 frames=red_portals(self.frame) or dormant_anchors(self.frame)
             if frames and not visible:
@@ -845,7 +861,10 @@ class ElysianRun(CustomAction):
                         self.final_clear=True
                         self.phase("深层序列首领已击败", "任选一个英桀门进入后退出结算")
                 if self.shop_exit_steps:
-                    self.motion.walk(self.context,76,.6,dy=0);self.shop_exit_steps-=1
+                    # 刚退出商店时先离开摊位再寻路：关内固定后退一步，
+                    # 避免站在商店交互范围内直接进入找门流程。
+                    self.motion.walk(self.context, 0, .25, dy=76)
+                    self.shop_exit_steps -= 1
                     return
                 self.navigate(); return
             self.peace_since=0
@@ -913,6 +932,7 @@ class ElysianRun(CustomAction):
         self.frame_target=None;self.frame_lost=0
         self.shop_done=False
         self.shop_seen=set();self.shop_pending=None;self.shop_scrolls=self.shop_exit_steps=0
+        self.shop_steps=0
         self.final_clear=False
         self.final_gate_clicked=self.final_exit=False
         self.settlement_requested=False
