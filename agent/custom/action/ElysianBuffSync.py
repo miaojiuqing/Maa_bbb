@@ -18,12 +18,23 @@ BUFF_ROWS = (
 )
 
 BUFF_COSTS = (0, 5, 5, 10, 10, 15, 15)
+# 桌面端实测行距 61px（与安卓一致）；读不到两行以上时用它兜底推算行位置。
+FALLBACK_STEP = 61
 
 
 def rows_match(rows, costs):
     return ([row[0] for row in rows] == list(costs)
             and all(45 <= following[1] - current[1] <= 90
                     for current, following in zip(rows, rows[1:])))
+
+
+def grid_step(rows):
+    """按已识别行的间距取中位数，得到该列表的行距；行距异常时返回 0。"""
+    diffs = sorted(following[1] - current[1] for current, following in zip(rows, rows[1:]))
+    if not diffs:
+        return 0
+    step = diffs[len(diffs) // 2]
+    return step if 45 <= step <= 110 else 0
 
 
 def read_buff_targets(context):
@@ -97,6 +108,10 @@ class ElysianBuffSync(CustomAction):
         for attempt in range(13):
             frame = self.capture()
             rows = self.cost_rows(frame)
+            if rows and self.at_top(frame):
+                # 「增益效果」栏与列表同步滚动：能看到栏，就说明最上面一行正是第 1 条。
+                self.logger.info("已定位战前增益第1～3条，开始核对勾选")
+                return
             first = next((row for row in rows if row[0] == 0), None)
             if first:
                 y = first[1]
@@ -115,6 +130,13 @@ class ElysianBuffSync(CustomAction):
                 break
             self.scroll_list(95, 450, 450 + delta)
         raise RuntimeError("无法定位战前增益第一条，已停止并保留现场")
+
+    def at_top(self, frame):
+        """「增益效果」栏与列表一起滚动：栏可见即说明第 1 条就在它下方（列表已到顶）。"""
+        scratch = "乐土战前-效果栏检测"
+        return bool(self.hit(scratch, frame, {scratch: {
+            "enabled": True, "recognition": {"type": "OCR", "param": {
+                "roi": [60, 280, 1010, 300], "expected": ["增益效果"], "threshold": .7}}}}))
 
     def cost_rows(self, frame):
         # 旧模板中的数字被裁去一半，0 与 5 也能得到高分匹配。
@@ -139,21 +161,28 @@ class ElysianBuffSync(CustomAction):
         return sorted(rows, key=lambda row: row[1])
 
     def row_y(self, index, frame):
+        """按"端点锚定 + 行距网格"取行位置：到顶时第一行必是第1条，到底时最后一行必是第7条。
+
+        这样个别行的负荷数字被 OCR 漏读（PC 端偶发）时仍能定位，不必整段重来。
+        """
         rows = self.cost_rows(frame)
+        if not rows:
+            raise RuntimeError(f"无法定位战前增益第 {index + 1} 条：没读到任何负荷数字")
+        step = grid_step(rows) or FALLBACK_STEP
         if index < 3:
-            start = next((i for i, row in enumerate(rows) if row[0] == 0), None)
-            visible = rows[start:start + 3] if start is not None else []
-            expected = BUFF_COSTS[:3]
-            offset = index
+            base = rows[0][1]
         else:
             if not self.hit("往世乐土-增益选择-已滑动至最下方", frame):
                 raise RuntimeError("核对下半增益时列表未到底部")
-            visible = rows[-4:]
-            expected = BUFF_COSTS[3:]
-            offset = index - 3
-        if not rows_match(visible, expected):
+            base = rows[-1][1] - (len(BUFF_COSTS) - 1) * step
+        ys = [base + i * step for i in range(len(BUFF_COSTS))]
+        # 已读到的行若与推算位置上的负荷矛盾（列表其实没到顶/到底），宁可报错也不点错行。
+        wrong = sum(1 for cost, y in rows
+                    for k, expect_y in enumerate(ys)
+                    if abs(y - expect_y) <= step // 2 and cost != BUFF_COSTS[k])
+        if wrong >= 2:
             raise RuntimeError(f"无法可靠定位战前增益第 {index + 1} 条，负荷顺序为 {rows}")
-        return visible[offset][1]
+        return ys[index]
 
     def row_state(self, index):
         frame = self.capture()

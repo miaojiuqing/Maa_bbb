@@ -160,34 +160,83 @@ def choose_gate(detections, state):
 TITLE_MARKERS = ("的祝福", "的刻印")
 TITLE_LEVEL = re.compile(r"\+\s*\d")
 TITLE_LABELS = ("普通", "增幅", "核心", "专属")
+# 桌面端卡片左上角会多一行「LShift +1」这类键位提示，长得像「+等级」标题，必须先排除。
+KEY_HINT = re.compile(r"(?i)^(lshift|rshift|shift|ctrl|alt|tab|space|enter|esc|[a-z]{1,3})\s*\+\s*\d+$")
 
 
 def _title_line(lines):
-    """挑出本行标题块：含「的祝福/的刻印」或「+数字」的行优先，其次取最上面一行短文本。"""
-    for line in lines:
-        text = normalize(line["text"])
+    """标题块：优先「的祝福/的刻印」、「+数字」、或「A·B·C·D」式核心名；
+    都没有时用卡片右侧的类型标签（专属/普通/增幅/核心）锚定同一行的文本。"""
+    pairs = [(line, normalize(line["text"])) for line in lines
+             if not KEY_HINT.match(normalize(line["text"]))]
+    for line, text in pairs:
         if any(marker in text for marker in TITLE_MARKERS) or TITLE_LEVEL.search(text):
             return line
-    for line in lines:
-        text = normalize(line["text"])
-        if text and text not in TITLE_LABELS and len(text) <= 24 and not text.endswith("。"):
+    for line, text in pairs:
+        if text.count("·") >= 3 and len(text) <= 20:
             return line
-    return lines[0]
+    # 黄金的咏叹 / 无限的「M」/ 幕间剧「逆转的螺旋」等核心名不含上述特征，用类型标签定位标题行。
+    labels = [line for line, text in pairs if text in TITLE_LABELS]
+    if not labels:
+        return None
+    anchor = min(line["box"][1] for line in labels)
+    cands = [line for line, text in pairs if text not in TITLE_LABELS]
+    return min(cands, key=lambda line: abs(line["box"][1] - anchor)) if cands else None
 
 
 def choice_rows(items):
     # 只把「标题块」当作卡片名称参与匹配/评分；描述块常跨行，混进来会让命中的名字属于相邻卡片。
+    # 点击点取标题块自身的位置：不能再用 y 带中心，卡 2 描述很长时会把带 3 的中心盖住。
     rows = []
     for top, bottom in ((180, 323), (332, 477), (485, 636)):
         lines = [i for i in items if i["box"][0] >= 510 and top <= i["box"][1] < bottom]
         if not lines: continue
         lines.sort(key=lambda r: (r["box"][1], r["box"][0]))
         title = _title_line(lines)
+        if title is None:
+            continue
+        box = title["box"]
         rows.append({
             "text": normalize(title["text"]),
             "detail": " ".join(r["text"] for r in lines),
-            "point": (580, (top + bottom) // 2),
+            "point": (580, box[1] + box[3] // 2),
         })
+    # 兜底：标题块自己就带「的祝福/的刻印/+等级」特征时直接收集，不依赖固定 y 带。
+    # 桌面端卡片更高，第 3 条带以外的卡（如 y≈590/626 的必需刻印）也要能读到。
+    covered = [row["point"][1] for row in rows]
+    for item in items:
+        box = item["box"]
+        text = normalize(item["text"])
+        if box[0] < 510 or box[1] < 170 or len(text) > 24:
+            continue        # 页头「XX」的刻印 / 请选择英桀的刻印 在 170 以上，不属于卡片
+        if KEY_HINT.match(text):
+            continue        # 「LShift +2」是桌面端键位提示，不是刻印名
+        if not (any(marker in text for marker in TITLE_MARKERS) or TITLE_LEVEL.search(text)):
+            continue
+        center = box[1] + box[3] // 2
+        if any(abs(center - y) <= 40 for y in covered):
+            continue
+        rows.append({"text": text, "detail": item["text"], "point": (580, center)})
+    # 再兜一层：核心刻印名（黄金的咏叹 / 无限的「M」）没有标题特征，只能靠右侧类型标签定位。
+    # 这里对三条 y 带之外的卡同样生效，避免桌面端卡片变高后核心卡被挤到带外而漏读。
+    labels = [i["box"][1] for i in items if normalize(i["text"]) in TITLE_LABELS]
+    for item in items:
+        box = item["box"]
+        text = normalize(item["text"])
+        if box[0] < 510 or box[1] < 170 or not text or len(text) > 14:
+            continue
+        if text in TITLE_LABELS:
+            continue
+        if not any(abs(box[1] - y) <= 20 for y in labels):
+            continue
+        center = box[1] + box[3] // 2
+        if any(abs(center - y) <= 40 for y in covered):
+            continue
+        if any(row["text"] == text for row in rows):
+            continue
+        rows.append({"text": text, "detail": item["text"], "point": (580, center)})
+        covered.append(center)
+    rows.sort(key=lambda row: row["point"][1])
     return rows
 
 

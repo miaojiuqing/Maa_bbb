@@ -1,463 +1,473 @@
 {
-  "interface_version": 2,
-  "agent": {
-    "child_exec": "python",
-    "child_args": [
-      "../agent/main.py",
-      "-dev"
+    "interface_version": 2,
+    "agent": {
+        "child_exec": "python",
+        "child_args": [
+            "../agent/main.py",
+            "-dev"
+        ]
+    },
+    "name": "MAA_bbb",
+    "title": "识宝小助手 Oᴗoಣ | 自动战斗框架超级更新,用不了请上传日志,自动乐土激情开发中",
+    "version": "",
+    "github": "https://github.com/miaojiuqing/MAA_bbb",
+    "contact": "<a href=\"https://qm.qq.com/q/XrFQKgGvaI\"><font color=\"#12B7F5\"><b>💬 加入群聊</b></font></a><br/><a href=\"https://www.bilibili.com/video/BV1Ld42z1ERu/?spm_id_from=333.1387.homepage.video_card.click\"><font color=\"#FB7299\"><b>🎥 B站视频链接</b></font></a>",
+    "description": "PC端使用一定要分辨率16:9！",
+    "icon": ".\\resource\\base\\image\\logo.ico",
+    "mirrorchyan_rid": "Maa_bbb",
+    "mirrorchyan_multiplatform": true,
+    "welcome": "欢迎舰长使用识宝小助手Oᴗoಣ",
+    "controller": [
+        {
+            "name": "桌面端",
+            "type": "Win32",
+            "description": "截图方式优先PrintWindow,截图参数请自行在PrintWindow、FramePool和GDI中选择,用的不行就设置里打开高级设置好后自己改一下",
+            "permission_required": true,
+            "win32": {
+                "class_regex": "UnityWndClass",
+                "window_regex": "崩坏3|崩坏3 Steam版|Honkai Impact 3|崩壊3rd",
+                "screencap": "PrintWindow", //截图方式不设置默认 
+                "mouse": "PostMessageWithCursorPos",
+                "keyboard": "Seize"
+            }
+        },
+        {
+            "name": "安卓端",
+            "type": "Adb"
+        }
+    ],
+    "resource": [
+        {
+            "name": "键鼠操作",
+            "description": "当设置-操作-电脑端操作方式为\"键鼠操作方式\"时选择此项",
+            "controller": [
+                "桌面端"
+            ],
+            "path": [
+                "./resource/base",
+                "./resource/resource_win32"
+            ]
+        },
+        {
+            "name": "纯键盘操作",
+            "description": "当设置-操作-电脑端操作方式为\"键盘操作方式\"时选择此项",
+            "controller": [
+                "桌面端"
+            ],
+            "path": [
+                "./resource/base",
+                "./resource/resource_win32",
+                "./resource/resource_win32_jp"
+            ]
+        },
+        {
+            "name": "键鼠操作（繁中）",
+            "description": "繁中客户端专用：键鼠操作方式，叠加 resource_tw 繁中兼容覆盖包",
+            "controller": [
+                "桌面端"
+            ],
+            "path": [
+                "./resource/base",
+                "./resource/resource_win32",
+                "./resource/resource_tw"
+            ]
+        },
+        {
+            "name": "纯键盘操作（繁中）",
+            "description": "繁中客户端专用：键盘操作方式，叠加 resource_tw 繁中兼容覆盖包",
+            "controller": [
+                "桌面端"
+            ],
+            "path": [
+                "./resource/base",
+                "./resource/resource_win32",
+                "./resource/resource_win32_jp",
+                "./resource/resource_tw"
+            ]
+        },
+        {
+            "name": "官服",
+            "controller": [
+                "安卓端"
+            ],
+            "path": [
+                "./resource/base"
+            ]
+        },
+        {
+            "name": "B服",
+            "controller": [
+                "安卓端"
+            ],
+            "path": [
+                "./resource/base",
+                "./resource/resource_bilibili"
+            ]
+        },
+        {
+            "name": "OPPO渠道服",
+            "controller": [
+                "安卓端"
+            ],
+            "path": [
+                "./resource/base",
+                "./resource/resource_OPPE"
+            ]
+        },
+        {
+            "name": "华为渠道服",
+            "controller": [
+                "安卓端"
+            ],
+            "path": [
+                "./resource/base",
+                "./resource/resource_huawei"
+            ]
+        },
+        {
+            "name": "应用宝渠道服",
+            "controller": [
+                "安卓端"
+            ],
+            "path": [
+                "./resource/base",
+                "./resource/resource_yyb"
+            ]
+        },
+        {
+            "name": "VIVO服",
+            "controller": [
+                "安卓端"
+            ],
+            "path": [
+                "./resource/base",
+                "./resource/resource_vivo"
+            ]
+        },
+        {
+            "name": "九游服",
+            "controller": [
+                "安卓端"
+            ],
+            "path": [
+                "./resource/base",
+                "./resource/resource_jiuyou"
+            ]
+        },
+        {
+            "name": "小米服",
+            "controller": [
+                "安卓端"
+            ],
+            "path": [
+                "./resource/base",
+                "./resource/resource_xiaomi"
+            ]
+        }
+    ],
+    "group": [
+        {
+            "name": "日常",
+            "default_expand": true
+        },
+        {
+            "name": "周常",
+            "default_expand": true
+        },
+        {
+            "name": "周期性",
+            "default_expand": true
+        },
+        {
+            "name": "商店",
+            "default_expand": true
+        },
+        {
+            "name": "活动",
+            "default_expand": true
+        },
+        {
+            "name": "单独运行工具",
+            "default_expand": false
+        }
+    ],
+    "import": [
+        "tasks/游戏启动.json",
+        //单独运行工具
+        "tasks/工具/测试.json",
+        "tasks/工具/攻略.json",
+        "tasks/工具/过剧情.json",
+        "tasks/工具/克莱茵打灰.json",
+        "tasks/工具/圣痕洗词缀.json",
+        "tasks/工具/自动战斗.json",
+        "tasks/工具/自动战斗pro.json",
+        //活动
+        // "tasks/活动/进行中/繁星旅航.json",
+        // "tasks/活动/进行中/论文危机.json",
+        // "tasks/活动/进行中/天命特别教室.json",
+        //日常
+        "tasks/日常/材料远征.json",
+        //日常-家园
+        "tasks/日常/家园/打工.json",
+        "tasks/日常/家园/远征派遣.json",
+        "tasks/日常/家园/资源领取.json",
+        //日常-舰团
+        "tasks/日常/舰团/保税仓库.json",
+        "tasks/日常/舰团/每日委托.json",
+        "tasks/日常/舰团/模拟作战室.json",
+        "tasks/日常/舰团/周活跃领取.json",
+        //日常-奖励领取
+        "tasks/日常/奖励领取/日常活跃.json",
+        "tasks/日常/奖励领取/日常活跃专领.json",
+        "tasks/日常/奖励领取/活动奖励专领.json",
+        "tasks/日常/奖励领取/通行证.json",
+        "tasks/日常/奖励领取/邮箱.json",
+        //日常-商店
+        "tasks/日常/商店/40晶体核心.json",
+        "tasks/日常/商店/后勤终端.json",
+        "tasks/日常/商店/乐土商店.json",
+        "tasks/日常/商店/虚境商店每周特惠.json",
+        "tasks/日常/商店/卖材料换星石.json",
+        //周常
+        "tasks/周常/答题.json",
+        "tasks/周常/分享.json",
+        "tasks/周常/吼姆秘宝.json",
+        "tasks/周常/拓境战幕.json",
+        "tasks/周常/记忆战场.json",
+        "tasks/周常/万象虚境.json",
+        "tasks/周常/往世乐土.json",
+        //周期性
+        "tasks/周期性/超弦空间.json",
+        "tasks/周期性/冒险委托.json"
+    ],
+    "task": [],
+    "option": {},
+    "preset": [
+        {
+            "name": "日常-简化版",
+            "label": "日常(每天都能做的任务)",
+            "task": [
+                {
+                    "name": "崩坏三 启动！",
+                    "enabled": true
+                },
+                {
+                    "name": "日常奖励领取-第一次",
+                    "enabled": true
+                },
+                {
+                    "name": "材料远征",
+                    "enabled": true
+                },
+                {
+                    "name": "家园远征派遣",
+                    "enabled": true
+                },
+                {
+                    "name": "家园资源领取",
+                    "enabled": true
+                },
+                {
+                    "name": "家园打工",
+                    "enabled": true
+                },
+                {
+                    "name": "舰团每日委托",
+                    "enabled": true
+                },
+                {
+                    "name": "舰团保税仓库委托申请",
+                    "enabled": false
+                },
+                {
+                    "name": "舰团每周活跃奖励",
+                    "enabled": true
+                },
+                {
+                    "name": "模拟作战室-减负",
+                    "enabled": true
+                },
+                {
+                    "name": "后勤终端物品购买",
+                    "enabled": true
+                },
+                {
+                    "name": "每日40晶体核心",
+                    "enabled": false
+                },
+                {
+                    "name": "日常奖励领取-第二次",
+                    "enabled": true
+                },
+                {
+                    "name": "日常活跃专领",
+                    "enabled": true
+                },
+                {
+                    "name": "凭证奖励尝试领取",
+                    "enabled": true
+                },
+                {
+                    "name": "领取邮箱奖励",
+                    "enabled": true
+                },
+                {
+                    "name": "退出/关闭游戏",
+                    "enabled": false
+                }
+            ]
+        },
+        {
+            "name": "日常-完整版",
+            "label": "日常(包含周期性任务)",
+            "task": [
+                {
+                    "name": "崩坏三 启动！",
+                    "enabled": true
+                },
+                {
+                    "name": "日常奖励领取-第一次",
+                    "enabled": true
+                },
+                {
+                    "name": "材料远征",
+                    "enabled": true
+                },
+                {
+                    "name": "家园远征派遣",
+                    "enabled": true
+                },
+                {
+                    "name": "家园资源领取",
+                    "enabled": true
+                },
+                {
+                    "name": "家园打工",
+                    "enabled": true
+                },
+                {
+                    "name": "舰团每日委托",
+                    "enabled": true
+                },
+                {
+                    "name": "舰团保税仓库委托申请",
+                    "enabled": false
+                },
+                {
+                    "name": "舰团每周活跃奖励",
+                    "enabled": true
+                },
+                {
+                    "name": "模拟作战室-减负",
+                    "enabled": true
+                },
+                {
+                    "name": "后勤终端物品购买",
+                    "enabled": true
+                },
+                {
+                    "name": "每日40晶体核心",
+                    "enabled": false
+                },
+                {
+                    "name": "冒险委托-减负",
+                    "enabled": true
+                },
+                {
+                    "name": "万象虚境",
+                    "enabled": true
+                },
+                {
+                    "name": "拓境战幕-减负",
+                    "enabled": true
+                },
+                {
+                    "name": "每周分享",
+                    "enabled": true
+                },
+                {
+                    "name": "超弦空间(深渊)",
+                    "enabled": false
+                },
+                {
+                    "name": "乐土每周商店购买",
+                    "enabled": false
+                },
+                {
+                    "name": "每周吼姆秘宝",
+                    "enabled": true
+                },
+                {
+                    "name": "每周答题-减负",
+                    "enabled": true
+                },
+                {
+                    "name": "每周虚境商店1星石的90张虚境挑战卷",
+                    "enabled": true
+                },
+                {
+                    "name": "记忆战场",
+                    "enabled": true
+                },
+                {
+                    "name": "往世乐土",
+                    "enabled": false
+                },
+                {
+                    "name": "日常奖励领取-第二次",
+                    "enabled": true
+                },
+                {
+                    "name": "日常活跃专领",
+                    "enabled": true
+                },
+                {
+                    "name": "凭证奖励尝试领取",
+                    "enabled": true
+                },
+                {
+                    "name": "领取邮箱奖励",
+                    "enabled": true
+                },
+                {
+                    "name": "退出/关闭游戏",
+                    "enabled": false
+                }
+            ]
+        },
+        {
+            "name": "建议单独运行",
+            "label": "单独运行",
+            "task": [
+                {
+                    "name": "克莱茵在线乐土打灰",
+                    "enabled": true
+                },
+                {
+                    "name": "往世乐土",
+                    "enabled": true
+                },
+                {
+                    "name": "洗词缀",
+                    "enabled": false
+                },
+                {
+                    "name": "自动战斗",
+                    "enabled": false
+                },
+                {
+                    "name": "自动战斗pro",
+                    "enabled": false
+                },
+                {
+                    "name": "自动点击剧情跳过",
+                    "enabled": false
+                },
+                {
+                    "name": "只是测试",
+                    "enabled": false
+                }
+            ]
+        }
     ]
-  },
-  "name": "MAA_bbb",
-  "title": "识宝小助手 Oᴗoಣ | 自动战斗框架超级更新,用不了请上传日志,自动乐土激情开发中",
-  "version": "",
-  "github": "https://github.com/miaojiuqing/MAA_bbb",
-  "contact": "<a href=\"https://qm.qq.com/q/XrFQKgGvaI\"><font color=\"#12B7F5\"><b>💬 加入群聊</b></font></a><br/><a href=\"https://www.bilibili.com/video/BV1Ld42z1ERu/?spm_id_from=333.1387.homepage.video_card.click\"><font color=\"#FB7299\"><b>🎥 B站视频链接</b></font></a>",
-  "description": "PC端使用一定要分辨率16:9！",
-  "icon": ".\\resource\\base\\image\\logo.ico",
-  "mirrorchyan_rid": "Maa_bbb",
-  "mirrorchyan_multiplatform": true,
-  "welcome": "欢迎舰长使用识宝小助手Oᴗoಣ",
-  "controller": [
-    {
-      "name": "桌面端",
-      "type": "Win32",
-      "description": "截图方式优先PrintWindow,截图参数请自行在PrintWindow、FramePool和GDI中选择,用的不行就设置里打开高级设置好后自己改一下",
-      "permission_required": true,
-      "win32": {
-        "class_regex": "UnityWndClass",
-        "window_regex": "崩坏3|崩坏3 Steam版|Honkai Impact 3|崩壊3rd",
-        "screencap": "PrintWindow",
-        "mouse": "PostMessageWithCursorPos",
-        "keyboard": "Seize"
-      }
-    },
-    {
-      "name": "安卓端",
-      "type": "Adb"
-    }
-  ],
-  "resource": [
-    {
-      "name": "键鼠操作",
-      "description": "当设置-操作-电脑端操作方式为\"键鼠操作方式\"时选择此项",
-      "controller": [
-        "桌面端"
-      ],
-      "path": [
-        "./resource/base",
-        "./resource/resource_win32"
-      ]
-    },
-    {
-      "name": "纯键盘操作",
-      "description": "当设置-操作-电脑端操作方式为\"键盘操作方式\"时选择此项",
-      "controller": [
-        "桌面端"
-      ],
-      "path": [
-        "./resource/base",
-        "./resource/resource_win32",
-        "./resource/resource_win32_jp"
-      ]
-    },
-    {
-      "name": "官服",
-      "controller": [
-        "安卓端"
-      ],
-      "path": [
-        "./resource/base"
-      ]
-    },
-    {
-      "name": "B服",
-      "controller": [
-        "安卓端"
-      ],
-      "path": [
-        "./resource/base",
-        "./resource/resource_bilibili"
-      ]
-    },
-    {
-      "name": "OPPO渠道服",
-      "controller": [
-        "安卓端"
-      ],
-      "path": [
-        "./resource/base",
-        "./resource/resource_OPPE"
-      ]
-    },
-    {
-      "name": "华为渠道服",
-      "controller": [
-        "安卓端"
-      ],
-      "path": [
-        "./resource/base",
-        "./resource/resource_huawei"
-      ]
-    },
-    {
-      "name": "应用宝渠道服",
-      "controller": [
-        "安卓端"
-      ],
-      "path": [
-        "./resource/base",
-        "./resource/resource_yyb"
-      ]
-    },
-    {
-      "name": "VIVO服",
-      "controller": [
-        "安卓端"
-      ],
-      "path": [
-        "./resource/base",
-        "./resource/resource_vivo"
-      ]
-    },
-    {
-      "name": "九游服",
-      "controller": [
-        "安卓端"
-      ],
-      "path": [
-        "./resource/base",
-        "./resource/resource_jiuyou"
-      ]
-    },
-    {
-      "name": "小米服",
-      "controller": [
-        "安卓端"
-      ],
-      "path": [
-        "./resource/base",
-        "./resource/resource_xiaomi"
-      ]
-    },
-    {
-      "name": "键鼠操作（繁中）",
-      "description": "同上，但额外加载 resource_tw：OCR 同时认简体与繁体。繁中（繁體）客户端选这个。切换这里即可，无需改文件。",
-      "controller": [
-        "桌面端"
-      ],
-      "path": [
-        "./resource/base",
-        "./resource/resource_win32",
-        "./resource/resource_tw"
-      ],
-      "hash": "2ac073ed187878b5"
-    },
-    {
-      "name": "纯键盘操作（繁中）",
-      "description": "同上，但额外加载 resource_tw：OCR 同时认简体与繁体。繁中（繁體）客户端选这个。",
-      "controller": [
-        "桌面端"
-      ],
-      "path": [
-        "./resource/base",
-        "./resource/resource_win32",
-        "./resource/resource_win32_jp",
-        "./resource/resource_tw"
-      ],
-      "hash": "cdce3235b2735be3"
-    }
-  ],
-  "group": [
-    {
-      "name": "日常",
-      "default_expand": true
-    },
-    {
-      "name": "周常",
-      "default_expand": true
-    },
-    {
-      "name": "周期性",
-      "default_expand": true
-    },
-    {
-      "name": "商店",
-      "default_expand": true
-    },
-    {
-      "name": "活动",
-      "default_expand": true
-    },
-    {
-      "name": "单独运行工具",
-      "default_expand": false
-    }
-  ],
-  "import": [
-    "tasks/工具/繁中助手.json",
-    "tasks/游戏启动.json",
-    "tasks/工具/测试.json",
-    "tasks/工具/攻略.json",
-    "tasks/工具/过剧情.json",
-    "tasks/工具/克莱茵打灰.json",
-    "tasks/工具/圣痕洗词缀.json",
-    "tasks/工具/自动战斗.json",
-    "tasks/工具/自动战斗pro.json",
-    "tasks/日常/材料远征.json",
-    "tasks/日常/家园/打工.json",
-    "tasks/日常/家园/远征派遣.json",
-    "tasks/日常/家园/资源领取.json",
-    "tasks/日常/舰团/保税仓库.json",
-    "tasks/日常/舰团/每日委托.json",
-    "tasks/日常/舰团/模拟作战室.json",
-    "tasks/日常/舰团/周活跃领取.json",
-    "tasks/日常/奖励领取/日常活跃.json",
-    "tasks/日常/奖励领取/日常活跃专领.json",
-    "tasks/日常/奖励领取/通行证.json",
-    "tasks/日常/奖励领取/邮箱.json",
-    "tasks/日常/商店/40晶体核心.json",
-    "tasks/日常/商店/后勤终端.json",
-    "tasks/日常/商店/乐土商店.json",
-    "tasks/日常/商店/虚境商店每周特惠.json",
-    "tasks/日常/商店/卖材料换星石.json",
-    "tasks/周常/答题.json",
-    "tasks/周常/分享.json",
-    "tasks/周常/吼姆秘宝.json",
-    "tasks/周常/拓境战幕.json",
-    "tasks/周常/记忆战场.json",
-    "tasks/周常/万象虚境.json",
-    "tasks/周常/往世乐土.json",
-    "tasks/周期性/超弦空间.json",
-    "tasks/周期性/冒险委托.json"
-  ],
-  "task": [],
-  "option": {},
-  "preset": [
-    {
-      "name": "日常-简化版",
-      "label": "日常(每天都能做的任务)",
-      "task": [
-        {
-          "name": "崩坏三 启动！",
-          "enabled": true
-        },
-        {
-          "name": "日常奖励领取-第一次",
-          "enabled": true
-        },
-        {
-          "name": "材料远征",
-          "enabled": true
-        },
-        {
-          "name": "家园远征派遣",
-          "enabled": true
-        },
-        {
-          "name": "家园资源领取",
-          "enabled": true
-        },
-        {
-          "name": "家园打工",
-          "enabled": true
-        },
-        {
-          "name": "舰团每日委托",
-          "enabled": true
-        },
-        {
-          "name": "舰团保税仓库委托申请",
-          "enabled": false
-        },
-        {
-          "name": "舰团每周活跃奖励",
-          "enabled": true
-        },
-        {
-          "name": "模拟作战室-减负",
-          "enabled": true
-        },
-        {
-          "name": "后勤终端物品购买",
-          "enabled": true
-        },
-        {
-          "name": "每日40晶体核心",
-          "enabled": false
-        },
-        {
-          "name": "日常奖励领取-第二次",
-          "enabled": true
-        },
-        {
-          "name": "日常活跃专领",
-          "enabled": true
-        },
-        {
-          "name": "凭证奖励尝试领取",
-          "enabled": true
-        },
-        {
-          "name": "领取邮箱奖励",
-          "enabled": true
-        },
-        {
-          "name": "退出/关闭游戏",
-          "enabled": false
-        }
-      ]
-    },
-    {
-      "name": "日常-完整版",
-      "label": "日常(包含周期性任务)",
-      "task": [
-        {
-          "name": "崩坏三 启动！",
-          "enabled": true
-        },
-        {
-          "name": "日常奖励领取-第一次",
-          "enabled": true
-        },
-        {
-          "name": "材料远征",
-          "enabled": true
-        },
-        {
-          "name": "家园远征派遣",
-          "enabled": true
-        },
-        {
-          "name": "家园资源领取",
-          "enabled": true
-        },
-        {
-          "name": "家园打工",
-          "enabled": true
-        },
-        {
-          "name": "舰团每日委托",
-          "enabled": true
-        },
-        {
-          "name": "舰团保税仓库委托申请",
-          "enabled": false
-        },
-        {
-          "name": "舰团每周活跃奖励",
-          "enabled": true
-        },
-        {
-          "name": "模拟作战室-减负",
-          "enabled": true
-        },
-        {
-          "name": "后勤终端物品购买",
-          "enabled": true
-        },
-        {
-          "name": "每日40晶体核心",
-          "enabled": false
-        },
-        {
-          "name": "冒险委托-减负",
-          "enabled": true
-        },
-        {
-          "name": "万象虚境",
-          "enabled": true
-        },
-        {
-          "name": "拓境战幕-减负",
-          "enabled": true
-        },
-        {
-          "name": "每周分享",
-          "enabled": true
-        },
-        {
-          "name": "超弦空间(深渊)",
-          "enabled": false
-        },
-        {
-          "name": "乐土每周商店购买",
-          "enabled": false
-        },
-        {
-          "name": "每周吼姆秘宝",
-          "enabled": true
-        },
-        {
-          "name": "每周答题-减负",
-          "enabled": true
-        },
-        {
-          "name": "每周虚境商店1星石的90张虚境挑战卷",
-          "enabled": true
-        },
-        {
-          "name": "记忆战场",
-          "enabled": true
-        },
-        {
-          "name": "往世乐土",
-          "enabled": false
-        },
-        {
-          "name": "日常奖励领取-第二次",
-          "enabled": true
-        },
-        {
-          "name": "日常活跃专领",
-          "enabled": true
-        },
-        {
-          "name": "凭证奖励尝试领取",
-          "enabled": true
-        },
-        {
-          "name": "领取邮箱奖励",
-          "enabled": true
-        },
-        {
-          "name": "退出/关闭游戏",
-          "enabled": false
-        }
-      ]
-    },
-    {
-      "name": "建议单独运行",
-      "label": "单独运行",
-      "task": [
-        {
-          "name": "克莱茵在线乐土打灰",
-          "enabled": true
-        },
-        {
-          "name": "往世乐土",
-          "enabled": true
-        },
-        {
-          "name": "洗词缀",
-          "enabled": false
-        },
-        {
-          "name": "自动战斗",
-          "enabled": false
-        },
-        {
-          "name": "自动战斗pro",
-          "enabled": false
-        },
-        {
-          "name": "自动点击剧情跳过",
-          "enabled": false
-        },
-        {
-          "name": "只是测试",
-          "enabled": false
-        }
-      ]
-    }
-  ]
 }

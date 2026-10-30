@@ -42,6 +42,7 @@
             "[JumpBack]所有资源已下载完毕",
             "[JumpBack]着色器编译中",
             "[JumpBack]点击左上角返回",
+            "[JumpBack]点击左上角返回_文字",
             // "[JumpBack]拓境战幕-返回",
             "[JumpBack]资源下载",
             "[JumpBack]今日不再跳过剧情确认",
@@ -90,6 +91,28 @@
                 ],
                 "template": [
                     "通用/左上角返回.png"
+                ]
+            }
+        },
+        "action": {
+            "type": "Click"
+        },
+        "post_delay": 500
+    },
+    "点击左上角返回_文字": { //计划直接把活动的那些返回箭头也丢进去
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "threshold": 0.85,
+                "roi": [
+                    0,
+                    0,
+                    158,
+                    102
+                ],
+                "expected": [
+                    "返",
+                    "回"
                 ]
             }
         },

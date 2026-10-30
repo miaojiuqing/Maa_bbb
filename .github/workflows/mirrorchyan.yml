@@ -19,6 +19,25 @@ jobs:
         os: [win, macos, linux]
         arch: [aarch64, x86_64]
     steps:
+      # 与 install.yml 同一道版本线护栏：即使绕过 tag 构建、直接在 GitHub UI 手动创建 Release，
+      # 也不会把 v1 以外的版本推到 MirrorChyan。以后放开时同步改 ALLOWED_MAJOR 或删掉这一步。
+      - name: Enforce allowed release major
+        if: ${{ github.event_name == 'release' }}
+        shell: bash
+        env:
+          ALLOWED_MAJOR: "1"
+        run: |
+          set -euo pipefail
+          ref="${{ github.event.release.tag_name }}"
+          major="${ref#v}"
+          major="${major%%.*}"
+          echo "release tag=$ref  major=v$major  allowed=v$ALLOWED_MAJOR"
+          if [[ "$major" != "$ALLOWED_MAJOR" ]]; then
+            echo "❌ 当前只允许发布 v$ALLOWED_MAJOR.* 版本，这个 Release 的 tag 是 $ref" >&2
+            exit 1
+          fi
+          echo "✅ 版本线校验通过：$ref"
+
       - uses: MirrorChyan/uploading-action@v1
         with:
           filetype: latest-release

@@ -4,7 +4,7 @@ import time
 from types import SimpleNamespace
 from maa.custom_action import CustomAction
 from .Role.CharacterCombat import CharacterCombat
-from ..utils import DesktopInput
+from ..utils import DesktopInput, MoveInput
 from ..utils.CharacterProfiles import CHARACTER_PROFILES
 
 GATES = {"黄金": 19, "无限": 17, "浮生": 22}
@@ -47,6 +47,8 @@ class ElysianPanelAction(CustomAction):
     def walk(self, context, dx=0, duration=.6, dy=-76):
         controller = context.tasker.controller
         if self.stopped(context):
+            return
+        if MoveInput.walk(context, dx, duration, dy, self.stop_event):  # 桌面端没有摇杆，改用 WASD
             return
         held = DesktopInput.hold(context)  # 桌面端要先按住 Alt 才能拖视角，安卓端恒为 False
         try:
