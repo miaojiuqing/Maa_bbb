@@ -61,6 +61,31 @@
             ]
         },
         {
+            "name": "键鼠操作（繁中）",
+            "description": "繁中客户端专用：键鼠操作方式，叠加 resource_tw 繁中兼容覆盖包",
+            "controller": [
+                "桌面端"
+            ],
+            "path": [
+                "./resource/base",
+                "./resource/resource_win32",
+                "./resource/resource_tw"
+            ]
+        },
+        {
+            "name": "纯键盘操作（繁中）",
+            "description": "繁中客户端专用：键盘操作方式，叠加 resource_tw 繁中兼容覆盖包",
+            "controller": [
+                "桌面端"
+            ],
+            "path": [
+                "./resource/base",
+                "./resource/resource_win32",
+                "./resource/resource_win32_jp",
+                "./resource/resource_tw"
+            ]
+        },
+        {
             "name": "官服",
             "controller": [
                 "安卓端"

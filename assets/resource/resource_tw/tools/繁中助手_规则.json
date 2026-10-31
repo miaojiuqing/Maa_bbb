@@ -1,0 +1,1373 @@
+{
+  "用词": [
+    [
+      "刷新倒计时",
+      "重置倒數計時"
+    ],
+    [
+      "刷新倒数",
+      "重置倒數"
+    ],
+    [
+      "放弃并结算",
+      "直接結算"
+    ],
+    [
+      "直接结算",
+      "直接結算"
+    ]
+  ],
+  "节点补丁": {
+    "后勤终端-已进入后勤终端": {
+      "expected": [
+        "重置倒數計時",
+        "倒數計時"
+      ]
+    },
+    "模拟作战室-减负确认": {
+      "expected": [
+        "確定",
+        "确定"
+      ],
+      "post_delay": 600,
+      "max_hit": 3
+    },
+    "模拟作战室-点击减负": {
+      "max_hit": 2
+    },
+    "模拟作战室-关闭获取小提示": {
+      "recognition": "OCR",
+      "roi": [
+        500,
+        80,
+        500,
+        60
+      ],
+      "expected": [
+        "[获獲][取取]小提示"
+      ],
+      "action": "Click",
+      "target": [
+        1036,
+        100,
+        40,
+        36
+      ],
+      "post_delay": 500
+    },
+    "冒险委托通用-点击选择所需地图": {
+      "max_hit": 3
+    },
+    "材料远征-点击减负": {
+      "expected": [
+        "精簡"
+      ],
+      "max_hit": 3
+    },
+    "材料远征-未检测到减负异常提示": {
+      "expected": [
+        "精簡",
+        "快速精簡"
+      ]
+    },
+    "材料远征-点击一键减负": {
+      "max_hit": 2
+    },
+    "万象虚境-点击减负": {
+      "expected": [
+        "精簡"
+      ]
+    },
+    "冒险委托通用-点击减负": {
+      "expected": [
+        "精簡"
+      ]
+    },
+    "每周吼姆秘宝-已进入商店": {
+      "expected_replace": [
+        "[周週]期",
+        "普通",
+        "[礼禮]包"
+      ]
+    },
+    "家园远征-体力不足提示": {
+      "expected_replace": [
+        "体力补充"
+      ]
+    },
+    "答题-滑动寻找答题界面": {
+      "max_hit": 3
+    },
+    "点击金币商店": {
+      "max_hit": 2
+    },
+    "拓境战幕-点击减负": {
+      "max_hit": 3
+    },
+    "拓境战幕-烧卷领奖": {
+      "max_hit": 3
+    },
+    "每日晶体核心-收工返回": {
+      "recognition": "DirectHit",
+      "next": [
+        "[JumpBack]点击返回主菜单",
+        "[JumpBack]点击左上角返回",
+        "每日晶体核心-静默结束"
+      ]
+    },
+    "每日晶体核心-静默结束": {
+      "recognition": "DirectHit"
+    },
+    "每日晶体核心-滚回顶部": {
+      "recognition": "DirectHit",
+      "action": "Swipe",
+      "begin": [
+        855,
+        260,
+        0,
+        0
+      ],
+      "end": [
+        855,
+        660,
+        0,
+        0
+      ],
+      "duration": 600,
+      "max_hit": 6
+    },
+    "舰团每日委托-奖励选取层-检查是否有家园卷": {
+      "focus": {
+        "Node.Recognition.Succeeded": "检测到【家园补给卡】（抽卡池票），保留它、取消其他勾选"
+      }
+    },
+    "舰团每日委托-奖励选取层-检查是否有家园卷-没卷": {
+      "focus": {
+        "Node.Recognition.Succeeded": "奖励池里没有家园票，改为保存当前勾选"
+      }
+    },
+    "舰团每日委托-奖励选取层-按名字找家园票": {
+      "recognition": "OCR",
+      "roi": [
+        0,
+        100,
+        1120,
+        620
+      ],
+      "expected": [
+        "家[园園][补補]给卡",
+        "家[园園][补補]給卡",
+        "[家家][园園]票"
+      ],
+      "focus": {
+        "Node.Recognition.Succeeded": "按名字找到了【家园补给卡】"
+      },
+      "next": [
+        "舰团每日委托-奖励选取层-取消选择票卷之外的所有勾勾-第一行",
+        "[JumpBack]舰团每日委托-奖励选取层-取消选中第一层",
+        "舰团每日委托-奖励选取层-点击保存选择"
+      ]
+    },
+    "空任务-限次": {
+      "recognition": "DirectHit",
+      "max_hit": 5
+    },
+    "点击返回主菜单": {
+      "max_hit": 8
+    },
+    "万象虚境-检查虚境挑战书是否为0": {
+      "focus": {
+        "Node.Recognition.Succeeded": "虚境挑战书为 0（今天打不了），正常收工"
+      }
+    },
+    "万象虚境-虚境挑战书不足": {
+      "focus": {
+        "Node.Recognition.Succeeded": "虚境挑战书不足，正常收工"
+      }
+    },
+    "强制回主页": {
+      "recognition": "DirectHit",
+      "max_hit": 8,
+      "next": [
+        "[JumpBack]关闭一切弹窗-通用",
+        "[JumpBack]点击叉叉",
+        "[JumpBack]点击红叉叉",
+        "[JumpBack]点击空白位置关闭",
+        "[JumpBack]点击左上角返回",
+        "[JumpBack]点击返回主菜单",
+        "空任务-限次"
+      ]
+    },
+    "关闭一切弹窗-通用": {
+      "recognition": "OCR",
+      "expected": [
+        "[取取]消",
+        "[关關][闭閉]",
+        "[返返]回",
+        "跳[过過]"
+      ],
+      "action": "Click"
+    },
+    "模拟作战室-休假券不足": {
+      "recognition": "OCR",
+      "roi": [
+        560,
+        440,
+        210,
+        60
+      ],
+      "expected": [
+        "^\\s*[0Oo]\\s*/\\s*\\d+",
+        "^0/"
+      ],
+      "focus": {
+        "Node.Recognition.Succeeded": "休假券为 0，无法减负，正常收工（不是出错）"
+      },
+      "next": [
+        "返回主页后强制结束任务",
+        "[JumpBack]点击返回主菜单",
+        "[JumpBack]点击左上角返回",
+        "[JumpBack]点击叉叉"
+      ]
+    },
+    "每日晶体核心-今日已买过": {
+      "recognition": "OCR",
+      "roi": [
+        240,
+        78,
+        1016,
+        641
+      ],
+      "expected": [
+        "每日限[购購].*[1-9]\\d*/30"
+      ],
+      "next": [
+        "[JumpBack]点击返回主菜单",
+        "[JumpBack]点击左上角返回",
+        "每日晶体核心-静默结束"
+      ]
+    },
+    "乐土刷级-首层复刷-点击进入战斗": {
+      "expected": [
+        "开始战斗",
+        "[开開]始[战戰][斗鬥]"
+      ],
+      "post_delay": 200,
+      "max_hit": 3,
+      "focus": {
+        "Node.Recognition.Succeeded": "点「開始戰鬥」。若连续 3 次没反应，通常是乐土队伍还没配（出战位/支援位为空）"
+      }
+    },
+    "乐土刷级-首层复刷-点击放弃并结算": {
+      "expected": [
+        "直接結算",
+        "直接结算",
+        "[直直]接[结結]算"
+      ],
+      "post_delay": 1000,
+      "max_hit": 2,
+      "focus": {
+        "Node.Recognition.Succeeded": "点「直接結算」"
+      }
+    },
+    "乐土刷级-减负模式-点击放弃并结算": {
+      "expected": [
+        "直接結算",
+        "直接结算",
+        "[直直]接[结結]算"
+      ],
+      "post_delay": 1000,
+      "max_hit": 2,
+      "focus": {
+        "Node.Recognition.Succeeded": "点「直接結算」"
+      }
+    },
+    "乐土刷级-首层复刷-放弃并结算确认": {
+      "expected": [
+        "放弃并结算",
+        "直接結算",
+        "直接结算"
+      ]
+    },
+    "乐土刷级-减负模式-放弃并结算确认": {
+      "expected": [
+        "放弃并结算",
+        "直接結算",
+        "直接结算"
+      ]
+    },
+    "乐土-提前结算确认": {
+      "recognition": "OCR",
+      "roi": [
+        150,
+        265,
+        1010,
+        70
+      ],
+      "expected": [
+        "提前結算",
+        "提前结算",
+        "[提提]前[结結]算"
+      ],
+      "action": "Click",
+      "target": [
+        660,
+        388,
+        232,
+        62
+      ],
+      "post_delay": 1000,
+      "max_hit": 2,
+      "next": [
+        "乐土-挑战结束-关闭"
+      ],
+      "focus": {
+        "Node.Recognition.Succeeded": "点「確定」确认提前结算"
+      }
+    },
+    "乐土-挑战结束-关闭": {
+      "recognition": "OCR",
+      "roi": [
+        380,
+        630,
+        540,
+        70
+      ],
+      "expected": [
+        "點擊空白處關閉",
+        "点击空白处关闭",
+        "[点點][击擊]空白[处處][關关][閉闭]"
+      ],
+      "action": "Click",
+      "target": [
+        1160,
+        640,
+        100,
+        60
+      ],
+      "post_delay": 1200,
+      "max_hit": 2,
+      "focus": {
+        "Node.Recognition.Succeeded": "点空白处关闭结算界面"
+      }
+    },
+    "乐土-暂停菜单-放弃战斗": {
+      "recognition": "OCR",
+      "roi": [
+        370,
+        410,
+        260,
+        65
+      ],
+      "expected": [
+        "放棄戰鬥",
+        "放弃战斗",
+        "[放放][棄弃][战戰][鬥斗]"
+      ],
+      "action": "Click",
+      "post_delay": 1800,
+      "max_hit": 3,
+      "focus": {
+        "Node.Recognition.Succeeded": "战斗暂停菜单：点「放棄戰鬥」退出"
+      }
+    },
+    "克莱茵打灰-通用-乐土币刷满了": {
+      "expected_replace": [
+        "锈蚀之徽掉落已达上限",
+        "[锈鏽][蚀蝕]之[徽徵]掉落[已已][达達]上限"
+      ]
+    },
+    "乐土刷级-通用-当前女武神记忆碎片掉落已达上限": {
+      "expected_replace": [
+        "记忆碎片.*掉落已达上限",
+        "[记記][忆憶]碎片.*掉落[已已][达達]上限"
+      ]
+    },
+    "往世乐土-未完成进度检测": {
+      "recognition": "OCR",
+      "roi": [
+        660,
+        130,
+        400,
+        110
+      ],
+      "expected": [
+        "当前挑战进度",
+        "[当當]前挑[战戰][进進]度"
+      ],
+      "action": "Click",
+      "target": [
+        595,
+        512,
+        225,
+        62
+      ],
+      "post_delay": 4000,
+      "max_hit": 200,
+      "next": [
+        "往世乐土-清理-点确定",
+        "往世乐土-清理-点确定-兜底"
+      ],
+      "focus": {
+        "Node.Recognition.Succeeded": "看到「當前挑戰進度」弹窗",
+        "Node.Action.Succeeded": "點「直接結算」"
+      },
+      "pre_delay": 1500
+    },
+    "往世乐土-清理-点确定": {
+      "recognition": "OCR",
+      "roi": [
+        580,
+        360,
+        420,
+        210
+      ],
+      "expected": [
+        "確定",
+        "确定",
+        "[確确]定",
+        ".*確定.*",
+        ".*确定.*"
+      ],
+      "action": "Click",
+      "post_delay": 2500,
+      "max_hit": 50,
+      "next": [
+        "往世乐土-清理-点空白",
+        "往世乐土-未完成进度检测",
+        "往世乐土-已进入往世乐土"
+      ],
+      "focus": {
+        "Node.Recognition.Succeeded": "看到「確定」按钮",
+        "Node.Action.Succeeded": "点「確定」确认提前结算"
+      },
+      "pre_delay": 1000
+    },
+    "往世乐土-清理-点空白": {
+      "recognition": "OCR",
+      "roi": [
+        650,
+        368,
+        420,
+        62
+      ],
+      "expected": [
+        "暫無獲取的戰利品",
+        "暂无获取的战利品",
+        "暫無獲取的戰利[品品]",
+        "[暂暫]無?[获獲]取[的的]戰?[利利][品品]"
+      ],
+      "action": "Click",
+      "target": [
+        520,
+        625,
+        260,
+        70
+      ],
+      "pre_delay": 2000,
+      "post_delay": 3000,
+      "max_hit": 50,
+      "next": [
+        "往世乐土-已进入往世乐土",
+        "往世乐土-未完成进度检测"
+      ],
+      "focus": {
+        "Node.Recognition.Succeeded": "看到结算页的「暫無獲取的戰利品」",
+        "Node.Action.Succeeded": "点下方提示行关闭结算页"
+      }
+    },
+    "往世乐土-开始任务层": {
+      "focus": {
+        "Node.Recognition.Succeeded": "开始往世乐土周常"
+      }
+    },
+    "乐土-积分倍率-打开下拉": {
+      "recognition": "OCR",
+      "roi": [
+        610,
+        548,
+        240,
+        55
+      ],
+      "expected": [
+        "空無",
+        "空无",
+        "[空空][無无]"
+      ],
+      "action": "Click",
+      "post_delay": 1500,
+      "next": [
+        "乐土-积分倍率-选档位",
+        "乐土-积分倍率-下滑"
+      ],
+      "focus": {
+        "Node.Recognition.Succeeded": "打开积分倍率下拉（当前 x1）"
+      },
+      "pre_delay": 800
+    },
+    "乐土-积分倍率-选档位": {
+      "recognition": "OCR",
+      "roi": [
+        590,
+        235,
+        270,
+        300
+      ],
+      "expected": [
+        "劫燒",
+        "劫烧",
+        "[劫劫][燒烧]"
+      ],
+      "action": "Click",
+      "post_delay": 1500,
+      "max_hit": 2,
+      "focus": {
+        "Node.Recognition.Succeeded": "尝试2次仍未推进就会放弃，避免无限点击"
+      },
+      "pre_delay": 800
+    },
+    "乐土-积分倍率-下滑": {
+      "recognition": "DirectHit",
+      "action": "Swipe",
+      "begin": [
+        720,
+        480
+      ],
+      "end": [
+        720,
+        270
+      ],
+      "duration": 400,
+      "post_delay": 1200,
+      "max_hit": 3,
+      "next": [
+        "乐土-积分倍率-选档位"
+      ],
+      "pre_delay": 600
+    },
+    "乐土-对话-跳过": {
+      "recognition": "OCR",
+      "roi": [
+        1135,
+        5,
+        145,
+        65
+      ],
+      "expected": [
+        "跳過",
+        "跳过",
+        "[跳跳][過过]"
+      ],
+      "action": "Click",
+      "target": [
+        1155,
+        20,
+        110,
+        40
+      ],
+      "post_delay": 3000,
+      "max_hit": 200,
+      "next": [
+        "乐土-跳过剧情-确认",
+        "乐土-跳过剧情-确认-兜底",
+        "乐土-跳过剧情-勾不再显示",
+        "往世乐土-已进入三位导航界面",
+        "往世乐土-已进入往世乐土"
+      ],
+      "focus": {
+        "Node.Action.Succeeded": "剧情对话：点「跳過」"
+      },
+      "pre_delay": 1500
+    },
+    "往世乐土-已进入三位导航界面": {
+      "focus": {
+        "Node.Recognition.Succeeded": "已进入三卡界面（英傑試煉 / 深层序列）"
+      },
+      "expected": [
+        "英傑試煉",
+        "英杰试炼",
+        "[英英][傑杰][試试][煉炼]"
+      ],
+      "post_delay": 800,
+      "next": [
+        "往世乐土-未完成进度检测",
+        "乐土-对话-跳过",
+        "往世乐土-点击选择深层序列",
+        "往事乐土-乐土开始了",
+        "往世乐土-已进入三位导航界面",
+        "[JumpBack]往世乐土-战斗-对话ing",
+        "[JumpBack]通用-加载中",
+        "[JumpBack]往世乐土-等爱莉说话",
+        "乐土关内-接管"
+      ]
+    },
+    "往世乐土-点击选择深层序列": {
+      "expected": [
+        "深层序列",
+        "深[层層]序列",
+        "[深][层層]序列"
+      ],
+      "max_hit": 300,
+      "focus": {
+        "Node.Recognition.Succeeded": "在快速出击面板里看到「深层序列」",
+        "Node.Action.Succeeded": "点面板里的「深层序列」"
+      },
+      "post_delay": 4000,
+      "roi": [
+        797,
+        48,
+        220,
+        205
+      ],
+      "pre_delay": 1500
+    },
+    "乐土-跳过剧情-勾不再显示": {
+      "recognition": "OCR",
+      "roi": [
+        500,
+        600,
+        320,
+        55
+      ],
+      "expected": [
+        "不再顯示",
+        "不再显示",
+        "不[再再]顯[示示]"
+      ],
+      "action": "Click",
+      "target": [
+        518,
+        605,
+        52,
+        48
+      ],
+      "post_delay": 1500,
+      "max_hit": 3,
+      "next": [
+        "乐土-跳过剧情-确认",
+        "乐土-跳过剧情-确认-兜底",
+        "往世乐土-已进入三位导航界面",
+        "往世乐土-已进入往世乐土"
+      ],
+      "focus": {
+        "Node.Action.Succeeded": "勾选「今日不再顯示此視窗」"
+      },
+      "pre_delay": 800
+    },
+    "乐土-跳过剧情-确认": {
+      "recognition": "OCR",
+      "roi": [
+        420,
+        440,
+        560,
+        130
+      ],
+      "expected": [
+        "確認",
+        "确认",
+        "[確确][認认]"
+      ],
+      "action": "Click",
+      "target": [
+        655,
+        476,
+        315,
+        68
+      ],
+      "post_delay": 1200,
+      "max_hit": 60,
+      "next": [
+        "乐土-跳过剧情-确认",
+        "乐土-跳过剧情-勾不再显示",
+        "乐土-跳过剧情-确认-兜底",
+        "往世乐土-已进入三位导航界面",
+        "往世乐土-已进入往世乐土"
+      ],
+      "focus": {
+        "Node.Recognition.Succeeded": "看到「確認」按钮",
+        "Node.Action.Succeeded": "点「確認」跳过剧情"
+      },
+      "pre_delay": 1200
+    },
+    "往世乐土-增益选择-上半-第二条-实际选择-已选中": {
+      "recognition": "DirectHit",
+      "focus": {
+        "Node.Recognition.Succeeded": "不选：500生命收益低，优先给增伤"
+      }
+    },
+    "往世乐土-增益选择-下半-第四条-实际选择-已选中": {
+      "recognition": "DirectHit",
+      "focus": {
+        "Node.Recognition.Succeeded": "不选：需要极限闪避，自动化不会闪避"
+      }
+    },
+    "往世乐土-增益选择-下半-第七条-实际选择-已选中": {
+      "recognition": "DirectHit",
+      "focus": {
+        "Node.Recognition.Succeeded": "不选：限定拳套/镰刀/重炮/太刀，时序之律者用驱动核心"
+      }
+    },
+    "乐土战前-同步增益": {
+      "expected": [
+        "本期剩余时间",
+        "本期剩餘時間",
+        "本期剩[余餘]時間",
+        "[本本]期剩[余餘]時?间"
+      ]
+    },
+    "往世乐土-增益选择-尝试滑动至最上方": {
+      "expected": [
+        "本期剩余时间",
+        "本期剩餘時間",
+        "本期剩[余餘]時間",
+        "[本本]期剩[余餘]時?间"
+      ]
+    },
+    "往世乐土-打开快速出击": {
+      "max_hit": 5,
+      "focus": {
+        "Node.Recognition.Succeeded": "尝试5次仍未推进就会放弃，避免无限点击"
+      },
+      "post_delay": 3000,
+      "pre_delay": 1200
+    },
+    "往世乐土-点击进入往世乐土": {
+      "max_hit": 200,
+      "focus": {
+        "Node.Recognition.Succeeded": "尝试5次仍未推进就会放弃，避免无限点击"
+      },
+      "post_delay": 4000,
+      "pre_delay": 1500
+    },
+    "虚境商店-时序通行证-确认购买": {
+      "recognition": "OCR",
+      "roi": [
+        700,
+        515,
+        380,
+        90
+      ],
+      "expected": [
+        "购买",
+        "購買",
+        "[购購][买買]"
+      ],
+      "action": "Click",
+      "target": [
+        715,
+        530,
+        355,
+        60
+      ],
+      "post_delay": 2200,
+      "max_hit": 4,
+      "next": [
+        "虚境商店-时序通行证-还能买",
+        "虚境商店-时序通行证-已买满",
+        "虚境商店-购票流程结束"
+      ],
+      "focus": {
+        "Node.Action.Succeeded": "点「購買」完成一次购买"
+      }
+    },
+    "虚境商店-时序通行证-买满了": {
+      "recognition": "OCR",
+      "roi": [
+        200,
+        520,
+        200,
+        100
+      ],
+      "expected": [
+        "2/2",
+        "2 / 2",
+        "1/1"
+      ],
+      "action": "DoNothing"
+    },
+    "虚境商店-购票入口": {
+      "recognition": "DirectHit",
+      "action": "DoNothing",
+      "next": [
+        "虚境商店-找一元90张",
+        "虚境商店-找每周80",
+        "虚境商店-列表下滑",
+        "虚境商店-已购确认",
+        "虚境商店-购票流程结束"
+      ],
+      "focus": {
+        "Node.Recognition.Succeeded": "开始处理虚境商店购票"
+      }
+    },
+    "虚境商店-时序通行证-还能买": {
+      "recognition": "OCR",
+      "roi": [
+        200,
+        528,
+        140,
+        80
+      ],
+      "expected": [
+        "[01]\\s*[/／]\\s*2",
+        ".[01]\\s*[/／]\\s*2"
+      ],
+      "action": "DoNothing",
+      "next": [
+        "虚境商店-时序通行证-确认购买"
+      ],
+      "focus": {
+        "Node.Recognition.Succeeded": "读到每週限購 0/2 或 1/2，还可以买"
+      }
+    },
+    "虚境商店-时序通行证-已买满": {
+      "recognition": "OCR",
+      "roi": [
+        200,
+        528,
+        140,
+        80
+      ],
+      "expected": [
+        "2\\s*[/／]\\s*2",
+        ".2\\s*[/／]\\s*2"
+      ],
+      "action": "DoNothing",
+      "next": [
+        "虚境商店-购票流程结束"
+      ],
+      "focus": {
+        "Node.Recognition.Succeeded": "读到每週限購 2/2，本周已买满"
+      }
+    },
+    "虚境商店-往下找一元": {
+      "recognition": "DirectHit",
+      "action": "Swipe",
+      "begin": [
+        640,
+        690,
+        0,
+        0
+      ],
+      "end": [
+        640,
+        360,
+        0,
+        0
+      ],
+      "duration": 350,
+      "post_delay": 500,
+      "max_hit": 6,
+      "next": [
+        "虚境商店-点一元90张",
+        "虚境商店-往下找一元"
+      ],
+      "focus": {
+        "Node.Action.Succeeded": "向下滚动商店列表，寻找「時序通行證 x90」（一元那个，位于底部）"
+      }
+    },
+    "虚境商店-点一元90张": {
+      "recognition": "OCR",
+      "roi": [
+        150,
+        120,
+        720,
+        600
+      ],
+      "expected": [
+        "[x×]\\s*90",
+        "[x×]\\s*9\\s*0"
+      ],
+      "action": "Click",
+      "target": [
+        285,
+        650,
+        125,
+        55
+      ],
+      "post_delay": 1800,
+      "max_hit": 1,
+      "next": [
+        "虚境商店-时序通行证-确认购买",
+        "虚境商店-滚回顶部"
+      ],
+      "focus": {
+        "Node.Recognition.Succeeded": "在列表中看到 x90 的一元票",
+        "Node.Action.Succeeded": "点开一元票的购买弹窗"
+      }
+    },
+    "虚境商店-滚回顶部": {
+      "recognition": "DirectHit",
+      "action": "Swipe",
+      "begin": [
+        640,
+        300,
+        0,
+        0
+      ],
+      "end": [
+        640,
+        690,
+        0,
+        0
+      ],
+      "duration": 350,
+      "post_delay": 500,
+      "max_hit": 6,
+      "next": [
+        "虚境商店-滚回顶部",
+        "虚境商店-点每周80"
+      ],
+      "focus": {
+        "Node.Action.Succeeded": "向上滚动商店列表，回到顶部（每周80的票在第一张）"
+      }
+    },
+    "虚境商店-点每周80": {
+      "recognition": "DirectHit",
+      "action": "Click",
+      "target": [
+        285,
+        420,
+        125,
+        42
+      ],
+      "post_delay": 1800,
+      "max_hit": 2,
+      "next": [
+        "虚境商店-时序通行证-还能买",
+        "虚境商店-时序通行证-已买满",
+        "虚境商店-购票流程结束"
+      ],
+      "focus": {
+        "Node.Action.Succeeded": "点顶部第一张「時序通行證」的价格按钮，打开每周80的购买弹窗"
+      }
+    },
+    "虚境商店-购票流程结束": {
+      "recognition": "DirectHit",
+      "action": "StopTask",
+      "focus": {
+        "Node.Action.Succeeded": "虚境商店购票流程结束（正常完成）"
+      }
+    },
+    "虚境商店-找一元90张": {
+      "recognition": "OCR",
+      "roi": [
+        120,
+        110,
+        800,
+        640
+      ],
+      "expected": [
+        "^\\s*[x\\u00d7]\\s*90\\s*$",
+        "^\\s*[x\\u00d7]\\s*9\\s*0\\s*$"
+      ],
+      "action": "Click",
+      "post_delay": 1800,
+      "max_hit": 1,
+      "next": [
+        "虚境商店-时序通行证-确认购买",
+        "虚境商店-找每周80",
+        "虚境商店-列表下滑"
+      ],
+      "focus": {
+        "Node.Recognition.Succeeded": "找到一元票（x90）",
+        "Node.Action.Succeeded": "点开一元票"
+      }
+    },
+    "虚境商店-找每周80": {
+      "recognition": "OCR",
+      "roi": [
+        120,
+        110,
+        800,
+        640
+      ],
+      "expected": [
+        "^\\s*80\\s*$",
+        "^\\s*8\\s*0\\s*$"
+      ],
+      "action": "Click",
+      "post_delay": 1800,
+      "max_hit": 2,
+      "next": [
+        "虚境商店-时序通行证-还能买",
+        "虚境商店-时序通行证-已买满",
+        "虚境商店-购票流程结束"
+      ],
+      "focus": {
+        "Node.Recognition.Succeeded": "找到价格 80 的时序通行证",
+        "Node.Action.Succeeded": "点开每周80的购买弹窗"
+      }
+    },
+    "虚境商店-列表下滑": {
+      "recognition": "DirectHit",
+      "action": "Swipe",
+      "begin": [
+        640,
+        690,
+        0,
+        0
+      ],
+      "end": [
+        640,
+        360,
+        0,
+        0
+      ],
+      "duration": 350,
+      "post_delay": 500,
+      "max_hit": 6,
+      "next": [
+        "虚境商店-找一元90张",
+        "虚境商店-找每周80",
+        "虚境商店-列表下滑",
+        "虚境商店-已购确认",
+        "虚境商店-购票流程结束"
+      ],
+      "focus": {
+        "Node.Action.Succeeded": "翻一页继续找，直到翻遍商店列表"
+      }
+    },
+    "虚境商店-列表上滑": {
+      "recognition": "DirectHit",
+      "action": "Swipe",
+      "begin": [
+        640,
+        300,
+        0,
+        0
+      ],
+      "end": [
+        640,
+        690,
+        0,
+        0
+      ],
+      "duration": 350,
+      "post_delay": 500,
+      "max_hit": 6,
+      "next": [
+        "虚境商店-列表上滑",
+        "虚境商店-找一元90张",
+        "虚境商店-找每周80"
+      ],
+      "focus": {
+        "Node.Action.Succeeded": "列表向上翻一页继续找"
+      }
+    },
+    "虚境商店-确认子条件-时序通行证": {
+      "recognition": "OCR",
+      "roi": [
+        120,
+        110,
+        800,
+        640
+      ],
+      "expected": [
+        "时序通行证",
+        "時序通行證",
+        "[时時]序通行[证證]"
+      ],
+      "action": "DoNothing"
+    },
+    "虚境商店-确认子条件-已售罄": {
+      "recognition": "OCR",
+      "roi": [
+        120,
+        110,
+        800,
+        640
+      ],
+      "expected": [
+        "已售罄",
+        "已售完",
+        "已[售售][罄罊]"
+      ],
+      "action": "DoNothing"
+    },
+    "虚境商店-已购确认": {
+      "recognition": "And",
+      "all_of": [
+        "虚境商店-确认子条件-时序通行证",
+        "虚境商店-确认子条件-已售罄"
+      ],
+      "action": "DoNothing",
+      "max_hit": 1,
+      "next": [
+        "虚境商店-购票流程结束"
+      ],
+      "focus": {
+        "Node.Recognition.Succeeded": "确认：画面上「時序通行證」显示「已售罄」，即本周该商品确实已买到"
+      }
+    },
+    "往世乐土-已进入深层序列": {
+      "expected": [
+        "本期剩余时间",
+        "本期剩餘時間",
+        "本期剩[余餘]時?[间間]"
+      ],
+      "post_delay": 800,
+      "recognition": "OCR",
+      "roi": [
+        300,
+        60,
+        700,
+        70
+      ],
+      "next": [
+        "往世乐土-未选择任何增益",
+        "往世乐土-已进入三位导航界面",
+        "[JumpBack]往世乐土-点击普通战斗"
+      ]
+    },
+    "往世乐土-繁中入口": {
+      "recognition": "DirectHit",
+      "action": "DoNothing",
+      "next": [
+        "往世乐土-未完成进度检测",
+        "乐土-对话-跳过",
+        "繁中-刻印选择-已进入界面",
+        "繁中-刻印选择-界面-模板",
+        "往世乐土-总任务层",
+        "往世乐土-已进入往世乐土",
+        "往世乐土-已进入三位导航界面",
+        "往世乐土-点击选择深层序列",
+        "往世乐土-打开快速出击",
+        "乐土关内-接管",
+        "启动并进入游戏"
+      ],
+      "on_error": [
+        "强制回主页",
+        "成功进入游戏主菜单"
+      ],
+      "focus": {
+        "Node.Recognition.Succeeded": "繁中版往世乐土入口：先清遗留进度、再跳过剧情"
+      },
+      "post_delay": 2000
+    },
+    "往世乐土-战斗-已进入战斗": {
+      "recognition": "OCR",
+      "roi": [
+        60,
+        8,
+        220,
+        55
+      ],
+      "expected": [
+        "抵达层数",
+        "抵達層數",
+        "[抵抵][达達][层層][数數]"
+      ],
+      "post_delay": 500
+    },
+    "往世乐土-已进入往世乐土": {
+      "next": [
+        "往世乐土-未完成进度检测",
+        "乐土-对话-跳过",
+        "繁中-刻印选择-已进入界面",
+        "繁中-刻印选择-界面-模板",
+        "往世乐土-清理-点空白",
+        "繁中-结算页-模板",
+        "往世乐土-已进入深层序列",
+        "[JumpBack]往世乐土-点击选择深层序列",
+        "[JumpBack]乐土刷级-通用-关卡效果变化",
+        "[JumpBack]往世乐土-打开快速出击"
+      ]
+    },
+    "往世乐土-清理-点确定-兜底": {
+      "recognition": "DirectHit",
+      "action": "Click",
+      "target": [
+        665,
+        395,
+        220,
+        48
+      ],
+      "post_delay": 4000,
+      "max_hit": 6,
+      "next": [
+        "往世乐土-清理-点空白",
+        "往世乐土-未完成进度检测",
+        "往世乐土-已进入往世乐土"
+      ],
+      "focus": {
+        "Node.Action.Succeeded": "兜底：直接点「確定」按钮位置"
+      },
+      "pre_delay": 1500
+    },
+    "往世乐土-点击普通战斗": {
+      "pre_delay": 1500,
+      "post_delay": 4000
+    },
+    "往世乐土-点击减负战斗": {
+      "pre_delay": 1000,
+      "post_delay": 3000
+    },
+    "乐土-跳过剧情-确认-兜底": {
+      "recognition": "DirectHit",
+      "action": "Click",
+      "target": [
+        700,
+        483,
+        225,
+        55
+      ],
+      "pre_delay": 800,
+      "post_delay": 1500,
+      "max_hit": 6,
+      "next": [
+        "乐土-跳过剧情-确认",
+        "往世乐土-已进入三位导航界面",
+        "往世乐土-已进入往世乐土"
+      ],
+      "focus": {
+        "Node.Action.Succeeded": "兜底：直接点「確認」按钮中心"
+      }
+    },
+    "繁中-刻印选择-已进入界面": {
+      "recognition": "OCR",
+      "roi": [
+        520,
+        125,
+        380,
+        55
+      ],
+      "expected": [
+        "请选择英桀的刻印",
+        "請選擇英桀的刻印",
+        "[请請][选選][择擇]英[桀傑]的[刻刻]印"
+      ],
+      "action": "DoNothing",
+      "post_delay": 800,
+      "next": [
+        "繁中-刻印选择-选第一个刻印",
+        "繁中-刻印选择-点选择刻印"
+      ],
+      "focus": {
+        "Node.Recognition.Succeeded": "进入刻印选择界面"
+      }
+    },
+    "繁中-刻印选择-选第一个刻印": {
+      "recognition": "DirectHit",
+      "action": "Click",
+      "target": [
+        600,
+        210,
+        480,
+        200
+      ],
+      "post_delay": 1500,
+      "max_hit": 3,
+      "next": [
+        "繁中-刻印选择-点选择刻印"
+      ],
+      "focus": {
+        "Node.Action.Succeeded": "选中第一张刻印"
+      }
+    },
+    "繁中-刻印选择-点选择刻印": {
+      "recognition": "OCR",
+      "roi": [
+        1000,
+        645,
+        260,
+        70
+      ],
+      "expected": [
+        "選擇刻印",
+        "选择刻印",
+        "[选選][择擇][刻刻]印"
+      ],
+      "action": "Click",
+      "post_delay": 2000,
+      "max_hit": 8,
+      "next": [
+        "繁中-刻印选择-已进入界面",
+        "往世乐土-繁中入口"
+      ],
+      "focus": {
+        "Node.Recognition.Succeeded": "看到「選擇刻印」按钮",
+        "Node.Action.Succeeded": "点「選擇刻印」确认"
+      }
+    },
+    "繁中-结算页-模板": {
+      "recognition": "TemplateMatch",
+      "template": "繁中/结算页.png",
+      "roi": [
+        660,
+        110,
+        300,
+        100
+      ],
+      "threshold": 0.75,
+      "action": "Click",
+      "target": [
+        520,
+        625,
+        260,
+        70
+      ],
+      "pre_delay": 1500,
+      "post_delay": 3000,
+      "max_hit": 50,
+      "next": [
+        "往世乐土-已进入往世乐土",
+        "往世乐土-未完成进度检测"
+      ],
+      "focus": {
+        "Node.Recognition.Succeeded": "模板认出结算页",
+        "Node.Action.Succeeded": "点提示行关闭结算页"
+      }
+    },
+    "繁中-刻印选择-界面-模板": {
+      "recognition": "TemplateMatch",
+      "template": "繁中/刻印选择.png",
+      "roi": [
+        510,
+        115,
+        330,
+        70
+      ],
+      "threshold": 0.75,
+      "action": "DoNothing",
+      "post_delay": 800,
+      "next": [
+        "繁中-刻印选择-选第一个刻印",
+        "繁中-刻印选择-点选择刻印"
+      ],
+      "focus": {
+        "Node.Recognition.Succeeded": "模板认出土印选择界面"
+      }
+    }
+  },
+  "选项": {
+    "转按住时长": true,
+    "保持直接点击": [
+      "模拟作战室-减负确认",
+      "模拟作战室-点击减负",
+      "家园打工-领奖励-有可领取奖励",
+      "家园打工-打工确认",
+      "家园打工-点击一键打工",
+      "材料远征-点击减负",
+      "材料远征-点击一键减负",
+      "每周分享-点击分享画面",
+      "每周分享-点击分享",
+      "每周分享-点击进入选画分享界面",
+      "点击叉叉",
+      "点击叉叉-延迟一秒版",
+      "点击红叉叉",
+      "叉叉",
+      "点击左上角返回",
+      "点击左上角返回-延迟两秒",
+      "点击返回主菜单",
+      "点击空白位置关闭",
+      "关掉",
+      "点击左上角返回X",
+      "拓境战幕-点击叉叉",
+      "乐土每周商店-误触-购买弹窗关闭",
+      "冒险委托通用-后崩1的叉叉",
+      "预告网页处理-点击关闭"
+    ],
+    "点击后停顿": 200
+  },
+  "乐土积分倍率": "劫燒"
+}

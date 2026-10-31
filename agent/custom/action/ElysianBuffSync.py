@@ -202,7 +202,7 @@ class ElysianBuffSync(CustomAction):
         for attempt in range(3):
             selected, point = self.row_state(index)
             if selected == desired:
-                return
+                return True
             if attempt == 2:
                 raise RuntimeError(f"战前增益第 {index + 1} 条无法" + ("选中，可能负荷不足" if desired else "取消"))
             self.logger.info(f"战前增益第 {index + 1} 条：" + ("补选" if desired else "取消旧选择"))
@@ -212,15 +212,29 @@ class ElysianBuffSync(CustomAction):
                 raise RuntimeError("战前增益点击失败")
             self.wait(.5)
             if self.hit("往世乐土-增益选择-增益负荷", self.capture()):
+                if desired:
+                    # 负荷超上限：撤销这次选择并跳过该条，而不是让整个任务失败
+                    self.logger.info(f"战前增益第 {index + 1} 条超出负荷上限，取消并跳过")
+                    self.context.tasker.controller.post_click(*point).wait()
+                    self.wait(.5)
+                    return False
                 raise RuntimeError(f"战前增益第 {index + 1} 条触发负荷上限，无法满足当前配置")
 
     def sync(self, targets):
+        skipped = []
         for desired in (False, True):
             for upper, indexes in ((True, range(3)), (False, range(3, 7))):
                 self.edge(upper)
                 for index in indexes:
                     if targets[index] == desired:
-                        self.set_row(index, desired)
+                        ok = self.set_row(index, desired)
+                        if desired and ok is False:
+                            targets[index] = False
+                            skipped.append(index + 1)
+        if skipped:
+            self.logger.ui(
+                "增益负荷达到上限，已跳过第 " + "、".join(str(i) for i in skipped) + " 条，继续战斗",
+                "yellow")
         # 全部选择完成后再复核，防止游戏因互斥或刷新取消先前勾选。
         for upper, indexes in ((True, range(3)), (False, range(3, 7))):
             self.edge(upper)
