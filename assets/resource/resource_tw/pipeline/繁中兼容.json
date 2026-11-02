@@ -1,7 +1,7 @@
 {
     // 本文件由「繁中助手」自动生成，请勿手改（改 繁中助手_规则.json 后重新「重建覆盖包」）
-    // 生成时间: 2026-10-31 01:41:37
-    // 节点数: 670
+    // 生成时间: 2026-11-03 07:27:31
+    // 节点数: 698
     // 1) OCR 的 expected 追加繁体候选（追加而非替换，简体环境不受影响）
     // 2) UI 的 Click 改成 LongPress + duration（Click 没有 duration 字段，框架写死按住 50ms）
     // 回滚：删除本目录，并在「繁中助手」里点「停用繁中兼容」
@@ -851,24 +851,61 @@
         },
         "每周吼姆秘宝-点击礼包": {
             "expected": [
-                "礼包",
-                "[礼禮]包"
+                "^\\s*[礼禮]包\\s*$"
             ],
-            "post_delay": 200
+            "post_delay": 1500,
+            "max_hit": 8,
+            "pre_delay": 600,
+            "next": [
+                "繁中-吼姆秘宝-页面有吼姆秘宝",
+                "繁中-吼姆秘宝-网格内有售罄",
+                "每周吼姆秘宝-点击周期",
+                "繁中-吼姆秘宝-往下拖"
+            ],
+            "focus": {
+                "Node.Recognition.Succeeded": "看到左侧「禮包」页签",
+                "Node.Action.Succeeded": "点「禮包」页签"
+            }
         },
         "每周吼姆秘宝-已进入商店": {
             "expected": [
-                "[周週]期",
-                "普通",
-                "[礼禮]包"
-            ]
+                "^\\s*[周週]期\\s*$"
+            ],
+            "next": [
+                "繁中-吼姆秘宝-页面有吼姆秘宝",
+                "繁中-吼姆秘宝-网格内有售罄",
+                "每周吼姆秘宝-有秘宝可领取",
+                "每周吼姆秘宝-点击周期",
+                "繁中-吼姆秘宝-往下拖"
+            ],
+            "post_delay": 800,
+            "focus": {
+                "Node.Recognition.Succeeded": "已进入商店的「禮包」分类页",
+                "Node.Action.Succeeded": "进入礼包分类页"
+            }
         },
         "每周吼姆秘宝-点击周期": {
             "expected": [
-                "周期",
-                "[周週]期"
+                "^\\s*[周週]期\\s*$"
             ],
-            "post_delay": 200
+            "post_delay": 1500,
+            "pre_delay": 600,
+            "roi": [
+                0,
+                430,
+                260,
+                250
+            ],
+            "max_hit": 3,
+            "next": [
+                "繁中-吼姆秘宝-页面有吼姆秘宝",
+                "繁中-吼姆秘宝-网格内有售罄",
+                "繁中-吼姆秘宝-往下拖"
+            ],
+            "focus": {
+                "Node.Recognition.Succeeded": "看到「周期」子页签",
+                "Node.Action.Succeeded": "点「周期」子页签"
+            }
         },
         "每周吼姆秘宝-点击免费": {
             "expected": [
@@ -952,7 +989,7 @@
             "post_delay": 200,
             "max_hit": 2
         },
-        "每日40晶体核心-点击购买": {
+        "每日晶体核心-点击购买": {
             "expected": [
                 "购买",
                 "[购購][买買]"
@@ -2729,7 +2766,7 @@
                 "一键减负",
                 "一[键鍵][减減][负負]"
             ],
-            "max_hit": 2
+            "max_hit": 3
         },
         "模拟作战室-已进入模拟作战室": {
             "expected": [
@@ -2737,6 +2774,14 @@
                 ".*斗至今还历历在目",
                 "模[拟擬]作[战戰]室",
                 ".*[斗鬥]至今[还還][历歷][历歷]在目"
+            ],
+            "next": [
+                "模拟作战室-无可减负条件",
+                "[JumpBack]模拟作战室-确认减负奖励",
+                "[JumpBack]模拟作战室-减负确认",
+                "[JumpBack]模拟作战室-点击减负",
+                "模拟作战室-点击进入模拟作战室",
+                "繁中-模拟作战室-今日无需再减负"
             ]
         },
         "模拟作战室-减负确认": {
@@ -3766,15 +3811,11 @@
             "action": "Swipe",
             "begin": [
                 855,
-                260,
-                0,
-                0
+                260
             ],
             "end": [
                 855,
-                660,
-                0,
-                0
+                660
             ],
             "duration": 600,
             "max_hit": 6
@@ -4363,15 +4404,11 @@
             "action": "Swipe",
             "begin": [
                 640,
-                690,
-                0,
-                0
+                690
             ],
             "end": [
                 640,
-                360,
-                0,
-                0
+                360
             ],
             "duration": 350,
             "post_delay": 500,
@@ -4419,15 +4456,11 @@
             "action": "Swipe",
             "begin": [
                 640,
-                300,
-                0,
-                0
+                300
             ],
             "end": [
                 640,
-                690,
-                0,
-                0
+                690
             ],
             "duration": 350,
             "post_delay": 500,
@@ -4522,15 +4555,11 @@
             "action": "Swipe",
             "begin": [
                 640,
-                690,
-                0,
-                0
+                690
             ],
             "end": [
                 640,
-                360,
-                0,
-                0
+                360
             ],
             "duration": 350,
             "post_delay": 500,
@@ -4551,15 +4580,11 @@
             "action": "Swipe",
             "begin": [
                 640,
-                300,
-                0,
-                0
+                300
             ],
             "end": [
                 640,
-                690,
-                0,
-                0
+                690
             ],
             "duration": 350,
             "post_delay": 500,
@@ -4841,6 +4866,554 @@
             ],
             "focus": {
                 "Node.Recognition.Succeeded": "模板认出土印选择界面"
+            }
+        },
+        "繁中-打工-确认弹窗": {
+            "recognition": "OCR",
+            "roi": [
+                560,
+                55,
+                150,
+                45
+            ],
+            "expected": [
+                "打工確認",
+                "打工确认",
+                "打工[確确][認认]",
+                ".*打工[確确][認认].*"
+            ],
+            "action": "DoNothing",
+            "post_delay": 800,
+            "next": [
+                "繁中-打工-确认弹窗-点一键打工"
+            ],
+            "focus": {
+                "Node.Recognition.Succeeded": "看到「打工確認」弹窗"
+            }
+        },
+        "繁中-打工-确认弹窗-点一键打工": {
+            "recognition": "DirectHit",
+            "action": "Click",
+            "target": [
+                670,
+                600,
+                300,
+                50
+            ],
+            "post_delay": 1500,
+            "max_hit": 4,
+            "next": [],
+            "focus": {
+                "Node.Action.Succeeded": "点弹窗里的「一鍵打工」"
+            }
+        },
+        "家园打工-已进入打工": {
+            "next": [
+                "繁中-打工-确认弹窗",
+                "家园打工-领奖励-有可领取奖励",
+                "家园打工-领奖励-无可领取奖励",
+                "[JumpBack]家园等级提升",
+                "[JumpBack]家园打工-点击进入打工界面",
+                "[JumpBack]家园打工-确认奖励",
+                "[JumpBack]家园打工-检查是否有奖励点太快误触了"
+            ]
+        },
+        "繁中-吼姆秘宝-关闭误开弹窗": {
+            "recognition": "OCR",
+            "roi": [
+                660,
+                180,
+                260,
+                60
+            ],
+            "expected": [
+                "即刻獲得",
+                "即刻获得",
+                "即刻[獲获]得"
+            ],
+            "action": "Click",
+            "target": [
+                1010,
+                80,
+                70,
+                50
+            ],
+            "post_delay": 1200,
+            "max_hit": 10,
+            "next": [],
+            "focus": {
+                "Node.Recognition.Succeeded": "误开了商品购买弹窗",
+                "Node.Action.Succeeded": "关闭误开的弹窗"
+            }
+        },
+        "每周吼姆秘宝-总任务层": {
+            "next": [
+                "每周吼姆秘宝-已进入商店",
+                "[JumpBack]每周吼姆秘宝-点击进入商店",
+                "[JumpBack]每周吼姆秘宝-从集市进入商店",
+                "繁中-吼姆-点礼包页签"
+            ]
+        },
+        "繁中-吼姆秘宝-卡片已售罄": {
+            "recognition": "OCR",
+            "roi": [
+                1055,
+                360,
+                210,
+                330
+            ],
+            "expected": [
+                "已售罄",
+                "已售完",
+                "售罄",
+                "[已已]售[罄罄]"
+            ],
+            "action": "DoNothing",
+            "post_delay": 500,
+            "next": [
+                "每周吼姆秘宝-无秘宝可领取"
+            ],
+            "focus": {
+                "Node.Recognition.Succeeded": "吼姆秘宝卡片显示已售罄"
+            }
+        },
+        "繁中-吼姆秘宝-卡片可领取": {
+            "recognition": "OCR",
+            "roi": [
+                1055,
+                360,
+                210,
+                330
+            ],
+            "expected": [
+                "吼姆秘寶",
+                "吼姆秘宝",
+                "免費",
+                "免费",
+                "領取",
+                "领取"
+            ],
+            "action": "DoNothing",
+            "post_delay": 500,
+            "next": [
+                "每周吼姆秘宝-有秘宝可领取"
+            ],
+            "focus": {
+                "Node.Recognition.Succeeded": "吼姆秘宝卡片可领取"
+            }
+        },
+        "舰团每日委托-防材料不足小节点": {
+            "max_hit": 2
+        },
+        "繁中-模拟作战室-弹窗点确定": {
+            "recognition": "OCR",
+            "roi": [
+                560,
+                528,
+                270,
+                84
+            ],
+            "expected": [
+                "確定",
+                "确定",
+                "[確确]定"
+            ],
+            "action": "Click",
+            "pre_delay": 600,
+            "post_delay": 1500,
+            "max_hit": 6,
+            "next": [],
+            "focus": {
+                "Node.Recognition.Succeeded": "看到减负确认弹窗的「確定」按钮",
+                "Node.Action.Succeeded": "点「確定」确认减负"
+            }
+        },
+        "繁中-吼姆秘宝-往下拖": {
+            "recognition": "DirectHit",
+            "action": "Swipe",
+            "begin": [
+                760,
+                620
+            ],
+            "end": [
+                760,
+                420
+            ],
+            "duration": 700,
+            "post_delay": 1200,
+            "max_hit": 15,
+            "next": [
+                "繁中-吼姆-已购成功",
+                "繁中-吼姆秘宝-网格内有售罄",
+                "繁中-吼姆秘宝-页面有吼姆秘宝",
+                "繁中-吼姆秘宝-往下拖",
+                "繁中-吼姆-拖回顶部"
+            ],
+            "focus": {
+                "Node.Action.Succeeded": "商品列表往下拖，继续找吼姆秘宝"
+            }
+        },
+        "繁中-吼姆秘宝-页面有吼姆秘宝": {
+            "recognition": "OCR",
+            "roi": [
+                250,
+                55,
+                1030,
+                660
+            ],
+            "expected": [
+                "吼姆",
+                "秘寶",
+                "秘宝",
+                "吼姆秘寶",
+                "吼姆秘宝"
+            ],
+            "action": "DoNothing",
+            "post_delay": 400,
+            "next": [
+                "繁中-吼姆-已购成功",
+                "繁中-吼姆秘宝-网格内有售罄",
+                "繁中-吼姆-领取确认弹窗",
+                "繁中-吼姆-点免费领取",
+                "繁中-吼姆-关闭弹窗",
+                "繁中-吼姆秘宝-往下拖",
+                "繁中-吼姆-领取未确认"
+            ],
+            "focus": {
+                "Node.Recognition.Succeeded": "画面里看到「吼姆秘寶」卡片"
+            }
+        },
+        "繁中-吼姆秘宝-网格内有售罄": {
+            "recognition": "OCR",
+            "roi": [
+                250,
+                55,
+                1030,
+                660
+            ],
+            "expected": [
+                "售罄",
+                "售完",
+                "已售",
+                "[售售][罄罄]"
+            ],
+            "action": "DoNothing",
+            "post_delay": 400,
+            "next": [
+                "每周吼姆秘宝-无秘宝可领取"
+            ],
+            "focus": {
+                "Node.Recognition.Succeeded": "画面里看到「已售罄」→ 本周已买"
+            }
+        },
+        "每周吼姆秘宝-无秘宝可领取": {
+            "focus": {
+                "Node.Recognition.Succeeded": "本周吼姆秘宝已售罄，无需领取 → 结束任务"
+            }
+        },
+        "每周吼姆秘宝-有秘宝可领取": {
+            "focus": {
+                "Node.Recognition.Succeeded": "发现可领取的吼姆秘宝 → 去领取"
+            }
+        },
+        "繁中-吼姆-点礼包页签": {
+            "recognition": "DirectHit",
+            "action": "Click",
+            "target": [
+                140,
+                258,
+                110,
+                50
+            ],
+            "pre_delay": 500,
+            "post_delay": 1800,
+            "max_hit": 4,
+            "next": [
+                "繁中-吼姆-礼包页已打开",
+                "繁中-吼姆-点礼包页签"
+            ],
+            "focus": {
+                "Node.Action.Succeeded": "点左侧「禮包」页签"
+            }
+        },
+        "繁中-吼姆-点周期页签": {
+            "recognition": "DirectHit",
+            "action": "Click",
+            "target": [
+                140,
+                556,
+                110,
+                50
+            ],
+            "pre_delay": 500,
+            "post_delay": 1800,
+            "max_hit": 4,
+            "next": [
+                "繁中-吼姆-周期页已打开",
+                "繁中-吼姆-回到列表顶部",
+                "繁中-吼姆-点周期页签"
+            ],
+            "focus": {
+                "Node.Action.Succeeded": "点「周期」子页签"
+            }
+        },
+        "繁中-吼姆-礼包页已打开": {
+            "recognition": "OCR",
+            "roi": [
+                0,
+                400,
+                270,
+                290
+            ],
+            "expected": [
+                "推薦",
+                "推荐",
+                "常駐",
+                "常驻"
+            ],
+            "action": "DoNothing",
+            "post_delay": 500,
+            "next": [
+                "繁中-吼姆-点周期页签"
+            ],
+            "focus": {
+                "Node.Recognition.Succeeded": "礼包分类已打开（看到推薦/常駐子页签）"
+            }
+        },
+        "繁中-吼姆-周期页已打开": {
+            "recognition": "OCR",
+            "roi": [
+                255,
+                60,
+                1025,
+                640
+            ],
+            "expected": [
+                "每周特惠",
+                "每月遠古",
+                "每月远古",
+                "每周星石",
+                "本週限購",
+                "本月限購",
+                "每月裝備",
+                "每周體力",
+                "協同終端"
+            ],
+            "action": "DoNothing",
+            "post_delay": 500,
+            "next": [
+                "繁中-吼姆秘宝-页面有吼姆秘宝",
+                "繁中-吼姆秘宝-网格内有售罄",
+                "繁中-吼姆秘宝-往下拖"
+            ],
+            "focus": {
+                "Node.Recognition.Succeeded": "已进入「周期」页"
+            }
+        },
+        "繁中-吼姆-拖回顶部": {
+            "recognition": "DirectHit",
+            "action": "Swipe",
+            "begin": [
+                760,
+                200
+            ],
+            "end": [
+                760,
+                600
+            ],
+            "duration": 700,
+            "post_delay": 1200,
+            "max_hit": 10,
+            "next": [
+                "繁中-吼姆-已购成功",
+                "繁中-吼姆秘宝-网格内有售罄",
+                "繁中-吼姆秘宝-页面有吼姆秘宝",
+                "繁中-吼姆-拖回顶部",
+                "每周吼姆秘宝-无秘宝可领取"
+            ],
+            "focus": {
+                "Node.Action.Succeeded": "拖回列表顶部，再找一次吼姆秘宝"
+            }
+        },
+        "繁中-模拟作战室-今日无需再减负": {
+            "recognition": "DirectHit",
+            "action": "DoNothing",
+            "post_delay": 300,
+            "next": [
+                "成功进入游戏主菜单",
+                "[JumpBack]点击返回主菜单"
+            ],
+            "focus": {
+                "Node.Recognition.Succeeded": "模拟作战室今日已减负（点一键减负无弹窗）→ 返回主菜单"
+            }
+        },
+        "繁中-材料远征-数量已满": {
+            "recognition": "OCR",
+            "roi": [
+                900,
+                80,
+                400,
+                80
+            ],
+            "expected": [
+                "數量達到上限",
+                "数量达到上限",
+                "數量已達上限",
+                "数量已达上限"
+            ],
+            "action": "DoNothing",
+            "post_delay": 500,
+            "next": [
+                "成功进入游戏主菜单",
+                "[JumpBack]点击返回主菜单"
+            ],
+            "focus": {
+                "Node.Recognition.Succeeded": "远征数量已达上限（50/50）→ 无需派远征 → 返回主菜单"
+            }
+        },
+        "材料远征-未远征": {
+            "next": [
+                "繁中-材料远征-数量已满",
+                "材料远征-体力不足处理",
+                "材料远征-已远征",
+                "[JumpBack]相关资源下载-取消",
+                "[JumpBack]材料远征-减负后领取奖励",
+                "[JumpBack]材料远征-点击减负",
+                "[JumpBack]材料远征-点击一键减负"
+            ]
+        },
+        "繁中-吼姆-点免费领取": {
+            "recognition": "OCR",
+            "roi": [
+                255,
+                60,
+                1025,
+                640
+            ],
+            "expected": [
+                "^\\s*免費\\s*$",
+                "^\\s*免费\\s*$"
+            ],
+            "action": "Click",
+            "post_delay": 1800,
+            "max_hit": 4,
+            "next": [
+                "繁中-吼姆-已购成功",
+                "繁中-吼姆秘宝-网格内有售罄",
+                "繁中-吼姆-领取确认弹窗",
+                "繁中-吼姆-点免费领取",
+                "繁中-吼姆秘宝-往下拖",
+                "繁中-吼姆-领取未确认"
+            ],
+            "focus": {
+                "Node.Recognition.Succeeded": "看到「免費」按钮",
+                "Node.Action.Succeeded": "点「免費」领取吼姆秘宝"
+            }
+        },
+        "繁中-吼姆-领取确认弹窗": {
+            "recognition": "OCR",
+            "roi": [
+                400,
+                300,
+                480,
+                260
+            ],
+            "expected": [
+                "確定",
+                "确定",
+                "確認",
+                "确认"
+            ],
+            "action": "Click",
+            "post_delay": 1500,
+            "max_hit": 3,
+            "next": [
+                "繁中-吼姆-已购成功",
+                "繁中-吼姆秘宝-网格内有售罄",
+                "繁中-吼姆-点免费领取",
+                "繁中-吼姆秘宝-往下拖",
+                "繁中-吼姆-领取未确认"
+            ],
+            "focus": {
+                "Node.Recognition.Succeeded": "领取后出现确认弹窗",
+                "Node.Action.Succeeded": "点确认完成领取"
+            }
+        },
+        "繁中-吼姆-领取未确认": {
+            "recognition": "DirectHit",
+            "action": "DoNothing",
+            "post_delay": 300,
+            "next": [
+                "成功进入游戏主菜单",
+                "[JumpBack]点击返回主菜单"
+            ],
+            "focus": {
+                "Node.Recognition.Succeeded": "⚠ 未能确认吼姆秘宝购买成功（没变成已售罄）→ 返回主菜单"
+            }
+        },
+        "繁中-吼姆-已购成功": {
+            "recognition": "OCR",
+            "roi": [
+                180,
+                60,
+                1050,
+                640
+            ],
+            "expected": [
+                "1/1",
+                "1／1"
+            ],
+            "action": "DoNothing",
+            "post_delay": 400,
+            "next": [
+                "每周吼姆秘宝-无秘宝可领取"
+            ],
+            "focus": {
+                "Node.Recognition.Succeeded": "本週限購已变成 1/1 → 领取成功"
+            }
+        },
+        "繁中-吼姆-关闭弹窗": {
+            "recognition": "DirectHit",
+            "action": "Click",
+            "target": [
+                1020,
+                78,
+                60,
+                46
+            ],
+            "post_delay": 1500,
+            "max_hit": 3,
+            "next": [
+                "繁中-吼姆-已购成功",
+                "繁中-吼姆秘宝-网格内有售罄",
+                "繁中-吼姆-点免费领取",
+                "繁中-吼姆-领取未确认"
+            ],
+            "focus": {
+                "Node.Action.Succeeded": "关闭领取后的弹窗"
+            }
+        },
+        "繁中-吼姆-回到列表顶部": {
+            "recognition": "DirectHit",
+            "action": "Swipe",
+            "begin": [
+                760,
+                200
+            ],
+            "end": [
+                760,
+                620
+            ],
+            "duration": 700,
+            "post_delay": 1000,
+            "max_hit": 4,
+            "next": [
+                "繁中-吼姆-周期页已打开",
+                "繁中-吼姆-回到列表顶部",
+                "繁中-吼姆-点周期页签"
+            ],
+            "focus": {
+                "Node.Action.Succeeded": "列表回到顶部，重新确认是不是周期页"
             }
         }
 }
