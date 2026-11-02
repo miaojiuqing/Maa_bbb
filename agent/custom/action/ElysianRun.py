@@ -126,8 +126,14 @@ class ElysianRun(CustomAction):
 
     def click(self, x, y, delay=.45):
         if self.stopped(): return False
-        if not self.context.tasker.controller.post_click(int(x), int(y)).wait().succeeded:
-            raise RunHalt("触摸点击失败，已停止")
+        # 桌面端键鼠方案下游戏不主动唤出光标，PostMessage 形式的点击对 3D 场景 HUD
+        # （如左上角暂停键）无效；与 swipe 保持一致，先按住 Alt 再点，安卓端恒为 False。
+        held = DesktopInput.hold(self.context)
+        try:
+            if not self.context.tasker.controller.post_click(int(x), int(y)).wait().succeeded:
+                raise RunHalt("触摸点击失败，已停止")
+        finally:
+            DesktopInput.release(self.context, held)
         self.stop_event.wait(delay)
         return True
 

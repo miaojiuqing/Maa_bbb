@@ -25,7 +25,7 @@
                         "舰团每日委托-快捷补全道具": {
                             "recognition": "OCR",
                             "expected": [
-                                "快捷补全道具"
+                                "快捷补全道具", "快捷[补補]全道具"
                             ],
                             "pre_delay": 200,
                             "post_delay": 1000
@@ -38,7 +38,7 @@
                         "舰团每日委托-快捷补全道具": {
                             "recognition": "OCR",
                             "expected": [
-                                "快捷补全道具"
+                                "快捷补全道具", "快捷[补補]全道具"
                             ],
                             "pre_delay": 200,
                             "post_delay": 1000,

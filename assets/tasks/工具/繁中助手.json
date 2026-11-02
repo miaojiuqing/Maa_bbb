@@ -1,0 +1,39 @@
+{
+    "task": [
+        {
+            "name": "打开繁中适配助手",
+            "entry": "繁中助手-打开界面",
+            "group": [
+                "单独运行工具"
+            ],
+            "default_check": false,
+            "description": "在 mab.exe 里直接打开「繁中适配助手」窗口：<br/>· 切换/查看繁中识别是否开启<br/>· 维护用词规则（刷新→重置 这类）<br/>· 日志诊断：找出 OCR 读到却没匹配上的文字，双击即可采纳<br/>· 一键重建繁中覆盖包<br/><br/>[color:#009faa]繁中（繁體）客户端建议把左上角资源选成「键鼠操作（繁中）」[/color]",
+            "pipeline_override": {
+                "繁中助手-打开界面": {
+                    "action": "Command",
+                    "exec": "assets/resource/resource_tw/tools/繁中助手.bat",
+                    "args": [],
+                    "detach": true
+                }
+            }
+        },
+        {
+            "name": "重建繁中覆盖包",
+            "entry": "繁中助手-重建覆盖包",
+            "group": [
+                "单独运行工具"
+            ],
+            "default_check": false,
+            "description": "不打开窗口，后台重新生成繁中覆盖包并给任务文件补繁体。<br/>小助手更新之后点这个即可。<br/>执行结果会写到 繁中助手_重建日志.txt",
+            "pipeline_override": {
+                "繁中助手-重建覆盖包": {
+                    "action": "Command",
+                    "exec": "assets/resource/resource_tw/tools/繁中助手.bat",
+                    "args": [],
+                    "detach": true
+                }
+            }
+        }
+    ],
+    "option": {}
+}
