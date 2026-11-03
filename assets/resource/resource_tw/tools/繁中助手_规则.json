@@ -1523,7 +1523,11 @@
       "pre_delay": 600,
       "post_delay": 1500,
       "max_hit": 6,
-      "next": [],
+      "next": [
+        "繁中-模拟作战室-减负已确认",
+        "繁中-模拟作战室-弹窗点确定",
+        "繁中-模拟作战室-今日无需再减负"
+      ],
       "focus": {
         "Node.Recognition.Succeeded": "看到减负确认弹窗的「確定」按钮",
         "Node.Action.Succeeded": "点「確定」确认减负"
@@ -1932,6 +1936,116 @@
       ],
       "focus": {
         "Node.Action.Succeeded": "列表回到顶部，重新确认是不是周期页"
+      }
+    },
+    "每日40晶体核心-开始任务层": {
+      "recognition": "DirectHit",
+      "action": "DoNothing",
+      "next": [
+        "每日晶体核心-开始任务层"
+      ],
+      "focus": {
+        "Node.Recognition.Succeeded": "任务入口转接（上游任务名与节点名不一致）"
+      }
+    },
+    "每日晶体核心-已进入金币商店": {
+      "recognition": "OCR",
+      "roi": [
+        420,
+        150,
+        500,
+        250
+      ],
+      "expected": [
+        "雙子靈魂碎片",
+        "双子灵魂碎片",
+        "靈魂碎片",
+        "灵魂碎片",
+        "崩壞碎片",
+        "崩坏碎片",
+        "雙子靈魂結晶"
+      ],
+      "action": "DoNothing",
+      "post_delay": 300,
+      "next": [
+        "每日晶体核心-已售空",
+        "每日晶体核心-已进入晶体核心购买界面",
+        "[JumpBack]每日晶体核心-点击晶体核心价格",
+        "[JumpBack]每日晶体核心-滑动寻找晶体核心"
+      ],
+      "focus": {
+        "Node.Recognition.Succeeded": "确认已在「金幣商店」（看到灵魂结晶等独有商品）"
+      }
+    },
+    "每日晶体核心-数值不为1": {
+      "next": [
+        "每日晶体核心-已售空",
+        "[JumpBack]每日晶体核心-点击购买"
+      ]
+    },
+    "点击基础货币": {
+      "roi": [
+        0,
+        540,
+        245,
+        180
+      ],
+      "expected_replace": [
+        "^\\s*基[础礎][货貨][币幣]\\s*$"
+      ],
+      "pre_delay": 400,
+      "post_delay": 1300,
+      "max_hit": 6,
+      "focus": {
+        "Node.Recognition.Succeeded": "看到侧栏底部的「基礎貨幣」",
+        "Node.Action.Succeeded": "点「基礎貨幣」"
+      }
+    },
+    "每日晶体核心-点击购买": {
+      "max_hit": 3,
+      "post_delay": 1500,
+      "next": [
+        "每日晶体核心-已售空",
+        "每日晶体核心-点击购买",
+        "繁中-晶体核心-购买未确认"
+      ],
+      "focus": {
+        "Node.Action.Succeeded": "点「购买」"
+      }
+    },
+    "繁中-晶体核心-购买未确认": {
+      "recognition": "DirectHit",
+      "action": "DoNothing",
+      "post_delay": 300,
+      "next": [
+        "成功进入游戏主菜单",
+        "[JumpBack]点击返回主菜单"
+      ],
+      "focus": {
+        "Node.Recognition.Succeeded": "⚠ 点了购买但没变成已售罄 → 未能确认购买成功"
+      }
+    },
+    "繁中-模拟作战室-减负已确认": {
+      "recognition": "OCR",
+      "roi": [
+        1040,
+        590,
+        240,
+        120
+      ],
+      "expected": [
+        "一鍵減負",
+        "一键减负",
+        "一[鍵键][減减][負负]"
+      ],
+      "action": "DoNothing",
+      "post_delay": 500,
+      "next": [
+        "成功进入游戏主菜单",
+        "[JumpBack]点击返回主菜单"
+      ],
+      "focus": {
+        "Node.Recognition.Succeeded": "减负完成（「一鍵減負」按钮已恢复）"
       }
     }
   },
