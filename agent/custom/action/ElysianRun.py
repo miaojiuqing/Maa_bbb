@@ -483,7 +483,11 @@ class ElysianRun(CustomAction):
                     self.motion.walk(self.context, 0, .5, dy=-76)
                     self.nav_steps += 1
                     return
-            if not frames and not visible and not blocked_visible:
+            # 16 层是「商店+首领」双层：场景整片紫红岩壁与粉色裂纹，
+            # 颜色兜底会把背景光柱当成门框（实测 20:52:13 命中 [504,196,111,207]，
+            # 框内是背景光柱），把角色带偏后触发 180 秒找门超时。
+            # 该层改为只认模型检测，不启用颜色兜底。
+            if not frames and not visible and not blocked_visible and self.state.floor != 16:
                 frames=red_portals(self.frame) or dormant_anchors(self.frame)
             if frames and not visible:
                 self.frame_target=frames;self.frame_lost=0
