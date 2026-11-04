@@ -1,0 +1,15 @@
+{
+    "task": [
+        {
+            "name": "回忆玩具小屋",
+            "default_check": true,
+            "entry": "活动-回忆玩具小屋-任务开始层",
+            "group": [
+                "活动"
+            ],
+            "description": "该任务无寻路功能，运行前需保证上次退出时在售货机前",
+            "option": []
+        }
+    ],
+    "option": {}
+}
