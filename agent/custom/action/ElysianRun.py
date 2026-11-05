@@ -206,7 +206,7 @@ class ElysianRun(CustomAction):
                     self.nav_recoveries=self.lost_frames=0;self.nav_started=0
                     self.frame_target=None;self.frame_lost=0
                     self.shop_done=False
-                    self.shop_steps=0
+                    self.shop_steps=0;self.shop_passing=False
                     self.battle_finished = False
                     self.active_hud_frames=0
                     self.floor_since = time.monotonic()
@@ -471,18 +471,28 @@ class ElysianRun(CustomAction):
             blocked_visible = any(GATE_NAMES.get(g.get('cls_index')) in self.state.disabled_families
                                   and g.get('score', 0) >= .55 for g in detected_gates)
             # 商店遮挡：门就在商店后面，纯转视角永远看不到门框。
-            # 安卓端用 pipeline 的「看到商店→前进」「在商店旁→直走」两个兜底；
-            # 这里对齐它：只要视野里还有商店就继续往前挪，商店离开视野即停，
-            # 不会像原来固定 2 步那样走不够、也不会按着不动。
+            # 安卓端用 pipeline 的「看到商店→前进」「在商店旁→直走」两个兜底。
+            # 这里只在「首次看到商店」时判定一次并置位 shop_passing，之后连续走完
+            # 固定步数；不再逐帧重检商店——实测模型对移动中的商店检出率不稳，
+            # 逐帧判定会让 8 步被「转动视角找门」反复打断（85 秒才走完）。
             if self.shop_done and not visible and self.shop_steps < SHOP_PASS_STEPS:
-                shops = [r for r in detected_gates
-                         if r.get("cls_index") in (10, 13) and r.get("score", 0) >= .3]
-                if shops:
+                if self.shop_steps == 0:
+                    shops = [r for r in detected_gates
+                             if r.get("cls_index") in (10, 13) and r.get("score", 0) >= .3]
+                    self.shop_passing = bool(shops)
+                if self.shop_passing:
                     self.shop_steps += 1
                     self.phase("绕开商店", f"商店挡住门框，向前通过（{self.shop_steps}/{SHOP_PASS_STEPS}）")
                     self.motion.walk(self.context, 0, .5, dy=-76)
                     self.nav_steps += 1
                     return
+            elif self.shop_passing:
+                # 走完步数，或已经检出门 / 读到了「前往」，本轮绕行结束；
+                # 下一帧若门又消失也不再续走，避免在门口来回踱步。
+                self.shop_passing = False
+            if frames and self.shop_passing:
+                # 刚才那一帧看到了门框：不必再往前探，交给下面的靠近/展开逻辑。
+                self.shop_passing = False
             # 16 层是「商店+首领」双层：场景整片紫红岩壁与粉色裂纹，
             # 颜色兜底会把背景光柱当成门框（实测 20:52:13 命中 [504,196,111,207]，
             # 框内是背景光柱），把角色带偏后触发 180 秒找门超时。
@@ -943,6 +953,7 @@ class ElysianRun(CustomAction):
         self.shop_done=False
         self.shop_seen=set();self.shop_pending=None;self.shop_scrolls=self.shop_exit_steps=0
         self.shop_steps=0
+        self.shop_passing=False
         self.final_clear=False
         self.final_gate_clicked=self.final_exit=False
         self.settlement_requested=False
