@@ -8,6 +8,7 @@ from maa.custom_recognition import CustomRecognition
 
 from .ElysianRun import AssistantElysianRun, RunHalt
 from .ElysianBuffSync import read_buff_targets
+from ..utils import DesktopInput
 from ..utils.CharacterProfiles import CHARACTER_PROFILES
 from ..utils.ElysianPolicy import DISABLABLE_FAMILIES, GATE_NAMES, normalize, read_floor
 from ..utils.Logger import Logger
@@ -198,12 +199,20 @@ class ElysianConfigure(CustomAction):
                 "往世乐土-战斗-对话ing": {
                     "action": {"type": "Click", "param": {"target": [1200, 30, 1, 1]}}
                 },
-                "往世乐土-打完领奖-按住alt后点击进入-按住": {"action": "DoNothing"},
-                "往世乐土-打完领奖-已进入领奖入口": {"action": "DoNothing"},
-                "往世乐土-打完领奖-重置鼠标状态": {"action": "DoNothing"},
-                "往世乐土-打完领奖-领完奖点返回": {"action": {"type": "Click", "param": {"target": [42, 30, 1, 1]}}},
                 "往世乐土-已进入深层序列": {"focus": {"Node.Recognition.Succeeded": "进入深层序列，沿用原战前准备流程"}},
             })
+            # 领奖链的 Alt 只在安卓端禁用。桌面端游戏画面不主动唤出光标，
+            # 这些点击全靠先按 Alt 才生效：禁用后表现是「点了没反应，手动按 Alt
+            # 又能继续」（大厅领奖入口、左上角退出箭头都栽在这条链上）。
+            # 纯键盘包把这两个节点覆盖成 DoNothing，available() 探测不到即视为
+            #「不需要 Alt」，因此这里用 available() 而不是平台名判断。
+            if not DesktopInput.available(context):
+                patch.update({
+                    "往世乐土-打完领奖-按住alt后点击进入-按住": {"action": "DoNothing"},
+                    "往世乐土-打完领奖-已进入领奖入口": {"action": "DoNothing"},
+                    "往世乐土-打完领奖-重置鼠标状态": {"action": "DoNothing"},
+                    "往世乐土-打完领奖-领完奖点返回": {"action": {"type": "Click", "param": {"target": [42, 30, 1, 1]}}},
+                })
             sync_buffs = bool(setting(context, "乐土战前-同步配置").get("enabled", False))
             patch["乐土战前-同步增益"] = {
                 "enabled": sync_buffs,
