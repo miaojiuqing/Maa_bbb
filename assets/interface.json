@@ -253,6 +253,10 @@
                     "enabled": true
                 },
                 {
+                    "name": "家园资源领取",
+                    "enabled": true
+                },
+                {
                     "name": "日常奖励领取-第一次",
                     "enabled": true
                 },
@@ -262,10 +266,6 @@
                 },
                 {
                     "name": "家园远征派遣",
-                    "enabled": true
-                },
-                {
-                    "name": "家园资源领取",
                     "enabled": true
                 },
                 {
