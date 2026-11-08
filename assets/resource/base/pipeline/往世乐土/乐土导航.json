@@ -227,7 +227,8 @@
                 ],
                 "template": [
                     "周常/往世乐土/导航/减负战斗.png"
-                ]
+                ],
+                "threshold": 0.95
             }
         },
         "action": "Click",
