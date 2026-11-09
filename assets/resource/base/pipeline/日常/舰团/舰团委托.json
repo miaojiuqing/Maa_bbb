@@ -237,7 +237,7 @@
         ],
         "recognition": "OCR",
         "expected": [
-            "申请新委托 0/1"
+            "申请新委托"
         ],
         "pre_delay": 500,
         "action": "Click"
