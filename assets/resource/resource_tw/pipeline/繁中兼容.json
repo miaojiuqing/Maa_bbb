@@ -1,6 +1,6 @@
 {
     // 本文件由「繁中助手」自动生成，请勿手改（改 繁中助手_规则.json 后重新「重建覆盖包」）
-    // 生成时间: 2026-11-08 20:58:52
+    // 生成时间: 2026-11-11 00:26:17
     // 节点数: 723
     // 1) OCR 的 expected 追加繁体候选（追加而非替换，简体环境不受影响）
     // 2) UI 的 Click 改成 LongPress + duration（Click 没有 duration 字段，框架写死按住 50ms）
@@ -732,7 +732,7 @@
                 "家[园園]商店"
             ],
             "action": "Click",
-            "post_delay": 1200
+            "post_delay": 800
         },
         "点击虚境商店": {
             "expected": [
@@ -740,21 +740,21 @@
                 "[虚虛]境商店"
             ],
             "action": "Click",
-            "pre_delay": 300,
-            "post_delay": 1200
+            "pre_delay": 200,
+            "post_delay": 800
         },
         "点击基础货币": {
             "expected": [
                 "^\\s*基[础礎][货貨][币幣]\\s*$"
             ],
-            "post_delay": 1200,
+            "post_delay": 800,
             "roi": [
                 0,
                 540,
                 245,
                 180
             ],
-            "pre_delay": 300,
+            "pre_delay": 200,
             "max_hit": 6,
             "focus": {
                 "Node.Recognition.Succeeded": "看到侧栏底部的「基礎貨幣」",
@@ -861,7 +861,7 @@
             "post_delay": 200
         },
         "每周吼姆秘宝-点击进入商店": {
-            "post_delay": 1200,
+            "post_delay": 800,
             "max_hit": 3,
             "focus": {
                 "Node.Recognition.Succeeded": "看到主界面「商店」入口",
@@ -1013,17 +1013,17 @@
                 "金币商店",
                 "金[币幣]商店"
             ],
-            "post_delay": 1200,
+            "post_delay": 800,
             "max_hit": 2,
             "action": "Click",
-            "pre_delay": 300
+            "pre_delay": 200
         },
         "每日晶体核心-点击购买": {
             "expected": [
                 "购买",
                 "[购購][买買]"
             ],
-            "post_delay": 2500,
+            "post_delay": 1400,
             "max_hit": 3,
             "next": [
                 "每日晶体核心-已售空",
@@ -1036,7 +1036,7 @@
             },
             "action": "LongPress",
             "duration": 350,
-            "pre_delay": 400
+            "pre_delay": 200
         },
         "换星石-点击进入背包": {
             "post_delay": 200
@@ -2906,8 +2906,8 @@
         },
         "舰团每日委托-申请新委托": {
             "expected": [
-                "申请新委托 0/1",
-                "申[请請]新委[托託] 0/1"
+                "申请新委托",
+                "申[请請]新委[托託]"
             ],
             "post_delay": 200
         },
@@ -4438,7 +4438,7 @@
                 355,
                 60
             ],
-            "post_delay": 1500,
+            "post_delay": 1000,
             "max_hit": 4,
             "next": [
                 "虚境商店-时序通行证-还能买",
@@ -4450,7 +4450,7 @@
                 "Node.Action.Succeeded": "长按「購買」"
             },
             "duration": 350,
-            "pre_delay": 300
+            "pre_delay": 200
         },
         "虚境商店-时序通行证-买满了": {
             "recognition": "OCR",
@@ -4564,7 +4564,7 @@
                 125,
                 55
             ],
-            "post_delay": 1500,
+            "post_delay": 1000,
             "max_hit": 1,
             "next": [
                 "虚境商店-时序通行证-确认购买",
@@ -4575,7 +4575,7 @@
                 "Node.Action.Succeeded": "点开一元票的购买弹窗"
             },
             "duration": 350,
-            "pre_delay": 300
+            "pre_delay": 200
         },
         "虚境商店-滚回顶部": {
             "recognition": "DirectHit",
@@ -4608,7 +4608,7 @@
                 125,
                 42
             ],
-            "post_delay": 1500,
+            "post_delay": 1000,
             "max_hit": 2,
             "next": [
                 "虚境商店-时序通行证-还能买",
@@ -4619,7 +4619,7 @@
                 "Node.Action.Succeeded": "点顶部第一张「時序通行證」的价格按钮，打开每周80的购买弹窗"
             },
             "duration": 350,
-            "pre_delay": 300
+            "pre_delay": 200
         },
         "虚境商店-购票流程结束": {
             "recognition": "DirectHit",
@@ -4641,7 +4641,7 @@
                 "^\\s*[x\\u00d7]\\s*9\\s*0\\s*$"
             ],
             "action": "LongPress",
-            "post_delay": 1500,
+            "post_delay": 1000,
             "max_hit": 1,
             "next": [
                 "虚境商店-时序通行证-确认购买",
@@ -4653,7 +4653,7 @@
                 "Node.Action.Succeeded": "长按「×90」那张卡"
             },
             "duration": 350,
-            "pre_delay": 300
+            "pre_delay": 200
         },
         "虚境商店-找每周80": {
             "recognition": "OCR",
@@ -4668,7 +4668,7 @@
                 "^\\s*8\\s*0\\s*$"
             ],
             "action": "LongPress",
-            "post_delay": 1500,
+            "post_delay": 1000,
             "max_hit": 2,
             "next": [
                 "虚境商店-时序通行证-还能买",
@@ -4680,7 +4680,7 @@
                 "Node.Action.Succeeded": "长按「80」那张卡，打开购买窗"
             },
             "duration": 350,
-            "pre_delay": 300
+            "pre_delay": 200
         },
         "虚境商店-列表下滑": {
             "recognition": "DirectHit",
@@ -5037,13 +5037,14 @@
                 300,
                 50
             ],
-            "post_delay": 1500,
+            "post_delay": 1000,
             "max_hit": 4,
             "next": [],
             "focus": {
                 "Node.Action.Succeeded": "点弹窗里的「一鍵打工」"
             },
-            "duration": 300
+            "duration": 300,
+            "pre_delay": 200
         },
         "家园打工-已进入打工": {
             "next": [
@@ -5164,8 +5165,8 @@
                 "[確确]定"
             ],
             "action": "LongPress",
-            "pre_delay": 600,
-            "post_delay": 1500,
+            "pre_delay": 200,
+            "post_delay": 1000,
             "max_hit": 6,
             "next": [
                 "繁中-模拟作战室-减负已确认",
@@ -5275,8 +5276,8 @@
                 110,
                 50
             ],
-            "pre_delay": 500,
-            "post_delay": 1200,
+            "pre_delay": 200,
+            "post_delay": 800,
             "max_hit": 4,
             "next": [
                 "繁中-吼姆-礼包页已打开",
@@ -5295,8 +5296,8 @@
                 110,
                 50
             ],
-            "pre_delay": 500,
-            "post_delay": 1200,
+            "pre_delay": 200,
+            "post_delay": 800,
             "max_hit": 4,
             "next": [
                 "繁中-吼姆-周期页已打开",
@@ -5451,7 +5452,7 @@
                 "^\\s*免费\\s*$"
             ],
             "action": "LongPress",
-            "post_delay": 1800,
+            "post_delay": 1000,
             "max_hit": 4,
             "next": [
                 "繁中-吼姆-已购成功",
@@ -5465,7 +5466,8 @@
                 "Node.Recognition.Succeeded": "看到「免費」按钮",
                 "Node.Action.Succeeded": "点「免費」领取吼姆秘宝"
             },
-            "duration": 350
+            "duration": 350,
+            "pre_delay": 200
         },
         "繁中-吼姆-领取确认弹窗": {
             "recognition": "OCR",
@@ -5539,7 +5541,7 @@
                 60,
                 46
             ],
-            "post_delay": 1500,
+            "post_delay": 1000,
             "max_hit": 3,
             "next": [
                 "繁中-吼姆-已购成功",
@@ -5550,7 +5552,8 @@
             "focus": {
                 "Node.Action.Succeeded": "关闭领取后的弹窗"
             },
-            "duration": 300
+            "duration": 300,
+            "pre_delay": 200
         },
         "繁中-吼姆-回到列表顶部": {
             "recognition": "DirectHit",
@@ -5732,35 +5735,39 @@
         },
         "点击玩法商店": {
             "action": "Click",
-            "pre_delay": 300,
-            "post_delay": 1200
+            "pre_delay": 200,
+            "post_delay": 800
         },
         "商店购买通用-主菜单点击家园": {
             "action": "Click",
-            "post_delay": 1200
+            "post_delay": 800
         },
         "点击进入家园": {
             "action": "Click",
-            "post_delay": 1200
+            "post_delay": 800
         },
         "点击进入舰团": {
             "action": "Click",
-            "post_delay": 1200
+            "post_delay": 800
         },
         "点击主菜单处的出击": {
             "action": "Click",
-            "post_delay": 1200
+            "post_delay": 800
         },
         "家园打工-点击进入打工界面": {
             "action": "Click",
-            "post_delay": 1200
+            "post_delay": 800
         },
         "每日晶体核心-点击晶体核心价格": {
             "action": "LongPress",
-            "duration": 300
+            "duration": 300,
+            "pre_delay": 200,
+            "post_delay": 1000
         },
         "每日晶体核心-点击最大": {
             "action": "LongPress",
-            "duration": 300
+            "duration": 300,
+            "pre_delay": 200,
+            "post_delay": 1000
         }
 }
