@@ -1,6 +1,11 @@
 {
     "往世乐土-开始任务层": {
-        "action": {"type": "Custom", "param": {"custom_action": "ElysianConfigure"}},
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "ElysianConfigure"
+            }
+        },
         "next": [
             "往世乐土-总任务层",
             "往世乐土-已进入往世乐土",
@@ -55,11 +60,73 @@
             "追忆之皿"
         ],
         "next": [
+            "[JumpBack]点击空白位置关闭",
             "往世乐土-已进入深层序列",
+            "[JumpBack]往世乐土-有未完成的进度-直接结算",
             "[JumpBack]往世乐土-点击选择深层序列",
             "[JumpBack]乐土刷级-通用-关卡效果变化",
             "[JumpBack]往世乐土-打开快速出击"
         ]
+    },
+    "往世乐土-有未完成的进度-直接结算": {
+        "focus": {
+            "Node.Recognition.Succeeded": "检测到有未完成的乐土挑战进度"
+        },
+        "roi": [
+            668,
+            135,
+            392,
+            101
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "当前挑战进度"
+        ],
+        "next": [
+            "[JumpBack]点击空白位置关闭",
+            "往世乐土-有未完成的进度-结算确认",
+            "[JumpBack]往世乐土-有未完成的进度-点击直接结算"
+        ]
+    },
+    "往世乐土-有未完成的进度-结算确认": {
+        "recognition": {
+            "type": "ColorMatch",
+            "param": {
+                "roi": [
+                    656,
+                    388,
+                    238,
+                    68
+                ],
+                "connected": true,
+                "count": 8000,
+                "upper": [
+                    255,
+                    225,
+                    74
+                ],
+                "lower": [
+                    255,
+                    225,
+                    71
+                ]
+            }
+        },
+        "action": "Click"
+    },
+    "往世乐土-有未完成的进度-点击直接结算": {
+        "roi": [
+            633,
+            497,
+            156,
+            75
+        ],
+        "recognition": "OCR",
+        "expected": [
+            "直接结算"
+        ],
+        "action": "Click",
+        "post_delay": 2000
     },
     "往世乐土-打开快速出击": {
         "roi": [
