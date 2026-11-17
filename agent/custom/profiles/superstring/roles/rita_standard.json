@@ -1,0 +1,14 @@
+{
+  "character": "窈窕谍影",
+  "variant": "standard",
+  "cycle": ["weapon", "attack", "attack", "attack", "attack"],
+  "touch_actions": {
+    "attack": [1173, 615],
+    "weapon": [1045, 512],
+    "ultimate": [1184, 466],
+    "dodge": [1028, 649],
+    "switch_1": [1208, 147],
+    "switch_2": [1203, 285],
+    "star_ring": [914, 565]
+  }
+}
