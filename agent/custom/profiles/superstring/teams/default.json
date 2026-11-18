@@ -1,0 +1,11 @@
+{
+  "name": "默认队伍",
+  "opening": [],
+  "cycle": [
+    {"action": "weapon", "interval_ms": 1200},
+    {"action": "attack", "interval_ms": 180},
+    {"action": "attack", "interval_ms": 180},
+    {"action": "attack", "interval_ms": 180},
+    {"action": "attack", "interval_ms": 180}
+  ]
+}

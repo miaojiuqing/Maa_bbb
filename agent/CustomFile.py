@@ -19,6 +19,7 @@ from agent.custom.action.Role.Mobius import Mobius  # 梅比乌斯
 from agent.custom.action.Role.CharacterCombat import CharacterCombat
 from agent.custom.action.ElysianRun import AssistantElysianRun, ElysianPause
 from agent.custom.action.ElysianBuffSync import ElysianBuffSync
+from agent.custom.action.SuperstringCombat import SuperstringCombat
 from agent.custom.action.ElysianIntegration import (
     ElysianConfigure,
     ElysianInStage,
@@ -66,6 +67,11 @@ class ElysianPause_Cls(ElysianPause):
 
 @AgentServer.custom_action("CharacterCombat")
 class CharacterCombat_Cls(CharacterCombat):
+    pass
+
+
+@AgentServer.custom_action("SuperstringCombat")
+class SuperstringCombat_Cls(SuperstringCombat):
     pass
 
 
